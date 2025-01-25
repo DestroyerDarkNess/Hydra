@@ -1,0 +1,54 @@
+# Visual Studio version and user-specific settings
+.vs/
+*.suo
+*.user
+*.userprefs
+*.tmp
+*.log
+*.obj
+*.cache
+*.suo.cache
+*.sln.docstates
+
+# Visual Studio temporary files
+ipch/
+*.pdb
+*.opendb
+*.aps
+*.ncb
+*.sdf
+*.ilk
+*.tlb
+*.plg
+*.pch
+*.obj
+*.exp
+*.lib
+*.tlh
+*.tli
+*.VC.db
+
+# User-specific files
+*.suo
+*.user
+.vs
+*.userprefs
+.tmproj
+
+# Build output
+bin/
+obj/
+packages/
+
+# Local application data
+*.local
+*.buildextensions
+Nuget/
+
+# Test Results
+TestResults
+
+# Others
+*.user
+Thumbs.db
+desktop.ini

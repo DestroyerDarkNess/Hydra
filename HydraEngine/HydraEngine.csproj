@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BF4010A6-889D-45EB-84CB-800CFD056C60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>HydraEngine</RootNamespace>
+    <AssemblyName>HydraEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsmResolver">
+      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.DotNet">
+      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.PE">
+      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.PE.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.PE.File">
+      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.PE.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Source\SecureByte-Latest-main\Debug\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="dnlib, Version=4.4.0.0, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
+      <HintPath>..\packages\dnlib.4.4.0\lib\net45\dnlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Hardening, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Source\SecureByte-Latest-main\Debug\Hardening.dll</HintPath>
+    </Reference>
+    <Reference Include="ILMerge, Version=3.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\ILMerge.dll</HintPath>
+    </Reference>
+    <Reference Include="libz">
+      <HintPath>..\Libs\libz.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Origami, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Source\Origami\src\bin\Debug\net48\Origami.dll</HintPath>
+    </Reference>
+    <Reference Include="Ressy, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ressy.1.0.3\lib\net461\Ressy.dll</HintPath>
+    </Reference>
+    <Reference Include="Runtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Source\SecureByte-Latest-main\Debug\Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Source\Origami\src\bin\Debug\net48\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VM.Runtime">
+      <HintPath>..\VM.Runtime\bin\Debug\netstandard2.0\VM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="VMUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Source\SecureByte-Latest-main\Debug\VMUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="7zip\Common\CRC.cs" />
+    <Compile Include="7zip\Common\InBuffer.cs" />
+    <Compile Include="7zip\Common\OutBuffer.cs" />
+    <Compile Include="7zip\Compress\LZMA\LzmaBase.cs" />
+    <Compile Include="7zip\Compress\LZMA\LzmaDecoder.cs" />
+    <Compile Include="7zip\Compress\LZMA\LzmaEncoder.cs" />
+    <Compile Include="7zip\Compress\LZ\IMatchFinder.cs" />
+    <Compile Include="7zip\Compress\LZ\LzBinTree.cs" />
+    <Compile Include="7zip\Compress\LZ\LzInWindow.cs" />
+    <Compile Include="7zip\Compress\LZ\LzOutWindow.cs" />
+    <Compile Include="7zip\Compress\RangeCoder\RangeCoder.cs" />
+    <Compile Include="7zip\Compress\RangeCoder\RangeCoderBit.cs" />
+    <Compile Include="7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
+    <Compile Include="7zip\ICoder.cs" />
+    <Compile Include="7zip\QuickLZ.cs" />
+    <Compile Include="7zip\SevenZipHelper.cs" />
+    <Compile Include="Certificate\Sigthief.cs" />
+    <Compile Include="Core\Analyzer.cs" />
+    <Compile Include="Core\HexEncoding.cs" />
+    <Compile Include="Core\InjectHelper.cs" />
+    <Compile Include="Core\PEFileInfo.cs" />
+    <Compile Include="Core\Randomizer.cs" />
+    <Compile Include="Core\Utils.cs" />
+    <Compile Include="Models\NETBuilderInjection.cs" />
+    <Compile Include="Models\Pack.cs" />
+    <Compile Include="Protection\Calli\CallToCalli.cs" />
+    <Compile Include="Protection\CodeEncryption\AntiTamperNormal.cs" />
+    <Compile Include="Protection\CodeEncryption\ATGlobal.cs" />
+    <Compile Include="Protection\CodeEncryption\MutationHelper.cs" />
+    <Compile Include="Protection\CodeEncryption\Stuffs\AntiTamperExtensions.cs" />
+    <Compile Include="Protection\CodeEncryption\Stuffs\IKeyDeriver.cs" />
+    <Compile Include="Protection\CodeEncryption\Stuffs\InjectHelper.cs" />
+    <Compile Include="Protection\CodeEncryption\Stuffs\NormalDeriver.cs" />
+    <Compile Include="Protection\CodeEncryption\Stuffs\RandomGenerator.cs" />
+    <Compile Include="Protection\CodeEncryption\Stuffs\Utils.cs" />
+    <Compile Include="Protection\CodeOptimizer\AutoMethodBodySimplifyOptimize.cs" />
+    <Compile Include="Protection\CodeOptimizer\InstructionCollectionExtension.cs" />
+    <Compile Include="Protection\CodeOptimizer\InstructionExtension.cs" />
+    <Compile Include="Protection\CodeOptimizer\MethodBodyExtension.cs" />
+    <Compile Include="Protection\CodeOptimizer\MethodReferenceEqualityComparer.cs" />
+    <Compile Include="Protection\CtrlFlow\Block.cs" />
+    <Compile Include="Protection\CtrlFlow\BlockParser.cs" />
+    <Compile Include="Protection\CtrlFlow\CflowObf.cs" />
+    <Compile Include="Protection\CtrlFlow\ControlFlow.cs" />
+    <Compile Include="Models\Protection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protection\CtrlFlow\JumpCflow.cs" />
+    <Compile Include="Protection\Dnspy\NopAttack.cs" />
+    <Compile Include="Protection\Header\SectionObfuscation.cs" />
+    <Compile Include="Protection\Import\ImportProtection.cs" />
+    <Compile Include="Protection\Import\PInvokeToDInvoke.cs" />
+    <Compile Include="Protection\Import\Runtime\PToDInvoke.cs" />
+    <Compile Include="Protection\INT\AddIntPhase.cs" />
+    <Compile Include="Protection\INT\IntEncoding.cs" />
+    <Compile Include="Protection\Invalid\InvalidMDPhase.cs" />
+    <Compile Include="Protection\Invalid\InvalidMDWritter.cs" />
+    <Compile Include="Protection\Invalid\InvalidOpcodes.cs" />
+    <Compile Include="Protection\JIT\Protection.cs" />
+    <Compile Include="Protection\JIT\Runtime\Runtime.cs" />
+    <Compile Include="Protection\JIT\Utils.cs" />
+    <Compile Include="Protection\LocalF\L2F.cs" />
+    <Compile Include="Protection\Dnspy\AntiDecompiler.cs" />
+    <Compile Include="Protection\Method\DynamicCode.cs" />
+    <Compile Include="Protection\Method\EntryPointMover.cs" />
+    <Compile Include="Protection\Method\IL2Dynamic.cs" />
+    <Compile Include="Protection\Method\MethodError.cs" />
+    <Compile Include="Protection\Method\MethodToDelegate.cs" />
+    <Compile Include="Protection\Method\Runtime\M2D.cs" />
+    <Compile Include="Protection\Method\StackUnfConfusion.cs" />
+    <Compile Include="Protection\Misc\FakeObfuscation.cs" />
+    <Compile Include="Protection\Method\HideMethods.cs" />
+    <Compile Include="Protection\Misc\JunkCode.cs" />
+    <Compile Include="Protection\CodeOptimizer\OptimizeCode.cs" />
+    <Compile Include="Protection\Misc\NativeEraser.cs" />
+    <Compile Include="Protection\Misc\ReduceMetadataOptimization.cs" />
+    <Compile Include="Protection\Misc\SUFconfusion.cs" />
+    <Compile Include="Protection\Misc\Watermark.cs" />
+    <Compile Include="Protection\Mutations\Calculator.cs" />
+    <Compile Include="Protection\Mutations\Melting.cs" />
+    <Compile Include="Protection\Mutations\MutationHelper.cs" />
+    <Compile Include="Protection\Mutations\MutatorV2.cs" />
+    <Compile Include="Protection\Mutations\Mutator.cs" />
+    <Compile Include="Protection\Mutations\RandomHelper.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsConversions.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsReplacer.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToArray.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToInitializeArray.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToInliner.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToMath.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToMethodPointer.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToRandom.cs" />
+    <Compile Include="Protection\Mutations\Stages\IntsToStackalloc.cs" />
+    <Compile Include="Protection\Mutations\Stages\LocalsToCustomLocal.cs" />
+    <Compile Include="Protection\Mutations\Stages\MethodPreparation.cs" />
+    <Compile Include="Protection\Packer\BitDotNet.cs" />
+    <Compile Include="Protection\Packer\ILPacker.cs" />
+    <Compile Include="Protection\Packer\Native.cs" />
+    <Compile Include="Protection\Packer\NativeRC.cs" />
+    <Compile Include="Protection\Packer\NetBuilderInjection\AssemblyToShellCode.cs" />
+    <Compile Include="Protection\Packer\NetBuilderInjection\Helpers.cs" />
+    <Compile Include="Protection\Packer\Origami.cs" />
+    <Compile Include="Protection\Packer\PEPacker.cs" />
+    <Compile Include="Protection\Proxy\Helper.cs" />
+    <Compile Include="Protection\Proxy\ProxyMeth.cs" />
+    <Compile Include="Protection\Proxy\ProxyReferences.cs" />
+    <Compile Include="Protection\Proxy\ProxyString.cs" />
+    <Compile Include="Protection\Proxy\ProxyVariable.cs" />
+    <Compile Include="Protection\Renamer\Renamer.cs" />
+    <Compile Include="Protection\Renamer\RenamerPhase.cs" />
+    <Compile Include="Protection\Renamer\ResourceEncryption.cs" />
+    <Compile Include="Protection\Renamer\Runtime\ResRuntime.cs" />
+    <Compile Include="Protection\String\Runtime\DecryptionHelper.cs" />
+    <Compile Include="Protection\String\StringEncryption.cs" />
+    <Compile Include="Protection\String\StringsHider.cs" />
+    <Compile Include="Protection\String\UnmanagedString.cs" />
+    <Compile Include="Protection\String\Utils.cs" />
+    <Compile Include="Protection\Proxy\ProxyInt.cs" />
+    <Compile Include="Protection\VM\Core\Analyzer.cs" />
+    <Compile Include="Protection\VM\Core\Helper\Compression.cs" />
+    <Compile Include="Protection\VM\Core\Helper\Generator.cs" />
+    <Compile Include="Protection\VM\Core\Helper\InjectHelper.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\UStrings\Runtime.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\UStrings\VStrings.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\Converter.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\RuntimeProtections\CallToCalli.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\RuntimeProtections\CFlow.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\RuntimeProtections\ProxyInteger.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\RuntimeProtections\ProxyStrings.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\RuntimeProtections\Renamer.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\RuntimeProtections\Strings.cs" />
+    <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\Virtualization.cs" />
+    <Compile Include="Protection\VM\Core\Protections\IProtection.cs" />
+    <Compile Include="Protection\VM\Core\Protections\LoadDLLRuntime\VMInitialize.cs" />
+    <Compile Include="Protection\VM\Virtualizer.cs" />
+    <Compile Include="References\AssemblyFusion.cs" />
+    <Compile Include="References\DllEmbbeder.cs" />
+    <Compile Include="References\ILMerger.cs" />
+    <Compile Include="References\LibzWrapper.cs" />
+    <Compile Include="Runtimes\AdministratorRights\Runtime\RuntimeScalation.cs" />
+    <Compile Include="Runtimes\AdministratorRights\RuntimeSInj.cs" />
+    <Compile Include="Runtimes\AntiDLLInjection\AntiDLLInject.cs" />
+    <Compile Include="Runtimes\AntiDLLInjection\Runtime\LoadLibraryDetour.cs" />
+    <Compile Include="Runtimes\AntiMemoryEditing\AntiMemoryEdit.cs" />
+    <Compile Include="Runtimes\AntiMemoryEditing\Runtime\ObfuscatedValue.cs" />
+    <Compile Include="Runtimes\Anti\AntiAttach.cs" />
+    <Compile Include="Runtimes\Anti\AntiDe4dot.cs" />
+    <Compile Include="Runtimes\Anti\AntiDebug.cs" />
+    <Compile Include="Runtimes\Anti\AntiDump.cs" />
+    <Compile Include="Runtimes\Anti\AntiILDasm.cs" />
+    <Compile Include="Runtimes\Anti\AntiInvoke.cs" />
+    <Compile Include="Runtimes\Anti\Antimanything.cs" />
+    <Compile Include="Runtimes\Anti\AntiProxy.cs" />
+    <Compile Include="Runtimes\Anti\AntiTamper.cs" />
+    <Compile Include="Runtimes\Anti\BypassAmsi.cs" />
+    <Compile Include="Runtimes\Anti\ExtremeAD.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\AmsiBypass.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\AntiAttachRuntime.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\AntiDebugSafe.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\AntiDumpRun.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\AntiDumpZeroMemory.cs" />
+    <Compile Include="Runtimes\Anti\AntiHTTPDebug.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\AntiHTTPDebuggers.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\EofAntiTamper.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\ExtremeAntidump.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\HideThreads.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\InvokeDetector.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\ProxyRuntime.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\SelfDeleteClass.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\TestClass.cs" />
+    <Compile Include="Runtimes\Anti\Runtime\Unhooker.cs" />
+    <Compile Include="Runtimes\Anti\SharpUnhooker.cs" />
+    <Compile Include="Runtimes\Anti\ThreadsHider.cs" />
+    <Compile Include="Runtimes\Anti\ZeroMemory.cs" />
+    <Compile Include="Runtimes\Exceptions\ExpMan.cs" />
+    <Compile Include="Runtimes\Exceptions\Runtime\ExceptionManager.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\XorMethod.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bin.zip" />
+    <None Include="Resources\mpress.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackgroundImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hydra_Ex_Legacy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PackCode.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JLX64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JLX86.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JITLibrary.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\donut.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ILoader.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ILoaderFramework.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\libz.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConversionBack.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Runtime.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Antidump_HailHydra.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VMProtect_Con.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VMProtect.SDK.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CodeEncryption.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtremeAntiDump_HailHydra.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
