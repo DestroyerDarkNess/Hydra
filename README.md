@@ -2,6 +2,10 @@
 
 [Download on the official website](https://toolslib.net/downloads/viewdownload/600-hydranet/)
 
+# Embed DLL assemblies onto executable
+
+![{DCC3C1D8-5A40-419B-9D0A-871AEBC70F2D}](https://github.com/user-attachments/assets/12bdde6f-1b48-4f0b-8716-324d1d016252)
+ 
 # Protections Preview 
 
 ![{FBFBDF60-8891-4408-BF11-92BAB1FB9BCB}](https://github.com/user-attachments/assets/b94c0579-a161-41e2-b292-48a7e5ff9a9a)
