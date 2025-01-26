@@ -31,6 +31,10 @@
 
 The NativeV2 Packer itself is just a loader written in C for .net, its purpose is simply to add a native layer, but without protection, so it must be protected in the end with VMP or similar software .
 
+# More...
+
+![{F05B08A1-F9DF-425F-9131-5D6C65F40D9B}](https://github.com/user-attachments/assets/66f47bdb-e831-47f2-83d3-37ac3a095f19)
+
 
 
 
