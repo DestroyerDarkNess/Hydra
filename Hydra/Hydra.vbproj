@@ -55,7 +55,7 @@
       <HintPath>..\HydraEngine\bin\Debug\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="Guna.UI2">
-      <HintPath>..\..\..\..\Documents\Visual Studio 2022\Libs\Guna.UI2.dll</HintPath>
+      <HintPath>..\Libs\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

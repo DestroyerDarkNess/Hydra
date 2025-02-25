@@ -1,19 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Text;
-using AsmResolver.DotNet;
+﻿using AsmResolver.DotNet;
 using AsmResolver.DotNet.Code.Native;
 using AsmResolver.DotNet.Signatures;
 using AsmResolver.PE.DotNet;
 using AsmResolver.PE.DotNet.Cil;
 using AsmResolver.PE.DotNet.Metadata.Tables.Rows;
 using AsmResolver.PE.File.Headers;
-using MethodDefinition = AsmResolver.DotNet.MethodDefinition;
-using ModuleDefinition = AsmResolver.DotNet.ModuleDefinition;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using dnlib.DotNet.Writer;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MethodDefinition = AsmResolver.DotNet.MethodDefinition;
+using ModuleDefinition = AsmResolver.DotNet.ModuleDefinition;
 
 namespace HydraEngine.Protection.String
 {
@@ -39,13 +38,13 @@ namespace HydraEngine.Protection.String
 
                 if (isx86)
                 {
-                    module.PEKind = OptionalHeaderMagic.Pe32;
+                    module.PEKind = OptionalHeaderMagic.PE32;
                     module.MachineType = MachineType.I386;
                     module.Attributes |= DotNetDirectoryFlags.Bit32Required;
                 }
                 else
                 {
-                    module.PEKind = OptionalHeaderMagic.Pe32Plus;
+                    module.PEKind = OptionalHeaderMagic.PE32Plus;
                     module.MachineType = MachineType.Amd64;
                 }
 

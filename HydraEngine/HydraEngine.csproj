@@ -37,28 +37,28 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsmResolver">
-      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.dll</HintPath>
+    <Reference Include="AsmResolver, Version=5.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsmResolver.5.5.1\lib\netstandard2.0\AsmResolver.dll</HintPath>
     </Reference>
-    <Reference Include="AsmResolver.DotNet">
-      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.DotNet.dll</HintPath>
+    <Reference Include="AsmResolver.DotNet, Version=5.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsmResolver.DotNet.5.5.1\lib\netstandard2.0\AsmResolver.DotNet.dll</HintPath>
     </Reference>
-    <Reference Include="AsmResolver.PE">
-      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.PE.dll</HintPath>
+    <Reference Include="AsmResolver.PE, Version=5.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsmResolver.PE.5.5.1\lib\netstandard2.0\AsmResolver.PE.dll</HintPath>
     </Reference>
-    <Reference Include="AsmResolver.PE.File">
-      <HintPath>..\Source\Origami\src\bin\Debug\net48\AsmResolver.PE.File.dll</HintPath>
+    <Reference Include="AsmResolver.PE.File, Version=5.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsmResolver.PE.File.5.5.1\lib\netstandard2.0\AsmResolver.PE.File.dll</HintPath>
     </Reference>
     <Reference Include="Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Source\SecureByte-Latest-main\Debug\Core.dll</HintPath>
+      <HintPath>..\Libs\Core.dll</HintPath>
     </Reference>
     <Reference Include="dnlib, Version=4.4.0.0, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
       <HintPath>..\packages\dnlib.4.4.0\lib\net45\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="Hardening, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Source\SecureByte-Latest-main\Debug\Hardening.dll</HintPath>
+      <HintPath>..\Libs\Hardening.dll</HintPath>
     </Reference>
     <Reference Include="ILMerge, Version=3.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,10 +67,13 @@
     <Reference Include="libz">
       <HintPath>..\Libs\libz.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Origami, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Source\Origami\src\bin\Debug\net48\Origami.dll</HintPath>
+      <HintPath>..\Libs\Origami.dll</HintPath>
     </Reference>
     <Reference Include="Ressy, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Ressy.1.0.3\lib\net461\Ressy.dll</HintPath>
@@ -80,13 +83,33 @@
       <HintPath>..\Source\SecureByte-Latest-main\Debug\Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Source\Origami\src\bin\Debug\net48\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="System.ValueTuple" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.8\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -101,7 +124,7 @@
     </Reference>
     <Reference Include="VMUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Source\SecureByte-Latest-main\Debug\VMUtils.dll</HintPath>
+      <HintPath>..\Libs\VMUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
