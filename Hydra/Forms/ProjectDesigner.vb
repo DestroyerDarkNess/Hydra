@@ -1,18 +1,8 @@
-﻿Imports System.Diagnostics.Eventing.Reader
-Imports System.Drawing.Imaging
-Imports System.IO
-Imports System.Net
-Imports System.Reflection
-Imports System.Runtime.CompilerServices
-Imports System.Text
+﻿Imports System.IO
 Imports System.Threading
-Imports System.Xml
 Imports dnlib.DotNet
 Imports dnlib.DotNet.Emit
-Imports dnlib.DotNet.MD
 Imports dnlib.DotNet.Writer
-Imports dnlib.PE
-Imports Guna.UI2.Native.WinApi
 Imports Guna.UI2.WinForms
 Imports HydraEngine.Core
 Imports HydraEngine.Protection
@@ -1127,6 +1117,28 @@ Public Class ProjectDesigner
 
                                                  Catch ex As Exception : End Try
 
+                                                 If File.Exists(BackupPath) = False Then
+
+                                                     Writelog("[Danger] JIT Protection Corrupted, re-protecting... The protected assembly may not function correctly.")
+
+                                                     For Each Type In AsmDef.Types
+                                                         For Each MethodsDef In Type.Methods
+                                                             If MethodsDef.HasBody Then
+                                                                 MethodsDef.Body.SimplifyBranches()
+                                                                 MethodsDef.Body.OptimizeBranches()
+                                                             End If
+                                                         Next
+                                                     Next
+
+                                                     AddHandler writerOptions.WriterEvent, AddressOf AssemblyWriterEvent
+                                                     Core.Helpers.Utils.Sleep(2)
+                                                     AsmDef.Write(BackupPath)
+                                                     RemoveHandler writerOptions.WriterEvent, AddressOf AssemblyWriterEvent
+                                                     Core.Helpers.Utils.Sleep(3)
+
+                                                 End If
+
+
                                                  Dim AsmEX As ModuleDefMD = ModuleDefMD.Load(BackupPath)
 
                                                  Dim JIT As JIT.Protection = New JIT.Protection(AsmEX)
@@ -1287,7 +1299,7 @@ Public Class ProjectDesigner
                                          Catch ex As Exception : End Try
 
                                      Catch ex As Exception
-                                     Writelog(String.Format("Error saving: {0}", {ex.Message}))
+                                         Writelog(String.Format("Error saving: {0}", {ex.Message}))
                                      End Try
                                      Try
                                          Me.BeginInvoke(Sub()
