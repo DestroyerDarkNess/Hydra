@@ -1,13 +1,8 @@
 ﻿using dnlib.DotNet;
-using dnlib.DotNet.Emit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using HydraEngine.Protection.Mutations.Stages;
-using HydraEngine.Core;
+using HydraEngine.Protection.Renamer;
+using System;
+using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Mutations
 {
@@ -23,11 +18,11 @@ namespace HydraEngine.Protection.Mutations
             {
                 foreach (TypeDef typeDef in md.Types)
                 {
-                    if (!Analyzer. CanRename(typeDef)) continue;
+                    if (!AnalyzerPhase.CanRename(typeDef)) continue;
                     foreach (MethodDef method in typeDef.Methods)
                     {
-                        if (!Analyzer.CanRename(method)) continue;
-                        if (method.Body == null) continue;
+                        if (!AnalyzerPhase.CanRename(method, typeDef)) continue;
+                        if (method.HasBody == false) continue;
                         ApplyMutations(method);
 
                     }
@@ -71,7 +66,7 @@ namespace HydraEngine.Protection.Mutations
 
         private void ApplyMutations(MethodDef methodDef)
         {
-           
+
 
             if (UnsafeMutation == true)
             {
@@ -79,7 +74,7 @@ namespace HydraEngine.Protection.Mutations
                 var intsToInliner = new IntsToInliner(methodDef);
             }
 
-          
+
             var intsToArray = new IntsToArray(methodDef);
             var intsToStackalloc = new IntsToStackalloc(methodDef);
             var intsToMath = new IntsToMath(methodDef);
@@ -94,8 +89,8 @@ namespace HydraEngine.Protection.Mutations
                 }
             }
 
-           
-         
+
+
 
         }
 
@@ -113,10 +108,11 @@ namespace HydraEngine.Protection.Mutations
                     intsToMath.Execute(ref index);
                     break;
                 case 2:
-                    if (UnsafeMutation == true) { 
+                    if (UnsafeMutation == true)
+                    {
                         localsToCustomLocal.Execute(ref index);
                     }
-                        break;
+                    break;
                 case 3:
                     intsToRandom.Execute(ref index);
                     break;

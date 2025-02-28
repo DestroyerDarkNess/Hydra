@@ -53,98 +53,11 @@ namespace HydraEngine.Protection.String
                 foreach (var type in module.GetAllTypes().ToArray())
                 {
 
-                    //if (string.IsNullOrEmpty(type.Namespace) == false)
-                    //{
-                    //    if ( type.Namespace  == "Costura")
-                    //        continue;
-                    //    if (type.Namespace.ToString().Contains("My"))
-                    //        continue;
-                    //}
-
-                    //if (type.Interfaces.Count > 0)
-                    //    continue;
-
-
-                    //if (type.IsSpecialName != false || type.IsRuntimeSpecialName != false ) continue;
-
-                    //if (type.Name.ToString().StartsWith("<") || type.Name == "GeneratedInternalTypeHelper" || type.Name == "Resources" || type.Name == "MySettings" || type.Name == "Settings")
-                    //    continue;
-                    //if (type.DeclaringType is null || type.DeclaringType == type.Module.CorLibTypeFactory.Void.Type)
-                    //    continue;
-                    //if (type.IsInterface)
-                    //    continue;
-                    //if (type.IsForwarder)
-                    //    continue;
-                    //if (type.IsSerializable)
-                    //    continue;
-                    //if (type.IsAbstract)
-                    //    continue;
-                    //if (type.IsEnum)
-                    //    continue;
-                    //if (type.IsNestedFamilyOrAssembly)
-                    //    continue;
-                    //if (type.IsNestedFamilyAndAssembly)
-                    //    continue;
-
                     foreach (var method in type.Methods.ToArray())
                     {
 
                         if (method == null)
                             continue;
-
-
-                        //if (method.DeclaringType.BaseType != null)
-                        //{
-                        //    if (method.DeclaringType.BaseType.Name.Contains("Delegate"))
-                        //        continue;
-                        //}
-
-                        //if (method.DeclaringType.IsInterface)
-                        //    continue;
-                        //if (method.DeclaringType.IsDelegate || method.DeclaringType.IsAbstract)
-                        //    continue;
-                        //if (method.DeclaringType.Name == "GeneratedInternalTypeHelper")
-                        //    continue;
-
-                        //if (method.Name == ".ctor" || method.Name == ".cctor")
-                        //    continue;
-
-                        //if (method.DeclaringType.FullName == "System.Windows.Forms.Binding" && method.Name.ToString() == ".ctor")
-                        //    continue;
-                        //if (method.Name == "Invoke")
-                        //    continue;
-                        //if (method.IsSetMethod || method.IsGetMethod)
-                        //    continue;
-                        //if (method.IsSpecialName)
-                        //    continue;
-                        //if (method.IsFamilyAndAssembly)
-                        //    continue;
-                        //if (method.IsFamily)
-                        //    continue;
-                        //if (method.IsRuntime)
-                        //    continue;
-                        //if (method.IsRuntimeSpecialName)
-                        //    continue;
-                        //if (method.IsConstructor)
-                        //    continue;
-                        //if (method.IsNative)
-                        //    continue;
-                        //if (method.IsPInvokeImpl || method.IsUnmanagedExport)
-                        //    continue;
-                        //if (method == null)
-                        //    continue;
-                        //if (method.Name.ToString().StartsWith("<"))
-                        //    continue;
-                        //if (method.DeclaringType is null || method.DeclaringType == method.Module.CorLibTypeFactory.Void.Type)
-                        //    continue;
-                        //if (method.DeclaringType.IsForwarder)
-                        //    continue;
-                        //if (method.IsVirtual)
-                        //    continue;
-                        //if (method.ImplementationMap != null)
-                        //    continue;
-
-
 
                         if (method.HasMethodBody == false || method.CilMethodBody == null) continue;
 
@@ -199,6 +112,8 @@ namespace HydraEngine.Protection.String
                 module.Write(OuputAssembly);
 
                 TempModule = OuputAssembly;
+
+                if (TempModule == null) throw new Exception("MemoryStream is null");
 
                 return true;
             }

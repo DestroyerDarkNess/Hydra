@@ -1,19 +1,14 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+using dnlib.DotNet.Writer;
+using HydraEngine.Core;
+using HydraEngine.Protection.Renamer.Runtime;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
-using dnlib.DotNet.Writer;
-using HydraEngine.Protection.Mutations;
-using HydraEngine.Protection.Proxy;
-using System.Runtime.Remoting.Contexts;
-using HydraEngine.Protection.Renamer.Runtime;
-using HydraEngine.Core;
-using HydraEngine.Protection.Packer.NetBuilderInjection;
+using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Renamer
 {
@@ -182,7 +177,7 @@ namespace HydraEngine.Protection.Renamer
             {
 
                 string mname = Randomizer.GenerateRandomString() + ".resources";
-                int key = Utils.RandomTinyInt32();
+                int key = Core.Utils.RandomTinyInt32();
                 ModuleDefMD moduleDefMD = ModuleDefMD.Load(typeof(Runtime.ResRuntime).Module);
                 TypeDef typeDef = moduleDefMD.ResolveTypeDef(MDToken.ToRID(typeof(Runtime.ResRuntime).MetadataToken));
                 IEnumerable<IDnlibDef> source = InjectHelper.Inject(typeDef, Module.GlobalType, Module);
@@ -233,7 +228,7 @@ namespace HydraEngine.Protection.Renamer
                     var compressed = _7zip.QuickLZ.CompressBytes(ms.ToArray());
                     moduleBuff = Encrypt(compressed, key);
                 }
-               Module.Resources.Add(new EmbeddedResource(mname, moduleBuff, ManifestResourceAttributes.Private));
+                Module.Resources.Add(new EmbeddedResource(mname, moduleBuff, ManifestResourceAttributes.Private));
                 var methods = new HashSet<MethodDef>
             {
                 init

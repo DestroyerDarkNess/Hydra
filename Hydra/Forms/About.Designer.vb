@@ -24,6 +24,7 @@ Partial Class About
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(About))
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Button13 = New Guna.UI2.WinForms.Guna2Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
@@ -38,8 +39,9 @@ Partial Class About
         'Guna2Panel1
         '
         Me.Guna2Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(4, Byte), Integer))
         Me.Guna2Panel1.BorderThickness = 1
+        Me.Guna2Panel1.Controls.Add(Me.Guna2Button2)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Button13)
         Me.Guna2Panel1.Controls.Add(Me.Label6)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Button1)
@@ -55,14 +57,32 @@ Partial Class About
         Me.Guna2Panel1.Size = New System.Drawing.Size(412, 222)
         Me.Guna2Panel1.TabIndex = 2
         '
+        'Guna2Button2
+        '
+        Me.Guna2Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2Button2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(4, Byte), Integer))
+        Me.Guna2Button2.BorderRadius = 2
+        Me.Guna2Button2.BorderThickness = 1
+        Me.Guna2Button2.FillColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer))
+        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button2.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button2.Location = New System.Drawing.Point(114, 163)
+        Me.Guna2Button2.Name = "Guna2Button2"
+        Me.Guna2Button2.Size = New System.Drawing.Size(177, 20)
+        Me.Guna2Button2.TabIndex = 27
+        Me.Guna2Button2.Text = "Get Hydra Source Code"
+        Me.Guna2Button2.UseTransparentBackground = True
+        '
         'Guna2Button13
         '
         Me.Guna2Button13.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2Button13.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(4, Byte), Integer))
         Me.Guna2Button13.BorderRadius = 5
-        Me.Guna2Button13.FillColor = System.Drawing.Color.FromArgb(CType(CType(80, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Button13.BorderThickness = 1
+        Me.Guna2Button13.FillColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer))
         Me.Guna2Button13.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button13.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button13.Location = New System.Drawing.Point(83, 133)
+        Me.Guna2Button13.Location = New System.Drawing.Point(81, 117)
         Me.Guna2Button13.Name = "Guna2Button13"
         Me.Guna2Button13.Size = New System.Drawing.Size(254, 40)
         Me.Guna2Button13.TabIndex = 26
@@ -73,7 +93,7 @@ Partial Class About
         '
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semilight", 10.0!)
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Label6.ForeColor = System.Drawing.Color.Gray
         Me.Label6.Location = New System.Drawing.Point(127, 29)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(109, 20)
@@ -86,7 +106,7 @@ Partial Class About
         Me.Guna2Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2Button1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2Button1.BorderColor = System.Drawing.Color.Transparent
-        Me.Guna2Button1.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Button1.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(4, Byte), Integer))
         Me.Guna2Button1.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2Button1.ForeColor = System.Drawing.Color.White
         Me.Guna2Button1.Location = New System.Drawing.Point(371, 0)
@@ -99,8 +119,8 @@ Partial Class About
         '
         Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semilight", 10.0!)
-        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(68, 70)
+        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.Label5.Location = New System.Drawing.Point(68, 61)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(283, 44)
         Me.Label5.TabIndex = 6
@@ -132,7 +152,7 @@ Partial Class About
         '
         'Label1
         '
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(4, Byte), Integer))
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Black", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
@@ -147,7 +167,7 @@ Partial Class About
         '
         Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Light", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.Red
+        Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.Label7.Location = New System.Drawing.Point(3, 200)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(397, 13)
@@ -185,4 +205,5 @@ Partial Class About
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Guna2Button13 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
 End Class

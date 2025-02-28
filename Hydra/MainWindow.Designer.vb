@@ -47,8 +47,8 @@ Partial Class MainWindow
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HomePageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2DragControl1 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2ShadowForm1 = New Guna.UI2.WinForms.Guna2ShadowForm(Me.components)
@@ -58,6 +58,7 @@ Partial Class MainWindow
         Me.Guna2DragControl5 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2DragControl6 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2DragControl7 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
+        Me.Guna2DragControl8 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2Panel1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
         Me.MenuStripZ1.SuspendLayout()
@@ -69,13 +70,13 @@ Partial Class MainWindow
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2Panel1.BorderThickness = 1
         Me.Guna2Panel1.Controls.Add(Me.Guna2Button1)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Panel2)
         Me.Guna2Panel1.Controls.Add(Me.MenuStripZ1)
-        Me.Guna2Panel1.Controls.Add(Me.Label1)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Panel3)
+        Me.Guna2Panel1.Controls.Add(Me.Label1)
         Me.Guna2Panel1.FillColor = System.Drawing.Color.Transparent
         Me.Guna2Panel1.ForeColor = System.Drawing.Color.White
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
@@ -89,10 +90,10 @@ Partial Class MainWindow
         Me.Guna2Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2Button1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2Button1.BorderColor = System.Drawing.Color.Transparent
-        Me.Guna2Button1.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Button1.FillColor = System.Drawing.Color.Transparent
         Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button1.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button1.Location = New System.Drawing.Point(787, 0)
+        Me.Guna2Button1.Location = New System.Drawing.Point(790, 0)
         Me.Guna2Button1.Name = "Guna2Button1"
         Me.Guna2Button1.Size = New System.Drawing.Size(29, 17)
         Me.Guna2Button1.TabIndex = 23
@@ -101,7 +102,7 @@ Partial Class MainWindow
         '
         'Guna2Panel2
         '
-        Me.Guna2Panel2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Panel2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2Panel2.BorderThickness = 1
         Me.Guna2Panel2.Controls.Add(Me.Guna2Button13)
         Me.Guna2Panel2.Controls.Add(Me.LogInLabel4)
@@ -117,7 +118,7 @@ Partial Class MainWindow
         'Guna2Button13
         '
         Me.Guna2Button13.BorderRadius = 5
-        Me.Guna2Button13.FillColor = System.Drawing.Color.FromArgb(CType(CType(80, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2Button13.FillColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.Guna2Button13.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button13.ForeColor = System.Drawing.Color.White
         Me.Guna2Button13.Location = New System.Drawing.Point(65, 56)
@@ -133,7 +134,7 @@ Partial Class MainWindow
         Me.LogInLabel4.BackColor = System.Drawing.Color.Transparent
         Me.LogInLabel4.Font = New System.Drawing.Font("Segoe UI Semilight", 9.0!)
         Me.LogInLabel4.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.LogInLabel4.ForeColor = System.Drawing.Color.Silver
         Me.LogInLabel4.Location = New System.Drawing.Point(15, 113)
         Me.LogInLabel4.Name = "LogInLabel4"
         Me.LogInLabel4.Size = New System.Drawing.Size(276, 15)
@@ -146,7 +147,7 @@ Partial Class MainWindow
         Me.LogInLabel3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.LogInLabel3.Font = New System.Drawing.Font("Segoe UI Semilight", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LogInLabel3.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.LogInLabel3.ForeColor = System.Drawing.Color.Gray
         Me.LogInLabel3.Location = New System.Drawing.Point(0, 128)
         Me.LogInLabel3.Name = "LogInLabel3"
         Me.LogInLabel3.Size = New System.Drawing.Size(306, 25)
@@ -173,7 +174,7 @@ Partial Class MainWindow
         Me.LogInLabel2.BackColor = System.Drawing.Color.Transparent
         Me.LogInLabel2.Font = New System.Drawing.Font("Segoe UI Semilight", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LogInLabel2.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.LogInLabel2.ForeColor = System.Drawing.Color.Gray
         Me.LogInLabel2.Location = New System.Drawing.Point(178, 11)
         Me.LogInLabel2.Name = "LogInLabel2"
         Me.LogInLabel2.Size = New System.Drawing.Size(61, 25)
@@ -266,7 +267,7 @@ Partial Class MainWindow
         '
         Me.ToolsToolStripMenuItem.ForeColor = System.Drawing.Color.White
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         Me.ToolsToolStripMenuItem.Visible = False
         '
@@ -292,19 +293,6 @@ Partial Class MainWindow
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.AboutToolStripMenuItem.Text = "About..."
         '
-        'Label1
-        '
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(819, 17)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "Hydra Protector Reborn"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'Guna2Panel3
         '
         Me.Guna2Panel3.FillColor = System.Drawing.Color.Transparent
@@ -314,6 +302,19 @@ Partial Class MainWindow
         Me.Guna2Panel3.TabIndex = 7
         Me.Guna2Panel3.UseTransparentBackground = True
         Me.Guna2Panel3.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(819, 17)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "  Hydra Protector Reborn @Dark" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Guna2Elipse1
         '
@@ -361,6 +362,12 @@ Partial Class MainWindow
         Me.Guna2DragControl7.DockIndicatorTransparencyValue = 0.6R
         Me.Guna2DragControl7.TargetControl = Me.LogInLabel4
         Me.Guna2DragControl7.UseTransparentDrag = True
+        '
+        'Guna2DragControl8
+        '
+        Me.Guna2DragControl8.DockIndicatorTransparencyValue = 0.6R
+        Me.Guna2DragControl8.TargetControl = Me.MenuStripZ1
+        Me.Guna2DragControl8.UseTransparentDrag = True
         '
         'MainWindow
         '
@@ -421,4 +428,5 @@ Partial Class MainWindow
     Friend WithEvents Guna2DragControl5 As Guna.UI2.WinForms.Guna2DragControl
     Friend WithEvents Guna2DragControl6 As Guna.UI2.WinForms.Guna2DragControl
     Friend WithEvents Guna2DragControl7 As Guna.UI2.WinForms.Guna2DragControl
+    Friend WithEvents Guna2DragControl8 As Guna.UI2.WinForms.Guna2DragControl
 End Class

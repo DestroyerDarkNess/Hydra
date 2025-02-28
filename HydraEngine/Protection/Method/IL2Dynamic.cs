@@ -1,20 +1,16 @@
-﻿using System;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using OpCode = dnlib.DotNet.Emit.OpCode;
-using ReflOpCode = System.Reflection.Emit.OpCode;
 using OpCodes = dnlib.DotNet.Emit.OpCodes;
-using ReflOpCodes = System.Reflection.Emit.OpCodes;
+using OperandType = dnlib.DotNet.Emit.OperandType;
 using ROpCode = System.Reflection.Emit.OpCode;
 using ROpCodes = System.Reflection.Emit.OpCodes;
-using OperandType = dnlib.DotNet.Emit.OperandType;
-using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using System.Reflection.Emit;
-using HydraEngine.Properties;
 
 namespace HydraEngine.Protection.Method
 {
@@ -199,7 +195,7 @@ namespace HydraEngine.Protection.Method
         }
 
 
-        public void ConvertToDynamic(MethodDef method, ModuleDef module)
+        public bool ConvertToDynamic(MethodDef method, ModuleDef module)
         {
             try
             {
@@ -240,13 +236,13 @@ namespace HydraEngine.Protection.Method
                 {
                     method.Body.Instructions.Add(inst);
                 }
-
+                return true;
             }
-            catch { }
+            catch { return false; }
 
         }
         static Dictionary<int, int> counterList = new Dictionary<int, int>();
-        public  Instruction[] BuildInstruction(Instruction[] toBuild, TypeDef typeDef, MethodDef method, IList<TypeSig> Param, ITypeDefOrRef type, IList<Parameter> pp, TypeDef typeM, Local local, Local local2, Local local3, Local local4, Local[] oldLocals, Instruction[] oldInstructions, AssemblyDef ctx, bool ISConstructorMethod, out List<Local> outLocals, TypeSig returnType)
+        public Instruction[] BuildInstruction(Instruction[] toBuild, TypeDef typeDef, MethodDef method, IList<TypeSig> Param, ITypeDefOrRef type, IList<Parameter> pp, TypeDef typeM, Local local, Local local2, Local local3, Local local4, Local[] oldLocals, Instruction[] oldInstructions, AssemblyDef ctx, bool ISConstructorMethod, out List<Local> outLocals, TypeSig returnType)
         {
             List<Instruction> lista = new List<Instruction>();
             List<Local> variables = new List<Local>();
@@ -528,7 +524,7 @@ namespace HydraEngine.Protection.Method
             return lista.ToArray();
         }
         static int LocalsCount = 0;
-        public  void ConvertInstructionWithOperand(Instruction instruct, Local push, ref List<Instruction> lista, List<Local> variables, List<Instruction> brTargets, AssemblyDef ctx)
+        public void ConvertInstructionWithOperand(Instruction instruct, Local push, ref List<Instruction> lista, List<Local> variables, List<Instruction> brTargets, AssemblyDef ctx)
         {
             lista.Add(OpCodes.Ldloc_S.ToInstruction(push));
             char[] Opcode = Utils.ConvertOpCode(instruct.OpCode).Name.ToCharArray();
@@ -850,7 +846,7 @@ namespace HydraEngine.Protection.Method
             lista.RemoveAt(lista.Count - 1);
 
         }
-        public  void ConvertInstruction(Instruction instruct, Local push, ref List<Instruction> lista, AssemblyDef ctx)
+        public void ConvertInstruction(Instruction instruct, Local push, ref List<Instruction> lista, AssemblyDef ctx)
         {
             lista.Add(OpCodes.Ldloc_S.ToInstruction(push));
             char[] Opcode = Utils.ConvertOpCode(instruct.OpCode).Name.ToCharArray();
@@ -868,7 +864,7 @@ namespace HydraEngine.Protection.Method
             lista.Add(OpCodes.Ldsfld.ToInstruction(ctx.ManifestModule.Import(final)));
             lista.Add(OpCodes.Callvirt.ToInstruction(ctx.ManifestModule.Import(typeof(ILGenerator).GetMethod("Emit", new Type[] { typeof(ROpCode) }))));
         }
-        public  void addLocal(Local local, Local push, ref List<Instruction> lista, AssemblyDef ctx, ref List<Local> list)
+        public void addLocal(Local local, Local push, ref List<Instruction> lista, AssemblyDef ctx, ref List<Local> list)
         {
             lista.Add(OpCodes.Ldloc_S.ToInstruction(push));
             lista.Add(OpCodes.Ldtoken.ToInstruction(local.Type.ToTypeDefOrRef()));
@@ -877,7 +873,7 @@ namespace HydraEngine.Protection.Method
             list.Add(new Local(ctx.ManifestModule.Import(typeof(LocalBuilder)).ToTypeSig()));
             lista.Add(OpCodes.Stloc_S.ToInstruction(list[list.Count - 1]));
         }
-        public  int Emulate(Instruction[] code, AssemblyDef ctx)
+        public int Emulate(Instruction[] code, AssemblyDef ctx)
         {
             DynamicMethod emulatore = new DynamicMethod(GenerateString(Mode), typeof(void), null);
             ILGenerator il = emulatore.GetILGenerator();

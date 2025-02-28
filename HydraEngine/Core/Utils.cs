@@ -1,18 +1,17 @@
 ﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
 using dnlib.PE;
 using Ressy;
 using Ressy.HighLevel.Icons;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing.Imaging;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HydraEngine.Core
 {
@@ -25,22 +24,24 @@ namespace HydraEngine.Core
     public class AssemblyMap
     {
 
-        public  MethodDef EntryPoint { get; set; }  = null;
+        public MethodDef EntryPoint { get; set; } = null;
         public ModuleKind Kind { get; set; } = ModuleKind.Console;
-        public Characteristics Characteristics { get; set; } =  Characteristics.ExecutableImage;
+        public Characteristics Characteristics { get; set; } = Characteristics.ExecutableImage;
         public Machine Machine { get; set; } = Machine.I386;
         public bool Is32BitPreferred { get; set; } = true;
 
         public bool Update(ModuleDef module)
         {
-            try {
+            try
+            {
                 this.EntryPoint = module.EntryPoint;
                 this.Kind = module.Kind;
                 this.Characteristics = module.Characteristics;
                 this.Machine = module.Machine;
                 this.Is32BitPreferred = module.Is32BitPreferred;
                 return true;
-            } catch { return false; }
+            }
+            catch { return false; }
         }
     }
     public class Utils
@@ -77,8 +78,10 @@ namespace HydraEngine.Core
             }
         }
 
-        public static bool ChangeIcon(string AppPath , string IconPath) {
-            try {
+        public static bool ChangeIcon(string AppPath, string IconPath)
+        {
+            try
+            {
                 if (File.Exists(AppPath) || File.Exists(IconPath))
                 {
                     var portableExecutable = new PortableExecutable(AppPath);
@@ -87,7 +90,8 @@ namespace HydraEngine.Core
                     return true;
                 }
                 return false;
-            } catch { return false; }
+            }
+            catch { return false; }
         }
 
         public static string RunRemoteHost(string Target, string FullArguments = "", bool redirectouput = true)
@@ -119,8 +123,9 @@ namespace HydraEngine.Core
                 {
                     string HostOutput = cmdProcess.StandardOutput.ReadToEnd().ToString() + Environment.NewLine + cmdProcess.StandardError.ReadToEnd().ToString();
                     return HostOutput.ToString();
-                } else { return ""; }
-               
+                }
+                else { return ""; }
+
             }
             catch (Exception ex)
             {
@@ -208,7 +213,7 @@ namespace HydraEngine.Core
                         }
                     }
                 }
-                catch {}
+                catch { }
             }
 
             return result;
@@ -229,10 +234,21 @@ namespace HydraEngine.Core
                 };
 
                 return ModuleDefMD.Load(data, options);
-            } catch { assemblyResolver = null; return null; }
-          
+            }
+            catch { assemblyResolver = null; return null; }
+
         }
 
+        public static MethodDefUser CreateMethod(ModuleDef mod)
+        {
+            MethodDefUser methodDefUser = new MethodDefUser(Randomizer.GenerateRandomString(15), MethodSig.CreateStatic(mod.CorLibTypes.Void), dnlib.DotNet.MethodImplAttributes.IL, dnlib.DotNet.MethodAttributes.Public | dnlib.DotNet.MethodAttributes.Static)
+            {
+                Body = new CilBody()
+            };
+            methodDefUser.Body.Instructions.Add(OpCodes.Ret.ToInstruction());
+            mod.GlobalType.Methods.Add(methodDefUser);
+            return methodDefUser;
+        }
 
         //public static ModuleDefMD LoadModule(byte[] data, out AssemblyResolver assemblyResolver, out AssemblyMap assemblyMap)
         //{

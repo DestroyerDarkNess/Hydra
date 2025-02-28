@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
+using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HydraEngine._7zip
 {
@@ -21,6 +19,17 @@ namespace HydraEngine._7zip
         private const int DEFAULT_HEADERLEN = 9;
         private const int QLZ_POINTERS_1 = 1;
         private const int QLZ_POINTERS_3 = 16;
+
+        public static byte[] CompressBytes2(byte[] data)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            using (DeflateStream deflateStream = new DeflateStream(memoryStream, CompressionLevel.Optimal))
+            {
+                deflateStream.Write(data, 0, data.Length);
+            }
+            return memoryStream.ToArray();
+        }
+
         public static byte[] CompressBytes(byte[] source, int level = 3)
         {
             byte[] d2 = null;

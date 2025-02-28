@@ -1,19 +1,19 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using HydraEngine.Core;
+using HydraEngine.Protection.Method;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Proxy
 {
-     public class ProxyInt : Models.Protection
+    public class ProxyInt : Models.Protection
     {
         public ProxyInt() : base("Protection.Proxy.ProxyInt", "Renamer Phase", "Description for Renamer Phase") { }
 
         public string BaseChars { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        public bool DynamicInstructions { get; set; } = false;
 
         public override async Task<bool> Execute(ModuleDefMD module)
         {
@@ -45,6 +45,11 @@ namespace HydraEngine.Protection.Proxy
                                 meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
                                 instr[i].OpCode = OpCodes.Call;
                                 instr[i].Operand = meth1;
+
+                                if (DynamicInstructions)
+                                {
+                                    bool Dynamic = new IL2Dynamic().ConvertToDynamic(meth1, module);
+                                }
                             }
                             else if (meth.Body.Instructions[i].OpCode == OpCodes.Ldc_R4)
                             {
@@ -60,6 +65,11 @@ namespace HydraEngine.Protection.Proxy
                                 meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
                                 instr[i].OpCode = OpCodes.Call;
                                 instr[i].Operand = meth1;
+
+                                if (DynamicInstructions)
+                                {
+                                    bool Dynamic = new IL2Dynamic().ConvertToDynamic(meth1, module);
+                                }
                             }
                         }
                     }
