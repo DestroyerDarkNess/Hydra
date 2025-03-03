@@ -245,8 +245,15 @@ Public Class ProjectDesigner
 
     Private Sub Guna2Button12_Click(sender As Object, e As EventArgs) Handles Guna2Button12.Click
         Dim CurrentFile As String = Guna2Button12.Text
+        Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
 
-        Core.Helpers.Utils.SaveFile()
+
+        Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*.{Extension};", Path.GetDirectoryName(CurrentFile))
+
+        If String.IsNullOrEmpty(NewSavePath) = False Then
+            Guna2Button12.Text = NewSavePath
+        End If
+
     End Sub
     Private Sub Guna2CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox2.CheckedChanged
         RaiseUI()
@@ -318,12 +325,16 @@ Public Class ProjectDesigner
         Catch ex As Exception : End Try
     End Sub
 
-    Private Sub Menu_CheckedChanged(sender As Object, e As EventArgs) Handles InfoButton.CheckedChanged, JumpCrackButton.CheckedChanged, DLLMergeButton.CheckedChanged, ShiledButton.CheckedChanged, PackButton.CheckedChanged, CodeButton.CheckedChanged, ExtraFeaturesButton.CheckedChanged
+    Private Sub Menu_CheckedChanged(sender As Object, e As EventArgs) Handles VMButton.CheckedChanged, InfoButton.CheckedChanged, JumpCrackButton.CheckedChanged, DLLMergeButton.CheckedChanged, ShiledButton.CheckedChanged, PackButton.CheckedChanged, CodeButton.CheckedChanged, ExtraFeaturesButton.CheckedChanged
         Dim ButtonObject As Guna.UI2.WinForms.Guna2Button = DirectCast(sender, Guna.UI2.WinForms.Guna2Button)
 
         If ButtonObject Is InfoButton Then
 
             TabControl1.SelectedTab = TabPage1
+
+        ElseIf ButtonObject Is VMButton Then
+
+            TabControl1.SelectedTab = TabPage8
 
         ElseIf ButtonObject Is JumpCrackButton Then
 
@@ -700,12 +711,16 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Method.IL2Dynamic)
         End If
 
-        If ILVMCheck.Checked And VMSelected = 1 Then
-            Result.Add(New HydraEngine.Protection.VM.Virtualizer)
+        If DynamicMethodsCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.DynamicCode)
         End If
 
         If ILVMCheck.Checked And VMSelected = 0 Then
-            Result.Add(New HydraEngine.Protection.Method.DynamicCode)
+            Result.Add(New HydraEngine.Protection.VM.Virtualizer)
+        End If
+
+        If ILVMCheck.Checked And VMSelected = 1 Then
+            Result.Add(New HydraEngine.Protection.VM.EXGuard)
         End If
 
         If MethodError.Checked = True Then
@@ -735,15 +750,13 @@ Public Class ProjectDesigner
         AntiTamperEx = MethodError.Checked
         InvalidMetaData = InvalidMetaDataCheck.Checked
 
-        Dim DynMethods As Boolean = (VMComboSelect.SelectedIndex = 0)
+        Dim DynMethods As Boolean = DynamicMethodsCheck.Checked
 
         Dim SingPE As Boolean = Guna2CheckBox2.Checked
         Dim CloneCert As Boolean = Not (Guna2ComboBox3.SelectedIndex = 0)
         Dim Cert As String = Guna2TextBox3.Text
 
         If Guna2CheckBox2.Checked Then SingPE = File.Exists(Cert)
-
-
 
         Dim ProtectVMRuntime As Boolean = ProtectVMCheck.Checked
         Dim ProtectAntiDump As Boolean = ProtectAntiDumpCheck.Checked
@@ -1124,6 +1137,9 @@ Public Class ProjectDesigner
 
                                          If TypeOf Protection Is Virtualizer Then
                                              DirectCast(Protection, Virtualizer).ProtectRuntime = ProtectVMRuntime
+                                         ElseIf TypeOf Protection Is EXGuard Then
+                                             DirectCast(Protection, EXGuard).Protect = ProtectVMRuntime
+                                             DirectCast(Protection, EXGuard).ouput = IO.Path.GetDirectoryName(Ouput)
                                          ElseIf TypeOf Protection Is ExtremeAD Then
                                              DirectCast(Protection, ExtremeAD).Protect = ProtectAntiDump
                                          End If
@@ -1276,7 +1292,7 @@ Public Class ProjectDesigner
                                          Else
                                              'OptimizeModule(AsmDef)
 
-                                             If VMEnabled Then
+                                             If VMEnabled Or DynMethods Then
                                                  writerOptions.MetadataOptions.Flags = MetadataFlags.PreserveAll
                                                  writerOptions.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.ILOnly
                                                  writerOptions.MetadataLogger = DummyLogger.NoThrowInstance

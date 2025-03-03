@@ -160,6 +160,18 @@
         mRPo7gAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="VMButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAAUpJREFUWEftlb1KxFAQRlOtiqgvINjYCAv7cGqhjf9aay1YWbn7FOJTrGBpZeXv
+        6uqRgUn47mwCgQg29zTZnJmbyczeJEWRyWQymaIogBPgBTiNMQXoAdvAPfAFPABnwDKw5f4TGAObwLwf
+        S2/HA2AhXtiKGz9APwk6wBJw63mRtyic5yicu+QmgKEEr5PKDnAlOX/Bnl584N0bU2A9FN8AvmWxjXXF
+        /w5lB1gEdlv4sdawIiMJXoaYdj8Sb3tC6bmfa+GnWsOCfenSNsya+1Vg4t6mNAjrKrr4MqhTuHB3Lu6m
+        Zk1FF18GdQrvfl7u5JnufU1FF18RpvAov4cx15B4q0JNviJMoaS2e0OTuviEMAWjtntDk7r4hPBeaOze
+        AF49bxJ8+eQ0+Q/1MwBHwBNwGGMKsO8bNvmO+PfFbq7O28Y+Vp/JZDL/xi9/matLL9p6uAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
   <data name="ExtraFeaturesButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

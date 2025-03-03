@@ -1,11 +1,6 @@
-﻿Imports System.Text.RegularExpressions
-Imports System.Net
+﻿Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
-Imports System.Runtime.InteropServices
-Imports System.Text
-Imports System.Runtime.CompilerServices
-Imports System.Drawing.Imaging
 
 Namespace Core.Helpers
 
@@ -123,11 +118,13 @@ Namespace Core.Helpers
 
         End Function
 
-        Public Shared Function SaveFile(Optional ByVal NameFile As String = "", Optional ByVal Formats As String = "") As String
+        Public Shared Function SaveFile(Optional ByVal NameFile As String = "", Optional ByVal Formats As String = "", Optional ByVal InitialDirectory As String = "") As String
             Dim SaveFileDialog1 As New SaveFileDialog
             ' OpenFileDialog1.DefaultExt = "txt"
             SaveFileDialog1.FileName = NameFile
-            '  OpenFileDialog1.InitialDirectory = "c:\"
+            If Not InitialDirectory = "" Then
+                SaveFileDialog1.InitialDirectory = InitialDirectory
+            End If
             SaveFileDialog1.Title = "Save file"
             If Not Formats = "" Then
                 SaveFileDialog1.Filter = Formats
