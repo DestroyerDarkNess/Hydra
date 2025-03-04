@@ -244,16 +244,17 @@ Public Class ProjectDesigner
 #Region " UI "
 
     Private Sub Guna2Button12_Click(sender As Object, e As EventArgs) Handles Guna2Button12.Click
-        Dim CurrentFile As String = Guna2Button12.Text
-        Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
+        Try
+            Dim CurrentFile As String = OutputTextBox.Text
+            Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
 
 
-        Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*.{Extension};", Path.GetDirectoryName(CurrentFile))
+            Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*{Extension}", Path.GetDirectoryName(CurrentFile))
 
-        If String.IsNullOrEmpty(NewSavePath) = False Then
-            Guna2Button12.Text = NewSavePath
-        End If
-
+            If String.IsNullOrEmpty(NewSavePath) = False Then
+                OutputTextBox.Text = NewSavePath
+            End If
+        Catch ex As Exception : End Try
     End Sub
     Private Sub Guna2CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox2.CheckedChanged
         RaiseUI()

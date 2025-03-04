@@ -27,7 +27,7 @@ namespace HydraEngine.Protection.String
 
                 var decryptMethod = InjectMethod(module, "Decrypt");
 
-                var decryptMethod2 = InjectMethod(module, "Decrypt2");
+
 
                 foreach (TypeDef type in module.Types.Where(t => !t.IsGlobalModuleType))
                 {
@@ -36,6 +36,8 @@ namespace HydraEngine.Protection.String
                         EncryptStringsInMethod(method, decryptMethod);
                     }
                 }
+
+                var decryptMethod2 = InjectMethod2(module, "Decrypt2");
 
                 foreach (TypeDef type in module.Types.Where(t => !t.IsGlobalModuleType))
                 {
@@ -155,8 +157,8 @@ namespace HydraEngine.Protection.String
 
             if (GetKeyMethod != null) GetKeyMethod.Name = Randomizer.GenerateRandomString(20);
 
-            var cctor = module.GlobalType.FindStaticConstructor();
-            if (cctor != null) module.GlobalType.Remove(cctor);
+            //var cctor = module.GlobalType.FindStaticConstructor();
+            //if (cctor != null) module.GlobalType.Remove(cctor);
 
             return decryptMethod;
         }
@@ -171,8 +173,8 @@ namespace HydraEngine.Protection.String
 
             if (decryptMethod != null) decryptMethod.Name = Randomizer.GenerateRandomString(22);
 
-            var cctor = module.GlobalType.FindStaticConstructor();
-            if (cctor != null) module.GlobalType.Remove(cctor);
+            //var cctor = module.GlobalType.FindStaticConstructor();
+            //if (cctor != null) module.GlobalType.Remove(cctor);
 
             return decryptMethod;
         }
@@ -219,20 +221,6 @@ namespace HydraEngine.Protection.String
             }
         }
 
-        public static string Decrypt2(string str, int min, int key, int hash, int length, int max)
-        {
-            if (max > 78787878) ;
-            if (length > 485941) ;
-
-            StringBuilder builder = new StringBuilder();
-            foreach (char c in str.ToCharArray())
-                builder.Append((char)(c - key));
-
-            if (min < 14141) ;
-            if (length < 1548174) ;
-
-            return builder.ToString();
-        }
 
         private static byte[] GetKeyFromResources()
         {
