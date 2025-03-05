@@ -1,88 +1,78 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using dnlib.DotNet.Writer;
-using VM.Core.Helper;
-using VM.Core.Protections.Impl.Virtualization.RuntimeProtections;
-using System;
+using HydraEngine.Protection.VM;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using HydraEngine.Protection.VM;
-using HydraEngine.Runtimes.Anti.Runtime;
+using VM.Core.Helper;
 
 namespace VM.Core.Protections.Impl.Virtualization
 {
     public class Virtualization : IProtection
-	{
+    {
+
+        public HashSet<MethodDef> Methods = null;
+
         public override string Name() => "Virtualization";
-		public override void Execute(Virtualizer context)
-		{
+        public override void Execute(Virtualizer context)
+        {
             protectRuntime();
             IMethod runVm = context.Module.Import(Virtualizer.Instance.theMethod);
-            foreach (var type in context.Module.GetTypes().ToArray())
-			{
-                if (!Analyzer.CanRename(type)) continue;
-                if (type.FullName.StartsWith(Virtualizer.Instance.RTModule.Assembly.Name))
-					continue;
-				
-				//Context.Instance.Log.Information($"Processing type: {type.FullName}");
-				
-				foreach (var method in type.Methods.Where(M => M.HasBody && M.Body.HasInstructions).ToArray())
-				{
-                    if (!Analyzer.CanRename(method)) continue;
-                    string methodName = method.MDToken.ToInt32().ToString();					
-					
-                    if (method.IsRuntime)
-						continue;
+            //foreach (var type in context.Module.GetTypes().ToArray())
+            //{
+            //    if (!Analyzer.CanRename(type)) continue;
+            //    if (type.FullName.StartsWith(Virtualizer.Instance.RTModule.Assembly.Name)) continue; 
+            //}
 
-                    //Context.Instance.Log.Information($"Virtualizing method: {method.FullName}");
-					
-					var name = Generator.RandomName();
-					
-					var conv = new Converter(method, name);
-					conv.Save();
-					
-					if (!conv.Compatible)
-					{
-						//Context.Instance.Log.Warning($"Skipped method because of incompatibilities: {method.FullName}");
-						continue;
-					}
-					
-					method.Body = new CilBody();
+            foreach (var method in Methods)
+            {
+                string methodName = method.MDToken.ToInt32().ToString();
 
-					if (method.Parameters.Count() == 0)
-					{
-                        method.Body.Instructions.Add(new Instruction(OpCodes.Ldnull));
-                    } else
-					{
-                        method.Body.Instructions.Add(new Instruction(OpCodes.Ldc_I4, method.Parameters.Count));
-                        method.Body.Instructions.Add(OpCodes.Newarr.ToInstruction(context.Module.CorLibTypes.Object));
-                        for (var i = 0; i < method.Parameters.Count; i++)
-                        {
-                            method.Body.Instructions.Add(new Instruction(OpCodes.Dup));
-                            method.Body.Instructions.Add(new Instruction(OpCodes.Ldc_I4, i));
-                            method.Body.Instructions.Add(new Instruction(OpCodes.Ldarg, method.Parameters[i]));
-                            method.Body.Instructions.Add(new Instruction(OpCodes.Box, method.Parameters[i].Type.ToTypeDefOrRef()));
-                            method.Body.Instructions.Add(new Instruction(OpCodes.Stelem_Ref));
-                        }
-                    }
-                    method.Body.Instructions.Add(new Instruction(OpCodes.Ldstr, methodName));
-                    method.Body.Instructions.Add(Instruction.Create(OpCodes.Ldftn, runVm));
-                    method.Body.Instructions.Add(Instruction.Create(OpCodes.Calli, runVm.MethodSig));
+                if (method.IsRuntime) continue;
 
-                    if (method.HasReturnType)
-						method.Body.Instructions.Add(new Instruction(OpCodes.Unbox_Any, method.ReturnType.ToTypeDefOrRef()));
-					else
-						method.Body.Instructions.Add(OpCodes.Pop.ToInstruction());
-					
-					method.Body.Instructions.Add(new Instruction(OpCodes.Ret));
-					
-					method.Body.UpdateInstructionOffsets();
+                var name = Generator.RandomName();
 
-                    Virtualizer.Instance.VirtualizedMethods.Add(method.FullName);
+                var conv = new Converter(method, name);
+                conv.Save();
+
+                if (!conv.Compatible) continue;
+
+                method.Body = new CilBody();
+
+                if (method.Parameters.Count() == 0)
+                {
+                    method.Body.Instructions.Add(new Instruction(OpCodes.Ldnull));
                 }
-			}
+                else
+                {
+                    method.Body.Instructions.Add(new Instruction(OpCodes.Ldc_I4, method.Parameters.Count));
+                    method.Body.Instructions.Add(OpCodes.Newarr.ToInstruction(context.Module.CorLibTypes.Object));
+                    for (var i = 0; i < method.Parameters.Count; i++)
+                    {
+                        method.Body.Instructions.Add(new Instruction(OpCodes.Dup));
+                        method.Body.Instructions.Add(new Instruction(OpCodes.Ldc_I4, i));
+                        method.Body.Instructions.Add(new Instruction(OpCodes.Ldarg, method.Parameters[i]));
+                        method.Body.Instructions.Add(new Instruction(OpCodes.Box, method.Parameters[i].Type.ToTypeDefOrRef()));
+                        method.Body.Instructions.Add(new Instruction(OpCodes.Stelem_Ref));
+                    }
+                }
+                method.Body.Instructions.Add(new Instruction(OpCodes.Ldstr, methodName));
+                method.Body.Instructions.Add(Instruction.Create(OpCodes.Ldftn, runVm));
+                method.Body.Instructions.Add(Instruction.Create(OpCodes.Calli, runVm.MethodSig));
+
+                if (method.HasReturnType)
+                    method.Body.Instructions.Add(new Instruction(OpCodes.Unbox_Any, method.ReturnType.ToTypeDefOrRef()));
+                else
+                    method.Body.Instructions.Add(OpCodes.Pop.ToInstruction());
+
+                method.Body.Instructions.Add(new Instruction(OpCodes.Ret));
+
+                method.Body.UpdateInstructionOffsets();
+
+                Virtualizer.Instance.VirtualizedMethods.Add(method.FullName);
+            }
+
             if (Virtualizer.Instance.InjectRuntime) injectRuntime();
         }
 
@@ -114,14 +104,12 @@ namespace VM.Core.Protections.Impl.Virtualization
             Virtualizer.Instance.Module.GlobalType.FindOrCreateStaticConstructor().Body.Instructions.Insert(0, new Instruction(OpCodes.Ldftn, init));
             #endregion
 
-
             #region Protect Virtualized Methods
             //ProxyInteger.Execute(Context.Instance.Module);
             //Strings.Execute(Context.Instance.Module);
             //CallToCalli.Execute(Context.Instance.Module);
             #endregion
         }
-
 
         private async void protectRuntime()
         {
@@ -136,9 +124,9 @@ namespace VM.Core.Protections.Impl.Virtualization
 
                 #region Protect Runtime
                 //Strings.Execute(Context.Instance.RTModule);
-               // CFlow.Execute(Context.Instance.RTModule);
-              //  ProxyInteger.Execute(Context.Instance.RTModule);
-               // CallToCalli.Execute(Context.Instance.RTModule);
+                // CFlow.Execute(Context.Instance.RTModule);
+                //  ProxyInteger.Execute(Context.Instance.RTModule);
+                // CallToCalli.Execute(Context.Instance.RTModule);
                 //Renamer.Execute(Context.Instance.RTModule); Context.Instance.theMethod.Name = Generator.RandomName();
 
                 var renamer = new HydraEngine.Protection.Renamer.RenamerPhase

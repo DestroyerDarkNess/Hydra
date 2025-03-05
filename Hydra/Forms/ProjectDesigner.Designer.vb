@@ -173,10 +173,16 @@ Partial Class ProjectDesigner
         Me.XylosNotice4 = New Hydra.XylosNotice()
         Me.LogInLabel3 = New Hydra.LogInLabel()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
-        Me.Guna2GroupBox9 = New Guna.UI2.WinForms.Guna2GroupBox()
-        Me.VMComboSelect = New Guna.UI2.WinForms.Guna2ComboBox()
-        Me.ILVMCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.XylosNotice7 = New Hydra.XylosNotice()
+        Me.VirtualizeStringsVM = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2CheckBox7 = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2CheckBox6 = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2CheckBox5 = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2CheckBox4 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ProtectVMCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.ILVMCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.VMComboSelect = New Guna.UI2.WinForms.Guna2ComboBox()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.LogInLabel8 = New Hydra.LogInLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.VMButton = New Guna.UI2.WinForms.Guna2Button()
@@ -212,7 +218,6 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox8.SuspendLayout()
         Me.Guna2GroupBox7.SuspendLayout()
         Me.TabPage8.SuspendLayout()
-        Me.Guna2GroupBox9.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.LogInContextMenu1.SuspendLayout()
@@ -336,7 +341,6 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox1.Location = New System.Drawing.Point(3, 3)
         Me.Guna2TextBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Guna2TextBox1.Name = "Guna2TextBox1"
-        Me.Guna2TextBox1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.Guna2TextBox1.PlaceholderText = ""
         Me.Guna2TextBox1.ReadOnly = True
         Me.Guna2TextBox1.SelectedText = ""
@@ -499,9 +503,9 @@ Partial Class ProjectDesigner
         'Guna2Button2
         '
         Me.Guna2Button2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.Guna2Button2.BorderThickness = 1
+        Me.Guna2Button2.BorderRadius = 5
         Me.Guna2Button2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(25, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.Guna2Button2.FillColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Guna2Button2.FillColor = System.Drawing.Color.Transparent
         Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button2.ForeColor = System.Drawing.Color.White
         Me.Guna2Button2.Image = CType(resources.GetObject("Guna2Button2.Image"), System.Drawing.Image)
@@ -600,7 +604,6 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox2.Location = New System.Drawing.Point(53, 46)
         Me.Guna2TextBox2.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.Guna2TextBox2.Name = "Guna2TextBox2"
-        Me.Guna2TextBox2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.Guna2TextBox2.PlaceholderText = ""
         Me.Guna2TextBox2.SelectedText = ""
         Me.Guna2TextBox2.SelectionStart = 9
@@ -1816,7 +1819,6 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox9.Location = New System.Drawing.Point(63, 90)
         Me.Guna2TextBox9.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.Guna2TextBox9.Name = "Guna2TextBox9"
-        Me.Guna2TextBox9.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.Guna2TextBox9.PlaceholderText = ""
         Me.Guna2TextBox9.SelectedText = ""
         Me.Guna2TextBox9.SelectionStart = 9
@@ -2158,7 +2160,6 @@ Partial Class ProjectDesigner
         Me.OutputTextBox.Location = New System.Drawing.Point(69, 18)
         Me.OutputTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.OutputTextBox.Name = "OutputTextBox"
-        Me.OutputTextBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.OutputTextBox.PlaceholderText = ""
         Me.OutputTextBox.ReadOnly = True
         Me.OutputTextBox.SelectedText = ""
@@ -2184,7 +2185,6 @@ Partial Class ProjectDesigner
         Me.LogTextBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.LogTextBox.Multiline = True
         Me.LogTextBox.Name = "LogTextBox"
-        Me.LogTextBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.LogTextBox.PlaceholderText = ""
         Me.LogTextBox.ReadOnly = True
         Me.LogTextBox.SelectedText = ""
@@ -2613,7 +2613,6 @@ Partial Class ProjectDesigner
         Me.PESectionCustomText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PESectionCustomText.MaxLength = 8
         Me.PESectionCustomText.Name = "PESectionCustomText"
-        Me.PESectionCustomText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.PESectionCustomText.PlaceholderText = ""
         Me.PESectionCustomText.SelectedText = ""
         Me.PESectionCustomText.Size = New System.Drawing.Size(210, 27)
@@ -2683,7 +2682,6 @@ Partial Class ProjectDesigner
         Me.PESectionExclusion.Location = New System.Drawing.Point(79, 43)
         Me.PESectionExclusion.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PESectionExclusion.Name = "PESectionExclusion"
-        Me.PESectionExclusion.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.PESectionExclusion.PlaceholderText = "Example: .pdata|.text|.reloc ( Separated by | )"
         Me.PESectionExclusion.SelectedText = ""
         Me.PESectionExclusion.Size = New System.Drawing.Size(597, 27)
@@ -2713,7 +2711,6 @@ Partial Class ProjectDesigner
         Me.Guna2Button3.FillColor = System.Drawing.Color.Transparent
         Me.Guna2Button3.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button3.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button3.Image = CType(resources.GetObject("Guna2Button3.Image"), System.Drawing.Image)
         Me.Guna2Button3.Location = New System.Drawing.Point(648, 47)
         Me.Guna2Button3.Name = "Guna2Button3"
         Me.Guna2Button3.Size = New System.Drawing.Size(28, 26)
@@ -2768,7 +2765,6 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox3.Location = New System.Drawing.Point(93, 47)
         Me.Guna2TextBox3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Guna2TextBox3.Name = "Guna2TextBox3"
-        Me.Guna2TextBox3.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.Guna2TextBox3.PlaceholderText = ""
         Me.Guna2TextBox3.ReadOnly = True
         Me.Guna2TextBox3.SelectedText = ""
@@ -2824,7 +2820,16 @@ Partial Class ProjectDesigner
         'TabPage8
         '
         Me.TabPage8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.TabPage8.Controls.Add(Me.Guna2GroupBox9)
+        Me.TabPage8.Controls.Add(Me.XylosNotice7)
+        Me.TabPage8.Controls.Add(Me.VirtualizeStringsVM)
+        Me.TabPage8.Controls.Add(Me.Guna2CheckBox7)
+        Me.TabPage8.Controls.Add(Me.Guna2CheckBox6)
+        Me.TabPage8.Controls.Add(Me.Guna2CheckBox5)
+        Me.TabPage8.Controls.Add(Me.Guna2CheckBox4)
+        Me.TabPage8.Controls.Add(Me.ProtectVMCheck)
+        Me.TabPage8.Controls.Add(Me.ILVMCheck)
+        Me.TabPage8.Controls.Add(Me.VMComboSelect)
+        Me.TabPage8.Controls.Add(Me.TreeView1)
         Me.TabPage8.Controls.Add(Me.LogInLabel8)
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
@@ -2832,20 +2837,149 @@ Partial Class ProjectDesigner
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "TabPage8"
         '
-        'Guna2GroupBox9
+        'XylosNotice7
         '
-        Me.Guna2GroupBox9.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2GroupBox9.Controls.Add(Me.VMComboSelect)
-        Me.Guna2GroupBox9.Controls.Add(Me.ILVMCheck)
-        Me.Guna2GroupBox9.Controls.Add(Me.ProtectVMCheck)
-        Me.Guna2GroupBox9.CustomBorderColor = System.Drawing.Color.Transparent
-        Me.Guna2GroupBox9.FillColor = System.Drawing.Color.Transparent
-        Me.Guna2GroupBox9.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2GroupBox9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox9.Location = New System.Drawing.Point(71, 11)
-        Me.Guna2GroupBox9.Name = "Guna2GroupBox9"
-        Me.Guna2GroupBox9.Size = New System.Drawing.Size(166, 68)
-        Me.Guna2GroupBox9.TabIndex = 78
+        Me.XylosNotice7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice7.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice7.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice7.Enabled = False
+        Me.XylosNotice7.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice7.Location = New System.Drawing.Point(267, 0)
+        Me.XylosNotice7.Multiline = True
+        Me.XylosNotice7.Name = "XylosNotice7"
+        Me.XylosNotice7.ReadOnly = True
+        Me.XylosNotice7.Size = New System.Drawing.Size(491, 28)
+        Me.XylosNotice7.TabIndex = 85
+        Me.XylosNotice7.Text = "If you use VM EXGuard (KoiVM Based) and also DLL Embedder use Resources Engine." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
+    ""
+        '
+        'VirtualizeStringsVM
+        '
+        Me.VirtualizeStringsVM.AutoSize = True
+        Me.VirtualizeStringsVM.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.VirtualizeStringsVM.CheckedState.BorderRadius = 0
+        Me.VirtualizeStringsVM.CheckedState.BorderThickness = 1
+        Me.VirtualizeStringsVM.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.VirtualizeStringsVM.Location = New System.Drawing.Point(71, 57)
+        Me.VirtualizeStringsVM.Name = "VirtualizeStringsVM"
+        Me.VirtualizeStringsVM.Size = New System.Drawing.Size(103, 17)
+        Me.VirtualizeStringsVM.TabIndex = 84
+        Me.VirtualizeStringsVM.Text = "Virtualize Strings"
+        Me.VirtualizeStringsVM.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.VirtualizeStringsVM.UncheckedState.BorderRadius = 0
+        Me.VirtualizeStringsVM.UncheckedState.BorderThickness = 1
+        Me.VirtualizeStringsVM.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.VirtualizeStringsVM.UseVisualStyleBackColor = True
+        '
+        'Guna2CheckBox7
+        '
+        Me.Guna2CheckBox7.AutoSize = True
+        Me.Guna2CheckBox7.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox7.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox7.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox7.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox7.Location = New System.Drawing.Point(452, 57)
+        Me.Guna2CheckBox7.Name = "Guna2CheckBox7"
+        Me.Guna2CheckBox7.Size = New System.Drawing.Size(145, 17)
+        Me.Guna2CheckBox7.TabIndex = 83
+        Me.Guna2CheckBox7.Text = "Exclude Unsafe Methods"
+        Me.Guna2CheckBox7.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox7.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox7.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox7.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox7.UseVisualStyleBackColor = True
+        '
+        'Guna2CheckBox6
+        '
+        Me.Guna2CheckBox6.AutoSize = True
+        Me.Guna2CheckBox6.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox6.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox6.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox6.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox6.Location = New System.Drawing.Point(306, 57)
+        Me.Guna2CheckBox6.Name = "Guna2CheckBox6"
+        Me.Guna2CheckBox6.Size = New System.Drawing.Size(131, 17)
+        Me.Guna2CheckBox6.TabIndex = 82
+        Me.Guna2CheckBox6.Text = "Exclude Red Methods"
+        Me.Guna2CheckBox6.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox6.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox6.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox6.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox6.UseVisualStyleBackColor = True
+        '
+        'Guna2CheckBox5
+        '
+        Me.Guna2CheckBox5.AutoSize = True
+        Me.Guna2CheckBox5.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox5.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox5.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox5.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox5.Location = New System.Drawing.Point(603, 57)
+        Me.Guna2CheckBox5.Name = "Guna2CheckBox5"
+        Me.Guna2CheckBox5.Size = New System.Drawing.Size(91, 17)
+        Me.Guna2CheckBox5.TabIndex = 81
+        Me.Guna2CheckBox5.Text = "Exclude cctor"
+        Me.Guna2CheckBox5.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox5.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox5.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox5.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox5.UseVisualStyleBackColor = True
+        '
+        'Guna2CheckBox4
+        '
+        Me.Guna2CheckBox4.AutoSize = True
+        Me.Guna2CheckBox4.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox4.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox4.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox4.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox4.Location = New System.Drawing.Point(700, 57)
+        Me.Guna2CheckBox4.Name = "Guna2CheckBox4"
+        Me.Guna2CheckBox4.Size = New System.Drawing.Size(37, 17)
+        Me.Guna2CheckBox4.TabIndex = 80
+        Me.Guna2CheckBox4.Text = "All"
+        Me.Guna2CheckBox4.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox4.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox4.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox4.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox4.UseVisualStyleBackColor = True
+        '
+        'ProtectVMCheck
+        '
+        Me.ProtectVMCheck.AutoSize = True
+        Me.ProtectVMCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProtectVMCheck.CheckedState.BorderRadius = 0
+        Me.ProtectVMCheck.CheckedState.BorderThickness = 1
+        Me.ProtectVMCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProtectVMCheck.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.ProtectVMCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        Me.ProtectVMCheck.Location = New System.Drawing.Point(71, 34)
+        Me.ProtectVMCheck.Name = "ProtectVMCheck"
+        Me.ProtectVMCheck.Size = New System.Drawing.Size(62, 17)
+        Me.ProtectVMCheck.TabIndex = 75
+        Me.ProtectVMCheck.Text = "Protect"
+        Me.ProtectVMCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProtectVMCheck.UncheckedState.BorderRadius = 0
+        Me.ProtectVMCheck.UncheckedState.BorderThickness = 1
+        Me.ProtectVMCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProtectVMCheck.UseVisualStyleBackColor = True
+        '
+        'ILVMCheck
+        '
+        Me.ILVMCheck.AutoSize = True
+        Me.ILVMCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ILVMCheck.CheckedState.BorderRadius = 0
+        Me.ILVMCheck.CheckedState.BorderThickness = 1
+        Me.ILVMCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ILVMCheck.Location = New System.Drawing.Point(71, 11)
+        Me.ILVMCheck.Name = "ILVMCheck"
+        Me.ILVMCheck.Size = New System.Drawing.Size(54, 17)
+        Me.ILVMCheck.TabIndex = 77
+        Me.ILVMCheck.Text = "ILVM "
+        Me.ILVMCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ILVMCheck.UncheckedState.BorderRadius = 0
+        Me.ILVMCheck.UncheckedState.BorderThickness = 1
+        Me.ILVMCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ILVMCheck.UseVisualStyleBackColor = True
         '
         'VMComboSelect
         '
@@ -2860,49 +2994,22 @@ Partial Class ProjectDesigner
         Me.VMComboSelect.FormattingEnabled = True
         Me.VMComboSelect.ItemHeight = 25
         Me.VMComboSelect.Items.AddRange(New Object() {"HexVM [Unstable]", "EXGuard"})
-        Me.VMComboSelect.Location = New System.Drawing.Point(10, 28)
+        Me.VMComboSelect.Location = New System.Drawing.Point(139, 14)
         Me.VMComboSelect.Name = "VMComboSelect"
-        Me.VMComboSelect.Size = New System.Drawing.Size(148, 31)
+        Me.VMComboSelect.Size = New System.Drawing.Size(114, 31)
         Me.VMComboSelect.StartIndex = 1
         Me.VMComboSelect.TabIndex = 78
         '
-        'ILVMCheck
+        'TreeView1
         '
-        Me.ILVMCheck.AutoSize = True
-        Me.ILVMCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ILVMCheck.CheckedState.BorderRadius = 0
-        Me.ILVMCheck.CheckedState.BorderThickness = 1
-        Me.ILVMCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ILVMCheck.Location = New System.Drawing.Point(4, 3)
-        Me.ILVMCheck.Name = "ILVMCheck"
-        Me.ILVMCheck.Size = New System.Drawing.Size(55, 19)
-        Me.ILVMCheck.TabIndex = 77
-        Me.ILVMCheck.Text = "ILVM "
-        Me.ILVMCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ILVMCheck.UncheckedState.BorderRadius = 0
-        Me.ILVMCheck.UncheckedState.BorderThickness = 1
-        Me.ILVMCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ILVMCheck.UseVisualStyleBackColor = True
-        '
-        'ProtectVMCheck
-        '
-        Me.ProtectVMCheck.AutoSize = True
-        Me.ProtectVMCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ProtectVMCheck.CheckedState.BorderRadius = 0
-        Me.ProtectVMCheck.CheckedState.BorderThickness = 1
-        Me.ProtectVMCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProtectVMCheck.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        Me.ProtectVMCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!)
-        Me.ProtectVMCheck.Location = New System.Drawing.Point(96, 3)
-        Me.ProtectVMCheck.Name = "ProtectVMCheck"
-        Me.ProtectVMCheck.Size = New System.Drawing.Size(62, 17)
-        Me.ProtectVMCheck.TabIndex = 75
-        Me.ProtectVMCheck.Text = "Protect"
-        Me.ProtectVMCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ProtectVMCheck.UncheckedState.BorderRadius = 0
-        Me.ProtectVMCheck.UncheckedState.BorderThickness = 1
-        Me.ProtectVMCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProtectVMCheck.UseVisualStyleBackColor = True
+        Me.TreeView1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.TreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TreeView1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TreeView1.ForeColor = System.Drawing.Color.White
+        Me.TreeView1.Location = New System.Drawing.Point(28, 80)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(709, 363)
+        Me.TreeView1.TabIndex = 79
         '
         'LogInLabel8
         '
@@ -3137,7 +3244,7 @@ Partial Class ProjectDesigner
         'BoosterToolTip1
         '
         Me.BoosterToolTip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.BoosterToolTip1.BorderColor = System.Drawing.Color.DeepSkyBlue
+        Me.BoosterToolTip1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
         '
@@ -3151,7 +3258,6 @@ Partial Class ProjectDesigner
         Me.Controls.Add(Me.Panel2)
         Me.ForeColor = System.Drawing.Color.White
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "ProjectDesigner"
@@ -3194,8 +3300,6 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox7.PerformLayout()
         Me.TabPage8.ResumeLayout(False)
         Me.TabPage8.PerformLayout()
-        Me.Guna2GroupBox9.ResumeLayout(False)
-        Me.Guna2GroupBox9.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.LogInContextMenu1.ResumeLayout(False)
@@ -3369,8 +3473,14 @@ Partial Class ProjectDesigner
     Friend WithEvents TabPage8 As TabPage
     Friend WithEvents LogInLabel8 As LogInLabel
     Friend WithEvents VMButton As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents Guna2GroupBox9 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents VMComboSelect As Guna.UI2.WinForms.Guna2ComboBox
     Friend WithEvents ILVMCheck As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents ProtectVMCheck As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents TreeView1 As TreeView
+    Friend WithEvents Guna2CheckBox4 As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Guna2CheckBox5 As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Guna2CheckBox6 As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Guna2CheckBox7 As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents VirtualizeStringsVM As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents XylosNotice7 As XylosNotice
 End Class

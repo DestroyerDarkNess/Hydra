@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading.Tasks;
 using VM.Core.Protections;
 using VM.Core.Protections.Impl.UStrings;
@@ -31,26 +28,34 @@ namespace HydraEngine.Protection.VM
         public ModuleDefMD Module { get; set; }
         public ModuleDefMD RTModule { get; set; }
         public Importer Importer { get; set; }
-
+        public bool VMStrings { get; set; } = false;
         public List<IProtection> Protections { get; set; }
         public List<string> VirtualizedMethods = new List<string>();
         public TypeDef theType = null;
         public MethodDef theMethod = null;
-
+        public List<MethodDef> SelectedMethods = null;
         //Need opts.MetadataOptions.Flags = MetadataFlags.PreserveAll;
 
         public override async Task<bool> Execute(ModuleDefMD module)
         {
             try
             {
+                if (SelectedMethods == null || SelectedMethods.Count == 0)
+                {
+                    throw new Exception("No Selected Methods");
+                }
+
                 Module = module;
                 RTModule = ModuleDefMD.Load("VM.Runtime.dll");
                 Importer = new Importer(module);
-                Protections = new List<IProtection>()
-            {
-                //new VStrings(),
-                new Virtualization()
-            };
+                Protections = new List<IProtection>();
+
+                if (VMStrings)
+                {
+                    Protections.Add(new VStrings());
+                }
+
+                Protections.Add(new Virtualization() { Methods = new HashSet<MethodDef>(SelectedMethods) });
 
                 this.theType = RTModule.Types.Where(t => t.FullName.Contains("VirtualMachine")).First(); //VirtualMachine
                 this.theMethod = theType.Methods.Where(m => m.ReturnType.ToString().Contains("Object")).First(); //RunVM, in case other methods are added.
@@ -62,20 +67,20 @@ namespace HydraEngine.Protection.VM
 
                 var opts = new ModuleWriterOptions(Module) { Logger = DummyLogger.NoThrowInstance };
 
-            opts.MetadataOptions.Flags = MetadataFlags.PreserveMethodRids | MetadataFlags.PreserveMemberRefRids;  //MetadataFlags.PreserveAllMethodRids;     // MetadataFlags.PreserveRids;
+                opts.MetadataOptions.Flags = MetadataFlags.PreserveMethodRids | MetadataFlags.PreserveMemberRefRids;  //MetadataFlags.PreserveAllMethodRids;     // MetadataFlags.PreserveRids;
 
-            // PreserveRids | PreserveStringsOffsets | PreserveUSOffsets |
-            // PreserveBlobOffsets | PreserveExtraSignatureData,
+                // PreserveRids | PreserveStringsOffsets | PreserveUSOffsets |
+                // PreserveBlobOffsets | PreserveExtraSignatureData,
 
-            Module.Write(this.TempModule, opts);
+                Module.Write(this.TempModule, opts);
                 return true;
-        }
+            }
             catch (Exception Ex)
             {
                 this.Errors = Ex;
                 return false;
             }
-}
+        }
 
         public override Task<bool> Execute(string assembly)
         {

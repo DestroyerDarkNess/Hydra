@@ -156,6 +156,7 @@
     <Compile Include="Core\DnlibUtils.cs" />
     <Compile Include="Core\HexEncoding.cs" />
     <Compile Include="Core\InjectHelper.cs" />
+    <Compile Include="Core\MethodTreeLoader.cs" />
     <Compile Include="Core\PEFileInfo.cs" />
     <Compile Include="Core\Randomizer.cs" />
     <Compile Include="Core\Utils.cs" />

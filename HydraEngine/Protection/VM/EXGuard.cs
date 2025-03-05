@@ -6,7 +6,6 @@ using HydraEngine.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.VM
@@ -17,7 +16,11 @@ namespace HydraEngine.Protection.VM
 
         public bool Protect { get; set; } = false;
 
+        public bool VMStrings { get; set; } = false;
+
         public string ouput { get; set; } = string.Empty;
+
+        public List<MethodDef> SelectedMethods = null;
 
         public override async Task<bool> Execute(string moduledef)
         {
@@ -27,73 +30,29 @@ namespace HydraEngine.Protection.VM
         {
             try
             {
-
                 string RuntimeVM_Name = $"{Randomizer.GenerateRandomString(Randomizer.BaseChars, 5)}.dll";
 
                 string Tempoutput = Path.Combine(Path.GetTempPath(), module.Name);
 
-                var methods = new HashSet<MethodDef>();
-                //methods.Add(module.EntryPoint);
-
-                //module.AssemblyReferencesAdder();
-                foreach (var type in module.Types.ToArray())
+                if (SelectedMethods == null || SelectedMethods.Count == 0)
                 {
-                    if (type == module.GlobalType) continue;
+                    throw new Exception("No Selected Methods");
+                }
+                else
+                {
+                    HashSet<MethodDef> methodSet = new HashSet<MethodDef>(SelectedMethods);
 
-                    //if (!AnalyzerPhase.CanRename(type)) continue;
-                    //if (!Analyzer.CanRename(type)) continue;
-                    //if (type.HasGenericParameters) continue;
-                    //if (type.CustomAttributes.Count(i => i.TypeFullName.Contains("CompilerGenerated")) != 0) continue;
-                    //if (type.IsValueType) continue;
-
-                    if (type.Namespace == string.Empty) continue;
-
-                    if (type.Name.Contains("ImplementationDetails>")) continue;
-
-                    if (type.Name.Contains("<>f__AnonymousType")) continue;
-
-                    foreach (var method in type.Methods.ToArray())
+                    if (VMStrings)
                     {
-                        Console.WriteLine("Method1: " + method.FullName);
-                        //if (method != module.GlobalType.FindOrCreateStaticConstructor()) continue;
-
-                        if (!Renamer.AnalyzerPhase.CanRename(method, type)) continue;
-                        if (!Analyzer.CanRename(method)) continue;
-                        //if (method.Parameters.Count != 0) continue;
-                        if (method.IsConstructor) continue;
-                        if (!method.HasBody) continue;
-                        if (method.Body.Instructions.Count < 2) continue;
-                        if (type.IsGlobalModuleType && method.IsConstructor) continue;
-                        //if (method.HasGenericParameters) continue;
-                        if (method.CustomAttributes.Count(i => i.TypeFullName.Contains("CompilerGenerated")) != 0) continue;
-                        //if (method.ReturnType == null) continue;
-                        //if (method.ReturnType.IsGenericParameter) continue;
-                        //if (method.Parameters.Count(i => i.Type.FullName.EndsWith("&") && i.ParamDef.IsOut == false) != 0) continue;
-                        //if (method.CustomAttributes.Count(i => i.NamedArguments.Count == 2 &&
-                        //                                        i.NamedArguments[0].Value.ToString().Contains("Encrypt") &&
-                        //                                        i.NamedArguments[1].Name.Contains("Exclude") && i.NamedArguments[1].Value
-                        //                                        .ToString().ToLower().Contains("true")) != 0) continue;
-                        //Console.WriteLine("Method2: " + method.FullName);
-
-                        if (method.IsPinvokeImpl) continue;
-                        if (method.IsUnmanagedExport) continue;
-                        if (methods.Contains(method)) continue;
-
-                        methods.Add(method);
-
-                        if (Protect)
+                        foreach (var method in SelectedMethods)
                         {
-                            new HideCallString(module).Execute(type, method);
-                            //new HideCallNumber(module).Execute(type, method);
+                            new HideCallString(module).Execute(method.DeclaringType, method);
+                            //new HideCallNumber(module).Execute(module.GlobalType, method);
                         }
                     }
+
+                    new EXGuardTask().Exceute(module, methodSet, Tempoutput, RuntimeVM_Name, "", "");
                 }
-
-                methods.Distinct();
-
-                Console.WriteLine("Methods: " + methods.Count);
-
-                new EXGuardTask().Exceute(module, methods, Tempoutput, RuntimeVM_Name, "", "");
 
                 int count = 0;
                 while (!File.Exists(Tempoutput))
