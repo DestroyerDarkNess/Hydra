@@ -1,16 +1,14 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Core;
+using EXGuard.Core.EXECProtections;
 using HydraEngine.Runtimes.Anti.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti
 {
-     public class Antimanything : Models.Protection
+    public class Antimanything : Models.Protection
     {
         public Antimanything() : base("Runtimes.Anti.Antimanything", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -37,7 +35,7 @@ namespace HydraEngine.Runtimes.Anti
                     module.GlobalType.Remove(md);
                     break;
                 }
-
+                AntiDnspy_Inject.Execute(module);
                 return true;
             }
             catch (Exception Ex)

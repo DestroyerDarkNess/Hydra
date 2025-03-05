@@ -1,17 +1,10 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using HydraEngine.Core;
-using HydraEngine.Runtimes.Anti.Runtime;
+﻿using dnlib.DotNet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace HydraEngine.Runtimes.Anti
 {
-     public class AntiILDasm : Models.Protection
+    public class AntiILDasm : Models.Protection
     {
         public AntiILDasm() : base("Runtimes.Anti.AntiILDasm", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -26,6 +19,9 @@ namespace HydraEngine.Runtimes.Anti
                     var attr = new CustomAttribute(ctorRef);
                     module.CustomAttributes.Add(attr);
                 }
+
+                //AntiILDasm_Inject.Execute(mod);
+
                 return true;
             }
             catch (Exception Ex)

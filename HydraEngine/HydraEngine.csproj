@@ -182,6 +182,7 @@
     <Compile Include="Protection\ControlFlow\ControlFlowBlock.cs" />
     <Compile Include="Protection\ControlFlow\ControlFlowBlockType.cs" />
     <Compile Include="Protection\ControlFlow\ControlFlowGraph.cs" />
+    <Compile Include="Protection\ControlFlow\EXGuard_ControlFlow.cs" />
     <Compile Include="Protection\ControlFlow\IPredicate.cs" />
     <Compile Include="Protection\ControlFlow\ManglerBase.cs" />
     <Compile Include="Protection\ControlFlow\Predicate.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Protection\Renamer\AsmResolver_Renamer.cs" />
     <Compile Include="Protection\Renamer\Renamer.cs" />
     <Compile Include="Protection\Renamer\RenamerPhase.cs" />
+    <Compile Include="Protection\Renamer\ResourceCompressEncryption.cs" />
     <Compile Include="Protection\Renamer\ResourceEncryption.cs" />
     <Compile Include="Protection\Renamer\Runtime\ResRuntime.cs" />
     <Compile Include="Protection\String\ReplaceObfuscation.cs" />

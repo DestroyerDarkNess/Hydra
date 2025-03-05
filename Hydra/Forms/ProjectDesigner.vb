@@ -565,10 +565,6 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.String.ReplaceObfuscation)
         End If
 
-        If EncodeIntergers.Checked = True Then
-            Result.Add(New HydraEngine.Protection.INT.IntEncoding)
-        End If
-
         If IntConfusion.Checked = True Then
             Result.Add(New HydraEngine.Protection.INT.AddIntPhase)
         End If
@@ -585,14 +581,12 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Proxy.ProxyInt With {.BaseChars = BaseChars, .DynamicInstructions = Dynamic_INT.Checked})
         End If
 
-        If Mutator.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Mutations.MutationProt)
-            'Result.Add(New HydraEngine.Protection.Mutations.Mutator)
-            Result.Add(New HydraEngine.Protection.Mutations.Melting)
-        End If
-
         If MutationV2Check.Checked = True Then
             Result.Add(New HydraEngine.Protection.Mutations.Mutatorv2 With {.UnsafeMutation = MutationV2Check_Unsafe.Checked})
+        End If
+
+        If EncodeIntergers.Checked = True Then
+            Result.Add(New HydraEngine.Protection.INT.IntEncoding)
         End If
 
         If Renamer.Checked = True And RenamerEngineCombo.SelectedIndex = 0 Then
@@ -618,10 +612,6 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.CodeOptimizer.OptimizeCode)
         End If
 
-        If ProxyReferences.Checked Then
-            Result.Add(New HydraEngine.Protection.Proxy.ProxyReferences)
-        End If
-
         If FakeObfuscation.Checked = True Then
             Result.Add(New HydraEngine.Protection.Misc.FakeObfuscation)
         End If
@@ -632,6 +622,20 @@ Public Class ProjectDesigner
 
         If ControlFlow.Checked Then
             Result.Add(New HydraEngine.Protection.ControlFlow.ControlFlow With {.StrongMode = ControlFlowStrongModeCheck.Checked})
+        End If
+
+        If EXGuardControlFlowCheck.Checked Then
+            Result.Add(New HydraEngine.Protection.ControlFlow.EXGuard_ControlFlow) 'With {.StrongMode = ControlFlowStrongModeCheck.Checked}
+        End If
+
+        If ProxyReferences.Checked Then
+            Result.Add(New HydraEngine.Protection.Proxy.ProxyReferences With {.Unsafe = ProxyReferencesUnsafeCheck.Checked})
+        End If
+
+        If Mutator.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Mutations.MutationProt)
+            'Result.Add(New HydraEngine.Protection.Mutations.Mutator)
+            If MutationCheck_Unsafe.Checked Then Result.Add(New HydraEngine.Protection.Mutations.Melting)
         End If
 
         If AntiDecompilerCheck.Checked = True Then
@@ -724,6 +728,10 @@ Public Class ProjectDesigner
 
         If DynamicMethodsCheck.Checked = True Then
             Result.Add(New HydraEngine.Protection.Method.DynamicCode)
+        End If
+
+        If ResourceCompressAndEncryptCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Renamer.ResourceCompressEncryption)
         End If
 
         If ILVMCheck.Checked And VMSelected = 0 Then
@@ -869,6 +877,7 @@ Public Class ProjectDesigner
         Dim AplyJitHook As Boolean = JITHookCheck.Checked
         Dim VMStrigns As Boolean = VirtualizeStringsVM.Checked
         Dim VM_Selected_Methods As List(Of UInteger) = Nothing
+        Dim AntiTamp As Boolean = AntiTamper.Checked
 
         If TreeVewMethodManager IsNot Nothing Then VM_Selected_Methods = TreeVewMethodManager.GetSelectedMethodTokens()
 
@@ -1602,6 +1611,7 @@ Public Class ProjectDesigner
                                              End If
 
                                              If SingPE Then
+
                                                  Dim OutName As String = Path.GetFileNameWithoutExtension(Ouput)
 
                                                  If CloneCert Then
@@ -1633,6 +1643,21 @@ Public Class ProjectDesigner
                                      Catch ex As Exception
                                          Writelog(String.Format("Error saving: {0}", {ex.Message}))
                                      End Try
+
+                                     Try
+                                         If AntiTamp Then
+                                             If File.Exists(Ouput) = True Then
+                                                 HydraEngine.Runtimes.Anti.AntiTamper.Sha256(Ouput)
+                                             End If
+
+                                             Dim OutName As String = Path.GetFileNameWithoutExtension(Ouput)
+                                             Dim SignedOut As String = Ouput.Replace(OutName, OutName + "_Signed")
+                                             If File.Exists(SignedOut) = True Then
+                                                 HydraEngine.Runtimes.Anti.AntiTamper.Sha256(SignedOut)
+                                             End If
+                                         End If
+                                     Catch ex As Exception : End Try
+
                                      Try
                                          Me.BeginInvoke(Sub()
                                                             BuildButton.Enabled = True

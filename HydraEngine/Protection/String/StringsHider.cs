@@ -17,46 +17,6 @@ namespace HydraEngine.Protection.String
         {
             try
             {
-                //var methods = new HashSet<MethodDef>();
-                //methods.Add(Module.EntryPoint);
-
-                //foreach (var hcst in Module.Types.ToArray())
-                //{
-                //    if (hcst == Module.GlobalType) continue;
-
-                //    foreach (var hcsm in hcst.Methods.ToArray())
-                //    {
-                //        new HideCallString(Module).Execute(hcst, hcsm);
-                //    }
-                //    //if (!methods.Contains(hcsm))
-
-                //}
-
-                //foreach (var mtt in Module.Types.ToArray())
-                //{
-                //    if (mtt == Module.GlobalType) continue;
-                //    foreach (var mtm in mtt.Methods.ToArray())
-                //    {
-                //        if (!RPNormal.ProxyMethods.Contains(mtm))
-                //            CEXControlFlow.Execute(mtm, 1);
-                //    }
-                //}
-
-                //ResourceProt_Inject.Execute(Module);
-
-                //RPNormal.Execute(Module);
-
-                //AntiDebug_Inject.Execute(Module);
-                //AntiDump_Inject.Execute(Module);
-
-                //AntiILDasm_Inject.Execute(Module);
-
-                //AntiDe4dot_Inject.Execute(Module);
-
-                //AntiDnspy_Inject.Execute(Module);
-
-                //AntiWebDebuggers_Inject.Execute(Module);
-
 
                 foreach (TypeDef type in Module.Types.Where(t => t.HasMethods))
                 {

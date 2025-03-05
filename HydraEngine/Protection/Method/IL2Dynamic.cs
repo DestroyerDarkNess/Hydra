@@ -173,18 +173,24 @@ namespace HydraEngine.Protection.Method
         {
             try
             {
-
                 foreach (var t in Module.Types)
                 {
-                    foreach (var m in t.Methods)
+                    foreach (var method in t.Methods)
                     {
-                        if (m == Module.GlobalType.FindOrCreateStaticConstructor())
+                        if (method.DeclaringType.IsGlobalModuleType) continue;
+
+                        if (!method.HasBody) continue;
+
+                        if (!method.Body.HasInstructions) continue;
+
+                        CtorCallProtection(method);
+
+                        if (method == Module.GlobalType.FindOrCreateStaticConstructor())
                         {
-                            ConvertToDynamic(m, Module);
+                            ConvertToDynamic(method, Module);
                         }
                     }
                 }
-
                 return true;
             }
             catch (Exception Ex)
@@ -194,6 +200,48 @@ namespace HydraEngine.Protection.Method
             }
         }
 
+        public void CtorCallProtection(MethodDef method)
+        {
+
+            var instr = method.Body.Instructions;
+
+            for (int i = 0; i < instr.Count; i++)
+            {
+                if (instr[i].OpCode == OpCodes.Call)
+                {
+                    // Verificar que i > 0 para evitar índice negativo
+                    if (i == 0)
+                        continue;
+
+                    // Validar que el operando no sea nulo y contenga "void"
+                    var operandString = instr[i].Operand?.ToString() ?? "";
+                    if (operandString.ToLower().Contains("void") && instr[i - 1].IsLdarg())
+                    {
+                        Local new_local = new Local(method.Module.CorLibTypes.Int32);
+                        method.Body.Variables.Add(new_local);
+
+                        // Insertar nuevas instrucciones
+                        instr.Insert(i - 1, OpCodes.Ldc_I4.ToInstruction(Random.Next()));
+                        instr.Insert(i, OpCodes.Stloc_S.ToInstruction(new_local));
+                        instr.Insert(i + 1, OpCodes.Ldloc_S.ToInstruction(new_local));
+                        instr.Insert(i + 2, OpCodes.Ldc_I4.ToInstruction(Random.Next()));
+
+                        // Ajustar índices después de las inserciones
+                        instr.Insert(i + 3, OpCodes.Ldarg_0.ToInstruction());
+                        instr.Insert(i + 4, OpCodes.Nop.ToInstruction());
+                        instr.Insert(i + 6, OpCodes.Nop.ToInstruction());
+
+                        // Insertar saltos condicionales
+                        instr.Insert(i + 3, new Instruction(OpCodes.Bne_Un_S, instr[i + 4]));
+                        instr.Insert(i + 5, new Instruction(OpCodes.Br_S, instr[i + 8]));
+                        instr.Insert(i + 8, new Instruction(OpCodes.Br_S, instr[i + 9]));
+
+                        // Ajustar el índice 'i' debido a las inserciones
+                        i += 9; // Incrementar 'i' para evitar reprocesar las nuevas instrucciones
+                    }
+                }
+            }
+        }
 
         public bool ConvertToDynamic(MethodDef method, ModuleDef module)
         {
@@ -204,7 +252,6 @@ namespace HydraEngine.Protection.Method
                 Utils2.LoadOpCodes();
 
                 TypeDef type = method.DeclaringType;
-
 
                 Instruction[] oldInstructions = method.Body.Instructions.ToArray();
                 Instruction[] instructions = null;

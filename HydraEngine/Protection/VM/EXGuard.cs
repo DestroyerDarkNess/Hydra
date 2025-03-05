@@ -6,6 +6,7 @@ using HydraEngine.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.VM
@@ -44,10 +45,21 @@ namespace HydraEngine.Protection.VM
 
                     if (VMStrings)
                     {
-                        foreach (var method in SelectedMethods)
+                        //foreach (var method in SelectedMethods)
+                        //{
+                        //    new HideCallString(module).Execute(method.DeclaringType, method);
+                        //    //new HideCallNumber(module).Execute(module.GlobalType, method);
+                        //} 
+                        foreach (TypeDef type in module.Types.Where(t => t.HasMethods))
                         {
-                            new HideCallString(module).Execute(method.DeclaringType, method);
-                            //new HideCallNumber(module).Execute(module.GlobalType, method);
+                            foreach (var method in type.Methods)
+                            {
+                                if (!method.HasBody) continue;
+                                if (!method.Body.HasInstructions) continue;
+                                new HideCallString(module).Execute(method.DeclaringType, method);
+                                //new HideCallNumber(module).Execute(module.GlobalType, method);
+                            }
+
                         }
                     }
 
