@@ -1,6 +1,4 @@
-﻿Imports System.Reflection
-
-Public Class DLLItem
+﻿Public Class DLLItem
 
     Public Property DllPath As String = String.Empty
 
@@ -26,6 +24,10 @@ Public Class DLLItem
 
     Public Function Merged() As Boolean
         Return (Guna2ComboBox1.SelectedIndex = 2)
+    End Function
+
+    Public Function Resources() As Boolean
+        Return (Guna2ComboBox1.SelectedIndex = 3)
     End Function
 
 End Class

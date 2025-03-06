@@ -1,25 +1,26 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Core;
+using HydraEngine.Protection.Renamer;
 using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Calli
 {
+
+
+
     public class CallToCalli : Models.Protection
     {
         public CallToCalli() : base("Protection.Calli.CallToCalli", "Renamer Phase", "Description for Renamer Phase") { }
 
         private string[] a = { "My.", ".My", "Costura" };
         private string[] b = { "Dispose", "ISupportInitialize", "Object" };
-       
+
 
         public string BaseChars { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        private Random Random = new Random();
+        public MethodDef CollatzCtor;
 
         public override async Task<bool> Execute(ModuleDefMD module)
         {
@@ -27,10 +28,10 @@ namespace HydraEngine.Protection.Calli
             {
                 foreach (var type in module.Types.ToArray())
                 {
-                    if (!Analyzer.CanRename(type)) continue;
+                    if (!AnalyzerPhase.CanRename(type)) continue;
                     foreach (var meth in type.Methods.ToArray())
                     {
-                        if (!Analyzer.CanRename(meth)) continue;
+                        if (!AnalyzerPhase.CanRename(meth, type)) continue;
                         if (!meth.HasBody) continue;
                         if (!meth.Body.HasInstructions) continue;
                         if (meth.FullName.Contains("My.")) continue;

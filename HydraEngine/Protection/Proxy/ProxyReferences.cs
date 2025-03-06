@@ -1,12 +1,11 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+using HydraEngine.Protection.Renamer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
-using HydraEngine.Core;
+using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Proxy
 {
@@ -18,7 +17,7 @@ namespace HydraEngine.Protection.Proxy
 
         public string BaseChars { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        private  bool CanObfuscate(MethodDef methodDef)
+        private bool CanObfuscate(MethodDef methodDef)
         {
             if (!methodDef.HasBody || !methodDef.Body.HasInstructions || methodDef.DeclaringType.IsGlobalModuleType)
             {
@@ -26,6 +25,8 @@ namespace HydraEngine.Protection.Proxy
             }
             return true;
         }
+
+        public bool Unsafe { get; set; } = false;
 
         public override async Task<bool> Execute(ModuleDefMD module)
         {
@@ -47,7 +48,7 @@ namespace HydraEngine.Protection.Proxy
                         continue;
                     }
 
-                    if (!Analyzer.CanRename(typeDef)) continue;
+                    if (!AnalyzerPhase.CanRename(typeDef)) continue;
 
                     foreach (var methodDef in typeDef.Methods.ToArray())
                     {
@@ -56,7 +57,7 @@ namespace HydraEngine.Protection.Proxy
                             continue;
                         }
 
-                        if (!Analyzer.CanRename(methodDef)) continue;
+                        if (!AnalyzerPhase.CanRename(methodDef, typeDef)) continue;
                         if (!methodDef.HasBody)
                         {
                             continue;
@@ -77,9 +78,12 @@ namespace HydraEngine.Protection.Proxy
                         {
                             var instruction = instructions[i];
 
-                            if (instruction.OpCode == OpCodes.Call)
+                            if (Unsafe)
                             {
-                                HandleCall(helper, typeDef, instruction);
+                                if (instruction.OpCode == OpCodes.Call)
+                                {
+                                    HandleCall(helper, typeDef, instruction);
+                                }
                             }
 
                             if (instruction.OpCode == OpCodes.Stfld)
@@ -99,7 +103,7 @@ namespace HydraEngine.Protection.Proxy
                         }
                     }
                 }
-
+                //RPNormal.Execute(module);
                 return true;
             }
             catch (Exception Ex)

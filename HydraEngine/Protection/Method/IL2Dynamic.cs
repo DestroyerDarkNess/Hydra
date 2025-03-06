@@ -1,20 +1,16 @@
-﻿using System;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using OpCode = dnlib.DotNet.Emit.OpCode;
-using ReflOpCode = System.Reflection.Emit.OpCode;
 using OpCodes = dnlib.DotNet.Emit.OpCodes;
-using ReflOpCodes = System.Reflection.Emit.OpCodes;
+using OperandType = dnlib.DotNet.Emit.OperandType;
 using ROpCode = System.Reflection.Emit.OpCode;
 using ROpCodes = System.Reflection.Emit.OpCodes;
-using OperandType = dnlib.DotNet.Emit.OperandType;
-using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using System.Reflection.Emit;
-using HydraEngine.Properties;
 
 namespace HydraEngine.Protection.Method
 {
@@ -177,18 +173,24 @@ namespace HydraEngine.Protection.Method
         {
             try
             {
-
                 foreach (var t in Module.Types)
                 {
-                    foreach (var m in t.Methods)
+                    foreach (var method in t.Methods)
                     {
-                        if (m == Module.GlobalType.FindOrCreateStaticConstructor())
+                        if (method.DeclaringType.IsGlobalModuleType) continue;
+
+                        if (!method.HasBody) continue;
+
+                        if (!method.Body.HasInstructions) continue;
+
+                        CtorCallProtection(method);
+
+                        if (method == Module.GlobalType.FindOrCreateStaticConstructor())
                         {
-                            ConvertToDynamic(m, Module);
+                            ConvertToDynamic(method, Module);
                         }
                     }
                 }
-
                 return true;
             }
             catch (Exception Ex)
@@ -198,8 +200,50 @@ namespace HydraEngine.Protection.Method
             }
         }
 
+        public void CtorCallProtection(MethodDef method)
+        {
 
-        public void ConvertToDynamic(MethodDef method, ModuleDef module)
+            var instr = method.Body.Instructions;
+
+            for (int i = 0; i < instr.Count; i++)
+            {
+                if (instr[i].OpCode == OpCodes.Call)
+                {
+                    // Verificar que i > 0 para evitar índice negativo
+                    if (i == 0)
+                        continue;
+
+                    // Validar que el operando no sea nulo y contenga "void"
+                    var operandString = instr[i].Operand?.ToString() ?? "";
+                    if (operandString.ToLower().Contains("void") && instr[i - 1].IsLdarg())
+                    {
+                        Local new_local = new Local(method.Module.CorLibTypes.Int32);
+                        method.Body.Variables.Add(new_local);
+
+                        // Insertar nuevas instrucciones
+                        instr.Insert(i - 1, OpCodes.Ldc_I4.ToInstruction(Random.Next()));
+                        instr.Insert(i, OpCodes.Stloc_S.ToInstruction(new_local));
+                        instr.Insert(i + 1, OpCodes.Ldloc_S.ToInstruction(new_local));
+                        instr.Insert(i + 2, OpCodes.Ldc_I4.ToInstruction(Random.Next()));
+
+                        // Ajustar índices después de las inserciones
+                        instr.Insert(i + 3, OpCodes.Ldarg_0.ToInstruction());
+                        instr.Insert(i + 4, OpCodes.Nop.ToInstruction());
+                        instr.Insert(i + 6, OpCodes.Nop.ToInstruction());
+
+                        // Insertar saltos condicionales
+                        instr.Insert(i + 3, new Instruction(OpCodes.Bne_Un_S, instr[i + 4]));
+                        instr.Insert(i + 5, new Instruction(OpCodes.Br_S, instr[i + 8]));
+                        instr.Insert(i + 8, new Instruction(OpCodes.Br_S, instr[i + 9]));
+
+                        // Ajustar el índice 'i' debido a las inserciones
+                        i += 9; // Incrementar 'i' para evitar reprocesar las nuevas instrucciones
+                    }
+                }
+            }
+        }
+
+        public bool ConvertToDynamic(MethodDef method, ModuleDef module)
         {
             try
             {
@@ -208,7 +252,6 @@ namespace HydraEngine.Protection.Method
                 Utils2.LoadOpCodes();
 
                 TypeDef type = method.DeclaringType;
-
 
                 Instruction[] oldInstructions = method.Body.Instructions.ToArray();
                 Instruction[] instructions = null;
@@ -240,13 +283,13 @@ namespace HydraEngine.Protection.Method
                 {
                     method.Body.Instructions.Add(inst);
                 }
-
+                return true;
             }
-            catch { }
+            catch { return false; }
 
         }
         static Dictionary<int, int> counterList = new Dictionary<int, int>();
-        public  Instruction[] BuildInstruction(Instruction[] toBuild, TypeDef typeDef, MethodDef method, IList<TypeSig> Param, ITypeDefOrRef type, IList<Parameter> pp, TypeDef typeM, Local local, Local local2, Local local3, Local local4, Local[] oldLocals, Instruction[] oldInstructions, AssemblyDef ctx, bool ISConstructorMethod, out List<Local> outLocals, TypeSig returnType)
+        public Instruction[] BuildInstruction(Instruction[] toBuild, TypeDef typeDef, MethodDef method, IList<TypeSig> Param, ITypeDefOrRef type, IList<Parameter> pp, TypeDef typeM, Local local, Local local2, Local local3, Local local4, Local[] oldLocals, Instruction[] oldInstructions, AssemblyDef ctx, bool ISConstructorMethod, out List<Local> outLocals, TypeSig returnType)
         {
             List<Instruction> lista = new List<Instruction>();
             List<Local> variables = new List<Local>();
@@ -528,7 +571,7 @@ namespace HydraEngine.Protection.Method
             return lista.ToArray();
         }
         static int LocalsCount = 0;
-        public  void ConvertInstructionWithOperand(Instruction instruct, Local push, ref List<Instruction> lista, List<Local> variables, List<Instruction> brTargets, AssemblyDef ctx)
+        public void ConvertInstructionWithOperand(Instruction instruct, Local push, ref List<Instruction> lista, List<Local> variables, List<Instruction> brTargets, AssemblyDef ctx)
         {
             lista.Add(OpCodes.Ldloc_S.ToInstruction(push));
             char[] Opcode = Utils.ConvertOpCode(instruct.OpCode).Name.ToCharArray();
@@ -850,7 +893,7 @@ namespace HydraEngine.Protection.Method
             lista.RemoveAt(lista.Count - 1);
 
         }
-        public  void ConvertInstruction(Instruction instruct, Local push, ref List<Instruction> lista, AssemblyDef ctx)
+        public void ConvertInstruction(Instruction instruct, Local push, ref List<Instruction> lista, AssemblyDef ctx)
         {
             lista.Add(OpCodes.Ldloc_S.ToInstruction(push));
             char[] Opcode = Utils.ConvertOpCode(instruct.OpCode).Name.ToCharArray();
@@ -868,7 +911,7 @@ namespace HydraEngine.Protection.Method
             lista.Add(OpCodes.Ldsfld.ToInstruction(ctx.ManifestModule.Import(final)));
             lista.Add(OpCodes.Callvirt.ToInstruction(ctx.ManifestModule.Import(typeof(ILGenerator).GetMethod("Emit", new Type[] { typeof(ROpCode) }))));
         }
-        public  void addLocal(Local local, Local push, ref List<Instruction> lista, AssemblyDef ctx, ref List<Local> list)
+        public void addLocal(Local local, Local push, ref List<Instruction> lista, AssemblyDef ctx, ref List<Local> list)
         {
             lista.Add(OpCodes.Ldloc_S.ToInstruction(push));
             lista.Add(OpCodes.Ldtoken.ToInstruction(local.Type.ToTypeDefOrRef()));
@@ -877,7 +920,7 @@ namespace HydraEngine.Protection.Method
             list.Add(new Local(ctx.ManifestModule.Import(typeof(LocalBuilder)).ToTypeSig()));
             lista.Add(OpCodes.Stloc_S.ToInstruction(list[list.Count - 1]));
         }
-        public  int Emulate(Instruction[] code, AssemblyDef ctx)
+        public int Emulate(Instruction[] code, AssemblyDef ctx)
         {
             DynamicMethod emulatore = new DynamicMethod(GenerateString(Mode), typeof(void), null);
             ILGenerator il = emulatore.GetILGenerator();

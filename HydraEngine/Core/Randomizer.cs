@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HydraEngine.Core
 {
     public class Randomizer
     {
         public static readonly RandomNumberGenerator csp = RandomNumberGenerator.Create();
-      
+
         public static int Next(int maxValue, int minValue = 0)
         {
             if (minValue >= maxValue) throw new ArgumentOutOfRangeException(nameof(minValue));
@@ -22,13 +20,13 @@ namespace HydraEngine.Core
         }
 
         private static Random random = new Random();
-        private static string BaseChars { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        public static string BaseChars { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
         public static string BaseChars2 = "日本書紀العالمحالعجلة林氏家族การดำน้ำดูปะการังसंस्कृतम्संस्कृतावाक्" +
              "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
              "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ" +
              "αβγδεζηθικλµνξοπρστυϕχψω" +
-             "れづれなるまゝに日暮らし硯にむかひて心にうりゆくよな事を、こはかとなく書きつくればあやうこそものぐるほけれ。"; 
+             "れづれなるまゝに日暮らし硯にむかひて心にうりゆくよな事を、こはかとなく書きつくればあやうこそものぐるほけれ。";
 
         public static string GenerateRandomString(string chars, int length)
         {

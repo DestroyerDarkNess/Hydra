@@ -1,13 +1,7 @@
 ﻿
 using ILMerging;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-using System.Windows.Forms;
 
 namespace HydraEngine.References
 {
@@ -37,9 +31,10 @@ namespace HydraEngine.References
                 ListArg.Add("/log");
                 ListArg.Add($"/out:{output}");
                 ListArg.Add(Original);
-              
+
                 foreach (string str in dllModules)
                 {
+                    //Console.WriteLine($"Merging {str}");
                     ListArg.Add(str);
                 }
 

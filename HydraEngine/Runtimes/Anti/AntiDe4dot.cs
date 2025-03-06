@@ -1,13 +1,11 @@
 ﻿using dnlib.DotNet;
+using EXGuard.Core.EXECProtections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti
 {
-     public class AntiDe4dot : Models.Protection
+    public class AntiDe4dot : Models.Protection
     {
         public AntiDe4dot() : base("Runtimes.Anti.AntiDe4dot", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -29,6 +27,7 @@ namespace HydraEngine.Runtimes.Anti
                     }
                 }
 
+                AntiDe4dot_Inject.Execute(mod);
                 return true;
             }
             catch (Exception Ex)

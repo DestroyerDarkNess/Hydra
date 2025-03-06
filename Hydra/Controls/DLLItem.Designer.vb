@@ -32,8 +32,7 @@ Partial Class DLLItem
         '
         'Guna2Panel5
         '
-        Me.Guna2Panel5.BorderColor = System.Drawing.Color.White
-        Me.Guna2Panel5.BorderRadius = 5
+        Me.Guna2Panel5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2Panel5.BorderThickness = 1
         Me.Guna2Panel5.Controls.Add(Me.LogInLabel3)
         Me.Guna2Panel5.Controls.Add(Me.Guna2ComboBox1)
@@ -60,16 +59,16 @@ Partial Class DLLItem
         'Guna2ComboBox1
         '
         Me.Guna2ComboBox1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2ComboBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2ComboBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.Guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Guna2ComboBox1.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(29, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Guna2ComboBox1.FocusedColor = System.Drawing.Color.Empty
         Me.Guna2ComboBox1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Guna2ComboBox1.FormattingEnabled = True
         Me.Guna2ComboBox1.ItemHeight = 25
-        Me.Guna2ComboBox1.Items.AddRange(New Object() {"Libz", "IL Embed", "IL Merge"})
+        Me.Guna2ComboBox1.Items.AddRange(New Object() {"Libz", "IL Embed", "IL Merge", "Resources"})
         Me.Guna2ComboBox1.Location = New System.Drawing.Point(512, -4)
         Me.Guna2ComboBox1.Name = "Guna2ComboBox1"
         Me.Guna2ComboBox1.Size = New System.Drawing.Size(142, 31)
@@ -81,19 +80,19 @@ Partial Class DLLItem
         Me.Guna2CheckBox3.Animated = True
         Me.Guna2CheckBox3.AutoSize = True
         Me.Guna2CheckBox3.Checked = True
-        Me.Guna2CheckBox3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
-        Me.Guna2CheckBox3.CheckedState.BorderRadius = 2
-        Me.Guna2CheckBox3.CheckedState.BorderThickness = 2
-        Me.Guna2CheckBox3.CheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2CheckBox3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox3.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox3.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox3.CheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.Guna2CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
         Me.Guna2CheckBox3.Location = New System.Drawing.Point(13, 6)
         Me.Guna2CheckBox3.Name = "Guna2CheckBox3"
         Me.Guna2CheckBox3.Size = New System.Drawing.Size(15, 14)
         Me.Guna2CheckBox3.TabIndex = 62
-        Me.Guna2CheckBox3.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
-        Me.Guna2CheckBox3.UncheckedState.BorderRadius = 2
-        Me.Guna2CheckBox3.UncheckedState.BorderThickness = 2
-        Me.Guna2CheckBox3.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox3.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox3.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox3.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox3.UncheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.Guna2CheckBox3.UseVisualStyleBackColor = True
         '
         'LogInLabel2

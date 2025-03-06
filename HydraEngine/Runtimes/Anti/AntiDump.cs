@@ -1,16 +1,14 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Core;
+using EXGuard.Core.EXECProtections;
 using HydraEngine.Runtimes.Anti.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti
 {
-     public class AntiDump : Models.Protection
+    public class AntiDump : Models.Protection
     {
         public AntiDump() : base("Runtimes.Anti.AntiDump", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -33,6 +31,7 @@ namespace HydraEngine.Runtimes.Anti
                     break;
                 }
 
+                AntiDump_Inject.Execute(mod);
                 return true;
             }
             catch (Exception Ex)

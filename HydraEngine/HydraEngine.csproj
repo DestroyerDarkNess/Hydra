@@ -56,6 +56,13 @@
     <Reference Include="dnlib, Version=4.4.0.0, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
       <HintPath>..\packages\dnlib.4.4.0\lib\net45\dnlib.dll</HintPath>
     </Reference>
+    <Reference Include="EXGuard.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\EXGuard.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EXGuard.Runtime">
+      <HintPath>..\Libs\EXGuard.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Hardening, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Hardening.dll</HintPath>
@@ -146,8 +153,10 @@
     <Compile Include="7zip\SevenZipHelper.cs" />
     <Compile Include="Certificate\Sigthief.cs" />
     <Compile Include="Core\Analyzer.cs" />
+    <Compile Include="Core\DnlibUtils.cs" />
     <Compile Include="Core\HexEncoding.cs" />
     <Compile Include="Core\InjectHelper.cs" />
+    <Compile Include="Core\MethodTreeLoader.cs" />
     <Compile Include="Core\PEFileInfo.cs" />
     <Compile Include="Core\Randomizer.cs" />
     <Compile Include="Core\Utils.cs" />
@@ -168,13 +177,21 @@
     <Compile Include="Protection\CodeOptimizer\InstructionExtension.cs" />
     <Compile Include="Protection\CodeOptimizer\MethodBodyExtension.cs" />
     <Compile Include="Protection\CodeOptimizer\MethodReferenceEqualityComparer.cs" />
-    <Compile Include="Protection\CtrlFlow\Block.cs" />
-    <Compile Include="Protection\CtrlFlow\BlockParser.cs" />
-    <Compile Include="Protection\CtrlFlow\CflowObf.cs" />
-    <Compile Include="Protection\CtrlFlow\ControlFlow.cs" />
+    <Compile Include="Protection\ControlFlow\BlockParser.cs" />
+    <Compile Include="Protection\ControlFlow\ControlFlow.cs" />
+    <Compile Include="Protection\ControlFlow\ControlFlowBlock.cs" />
+    <Compile Include="Protection\ControlFlow\ControlFlowBlockType.cs" />
+    <Compile Include="Protection\ControlFlow\ControlFlowGraph.cs" />
+    <Compile Include="Protection\ControlFlow\EXGuard_ControlFlow.cs" />
+    <Compile Include="Protection\ControlFlow\IPredicate.cs" />
+    <Compile Include="Protection\ControlFlow\ManglerBase.cs" />
+    <Compile Include="Protection\ControlFlow\Predicate.cs" />
+    <Compile Include="Protection\ControlFlow\Shuffler.cs" />
+    <Compile Include="Protection\ControlFlow\SwitchMangler.cs" />
+    <Compile Include="Protection\ControlFlow\SwitchMangler2.cs" />
+    <Compile Include="Protection\ControlFlow\Utils.cs" />
     <Compile Include="Models\Protection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protection\CtrlFlow\JumpCflow.cs" />
     <Compile Include="Protection\Dnspy\NopAttack.cs" />
     <Compile Include="Protection\Header\SectionObfuscation.cs" />
     <Compile Include="Protection\Import\ImportProtection.cs" />
@@ -205,9 +222,21 @@
     <Compile Include="Protection\Misc\ReduceMetadataOptimization.cs" />
     <Compile Include="Protection\Misc\SUFconfusion.cs" />
     <Compile Include="Protection\Misc\Watermark.cs" />
+    <Compile Include="Protection\Mutations\Blocks\Block.cs" />
+    <Compile Include="Protection\Mutations\Blocks\BlockParser.cs" />
+    <Compile Include="Protection\Mutations\Blocks\Extension.cs" />
+    <Compile Include="Protection\Mutations\Blocks\Trace.cs" />
     <Compile Include="Protection\Mutations\Calculator.cs" />
+    <Compile Include="Protection\Mutations\Emulator\InstructionEmulator.cs" />
+    <Compile Include="Protection\Mutations\Emulator\InstructionHandler.cs" />
+    <Compile Include="Protection\Mutations\Emulator\Instructions\Add.cs" />
+    <Compile Include="Protection\Mutations\Emulator\Instructions\And.cs" />
+    <Compile Include="Protection\Mutations\Emulator\Instructions\Ldc_I4.cs" />
+    <Compile Include="Protection\Mutations\Emulator\Instructions\Ldloc.cs" />
+    <Compile Include="Protection\Mutations\Emulator\Instructions\Stloc.cs" />
     <Compile Include="Protection\Mutations\Melting.cs" />
     <Compile Include="Protection\Mutations\MutationHelper.cs" />
+    <Compile Include="Protection\Mutations\MutationProt.cs" />
     <Compile Include="Protection\Mutations\MutatorV2.cs" />
     <Compile Include="Protection\Mutations\Mutator.cs" />
     <Compile Include="Protection\Mutations\RandomHelper.cs" />
@@ -235,10 +264,13 @@
     <Compile Include="Protection\Proxy\ProxyReferences.cs" />
     <Compile Include="Protection\Proxy\ProxyString.cs" />
     <Compile Include="Protection\Proxy\ProxyVariable.cs" />
+    <Compile Include="Protection\Renamer\AsmResolver_Renamer.cs" />
     <Compile Include="Protection\Renamer\Renamer.cs" />
     <Compile Include="Protection\Renamer\RenamerPhase.cs" />
+    <Compile Include="Protection\Renamer\ResourceCompressEncryption.cs" />
     <Compile Include="Protection\Renamer\ResourceEncryption.cs" />
     <Compile Include="Protection\Renamer\Runtime\ResRuntime.cs" />
+    <Compile Include="Protection\String\ReplaceObfuscation.cs" />
     <Compile Include="Protection\String\Runtime\DecryptionHelper.cs" />
     <Compile Include="Protection\String\StringEncryption.cs" />
     <Compile Include="Protection\String\StringsHider.cs" />
@@ -261,9 +293,11 @@
     <Compile Include="Protection\VM\Core\Protections\Impl\Virtualization\Virtualization.cs" />
     <Compile Include="Protection\VM\Core\Protections\IProtection.cs" />
     <Compile Include="Protection\VM\Core\Protections\LoadDLLRuntime\VMInitialize.cs" />
+    <Compile Include="Protection\VM\EXGuard.cs" />
     <Compile Include="Protection\VM\Virtualizer.cs" />
     <Compile Include="References\AssemblyFusion.cs" />
     <Compile Include="References\DllEmbbeder.cs" />
+    <Compile Include="References\Embeder.cs" />
     <Compile Include="References\ILMerger.cs" />
     <Compile Include="References\LibzWrapper.cs" />
     <Compile Include="Runtimes\AdministratorRights\Runtime\RuntimeScalation.cs" />

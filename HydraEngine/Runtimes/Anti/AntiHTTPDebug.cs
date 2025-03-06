@@ -1,16 +1,14 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using HydraEngine.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+using EXGuard.Core.EXECProtections;
 using HydraEngine.Runtimes.Anti.Runtime;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti
 {
-     public class AntiHTTPDebug : Models.Protection
+    public class AntiHTTPDebug : Models.Protection
     {
         public AntiHTTPDebug() : base("Runtimes.Anti.AntiHTTPDebug", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -37,6 +35,8 @@ namespace HydraEngine.Runtimes.Anti
                     module.GlobalType.Remove(md);
                     break;
                 }
+
+                AntiWebDebuggers_Inject.Execute(module);
 
                 return true;
             }

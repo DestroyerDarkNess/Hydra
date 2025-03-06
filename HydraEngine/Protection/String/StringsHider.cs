@@ -24,93 +24,93 @@ namespace HydraEngine.Protection.String
                     {
                         if (!CanRename(type)) continue;
                     }
-                   
+
                     MethodDef cctor = type.FindOrCreateStaticConstructor();
-                if (cctor.HasBody && cctor.Body.HasInstructions && cctor.Body.Instructions.Last().OpCode == OpCodes.Ret) cctor.Body.Instructions.Remove(cctor.Body.Instructions.Last());
+                    if (cctor.HasBody && cctor.Body.HasInstructions && cctor.Body.Instructions.Last().OpCode == OpCodes.Ret) cctor.Body.Instructions.Remove(cctor.Body.Instructions.Last());
 
-                    foreach (MethodDef method in type.Methods.Where(m => m.HasBody && m.Body.HasInstructions)) 
+                    foreach (MethodDef method in type.Methods.Where(m => m.HasBody && m.Body.HasInstructions))
                     {
-                    if (!CanRename(method)) continue;
-                    int ii = 0;
-                    for (int iii = 0; iii < method.Body.Instructions.Count; iii++)
-                    {
-                        Instruction Instruction = method.Body.Instructions[iii];
-                        if (Instruction.OpCode == OpCodes.Ldstr)
+                        if (!CanRename(method)) continue;
+                        int ii = 0;
+                        for (int iii = 0; iii < method.Body.Instructions.Count; iii++)
                         {
-                            string str = (string)Instruction.Operand;
-                            if (!string.IsNullOrEmpty(str))
+                            Instruction Instruction = method.Body.Instructions[iii];
+                            if (Instruction.OpCode == OpCodes.Ldstr)
                             {
-                                byte[] bytes = Encoding.UTF8.GetBytes(str);
-
-                                string newName = $"[{method.MDToken.ToString()}-{tag}]_{ii.ToString()}";
-
-                                FieldDefUser field = new FieldDefUser(newName, new FieldSig(Module.CorLibTypes.String), dnlib.DotNet.FieldAttributes.Assembly | dnlib.DotNet.FieldAttributes.Static);
-
-                                type.Fields.Add(field);
-
-                                cctor.Body.Instructions.Insert(0, OpCodes.Stsfld.ToInstruction(field));
-                                cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Callvirt, Module.Import(typeof(Encoding).GetMethod("GetString", new Type[] { typeof(byte[]) }))));
-
-                                for (int i = 0; i < bytes.Length; i++)
+                                string str = (string)Instruction.Operand;
+                                if (!string.IsNullOrEmpty(str))
                                 {
-                                    cctor.Body.Instructions.Insert(0, OpCodes.Stelem_I1.ToInstruction());
-                                    cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Ldc_I4, (int)bytes[i]));
-                                    cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Ldc_I4, (int)i));
-                                    cctor.Body.Instructions.Insert(0, OpCodes.Dup.ToInstruction());
+                                    byte[] bytes = Encoding.UTF8.GetBytes(str);
+
+                                    string newName = $"[{method.MDToken.ToString()}-{tag}]_{ii.ToString()}";
+
+                                    FieldDefUser field = new FieldDefUser(newName, new FieldSig(Module.CorLibTypes.String), dnlib.DotNet.FieldAttributes.Assembly | dnlib.DotNet.FieldAttributes.Static);
+
+                                    type.Fields.Add(field);
+
+                                    cctor.Body.Instructions.Insert(0, OpCodes.Stsfld.ToInstruction(field));
+                                    cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Callvirt, Module.Import(typeof(Encoding).GetMethod("GetString", new Type[] { typeof(byte[]) }))));
+
+                                    for (int i = 0; i < bytes.Length; i++)
+                                    {
+                                        cctor.Body.Instructions.Insert(0, OpCodes.Stelem_I1.ToInstruction());
+                                        cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Ldc_I4, (int)bytes[i]));
+                                        cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Ldc_I4, (int)i));
+                                        cctor.Body.Instructions.Insert(0, OpCodes.Dup.ToInstruction());
+                                    }
+
+                                    cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Newarr, Module.CorLibTypes.Byte.ToTypeDefOrRef()));
+                                    cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Ldc_I4, (int)bytes.Length));
+                                    cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Call, Module.Import(typeof(Encoding).GetMethod("get_UTF8", new Type[] { }))));
+
+                                    Instruction.OpCode = OpCodes.Ldsfld;
+                                    Instruction.Operand = field;
+
+                                    ii++;
                                 }
-
-                                cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Newarr, Module.CorLibTypes.Byte.ToTypeDefOrRef()));
-                                cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Ldc_I4, (int)bytes.Length));
-                                cctor.Body.Instructions.Insert(0, new Instruction(OpCodes.Call, Module.Import(typeof(Encoding).GetMethod("get_UTF8", new Type[] { }))));
-
-                                Instruction.OpCode = OpCodes.Ldsfld;
-                                Instruction.Operand = field;
-
-                                ii++;
                             }
                         }
-                    }
 
-                    for (int iii = 0; iii < method.Body.Instructions.Count; iii++) //Fix branches pointing the field directly.
-                    {
-                        Instruction Instruction = method.Body.Instructions[iii];
-                        if (Instruction.OpCode == OpCodes.Brfalse || Instruction.OpCode == OpCodes.Brtrue || Instruction.OpCode == OpCodes.Brfalse_S || Instruction.OpCode == OpCodes.Brtrue_S)
-                            if (Instruction.Operand.ToString().ToLower().Contains("ldsfld"))
+                        for (int iii = 0; iii < method.Body.Instructions.Count; iii++) //Fix branches pointing the field directly.
+                        {
+                            Instruction Instruction = method.Body.Instructions[iii];
+                            if (Instruction.OpCode == OpCodes.Brfalse || Instruction.OpCode == OpCodes.Brtrue || Instruction.OpCode == OpCodes.Brfalse_S || Instruction.OpCode == OpCodes.Brtrue_S)
+                                if (Instruction.Operand.ToString().ToLower().Contains("ldsfld"))
+                                {
+                                    object operand = Instruction.Operand;
+                                    Instruction targetedInstruction = (operand as Instruction);
+
+                                    //Instruction.Operand = method.Body.Instructions[method.Body.Instructions.IndexOf(targetedInstruction) - 1];
+                                }
+                        }
+
+                        if (cctor.Body.Instructions.Count > 0) //Fix last instructions
+                        {
+                            while (cctor.Body.Instructions.Last().OpCode == OpCodes.Stloc)
                             {
-                                object operand = Instruction.Operand;
-                                Instruction targetedInstruction = (operand as Instruction);
-
-                                //Instruction.Operand = method.Body.Instructions[method.Body.Instructions.IndexOf(targetedInstruction) - 1];
+                                Instruction instr = cctor.Body.Instructions.Last();
+                                cctor.Body.Instructions.Remove(instr);
                             }
+
+                            while (cctor.Body.Instructions.Last().OpCode == OpCodes.Ret)
+                            {
+                                Instruction instr = cctor.Body.Instructions.Last();
+                                cctor.Body.Instructions.Remove(instr);
+                            }
+                        }
+
+                        method.Body.Instructions.SimplifyBranches();
+                        method.Body.Instructions.OptimizeBranches();
                     }
 
-                    if (cctor.Body.Instructions.Count > 0) //Fix last instructions
+                    if (cctor.Body.Instructions.Count == 0 || cctor.Body.Instructions[cctor.Body.Instructions.Count - 1].OpCode != OpCodes.Ret)
                     {
-                        while (cctor.Body.Instructions.Last().OpCode == OpCodes.Stloc)
-                        {
-                            Instruction instr = cctor.Body.Instructions.Last();
-                            cctor.Body.Instructions.Remove(instr);
-                        }
-
-                        while (cctor.Body.Instructions.Last().OpCode == OpCodes.Ret)
-                        {
-                            Instruction instr = cctor.Body.Instructions.Last();
-                            cctor.Body.Instructions.Remove(instr);
-                        }
+                        cctor.Body.Instructions.Add(new Instruction(OpCodes.Ret));
                     }
-
-                    method.Body.Instructions.SimplifyBranches();
-                    method.Body.Instructions.OptimizeBranches();
                 }
 
-                if (cctor.Body.Instructions.Count == 0 || cctor.Body.Instructions[cctor.Body.Instructions.Count - 1].OpCode != OpCodes.Ret)
-                {
-                    cctor.Body.Instructions.Add(new Instruction(OpCodes.Ret));
-                }
-            }
 
-
-            return true;
+                return true;
             }
             catch (Exception Ex)
             {
@@ -127,7 +127,7 @@ namespace HydraEngine.Protection.String
         private bool CanRename(TypeDef type)
         {
             // Excluir tipos especiales de VB.NET y C#
-            if ( string.IsNullOrEmpty (type.Namespace) ) return false;
+            if (string.IsNullOrEmpty(type.Namespace)) return false;
             if (type.IsRuntimeSpecialName || type.IsGlobalModuleType || type.IsSpecialName || type.IsWindowsRuntime || type.IsInterface) return false;
             if (type.Namespace.StartsWith("Microsoft.VisualBasic")) return false;
             if (type.Namespace.StartsWith("My")) return false;

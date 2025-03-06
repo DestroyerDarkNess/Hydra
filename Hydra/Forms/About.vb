@@ -13,4 +13,7 @@
         Process.Start("https://toolslib.net/downloads/viewdownload/600-hydranet/files/2489/")
     End Sub
 
+    Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
+        Process.Start("https://github.com/DestroyerDarkNess/Hydra")
+    End Sub
 End Class

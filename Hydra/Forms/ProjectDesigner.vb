@@ -19,7 +19,21 @@ Public Class ProjectDesigner
     Public Property Assembly As ModuleDefMD = Nothing
     Public Property assemblyResolver As AssemblyResolver = Nothing
 
+    Public Property TreeVewMethodManager As MethodTreeLoader = Nothing
+
     Public Property Packers As List(Of HydraEngine.Models.Pack) = GetPackers()
+
+    Public Sub New()
+        SetStyle(ControlStyles.SupportsTransparentBackColor Or ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint Or ControlStyles.UserPaint, True)
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Me.BackColor = Color.Transparent
+        'Panel1.BackColor = Color.Transparent
+        Panel2.BackColor = Color.Transparent
+        'TabPage1.BackColor = Color.Transparent
+    End Sub
 
     Private Sub ProjectDesigner_Load(sender As Object, e As EventArgs) Handles Me.Load
         InfoButton.Checked = True
@@ -103,6 +117,14 @@ Public Class ProjectDesigner
                 Guna2Panel2.Enabled = False
             End Try
 
+            TreeVewMethodManager = New MethodTreeLoader(TreeView1, Assembly)
+            TreeVewMethodManager.LoadMethods()
+
+            Guna2CheckBox4.Checked = TreeVewMethodManager.All
+            Guna2CheckBox5.Checked = TreeVewMethodManager.ExcludeConstructors
+            Guna2CheckBox6.Checked = TreeVewMethodManager.ExcludeRedMethods
+            Guna2CheckBox7.Checked = TreeVewMethodManager.ExcludeUnsafeMethods
+
             Dim assemblyRefs As List(Of HydraEngine.Core.DLLInfo) = HydraEngine.Core.Utils.GetUniqueLibsToMerged(Assembly, WorkingDir)
             LoadDlls(assemblyRefs)
         Catch ex As Exception
@@ -168,7 +190,7 @@ Public Class ProjectDesigner
     End Sub
 
     Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
-        Dim FilesSelected As List(Of String) = Core.Helpers.Utils.OpenFile("DLL Files|*.dll")
+        Dim FilesSelected As List(Of String) = Core.Helpers.Utils.OpenFile("DLL Files|*.dll", True)
 
         If FilesSelected IsNot Nothing Then
             For Each Dll As String In FilesSelected
@@ -231,7 +253,19 @@ Public Class ProjectDesigner
 
 #Region " UI "
 
+    Private Sub Guna2Button12_Click(sender As Object, e As EventArgs) Handles Guna2Button12.Click
+        Try
+            Dim CurrentFile As String = OutputTextBox.Text
+            Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
 
+
+            Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*{Extension}", Path.GetDirectoryName(CurrentFile))
+
+            If String.IsNullOrEmpty(NewSavePath) = False Then
+                OutputTextBox.Text = NewSavePath
+            End If
+        Catch ex As Exception : End Try
+    End Sub
     Private Sub Guna2CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox2.CheckedChanged
         RaiseUI()
     End Sub
@@ -302,12 +336,16 @@ Public Class ProjectDesigner
         Catch ex As Exception : End Try
     End Sub
 
-    Private Sub Menu_CheckedChanged(sender As Object, e As EventArgs) Handles InfoButton.CheckedChanged, JumpCrackButton.CheckedChanged, DLLMergeButton.CheckedChanged, ShiledButton.CheckedChanged, PackButton.CheckedChanged, CodeButton.CheckedChanged, ExtraFeaturesButton.CheckedChanged
+    Private Sub Menu_CheckedChanged(sender As Object, e As EventArgs) Handles VMButton.CheckedChanged, InfoButton.CheckedChanged, JumpCrackButton.CheckedChanged, DLLMergeButton.CheckedChanged, ShiledButton.CheckedChanged, PackButton.CheckedChanged, CodeButton.CheckedChanged, ExtraFeaturesButton.CheckedChanged
         Dim ButtonObject As Guna.UI2.WinForms.Guna2Button = DirectCast(sender, Guna.UI2.WinForms.Guna2Button)
 
         If ButtonObject Is InfoButton Then
 
             TabControl1.SelectedTab = TabPage1
+
+        ElseIf ButtonObject Is VMButton Then
+
+            TabControl1.SelectedTab = TabPage8
 
         ElseIf ButtonObject Is JumpCrackButton Then
 
@@ -459,6 +497,26 @@ Public Class ProjectDesigner
 
         'Result.Add(New HydraEngine.Protection.Misc.Watermark)
 
+        If Renamer.Checked = True And RenamerEngineCombo.SelectedIndex = 1 Then
+            'Dim Renamer = New HydraEngine.Protection.Renamer.RenamerPhase With {.tag = Guna2TextBox9.Text, .Mode = BaseMode, .BaseChars = BaseChars, .Length = Guna2TrackBar1.Value}
+
+            Dim Renamer = New HydraEngine.Protection.Renamer.AsmResolver_Renamer With {.tag = Guna2TextBox9.Text, .Mode = BaseMode, .BaseChars = BaseChars, .Length = Guna2TrackBar1.Value}
+            Renamer.Resources = ResourcesCheck.Checked
+            Renamer.Namespace = NamespaceCheck.Checked
+            Renamer.NamespaceEmpty = NamespaceCheck_Empty.Checked
+            Renamer.ClassName = ClassName.Checked
+            Renamer.Methods = MethodsCheck.Checked
+            Renamer.Properties = PropertiesCheck.Checked
+            Renamer.Fields = FieldsCheck.Checked
+            Renamer.Events = EventsCheck.Checked
+            Renamer.ModuleRenaming = ModuleCheck.Checked
+            Renamer.ModuleInvisible = ModuleCheck_Invisible.Checked
+            'Renamer.ApplyCompilerGeneratedAttribute = Not ILVMCheck.Checked
+            Renamer.UnsafeRenamer = UnsafeMode.Checked
+            Result.Add(Renamer)
+
+        End If
+
         If ResourceEncryptionCheck.Checked = True Then
             Result.Add(New HydraEngine.Protection.Renamer.ResourceEncryption)
         End If
@@ -500,11 +558,11 @@ Public Class ProjectDesigner
         End If
 
         If ProxyStrings.Checked Then
-            Result.Add(New HydraEngine.Protection.Proxy.ProxyString With {.BaseChars = BaseChars})
+            Result.Add(New HydraEngine.Protection.Proxy.ProxyString With {.BaseChars = BaseChars, .DynamicInstructions = Dynamic_STRINGS.Checked})
         End If
 
-        If EncodeIntergers.Checked = True Then
-            Result.Add(New HydraEngine.Protection.INT.IntEncoding)
+        If ReplaceObfuscationCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.String.ReplaceObfuscation)
         End If
 
         If IntConfusion.Checked = True Then
@@ -519,25 +577,22 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
         End If
 
-        If ControlFlow.Checked Then
-            Result.Add(New HydraEngine.Protection.CtrlFlow.CflowObf)
-        End If
-
         If ProxyInt.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Proxy.ProxyInt With {.BaseChars = BaseChars})
-        End If
-
-        If Mutator.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Mutations.Mutator)
-            Result.Add(New HydraEngine.Protection.Mutations.Melting)
+            Result.Add(New HydraEngine.Protection.Proxy.ProxyInt With {.BaseChars = BaseChars, .DynamicInstructions = Dynamic_INT.Checked})
         End If
 
         If MutationV2Check.Checked = True Then
             Result.Add(New HydraEngine.Protection.Mutations.Mutatorv2 With {.UnsafeMutation = MutationV2Check_Unsafe.Checked})
         End If
 
-        If Renamer.Checked = True Then
-            Dim Renamer = New HydraEngine.Protection.Renamer.RenamerPhase With {.tag = Guna2TextBox9.Text, .Mode = BaseMode, .BaseChars = BaseChars, .Length = Guna2TrackBar1.Value}
+        If EncodeIntergers.Checked = True Then
+            Result.Add(New HydraEngine.Protection.INT.IntEncoding)
+        End If
+
+        If Renamer.Checked = True And RenamerEngineCombo.SelectedIndex = 0 Then
+            'Dim Renamer = New HydraEngine.Protection.Renamer.RenamerPhase With {.tag = Guna2TextBox9.Text, .Mode = BaseMode, .BaseChars = BaseChars, .Length = Guna2TrackBar1.Value}
+
+            Dim Renamer = New HydraEngine.Protection.Renamer.Renamer With {.tag = Guna2TextBox9.Text, .BaseChars = BaseChars, .Length = Guna2TrackBar1.Value}
             Renamer.Resources = ResourcesCheck.Checked
             Renamer.Namespace = NamespaceCheck.Checked
             Renamer.NamespaceEmpty = NamespaceCheck_Empty.Checked
@@ -550,15 +605,11 @@ Public Class ProjectDesigner
             Renamer.ModuleInvisible = ModuleCheck_Invisible.Checked
             Renamer.ApplyCompilerGeneratedAttribute = Not ILVMCheck.Checked
             Result.Add(Renamer)
-            'Result.Add(New HydraEngine.Protection.Renamer.Renamer)
+
         End If
 
         If Renamer.Checked = True And CodeOptimizerCheck.Checked = True Then
             Result.Add(New HydraEngine.Protection.CodeOptimizer.OptimizeCode)
-        End If
-
-        If ProxyReferences.Checked Then
-            Result.Add(New HydraEngine.Protection.Proxy.ProxyReferences)
         End If
 
         If FakeObfuscation.Checked = True Then
@@ -567,6 +618,24 @@ Public Class ProjectDesigner
 
         If AddJunkCode.Checked = True Then
             Result.Add(New HydraEngine.Protection.Misc.JunkCode With {.tag = Tag, .BaseChars = BaseChars, .number = Math.Round(Guna2NumericUpDown1.Value)})
+        End If
+
+        If ControlFlow.Checked Then
+            Result.Add(New HydraEngine.Protection.ControlFlow.ControlFlow With {.StrongMode = ControlFlowStrongModeCheck.Checked})
+        End If
+
+        If EXGuardControlFlowCheck.Checked Then
+            Result.Add(New HydraEngine.Protection.ControlFlow.EXGuard_ControlFlow) 'With {.StrongMode = ControlFlowStrongModeCheck.Checked}
+        End If
+
+        If ProxyReferences.Checked Then
+            Result.Add(New HydraEngine.Protection.Proxy.ProxyReferences With {.Unsafe = ProxyReferencesUnsafeCheck.Checked})
+        End If
+
+        If Mutator.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Mutations.MutationProt)
+            'Result.Add(New HydraEngine.Protection.Mutations.Mutator)
+            If MutationCheck_Unsafe.Checked Then Result.Add(New HydraEngine.Protection.Mutations.Melting)
         End If
 
         If AntiDecompilerCheck.Checked = True Then
@@ -657,12 +726,20 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Method.IL2Dynamic)
         End If
 
-        If ILVMCheck.Checked And VMSelected = 1 Then
-            Result.Add(New HydraEngine.Protection.VM.Virtualizer)
+        If DynamicMethodsCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.DynamicCode)
+        End If
+
+        If ResourceCompressAndEncryptCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Renamer.ResourceCompressEncryption)
         End If
 
         If ILVMCheck.Checked And VMSelected = 0 Then
-            Result.Add(New HydraEngine.Protection.Method.DynamicCode)
+            Result.Add(New HydraEngine.Protection.VM.Virtualizer)
+        End If
+
+        If ILVMCheck.Checked And VMSelected = 1 Then
+            Result.Add(New HydraEngine.Protection.VM.EXGuard)
         End If
 
         If MethodError.Checked = True Then
@@ -692,15 +769,13 @@ Public Class ProjectDesigner
         AntiTamperEx = MethodError.Checked
         InvalidMetaData = InvalidMetaDataCheck.Checked
 
-        Dim DynMethods As Boolean = (VMComboSelect.SelectedIndex = 0)
+        Dim DynMethods As Boolean = DynamicMethodsCheck.Checked
 
         Dim SingPE As Boolean = Guna2CheckBox2.Checked
         Dim CloneCert As Boolean = Not (Guna2ComboBox3.SelectedIndex = 0)
         Dim Cert As String = Guna2TextBox3.Text
 
         If Guna2CheckBox2.Checked Then SingPE = File.Exists(Cert)
-
-
 
         Dim ProtectVMRuntime As Boolean = ProtectVMCheck.Checked
         Dim ProtectAntiDump As Boolean = ProtectAntiDumpCheck.Checked
@@ -769,6 +844,7 @@ Public Class ProjectDesigner
         Dim DllsToMerged As List(Of String) = New List(Of String)
         Dim DllsToEmbed As List(Of String) = New List(Of String)
         Dim DllsToEmbedLibz As List(Of String) = New List(Of String)
+        Dim DllsToEmbedResources As List(Of String) = New List(Of String)
         Dim Embed As List(Of String) = Nothing
         Dim Libz As Boolean = False
 
@@ -784,6 +860,7 @@ Public Class ProjectDesigner
                 DllsToMerged.AddRange(enabledControls.Where(Function(control) DirectCast(control, DLLItem).Merged).ToList().Select(Function(control) DirectCast(control, DLLItem).DllPath).ToList())
                 DllsToEmbed.AddRange(enabledControls.Where(Function(control) DirectCast(control, DLLItem).Embed).ToList().Select(Function(control) DirectCast(control, DLLItem).DllPath).ToList())
                 DllsToEmbedLibz.AddRange(enabledControls.Where(Function(control) DirectCast(control, DLLItem).Libz).ToList().Select(Function(control) DirectCast(control, DLLItem).DllPath).ToList())
+                DllsToEmbedResources.AddRange(enabledControls.Where(Function(control) DirectCast(control, DLLItem).Resources).ToList().Select(Function(control) DirectCast(control, DLLItem).DllPath).ToList())
 
             End If
         End If
@@ -796,8 +873,13 @@ Public Class ProjectDesigner
         Dim CustomSectionName As String = String.Empty
         If CustomRenameSection Then CustomSectionName = PESectionCustomText.Text
         Dim SectionExclusion As String = PESectionExclusion.Text
-
+        Dim OptimizeCode = CodeOptimizerCheck.Checked
         Dim AplyJitHook As Boolean = JITHookCheck.Checked
+        Dim VMStrigns As Boolean = VirtualizeStringsVM.Checked
+        Dim VM_Selected_Methods As List(Of UInteger) = Nothing
+        Dim AntiTamp As Boolean = AntiTamper.Checked
+
+        If TreeVewMethodManager IsNot Nothing Then VM_Selected_Methods = TreeVewMethodManager.GetSelectedMethodTokens()
 
         Dim ExitMethod As String = ""
 
@@ -874,6 +956,268 @@ Public Class ProjectDesigner
                                      Dim ProtectInt As Integer = 0
                                      Dim ProtectErrors As Integer = 0
 
+
+                                     'If DllEmbed = True Then
+
+                                     '    If Not DllsToMerged.Count = 0 Then
+
+                                     '        Guna2ProgressBar1.Maximum = DllsToMerged.Count + 1
+                                     '        Guna2ProgressBar1.Value += 1
+
+
+                                     '        Try
+                                     '            If IO.File.Exists(PackedPath) = True Then
+                                     '                IO.File.Delete(PackedPath)
+                                     '            End If
+
+                                     '            Dim Merger As ILMerger = New ILMerger()
+                                     '            Dim Merge As Boolean = Merger.MergeAssemblies(OriginalPath, DllsToMerged, PackedPath)
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            If Merge = True Then
+                                     '                If IO.File.Exists(PackedPath) = True Then
+                                     '                    AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(PackedPath), AsmRef)
+                                     '                    Core.Helpers.Utils.Sleep(3)
+                                     '                    If AsmDef Is Nothing Then
+                                     '                        AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
+                                     '                        Throw New Exception("ILMerge Failed!")
+                                     '                    Else
+                                     '                        Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"Reference.ILMerge", "ILMerger", ""}))
+                                     '                    End If
+                                     '                Else
+                                     '                    Throw New Exception("ILMerge Failed!")
+                                     '                End If
+                                     '            Else
+                                     '                Throw Merger.Errors
+                                     '            End If
+
+                                     '            Guna2ProgressBar1.Value = Guna2ProgressBar1.Maximum
+                                     '        Catch ex As Exception
+                                     '            Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
+                                     '            Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"Reference.ILMerge", "ILMerger", ex.Message}))
+                                     '            Dim Stack As String = ex.StackTrace
+                                     '            If String.IsNullOrEmpty(Stack) = False Then
+                                     '                Writelog("Source :")
+                                     '                Writelog(Stack)
+                                     '                Writelog("")
+                                     '            End If
+                                     '            Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
+                                     '        End Try
+
+                                     '    End If
+
+                                     '    Core.Helpers.Utils.Sleep(2)
+
+                                     '    If Not DllsToEmbedLibz.Count = 0 Then
+                                     '        Guna2ProgressBar1.Maximum = DllsToEmbedLibz.Count + 1
+                                     '        Guna2ProgressBar1.Value += 1
+
+                                     '        Try
+
+                                     '            If IO.File.Exists(PackedPath) = True Then
+                                     '                IO.File.Copy(PackedPath, BackupPath)
+                                     '                IO.File.Delete(PackedPath)
+                                     '            Else
+                                     '                Try
+                                     '                    AsmDef.Write(BackupPath)
+                                     '                Catch ex As Exception : End Try
+                                     '            End If
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            Dim Merger As LibzWrapper = New LibzWrapper()
+                                     '            Dim Embbed As Boolean = Merger.MergeAssemblies(BackupPath, DllsToEmbedLibz)
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            If Embbed = True Then
+                                     '                Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"Reference.Libz", "Libz", ""}))
+                                     '                If IO.File.Exists(BackupPath) Then
+                                     '                    AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
+                                     '                End If
+                                     '            Else
+                                     '                Throw New Exception("Libz Failed!")
+                                     '            End If
+
+                                     '            Guna2ProgressBar1.Value = Guna2ProgressBar1.Maximum
+                                     '        Catch ex As Exception
+                                     '            Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
+                                     '            Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"Reference.Libz", "Libz", ex.Message}))
+                                     '            Dim Stack As String = ex.StackTrace
+                                     '            If String.IsNullOrEmpty(Stack) = False Then
+                                     '                Writelog("Source :")
+                                     '                Writelog(Stack)
+                                     '                Writelog("")
+                                     '            End If
+                                     '            Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
+                                     '        End Try
+
+                                     '    End If
+
+                                     '    If Not DllsToEmbed.Count = 0 Then
+                                     '        Guna2ProgressBar1.Maximum = DllsToEmbed.Count + 1
+                                     '        Guna2ProgressBar1.Value += 1
+
+                                     '        Try
+
+                                     '            Try
+                                     '                AsmDef.Write(BackupPath)
+                                     '            Catch ex As Exception : End Try
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            Dim thisMod As ModuleDefMD = ModuleDefMD.Load(My.Resources.ModuleLoader)
+                                     '            Dim MergerInstance As HydraEngine.References.DllEmbbeder = New HydraEngine.References.DllEmbbeder
+                                     '            MergerInstance.InjectDependencyClasses(thisMod, AsmDef)
+                                     '            Dim Embbed As Boolean = MergerInstance.ProcessAssembly(AsmDef, DllsToEmbed)
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            If Embbed = True Then
+                                     '                Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"Reference.AssemblyEmbed", "Assembly Embed", ""}))
+                                     '            Else
+                                     '                Throw New Exception("AssemblyEmbed Failed!")
+                                     '            End If
+
+                                     '            Guna2ProgressBar1.Value = Guna2ProgressBar1.Maximum
+                                     '        Catch ex As Exception
+                                     '            AsmDef = Nothing
+                                     '            Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
+                                     '            Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"Reference.AssemblyEmbed", "Assembly Embed", ex.Message}))
+                                     '            Dim Stack As String = ex.StackTrace
+                                     '            If String.IsNullOrEmpty(Stack) = False Then
+                                     '                Writelog("Source :")
+                                     '                Writelog(Stack)
+                                     '                Writelog("")
+                                     '            End If
+                                     '            Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
+                                     '        End Try
+
+                                     '    End If
+
+                                     '    If Not DllsToEmbedResources.Count = 0 Then
+                                     '        Guna2ProgressBar1.Maximum = DllsToEmbed.Count + 1
+                                     '        Guna2ProgressBar1.Value += 1
+
+                                     '        Try
+
+                                     '            Try
+                                     '                AsmDef.Write(BackupPath)
+                                     '            Catch ex As Exception : End Try
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            Dim Embeder As Embeder = New Embeder()
+                                     '            Dim Merge As Boolean = Embeder.MergeAssemblies(AsmDef, DllsToEmbedResources)
+
+                                     '            Core.Helpers.Utils.Sleep(3)
+
+                                     '            If Merge = True Then
+                                     '                Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"Reference.AssemblyEmbed", "Assembly Embed", ""}))
+                                     '            Else
+                                     '                Throw New Exception("AssemblyEmbed Failed!")
+                                     '            End If
+
+                                     '            Guna2ProgressBar1.Value = Guna2ProgressBar1.Maximum
+                                     '        Catch ex As Exception
+                                     '            AsmDef = Nothing
+                                     '            Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
+                                     '            Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"Reference.AssemblyEmbed", "Assembly Embed", ex.Message}))
+                                     '            Dim Stack As String = ex.StackTrace
+                                     '            If String.IsNullOrEmpty(Stack) = False Then
+                                     '                Writelog("Source :")
+                                     '                Writelog(Stack)
+                                     '                Writelog("")
+                                     '            End If
+                                     '            Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
+                                     '        End Try
+
+                                     '    End If
+
+                                     '    Core.Helpers.Utils.Sleep(2)
+
+                                     'End If
+
+                                     Me.BeginInvoke(Sub()
+                                                        Guna2ProgressBar1.Value = 0
+                                                        Guna2ProgressBar1.Maximum = ProtectConfig.Count + 3
+                                                        Guna2ProgressBar1.Value += 1
+                                                    End Sub)
+
+
+                                     If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
+
+                                     Core.Helpers.Utils.Sleep(2)
+
+                                     For Each Protection As HydraEngine.Models.Protection In ProtectConfig
+                                         Protection.ExitMethod = ExitMethod
+                                         Protection.IsNetCoreApp = IsNetCore
+                                         Try
+                                             AsmDef.Write(BackupPath)
+                                         Catch ex As Exception : End Try
+
+                                         Core.Helpers.Utils.Sleep(1)
+
+                                         If TypeOf Protection Is Virtualizer Then
+                                             DirectCast(Protection, Virtualizer).ProtectRuntime = ProtectVMRuntime
+                                             DirectCast(Protection, Virtualizer).VMStrings = VMStrigns
+                                             If TreeVewMethodManager IsNot Nothing Then
+                                                 DirectCast(Protection, Virtualizer).SelectedMethods = MethodTreeLoader.ResolveMethodsFromTokens(AsmDef, VM_Selected_Methods)
+                                             End If
+                                         ElseIf TypeOf Protection Is EXGuard Then
+                                             DirectCast(Protection, EXGuard).Protect = ProtectVMRuntime
+                                             DirectCast(Protection, EXGuard).ouput = IO.Path.GetDirectoryName(Ouput)
+                                             DirectCast(Protection, EXGuard).VMStrings = VMStrigns
+                                             If TreeVewMethodManager IsNot Nothing Then
+                                                 DirectCast(Protection, EXGuard).SelectedMethods = MethodTreeLoader.ResolveMethodsFromTokens(AsmDef, VM_Selected_Methods)
+                                             End If
+                                         ElseIf TypeOf Protection Is ExtremeAD Then
+                                             DirectCast(Protection, ExtremeAD).Protect = ProtectAntiDump
+                                         End If
+
+                                         Dim ProtectResult As Boolean = Await Protection.Execute(AsmDef)
+
+                                         If ProtectResult Then
+                                             If Protection.CompatibleWithMap Then AsmMap.Update(AsmDef)
+                                             If Protection.ManualReload Then
+                                                 Dim TempAsm As Byte() = Protection.TempModule.ToArray()
+                                                 AsmDef = HydraEngine.Core.Utils.LoadModule(TempAsm, AsmRef)
+                                                 Protection.TempModule.Dispose()
+                                             End If
+                                             If String.IsNullOrWhiteSpace(Protection.Id) = False Then Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {Protection.Id, Protection.Name, Protection.Description}))
+                                             ProtectInt += 1
+                                         Else
+
+                                             If IO.File.Exists(BackupPath) Then
+                                                 AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
+                                             End If
+
+                                             Core.Helpers.Utils.Sleep(1)
+
+                                             Writelog("")
+                                             Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
+                                             Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {Protection.Id, Protection.Name, Protection.Errors?.Message}))
+                                             Dim Stack As String = Protection.Errors?.StackTrace
+                                             If String.IsNullOrEmpty(Stack) = False Then
+                                                 Writelog("Source :")
+                                                 Writelog(Stack)
+                                                 Writelog("")
+                                             End If
+                                             Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
+                                             Writelog("")
+
+                                             ProtectErrors += 1
+                                         End If
+
+                                         Guna2ProgressBar1.Value += 1
+                                     Next
+
+                                     Me.BeginInvoke(Sub()
+                                                        Guna2ProgressBar1.Value = 0
+                                                        Guna2ProgressBar1.Maximum = ProtectConfig.Count + 3
+                                                        Guna2ProgressBar1.Value += 1
+                                                    End Sub)
 
                                      If DllEmbed = True Then
 
@@ -1000,6 +1344,7 @@ Public Class ProjectDesigner
 
                                                  Guna2ProgressBar1.Value = Guna2ProgressBar1.Maximum
                                              Catch ex As Exception
+                                                 AsmDef = Nothing
                                                  Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
                                                  Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"Reference.AssemblyEmbed", "Assembly Embed", ex.Message}))
                                                  Dim Stack As String = ex.StackTrace
@@ -1013,71 +1358,64 @@ Public Class ProjectDesigner
 
                                          End If
 
+                                         If Not DllsToEmbedResources.Count = 0 Then
+                                             Guna2ProgressBar1.Maximum = DllsToEmbed.Count + 1
+                                             Guna2ProgressBar1.Value += 1
+
+                                             Try
+
+                                                 Try
+                                                     AsmDef.Write(BackupPath)
+                                                 Catch ex As Exception : End Try
+
+                                                 Core.Helpers.Utils.Sleep(3)
+
+                                                 Dim Embeder As Embeder = New Embeder()
+                                                 Dim Merge As Boolean = Embeder.MergeAssemblies(AsmDef, DllsToEmbedResources)
+
+                                                 Core.Helpers.Utils.Sleep(3)
+
+                                                 If Merge = True Then
+                                                     Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"Reference.AssemblyEmbed", "Assembly Embed", ""}))
+                                                 Else
+                                                     Throw New Exception("AssemblyEmbed Failed!")
+                                                 End If
+
+                                                 Guna2ProgressBar1.Value = Guna2ProgressBar1.Maximum
+                                             Catch ex As Exception
+                                                 AsmDef = Nothing
+                                                 Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
+                                                 Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"Reference.AssemblyEmbed", "Assembly Embed", ex.Message}))
+                                                 Dim Stack As String = ex.StackTrace
+                                                 If String.IsNullOrEmpty(Stack) = False Then
+                                                     Writelog("Source :")
+                                                     Writelog(Stack)
+                                                     Writelog("")
+                                                 End If
+                                                 Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
+                                             End Try
+
+                                         End If
+
+                                         Core.Helpers.Utils.Sleep(2)
+
                                      End If
 
-                                     Me.BeginInvoke(Sub()
-                                                        Guna2ProgressBar1.Value = 0
-                                                        Guna2ProgressBar1.Maximum = ProtectConfig.Count + 3
-                                                        Guna2ProgressBar1.Value += 1
-                                                    End Sub)
+                                     Try
+                                         If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
 
-
-                                     If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
-
-                                     Core.Helpers.Utils.Sleep(2)
-
-                                     For Each Protection As HydraEngine.Models.Protection In ProtectConfig
-                                         Protection.ExitMethod = ExitMethod
-                                         Protection.IsNetCoreApp = IsNetCore
-                                         Try
-                                             AsmDef.Write(BackupPath)
-                                         Catch ex As Exception : End Try
-
-                                         Core.Helpers.Utils.Sleep(1)
-
-                                         If TypeOf Protection Is Virtualizer Then
-                                             DirectCast(Protection, Virtualizer).ProtectRuntime = ProtectVMRuntime
-                                         ElseIf TypeOf Protection Is ExtremeAD Then
-                                             DirectCast(Protection, ExtremeAD).Protect = ProtectAntiDump
+                                         If OptimizeCode Then
+                                             For Each Type In AsmDef.Types
+                                                 For Each MethodsDef In Type.Methods
+                                                     If MethodsDef.HasBody Then
+                                                         MethodsDef.Body.SimplifyBranches()
+                                                         MethodsDef.Body.OptimizeBranches()
+                                                     End If
+                                                 Next
+                                             Next
                                          End If
 
-                                         Dim ProtectResult As Boolean = Await Protection.Execute(AsmDef)
-
-                                         If ProtectResult Then
-                                             If Protection.CompatibleWithMap Then AsmMap.Update(AsmDef)
-                                             If Protection.ManualReload Then
-                                                 Dim TempAsm As Byte() = Protection.TempModule.ToArray()
-                                                 AsmDef = HydraEngine.Core.Utils.LoadModule(TempAsm, AsmRef)
-                                                 Protection.TempModule.Dispose()
-                                             End If
-                                             If String.IsNullOrWhiteSpace(Protection.Id) = False Then Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {Protection.Id, Protection.Name, Protection.Description}))
-                                             ProtectInt += 1
-                                         Else
-
-                                             If IO.File.Exists(BackupPath) Then
-                                                 AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
-                                             End If
-
-                                             Core.Helpers.Utils.Sleep(1)
-
-                                             Writelog("")
-                                             Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
-                                             Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {Protection.Id, Protection.Name, Protection.Errors?.Message}))
-                                             Dim Stack As String = Protection.Errors?.StackTrace
-                                             If String.IsNullOrEmpty(Stack) = False Then
-                                                 Writelog("Source :")
-                                                 Writelog(Stack)
-                                                 Writelog("")
-                                             End If
-                                             Writelog("<<<<<<<<<<<<<<---------------------------------------------- End Error")
-                                             Writelog("")
-
-                                             ProtectErrors += 1
-                                         End If
-
-                                         Guna2ProgressBar1.Value += 1
-                                     Next
-
+                                     Catch ex As Exception : End Try
 
                                      Try
 
@@ -1109,6 +1447,7 @@ Public Class ProjectDesigner
                                              Try
                                                  Try
                                                      AsmDef.Write(BackupPath)
+
                                                      RemoveHandler writerOptions.WriterEvent, AddressOf AssemblyWriterEvent
 
                                                      While (IO.File.Exists(BackupPath) = False)
@@ -1133,28 +1472,31 @@ Public Class ProjectDesigner
                                                      AddHandler writerOptions.WriterEvent, AddressOf AssemblyWriterEvent
                                                      Core.Helpers.Utils.Sleep(2)
                                                      AsmDef.Write(BackupPath)
+
                                                      RemoveHandler writerOptions.WriterEvent, AddressOf AssemblyWriterEvent
                                                      Core.Helpers.Utils.Sleep(3)
 
                                                  End If
 
-
                                                  Dim AsmEX As ModuleDefMD = ModuleDefMD.Load(BackupPath)
 
                                                  Dim JIT As JIT.Protection = New JIT.Protection(AsmEX)
                                                  Dim resultjit As Byte() = JIT.Protect()
-                                                 Try
 
+                                                 Try
                                                      File.WriteAllBytes(TempPreOuputPath, resultjit)
 
                                                      AsmDef = HydraEngine.Core.Utils.LoadModule(File.ReadAllBytes(JitPath), AsmRef)
                                                  Catch ex As Exception : End Try
-                                                 Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"JIT.Hook", "JIT Protection", "Protects Methodos against assembly decompilation."}))
 
+                                                 Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"JIT.Hook", "JIT Protection", "Protects Methodos against assembly decompilation."}))
                                              Catch ex As Exception
+
                                                  If IO.File.Exists(BackupPath) Then
+                                                     IO.File.Copy(BackupPath, TempPreOuputPath)
                                                      AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
                                                  End If
+
                                                  Writelog("Error ---------------------------------------------->>>>>>>>>>>>>>>>>>")
                                                  Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"JIT.Hook", "JIT Protection", ex.Message}))
                                                  Dim Stack As String = ex.StackTrace
@@ -1168,7 +1510,7 @@ Public Class ProjectDesigner
                                          Else
                                              'OptimizeModule(AsmDef)
 
-                                             If VMEnabled Then
+                                             If VMEnabled Or DynMethods Then
                                                  writerOptions.MetadataOptions.Flags = MetadataFlags.PreserveAll
                                                  writerOptions.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.ILOnly
                                                  writerOptions.MetadataLogger = DummyLogger.NoThrowInstance
@@ -1189,7 +1531,6 @@ Public Class ProjectDesigner
 
                                              'RemoveHandler writerOptions.WriterEvent, AddressOf AssemblyWriterEvent
                                          End If
-
 
                                          Writelog("")
 
@@ -1270,6 +1611,7 @@ Public Class ProjectDesigner
                                              End If
 
                                              If SingPE Then
+
                                                  Dim OutName As String = Path.GetFileNameWithoutExtension(Ouput)
 
                                                  If CloneCert Then
@@ -1301,6 +1643,21 @@ Public Class ProjectDesigner
                                      Catch ex As Exception
                                          Writelog(String.Format("Error saving: {0}", {ex.Message}))
                                      End Try
+
+                                     Try
+                                         If AntiTamp Then
+                                             If File.Exists(Ouput) = True Then
+                                                 HydraEngine.Runtimes.Anti.AntiTamper.Sha256(Ouput)
+                                             End If
+
+                                             Dim OutName As String = Path.GetFileNameWithoutExtension(Ouput)
+                                             Dim SignedOut As String = Ouput.Replace(OutName, OutName + "_Signed")
+                                             If File.Exists(SignedOut) = True Then
+                                                 HydraEngine.Runtimes.Anti.AntiTamper.Sha256(SignedOut)
+                                             End If
+                                         End If
+                                     Catch ex As Exception : End Try
+
                                      Try
                                          Me.BeginInvoke(Sub()
                                                             BuildButton.Enabled = True
@@ -1432,6 +1789,21 @@ Public Class ProjectDesigner
         End If
     End Sub
 
+    Private Sub Guna2CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox4.CheckedChanged
+        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.All = Guna2CheckBox4.Checked
+    End Sub
+
+    Private Sub Guna2CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox5.CheckedChanged
+        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.ExcludeConstructors = Guna2CheckBox5.Checked
+    End Sub
+
+    Private Sub Guna2CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox6.CheckedChanged
+        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.ExcludeRedMethods = Guna2CheckBox6.Checked
+    End Sub
+
+    Private Sub Guna2CheckBox7_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox7.CheckedChanged
+        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.ExcludeUnsafeMethods = Guna2CheckBox7.Checked
+    End Sub
 
 #End Region
 

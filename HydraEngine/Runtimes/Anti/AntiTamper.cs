@@ -1,13 +1,10 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Core;
 using HydraEngine.Runtimes.Anti.Runtime;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti
@@ -49,7 +46,7 @@ namespace HydraEngine.Runtimes.Anti
             throw new NotImplementedException();
         }
 
-        private  void Sha256(string filePath)
+        public static void Sha256(string filePath)
         {
             var sha256Bytes = SHA256.Create().ComputeHash(File.ReadAllBytes(filePath));
             var stream = new FileStream(filePath, FileMode.Append);
