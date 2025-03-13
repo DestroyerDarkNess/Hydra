@@ -1,6 +1,7 @@
 # Hydra
 
 [Download on the official website](https://toolslib.net/downloads/viewdownload/600-hydranet/)
+[Download on Github](https://github.com/DestroyerDarkNess/Hydra/releases/tag/1.1.3)
 
 # Embed DLL assemblies into executable
 
