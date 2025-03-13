@@ -1,13 +1,11 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.IO;
 using dnlib.DotNet;
 using dnlib.DotNet.MD;
-using dnlib.DotNet.Resources;
 using dnlib.DotNet.Writer;
 using dnlib.IO;
 using dnlib.PE;
+using System;
+using System.Collections.Generic;
 
 
 //NativeModuleWriterOptions NavwriterOptions = new NativeModuleWriterOptions(module, true)
@@ -100,30 +98,42 @@ namespace HydraEngine.Protection.Misc
             }
             List<Tuple<uint, uint, byte[]>> sections = new List<Tuple<uint, uint, byte[]>>();
             System.IO.MemoryStream s = new System.IO.MemoryStream();
-            foreach (NativeModuleWriter.OrigSection origSect in writer.OrigSections)
+
+            if (writer.OrigSections != null)
             {
-                var oldChunk = origSect.Chunk;
-                ImageSectionHeader sectHdr = origSect.PESection;
-                s.SetLength(0L);
-                oldChunk.WriteTo(new DataWriter(s));
-                byte[] buf = s.ToArray();
-                var newChunk = new DataReaderChunk( ByteArrayDataReaderFactory.CreateReader(buf), oldChunk.GetVirtualSize());
-                newChunk.SetOffset(oldChunk.FileOffset, oldChunk.RVA);
-                origSect.Chunk = newChunk;
-                sections.Add(Tuple.Create<uint, uint, byte[]>(sectHdr.PointerToRawData, sectHdr.PointerToRawData + sectHdr.SizeOfRawData, buf));
+                foreach (NativeModuleWriter.OrigSection origSect in writer.OrigSections)
+                {
+                    var oldChunk = origSect.Chunk;
+                    ImageSectionHeader sectHdr = origSect.PESection;
+                    s.SetLength(0L);
+                    oldChunk.WriteTo(new DataWriter(s));
+                    byte[] buf = s.ToArray();
+                    var newChunk = new DataReaderChunk(ByteArrayDataReaderFactory.CreateReader(buf), oldChunk.GetVirtualSize());
+                    newChunk.SetOffset(oldChunk.FileOffset, oldChunk.RVA);
+                    origSect.Chunk = newChunk;
+                    sections.Add(Tuple.Create<uint, uint, byte[]>(sectHdr.PointerToRawData, sectHdr.PointerToRawData + sectHdr.SizeOfRawData, buf));
+                }
             }
+
+
 
             var md = module.Metadata;
             uint row = md.TablesStream.MethodTable.Rows;
             for (uint i = 1u; i <= row; i += 1u)
             {
-                RawMethodRow method;
+                try
+                {
+                    if (md.TablesStream.MethodRowReader == null) continue;
+
+                    RawMethodRow method;
                     md.TablesStream.MethodRowReader.TryReadRow(i, out method);
 
-                if ((method.ImplFlags & 3) == 0)
-                {
-                    Erase(sections, (uint)md.PEImage.ToFileOffset((RVA)method.RVA));
+                    if ((method.ImplFlags & 3) == 0)
+                    {
+                        Erase(sections, (uint)md.PEImage.ToFileOffset((RVA)method.RVA));
+                    }
                 }
+                catch { continue; }
             }
             ImageDataDirectory res = md.ImageCor20Header.Resources;
             if (res.Size > 0u)

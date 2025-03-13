@@ -56,12 +56,9 @@
     <Reference Include="dnlib, Version=4.4.0.0, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
       <HintPath>..\packages\dnlib.4.4.0\lib\net45\dnlib.dll</HintPath>
     </Reference>
-    <Reference Include="EXGuard.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EXGuard.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\EXGuard.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="EXGuard.Runtime">
-      <HintPath>..\Libs\EXGuard.Runtime.dll</HintPath>
+      <HintPath>..\EXGuard.Core\bin\Debug\EXGuard.Core.dll</HintPath>
     </Reference>
     <Reference Include="Hardening, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -156,6 +153,7 @@
     <Compile Include="Core\DnlibUtils.cs" />
     <Compile Include="Core\HexEncoding.cs" />
     <Compile Include="Core\InjectHelper.cs" />
+    <Compile Include="Core\MethodDefExtensions.cs" />
     <Compile Include="Core\MethodTreeLoader.cs" />
     <Compile Include="Core\PEFileInfo.cs" />
     <Compile Include="Core\Randomizer.cs" />
@@ -207,6 +205,8 @@
     <Compile Include="Protection\JIT\Utils.cs" />
     <Compile Include="Protection\LocalF\L2F.cs" />
     <Compile Include="Protection\Dnspy\AntiDecompiler.cs" />
+    <Compile Include="Protection\Method\cctorHider.cs" />
+    <Compile Include="Protection\Method\cctorL2F.cs" />
     <Compile Include="Protection\Method\DynamicCode.cs" />
     <Compile Include="Protection\Method\EntryPointMover.cs" />
     <Compile Include="Protection\Method\IL2Dynamic.cs" />
@@ -221,6 +221,7 @@
     <Compile Include="Protection\Misc\NativeEraser.cs" />
     <Compile Include="Protection\Misc\ReduceMetadataOptimization.cs" />
     <Compile Include="Protection\Misc\SUFconfusion.cs" />
+    <Compile Include="Protection\Misc\TestProtection.cs" />
     <Compile Include="Protection\Misc\Watermark.cs" />
     <Compile Include="Protection\Mutations\Blocks\Block.cs" />
     <Compile Include="Protection\Mutations\Blocks\BlockParser.cs" />

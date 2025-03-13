@@ -1,15 +1,13 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
 using HydraEngine.Protection.Method.Runtime;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Method
 {
-     public class MethodToDelegate : Models.Protection
+    public class MethodToDelegate : Models.Protection
     {
         public MethodToDelegate() : base("Protection.Method.MethodToDelegate", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -17,7 +15,7 @@ namespace HydraEngine.Protection.Method
         {
             try
             {
-              
+
                 foreach (TypeDef type in Module.Types.ToArray())
                 {
                     if (type.Namespace.StartsWith("My")) continue;
@@ -65,7 +63,7 @@ namespace HydraEngine.Protection.Method
             }
         }
 
-      
+
         private bool CanRename(MethodDef method)
         {
             return !method.IsConstructor &&
@@ -87,7 +85,7 @@ namespace HydraEngine.Protection.Method
                    !type.Name.Contains("<HailHydra>");
         }
 
-        private static void ReplaceMethodWithDelegate(ModuleDef module, MethodDef method)
+        public static void ReplaceMethodWithDelegate(ModuleDef module, MethodDef method)
         {
             var delegateType = CreateDelegateType(module, method);
             var createDelegateMethod = typeof(M2D).GetMethod(nameof(M2D.CreateDelegate)).MakeGenericMethod(delegateType);

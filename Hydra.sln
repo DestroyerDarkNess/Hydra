@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleLoader", "ModuleLoade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VM.Runtime", "VM.Runtime\VM.Runtime.csproj", "{D1011E58-CD02-4DB9-8426-5B91DCE53B3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXGuard.Core", "EXGuard.Core\EXGuard.Core.csproj", "{39880A54-6A99-458E-950E-530ED82AE509}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXGuard.Runtime", "EXGuard.Runtime\EXGuard.Runtime.csproj", "{7630A9A6-9513-44C9-A191-8FA50150A54D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{D1011E58-CD02-4DB9-8426-5B91DCE53B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1011E58-CD02-4DB9-8426-5B91DCE53B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1011E58-CD02-4DB9-8426-5B91DCE53B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39880A54-6A99-458E-950E-530ED82AE509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39880A54-6A99-458E-950E-530ED82AE509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39880A54-6A99-458E-950E-530ED82AE509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39880A54-6A99-458E-950E-530ED82AE509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7630A9A6-9513-44C9-A191-8FA50150A54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7630A9A6-9513-44C9-A191-8FA50150A54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7630A9A6-9513-44C9-A191-8FA50150A54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7630A9A6-9513-44C9-A191-8FA50150A54D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

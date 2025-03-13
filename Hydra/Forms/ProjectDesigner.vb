@@ -722,10 +722,6 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Runtimes.Anti.BypassAmsi)
         End If
 
-        If DynamicCctorCheck.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Method.IL2Dynamic)
-        End If
-
         If DynamicMethodsCheck.Checked = True Then
             Result.Add(New HydraEngine.Protection.Method.DynamicCode)
         End If
@@ -740,6 +736,18 @@ Public Class ProjectDesigner
 
         If ILVMCheck.Checked And VMSelected = 1 Then
             Result.Add(New HydraEngine.Protection.VM.EXGuard)
+        End If
+
+        If DynamicCctorCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.IL2Dynamic)
+        End If
+
+        If CctorL2FCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.cctorL2F)
+        End If
+
+        If CctorHider.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.CctorHider)
         End If
 
         If MethodError.Checked = True Then
@@ -1416,6 +1424,15 @@ Public Class ProjectDesigner
                                          End If
 
                                      Catch ex As Exception : End Try
+
+                                     Dim TestProtection As Misc.TestProtection = New Misc.TestProtection() With {.Ouput = Ouput}
+                                     Dim TestProtectionResult As Boolean = Await TestProtection.Execute(AsmDef)
+
+                                     If TestProtectionResult Then
+                                         Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"TestProtectiond", "TestProtection", ""}))
+                                     Else
+                                         Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"TestProtectiond", "TestProtection", TestProtection.Errors}))
+                                     End If
 
                                      Try
 

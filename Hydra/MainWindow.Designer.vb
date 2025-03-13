@@ -327,6 +327,10 @@ Partial Class MainWindow
         Me.Guna2DragControl1.TargetControl = Me.Guna2Panel1
         Me.Guna2DragControl1.UseTransparentDrag = True
         '
+        'Guna2ShadowForm1
+        '
+        Me.Guna2ShadowForm1.TargetForm = Me
+        '
         'Guna2DragControl2
         '
         Me.Guna2DragControl2.DockIndicatorTransparencyValue = 0.6R
