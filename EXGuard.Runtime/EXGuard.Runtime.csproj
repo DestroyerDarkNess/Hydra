@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7630A9A6-9513-44C9-A191-8FA50150A54D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EXGuard.Runtime</RootNamespace>
+    <AssemblyName>EXGuard.Runtime</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\OpCodeMap.cs" />
+    <Compile Include="Data\RefInfo.cs" />
+    <Compile Include="Data\VCallMap.cs" />
+    <Compile Include="Data\VMData.cs" />
+    <Compile Include="Data\VMExportInfo.cs" />
+    <Compile Include="Data\VMFuncSig.cs" />
+    <Compile Include="Dynamic\Constants.cs" />
+    <Compile Include="Execution\EHFrame.cs" />
+    <Compile Include="Execution\EHState.cs" />
+    <Compile Include="Execution\ExecutionState.cs" />
+    <Compile Include="Execution\FieldRef.cs" />
+    <Compile Include="Execution\Internal\ArrayStoreHelpers.cs" />
+    <Compile Include="Execution\Internal\DirectCall.cs" />
+    <Compile Include="Execution\Internal\SizeOfHelper.cs" />
+    <Compile Include="Execution\Internal\TypedReferenceHelpers.cs" />
+    <Compile Include="Execution\Internal\ValueTypeBox.cs" />
+    <Compile Include="Execution\IReference.cs" />
+    <Compile Include="Execution\PointerRef.cs" />
+    <Compile Include="Execution\PointerType.cs" />
+    <Compile Include="Execution\StackRef.cs" />
+    <Compile Include="Execution\TypedRef.cs" />
+    <Compile Include="Execution\TypedRefPtr.cs" />
+    <Compile Include="Execution\VMContext.cs" />
+    <Compile Include="Execution\VMDispatcher.cs" />
+    <Compile Include="Execution\VMSlot.cs" />
+    <Compile Include="Execution\VMStack.cs" />
+    <Compile Include="JIT\JITEDMethodInfo.cs" />
+    <Compile Include="JIT\JITRuntime.cs" />
+    <Compile Include="Lzma.cs" />
+    <Compile Include="Main Class\Utils.cs" />
+    <Compile Include="Main Class\VMEntry.cs" />
+    <Compile Include="Main Class\VMInstance.cs" />
+    <Compile Include="Mutation.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="OpCodes\Add.cs" />
+    <Compile Include="OpCodes\Call.cs" />
+    <Compile Include="OpCodes\Cmp.cs" />
+    <Compile Include="OpCodes\Div.cs" />
+    <Compile Include="OpCodes\FConv.cs" />
+    <Compile Include="OpCodes\IConv.cs" />
+    <Compile Include="OpCodes\IOpCode.cs" />
+    <Compile Include="OpCodes\Jmp.cs" />
+    <Compile Include="OpCodes\Leave.cs" />
+    <Compile Include="OpCodes\Lind.cs" />
+    <Compile Include="OpCodes\Mul.cs" />
+    <Compile Include="OpCodes\Nop.cs" />
+    <Compile Include="OpCodes\Nor.cs" />
+    <Compile Include="OpCodes\Pop.cs" />
+    <Compile Include="OpCodes\Push.cs" />
+    <Compile Include="OpCodes\Rem.cs" />
+    <Compile Include="OpCodes\Ret.cs" />
+    <Compile Include="OpCodes\Shl.cs" />
+    <Compile Include="OpCodes\Shr.cs" />
+    <Compile Include="OpCodes\Sind.cs" />
+    <Compile Include="OpCodes\Sub.cs" />
+    <Compile Include="OpCodes\Sx.cs" />
+    <Compile Include="OpCodes\Try.cs" />
+    <Compile Include="OpCodes\Vcall.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RT Protection\Anti Dump\AntiDump.cs" />
+    <Compile Include="RT Protection\Constant String Protection Runtime\Constant.cs" />
+    <Compile Include="System Class\ExcludeFromCodeCoverageAttribute.cs" />
+    <Compile Include="System Class\HandleProcessCorruptedStateExceptionsAttribute.cs" />
+    <Compile Include="VCalls\Box.cs" />
+    <Compile Include="VCalls\Cast.cs" />
+    <Compile Include="VCalls\Ckfinite.cs" />
+    <Compile Include="VCalls\Ckoverflow.cs" />
+    <Compile Include="VCalls\Ecall.cs" />
+    <Compile Include="VCalls\Exit.cs" />
+    <Compile Include="VCalls\Initobj.cs" />
+    <Compile Include="VCalls\IVCall.cs" />
+    <Compile Include="VCalls\Ldfld.cs" />
+    <Compile Include="VCalls\Ldftn.cs" />
+    <Compile Include="VCalls\Localloc.cs" />
+    <Compile Include="VCalls\Rangechk.cs" />
+    <Compile Include="VCalls\Sizeof.cs" />
+    <Compile Include="VCalls\Stfld.cs" />
+    <Compile Include="VCalls\Throw.cs" />
+    <Compile Include="VCalls\Token.cs" />
+    <Compile Include="VCalls\Unbox.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

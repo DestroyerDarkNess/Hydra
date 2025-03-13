@@ -4,17 +4,16 @@ using HydraEngine.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Proxy
 {
-     public class ProxyMeth : Models.Protection
+    public class ProxyMeth : Models.Protection
     {
         public ProxyMeth() : base("Protection.Proxy.ProxyMeth", "Renamer Phase", "Description for Renamer Phase") { }
 
-        private  readonly Random Rand = new Random();
-        private  readonly List<MemberRef> MemberRefList = new List<MemberRef>();
+        private readonly Random Rand = new Random();
+        private readonly List<MemberRef> MemberRefList = new List<MemberRef>();
 
         public override async Task<bool> Execute(ModuleDefMD module)
         {
@@ -98,7 +97,6 @@ namespace HydraEngine.Protection.Proxy
             }
         }
 
-
         private void ScanMemberRef(ModuleDef module)
         {
             foreach (TypeDef type in module.Types)
@@ -128,7 +126,7 @@ namespace HydraEngine.Protection.Proxy
             }
         }
 
-        private  MethodDef GenerateSwitch(MemberRef original, ModuleDef md)
+        private MethodDef GenerateSwitch(MemberRef original, ModuleDef md)
         {
             try
             {

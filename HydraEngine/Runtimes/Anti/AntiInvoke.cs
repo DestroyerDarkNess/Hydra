@@ -1,16 +1,31 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using HydraEngine.Core;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+using HydraEngine.Protection.Method;
+using HydraEngine.Protection.Renamer;
 using HydraEngine.Runtimes.Anti.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti
 {
-     public class AntiInvoke : Models.Protection
+    public static class AntiInvokeRuntime
+    {
+        public static void Initialize()
+        {
+            if (Assembly.GetExecutingAssembly() != Assembly.GetCallingAssembly())
+            {
+                Process.GetCurrentProcess().Kill();
+                Environment.FailFast(null);
+            }
+        }
+
+    }
+
+    public class AntiInvoke : Models.Protection
     {
         public AntiInvoke() : base("Runtimes.Anti.AntiInvoke", "Renamer Phase", "Description for Renamer Phase") { }
 
@@ -38,6 +53,8 @@ namespace HydraEngine.Runtimes.Anti
                     break;
                 }
 
+                ForAll(module);
+
                 return true;
             }
             catch (Exception Ex)
@@ -45,6 +62,31 @@ namespace HydraEngine.Runtimes.Anti
                 this.Errors = Ex;
                 return false;
             }
+
+        }
+
+        private void ForAll(ModuleDefMD module)
+        {
+            ModuleDefMD moduleDefMD = ModuleDefMD.Load(typeof(AntiInvokeRuntime).Module);
+            TypeDef typeDef = moduleDefMD.ResolveTypeDef(MDToken.ToRID(typeof(AntiInvokeRuntime).MetadataToken));
+
+            foreach (TypeDef type in module.Types.ToArray())
+            {
+                if (!AnalyzerPhase.CanRename(type)) continue;
+
+                IEnumerable<IDnlibDef> source = InjectHelper.Inject(typeDef, type, module);
+                MethodDef cctor = module.GlobalType.FindOrCreateStaticConstructor();
+                MethodDef init = (MethodDef)source.Single((IDnlibDef method) => method.Name == "Initialize");
+                cctor.Body.Instructions.Insert(0, Instruction.Create(OpCodes.Call, init));
+
+                MethodDef type_cctor = type.FindOrCreateStaticConstructor();
+                MethodDef type_init = (MethodDef)source.Single((IDnlibDef method) => method.Name == "Initialize");
+                type_cctor.Body.Instructions.Insert(0, Instruction.Create(OpCodes.Call, type_init));
+
+                init.Name = "<" + Core.Randomizer.GenerateRandomString2() + ">";
+                bool Dynamic = new IL2Dynamic().ConvertToDynamic(init, module);
+            }
+
         }
 
         public override Task<bool> Execute(string assembly)
