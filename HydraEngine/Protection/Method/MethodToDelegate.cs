@@ -42,8 +42,7 @@ namespace HydraEngine.Protection.Method
 
                         if (method.HasClosureReferences()) continue;
 
-                        if (method.Body.Instructions.Any(instr => IsAccessingNonPublicMember(instr, type)))
-                            continue;
+                        if (method.Body.Instructions.Any(instr => IsAccessingNonPublicMember(instr, type))) continue;
 
                         FixPrivateAccess(method);
                         FixFieldAndMethodAccess(method);
@@ -77,7 +76,7 @@ namespace HydraEngine.Protection.Method
                         }
                         else
                         {
-                            Console.WriteLine("Failed: " + method.FullName);
+                            //Console.WriteLine("Failed: " + method.FullName);
                         }
 
                     }

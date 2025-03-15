@@ -57,11 +57,20 @@ namespace HydraEngine.Protection.Method
 
                 for (int i = 0; i < paramCount; i++)
                 {
-                    if (i == 0) il.Add(OpCodes.Ldarg_0.ToInstruction());
-                    else if (i == 1) il.Add(OpCodes.Ldarg_1.ToInstruction());
-                    else if (i == 2) il.Add(OpCodes.Ldarg_2.ToInstruction());
-                    else if (i == 3) il.Add(OpCodes.Ldarg_3.ToInstruction());
-                    else il.Add(OpCodes.Ldarg.ToInstruction((ushort)i));
+                    var param = originalMethod.Parameters[i];
+
+                    if (i == 0)
+                        il.Add(OpCodes.Ldarg_0.ToInstruction());
+                    else if (i == 1)
+                        il.Add(OpCodes.Ldarg_1.ToInstruction());
+                    else if (i == 2)
+                        il.Add(OpCodes.Ldarg_2.ToInstruction());
+                    else if (i == 3)
+                        il.Add(OpCodes.Ldarg_3.ToInstruction());
+                    else if (i <= byte.MaxValue)
+                        il.Add(Instruction.Create(OpCodes.Ldarg_S, param));
+                    else
+                        il.Add(Instruction.Create(OpCodes.Ldarg, param));
                 }
 
                 var methodRef = newMethod;
@@ -122,11 +131,20 @@ namespace HydraEngine.Protection.Method
 
                 for (int i = 0; i < paramCount; i++)
                 {
-                    if (i == 0) il.Add(OpCodes.Ldarg_0.ToInstruction());
-                    else if (i == 1) il.Add(OpCodes.Ldarg_1.ToInstruction());
-                    else if (i == 2) il.Add(OpCodes.Ldarg_2.ToInstruction());
-                    else if (i == 3) il.Add(OpCodes.Ldarg_3.ToInstruction());
-                    else il.Add(OpCodes.Ldarg.ToInstruction((ushort)i));
+                    var param = originalMethod.Parameters[i];
+
+                    if (i == 0)
+                        il.Add(OpCodes.Ldarg_0.ToInstruction());
+                    else if (i == 1)
+                        il.Add(OpCodes.Ldarg_1.ToInstruction());
+                    else if (i == 2)
+                        il.Add(OpCodes.Ldarg_2.ToInstruction());
+                    else if (i == 3)
+                        il.Add(OpCodes.Ldarg_3.ToInstruction());
+                    else if (i <= byte.MaxValue)
+                        il.Add(Instruction.Create(OpCodes.Ldarg_S, param));
+                    else
+                        il.Add(Instruction.Create(OpCodes.Ldarg, param));
                 }
 
                 originalMethod.Body = newOriginalBody;
