@@ -7,6 +7,41 @@ namespace HydraEngine.Core
 {
     public static class MethodDefExtensions
     {
+
+        public static bool HasClosureReferences(this MethodDef method)
+        {
+            if (!method.HasBody)
+                return false;
+
+            foreach (var instr in method.Body.Instructions)
+            {
+                if (instr.Operand is IMethod mRef)
+                {
+                    var declType = mRef.DeclaringType;
+                    if (declType != null)
+                    {
+                        if (declType.Name.Contains("<>") || declType.Name.Contains("DisplayClass"))
+                            return true;
+                    }
+                }
+                else if (instr.Operand is IField fRef)
+                {
+                    var declType = fRef.DeclaringType;
+                    if (declType != null)
+                    {
+                        if (declType.Name.Contains("<>") || declType.Name.Contains("DisplayClass"))
+                            return true;
+                    }
+                }
+                else if (instr.Operand is ITypeDefOrRef tRef)
+                {
+                    if (tRef.Name.Contains("<>") || tRef.Name.Contains("DisplayClass"))
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public static MethodDef Clone(this MethodDef method, bool copyBody = true)
         {
             // Crear nueva instancia con mismo nombre y firma
@@ -82,7 +117,7 @@ namespace HydraEngine.Core
             }
 
             // Clonar manejadores de excepciones
-            foreach (var eh in original.ExceptionHandlers)
+            foreach (var eh in original.ExceptionHandlers.ToArray())
             {
                 newBody.ExceptionHandlers.Add(new ExceptionHandler(eh.HandlerType)
                 {

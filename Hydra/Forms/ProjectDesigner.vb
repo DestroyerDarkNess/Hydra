@@ -545,6 +545,10 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Method.EntryPointMover)
         End If
 
+        If Method2DelegateCheck.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.MethodToDelegate With {.DynamicEntryPoint = Method2DynamicEntryPoint.Checked})
+        End If
+
         If ReduceMetadata.Checked = True Then
             Result.Add(New HydraEngine.Protection.Misc.ReduceMetadataOptimization)
         End If
@@ -747,7 +751,7 @@ Public Class ProjectDesigner
         End If
 
         If CctorHider.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Method.CctorHider)
+            Result.Add(New HydraEngine.Protection.Method.cctorHider)
         End If
 
         If MethodError.Checked = True Then

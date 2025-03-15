@@ -16,7 +16,6 @@ namespace HydraEngine.Protection.Method
         {
             try
             {
-
                 MethodDef methodDef = module.GlobalType.FindOrCreateStaticConstructor();
                 IList<Instruction> instructions = methodDef.Body.Instructions;
                 Dictionary<int, FieldDef> dictionary = new Dictionary<int, FieldDef>();

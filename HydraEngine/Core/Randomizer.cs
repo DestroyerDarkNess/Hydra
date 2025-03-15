@@ -55,6 +55,11 @@ namespace HydraEngine.Core
             return new string(Enumerable.Repeat(BaseChars2, random.Next(25, 100)).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public static string GenerateRandomString(int minLength, int maxLength)
+        {
+            return new string(Enumerable.Repeat(BaseChars2, random.Next(minLength, maxLength)).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public static string GenerateRandomString(int size)
         {
             StringBuilder stringy = new StringBuilder();

@@ -150,6 +150,8 @@
     <Compile Include="7zip\SevenZipHelper.cs" />
     <Compile Include="Certificate\Sigthief.cs" />
     <Compile Include="Core\Analyzer.cs" />
+    <Compile Include="Core\CilBodyExtensions.cs" />
+    <Compile Include="Core\DnlibExtensions.cs" />
     <Compile Include="Core\DnlibUtils.cs" />
     <Compile Include="Core\HexEncoding.cs" />
     <Compile Include="Core\InjectHelper.cs" />
@@ -211,6 +213,8 @@
     <Compile Include="Protection\Method\EntryPointMover.cs" />
     <Compile Include="Protection\Method\IL2Dynamic.cs" />
     <Compile Include="Protection\Method\MethodError.cs" />
+    <Compile Include="Protection\Method\MethodHider.cs" />
+    <Compile Include="Protection\Method\MethodMover.cs" />
     <Compile Include="Protection\Method\MethodToDelegate.cs" />
     <Compile Include="Protection\Method\Runtime\M2D.cs" />
     <Compile Include="Protection\Method\StackUnfConfusion.cs" />

@@ -51,6 +51,8 @@ Partial Class ProjectDesigner
         Me.Guna2NumericUpDown1 = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.AddJunkCode = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox4 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Method2DelegateCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.CctorL2FCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.CctorHider = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ProxyReferencesUnsafeCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ResourceCompressAndEncryptCheck = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -204,7 +206,7 @@ Partial Class ProjectDesigner
         Me.LogInContextMenu1 = New Hydra.LogInContextMenu()
         Me.ExcludeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoosterToolTip1 = New Hydra.BoosterToolTip()
-        Me.CctorL2FCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Method2DynamicEntryPoint = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -675,6 +677,8 @@ Partial Class ProjectDesigner
         'Guna2GroupBox4
         '
         Me.Guna2GroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox4.Controls.Add(Me.Method2DynamicEntryPoint)
+        Me.Guna2GroupBox4.Controls.Add(Me.Method2DelegateCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.CctorL2FCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.CctorHider)
         Me.Guna2GroupBox4.Controls.Add(Me.ProxyReferencesUnsafeCheck)
@@ -728,6 +732,42 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.Size = New System.Drawing.Size(499, 403)
         Me.Guna2GroupBox4.TabIndex = 43
         Me.Guna2GroupBox4.Text = "Options"
+        '
+        'Method2DelegateCheck
+        '
+        Me.Method2DelegateCheck.AutoSize = True
+        Me.Method2DelegateCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Method2DelegateCheck.CheckedState.BorderRadius = 0
+        Me.Method2DelegateCheck.CheckedState.BorderThickness = 1
+        Me.Method2DelegateCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Method2DelegateCheck.Location = New System.Drawing.Point(164, 252)
+        Me.Method2DelegateCheck.Name = "Method2DelegateCheck"
+        Me.Method2DelegateCheck.Size = New System.Drawing.Size(133, 19)
+        Me.Method2DelegateCheck.TabIndex = 90
+        Me.Method2DelegateCheck.Text = "Method To Delegate"
+        Me.Method2DelegateCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Method2DelegateCheck.UncheckedState.BorderRadius = 0
+        Me.Method2DelegateCheck.UncheckedState.BorderThickness = 1
+        Me.Method2DelegateCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Method2DelegateCheck.UseVisualStyleBackColor = True
+        '
+        'CctorL2FCheck
+        '
+        Me.CctorL2FCheck.AutoSize = True
+        Me.CctorL2FCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CctorL2FCheck.CheckedState.BorderRadius = 0
+        Me.CctorL2FCheck.CheckedState.BorderThickness = 1
+        Me.CctorL2FCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CctorL2FCheck.Location = New System.Drawing.Point(338, 154)
+        Me.CctorL2FCheck.Name = "CctorL2FCheck"
+        Me.CctorL2FCheck.Size = New System.Drawing.Size(139, 19)
+        Me.CctorL2FCheck.TabIndex = 89
+        Me.CctorL2FCheck.Text = "Cctor Renamer && L2F"
+        Me.CctorL2FCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CctorL2FCheck.UncheckedState.BorderRadius = 0
+        Me.CctorL2FCheck.UncheckedState.BorderThickness = 1
+        Me.CctorL2FCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CctorL2FCheck.UseVisualStyleBackColor = True
         '
         'CctorHider
         '
@@ -1182,7 +1222,7 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox6.FillColor = System.Drawing.Color.Transparent
         Me.Guna2GroupBox6.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2GroupBox6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox6.Location = New System.Drawing.Point(325, 279)
+        Me.Guna2GroupBox6.Location = New System.Drawing.Point(317, 283)
         Me.Guna2GroupBox6.Name = "Guna2GroupBox6"
         Me.Guna2GroupBox6.Size = New System.Drawing.Size(166, 116)
         Me.Guna2GroupBox6.TabIndex = 63
@@ -1267,7 +1307,7 @@ Partial Class ProjectDesigner
         Me.EntryPointMover.CheckedState.BorderRadius = 0
         Me.EntryPointMover.CheckedState.BorderThickness = 1
         Me.EntryPointMover.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.EntryPointMover.Location = New System.Drawing.Point(164, 302)
+        Me.EntryPointMover.Location = New System.Drawing.Point(338, 179)
         Me.EntryPointMover.Name = "EntryPointMover"
         Me.EntryPointMover.Size = New System.Drawing.Size(118, 19)
         Me.EntryPointMover.TabIndex = 50
@@ -1429,7 +1469,7 @@ Partial Class ProjectDesigner
         Me.L2F.CheckedState.BorderRadius = 0
         Me.L2F.CheckedState.BorderThickness = 1
         Me.L2F.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.L2F.Location = New System.Drawing.Point(164, 252)
+        Me.L2F.Location = New System.Drawing.Point(164, 302)
         Me.L2F.Name = "L2F"
         Me.L2F.Size = New System.Drawing.Size(98, 19)
         Me.L2F.TabIndex = 41
@@ -3354,23 +3394,25 @@ Partial Class ProjectDesigner
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
         '
-        'CctorL2FCheck
+        'Method2DynamicEntryPoint
         '
-        Me.CctorL2FCheck.AutoSize = True
-        Me.CctorL2FCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.CctorL2FCheck.CheckedState.BorderRadius = 0
-        Me.CctorL2FCheck.CheckedState.BorderThickness = 1
-        Me.CctorL2FCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CctorL2FCheck.Location = New System.Drawing.Point(338, 154)
-        Me.CctorL2FCheck.Name = "CctorL2FCheck"
-        Me.CctorL2FCheck.Size = New System.Drawing.Size(139, 19)
-        Me.CctorL2FCheck.TabIndex = 89
-        Me.CctorL2FCheck.Text = "Cctor Renamer && L2F"
-        Me.CctorL2FCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.CctorL2FCheck.UncheckedState.BorderRadius = 0
-        Me.CctorL2FCheck.UncheckedState.BorderThickness = 1
-        Me.CctorL2FCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CctorL2FCheck.UseVisualStyleBackColor = True
+        Me.Method2DynamicEntryPoint.AutoSize = True
+        Me.Method2DynamicEntryPoint.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Method2DynamicEntryPoint.CheckedState.BorderRadius = 0
+        Me.Method2DynamicEntryPoint.CheckedState.BorderThickness = 1
+        Me.Method2DynamicEntryPoint.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Method2DynamicEntryPoint.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.Method2DynamicEntryPoint.Font = New System.Drawing.Font("Segoe UI", 7.0!)
+        Me.Method2DynamicEntryPoint.Location = New System.Drawing.Point(295, 255)
+        Me.Method2DynamicEntryPoint.Name = "Method2DynamicEntryPoint"
+        Me.Method2DynamicEntryPoint.Size = New System.Drawing.Size(111, 16)
+        Me.Method2DynamicEntryPoint.TabIndex = 91
+        Me.Method2DynamicEntryPoint.Text = "Dynamic EntryPoint"
+        Me.Method2DynamicEntryPoint.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Method2DynamicEntryPoint.UncheckedState.BorderRadius = 0
+        Me.Method2DynamicEntryPoint.UncheckedState.BorderThickness = 1
+        Me.Method2DynamicEntryPoint.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Method2DynamicEntryPoint.UseVisualStyleBackColor = True
         '
         'ProjectDesigner
         '
@@ -3613,4 +3655,6 @@ Partial Class ProjectDesigner
     Friend WithEvents ProxyReferencesUnsafeCheck As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents CctorHider As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents CctorL2FCheck As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Method2DelegateCheck As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Method2DynamicEntryPoint As Guna.UI2.WinForms.Guna2CheckBox
 End Class
