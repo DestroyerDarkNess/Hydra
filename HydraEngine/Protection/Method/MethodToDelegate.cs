@@ -1,6 +1,7 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Protection.Method.Runtime;
+using HydraEngine.Core;
+using HydraEngine.Protection.Renamer;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,49 +12,82 @@ namespace HydraEngine.Protection.Method
     {
         public MethodToDelegate() : base("Protection.Method.MethodToDelegate", "Renamer Phase", "Description for Renamer Phase") { }
 
+        public bool DynamicEntryPoint { get; set; } = false;
+
         public override async Task<bool> Execute(ModuleDefMD Module)
         {
             try
             {
-
-                foreach (TypeDef type in Module.Types.ToArray())
+                foreach (var type in Module.Types.ToArray())
                 {
-                    if (type.Namespace.StartsWith("My")) continue;
-                    if (type.IsGlobalModuleType)
+                    if (!AnalyzerPhase.CanRename(type)) continue;
+                    foreach (var method in type.Methods.ToArray())
                     {
-                        continue;
-                    }
+                        if (method.IsConstructor) continue;
+                        if (!method.HasBody || !method.Body.HasInstructions || method.DeclaringType.IsGlobalModuleType) continue;
 
-                    if (!CanRename(type)) continue;
+                        if (method.HasGenericParameters) continue;
+                        if (method.IsPinvokeImpl) continue;
+                        if (method.IsUnmanagedExport) continue;
 
-                    if (type.Name == "GeneratedInternalTypeHelper")
-                    {
-                        continue;
-                    }
+                        //if (method.HasByRefParameters()) continue;
 
-                    foreach (MethodDef method in type.Methods.ToArray())
-                    {
-                        if (method.Name == ".ctor" || method.Name == ".cctor") continue;
-                        if (!CanRename(method)) continue;
-                        if (!method.HasBody)
+                        //var unsafeOpcodes = new[] { OpCodes.Ldind_I1, OpCodes.Stind_I1, OpCodes.Conv_I };
+                        //if (method.Body.Instructions.Any(instr => unsafeOpcodes.Contains(instr.OpCode)))
+                        //{
+                        //    continue;
+                        //}
+
+                        if (!AnalyzerPhase.CanRename(method, type)) continue;
+
+                        if (method.HasClosureReferences()) continue;
+
+                        if (method.Body.Instructions.Any(instr => IsAccessingNonPublicMember(instr, type))) continue;
+
+                        FixPrivateAccess(method);
+                        FixFieldAndMethodAccess(method);
+
+                        TypeDef ResultMove = MethodMover.MoveMethodILToStaticDelegate(method, Module);
+                        if (ResultMove != null)
                         {
-                            continue;
+                            ResultMove.Name = Guid.NewGuid().ToString("N") + Randomizer.GenerateRandomString(10, 30);
+
+                            try
+                            {
+                                TypeRef attrRef = Module.CorLibTypes.GetTypeRef("System.Runtime.CompilerServices", "CompilerGeneratedAttribute");
+                                var ctorRef = new MemberRefUser(Module, ".ctor", MethodSig.CreateInstance(Module.CorLibTypes.Void), attrRef);
+                                var attr = new CustomAttribute(ctorRef);
+
+                                TypeRef attrRef2 = Module.CorLibTypes.GetTypeRef("System", "EntryPointNotFoundException");
+                                var ctorRef2 = new MemberRefUser(Module, ".ctor", MethodSig.CreateInstance(Module.CorLibTypes.Void, Module.CorLibTypes.String), attrRef2);
+
+                                MethodDef NewMethod = ResultMove.Methods.FirstOrDefault(x => x.Name == method.Name);
+
+                                if (NewMethod != null)
+                                {
+                                    HydraEngine.Core.InjectHelper.AddAttributeToMethod(NewMethod, attr);
+                                    NewMethod.Name = $"<{Randomizer.GenerateRandomString(10, 30)}>";
+                                    NewMethod.Body.Instructions.Add(Instruction.Create(OpCodes.Ldstr, "Protected by https://github.com/DestroyerDarkNess/Hydra"));
+                                    NewMethod.Body.Instructions.Add(Instruction.Create(OpCodes.Newobj, ctorRef2));
+                                    NewMethod.Body.Instructions.Add(Instruction.Create(OpCodes.Throw));
+                                }
+                            }
+                            catch { }
+                        }
+                        else
+                        {
+                            //Console.WriteLine("Failed: " + method.FullName);
                         }
 
-                        if (method.IsVirtual || method.IsSpecialName)
-                        {
-                            continue;
-                        }
-
-                        if (method.Name == ".ctor" || method.Name == ".cctor")
-                        {
-                            continue;
-                        }
-
-                        if (method.IsRuntimeSpecialName || method.IsSpecialName || method.Name == "Invoke") continue;
-                        ReplaceMethodWithDelegate(Module, method);
                     }
                 }
+
+                if (DynamicEntryPoint)
+                {
+                    bool Dynamic = new IL2Dynamic().ConvertToDynamic(Module.EntryPoint, Module);
+                }
+
+
                 return true;
             }
             catch (Exception Ex)
@@ -63,71 +97,90 @@ namespace HydraEngine.Protection.Method
             }
         }
 
-
-        private bool CanRename(MethodDef method)
+        private bool IsAccessingNonPublicMember(Instruction instr, TypeDef declaringType)
         {
-            return !method.IsConstructor &&
-                   !method.DeclaringType.IsForwarder &&
-                   !method.IsFamily &&
-                   !method.IsStaticConstructor &&
-                   !method.IsRuntimeSpecialName &&
-                   !method.DeclaringType.IsGlobalModuleType &&
-                   !method.Name.Contains("Hydra");
-        }
-
-        private static bool CanRename(TypeDef type)
-        {
-            if (type.Namespace.Contains("My")) return false;
-            return !type.IsGlobalModuleType &&
-                   type.Interfaces.Count == 0 &&
-                   !type.IsSpecialName &&
-                   !type.IsRuntimeSpecialName &&
-                   !type.Name.Contains("<HailHydra>");
-        }
-
-        public static void ReplaceMethodWithDelegate(ModuleDef module, MethodDef method)
-        {
-            var delegateType = CreateDelegateType(module, method);
-            var createDelegateMethod = typeof(M2D).GetMethod(nameof(M2D.CreateDelegate)).MakeGenericMethod(delegateType);
-
-            var import = module.Import(createDelegateMethod);
-            var ilProcessor = method.Body.Instructions;
-
-            ilProcessor.Insert(0, Instruction.Create(OpCodes.Call, import));
-            ilProcessor.Insert(1, Instruction.Create(OpCodes.Stsfld, CreateDelegateField(module, method, delegateType)));
-        }
-
-        private static FieldDef CreateDelegateField(ModuleDef module, MethodDef method, Type delegateType)
-        {
-            var delegateField = new FieldDefUser(method.Name + "Delegate_" + Guid.NewGuid().ToString("N"), new FieldSig(module.Import(typeof(Delegate)).ToTypeSig()))
+            if (instr.OpCode == OpCodes.Ldfld || instr.OpCode == OpCodes.Ldflda || instr.OpCode == OpCodes.Stfld)
             {
-                Attributes = FieldAttributes.Private | FieldAttributes.Static
-            };
-            module.GlobalType.Fields.Add(delegateField);
-            return delegateField;
+                var field = instr.Operand as IField;
+                var fieldDef = field?.ResolveFieldDef();
+                if (fieldDef?.DeclaringType == declaringType && !fieldDef.IsPublic)
+                    return true;
+            }
+
+            if (instr.OpCode == OpCodes.Call || instr.OpCode == OpCodes.Callvirt)
+            {
+                var method = instr.Operand as IMethod;
+                var methodDef = method?.ResolveMethodDef();
+                if (methodDef?.DeclaringType == declaringType && !methodDef.IsPublic)
+                    return true;
+            }
+
+            return false;
         }
 
-        private static Type CreateDelegateType(ModuleDef module, MethodDef method)
+        private void FixFieldAndMethodAccess(MethodDef method)
         {
-            var delegateName = method.Name + "Delegate_" + Guid.NewGuid().ToString("N");
-            var delegateType = new TypeDefUser("DynamicDelegates", delegateName, module.CorLibTypes.GetTypeRef("System", "MulticastDelegate"));
-            module.Types.Add(delegateType);
+            if (!method.HasBody) return;
+            var instrs = method.Body.Instructions;
 
-            var ctor = new MethodDefUser(".ctor", MethodSig.CreateInstance(module.CorLibTypes.Void, module.CorLibTypes.Object, module.CorLibTypes.IntPtr));
-            ctor.Attributes = MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public;
-            delegateType.Methods.Add(ctor);
+            foreach (var instr in instrs)
+            {
+                if (instr.Operand is IField fieldRef)
+                {
+                    var fieldDef = fieldRef.ResolveFieldDef();
+                    if (fieldDef != null && fieldDef.IsPrivate)
+                    {
+                        fieldDef.Attributes &= ~FieldAttributes.FieldAccessMask;
+                        fieldDef.Attributes |= FieldAttributes.Public;
+                    }
+                }
 
-            var invoke = new MethodDefUser("Invoke", method.MethodSig);
-            invoke.Attributes = MethodAttributes.HideBySig | MethodAttributes.Virtual | MethodAttributes.Public | MethodAttributes.NewSlot;
-            delegateType.Methods.Add(invoke);
+                if (instr.Operand is IMethod methodRef)
+                {
+                    var targetMethodDef = methodRef.ResolveMethodDef();
+                    if (targetMethodDef != null && targetMethodDef.IsPrivate)
+                    {
+                        targetMethodDef.Attributes &= ~MethodAttributes.MemberAccessMask;
+                        targetMethodDef.Attributes |= MethodAttributes.Public;
+                    }
+                }
+            }
+        }
 
-            delegateType.BaseType = module.CorLibTypes.GetTypeRef("System", "MulticastDelegate");
-            return delegateType.GetType();
+        private void FixPrivateAccess(MethodDef method)
+        {
+            if (method == null || !method.HasBody)
+                return;
+
+            foreach (var instr in method.Body.Instructions)
+            {
+                if (instr.Operand is IField fieldRef)
+                {
+                    var fieldDef = fieldRef.ResolveFieldDef();
+                    if (fieldDef != null && fieldDef.IsPrivate)
+                    {
+                        fieldDef.Attributes &= ~FieldAttributes.FieldAccessMask;
+                        fieldDef.Attributes |= FieldAttributes.Public;
+                    }
+                }
+
+                else if (instr.Operand is IMethod methodRef)
+                {
+                    var targetMethodDef = methodRef.ResolveMethodDef();
+                    if (targetMethodDef != null && targetMethodDef.IsPrivate)
+                    {
+                        targetMethodDef.Attributes &= ~MethodAttributes.MemberAccessMask;
+                        targetMethodDef.Attributes |= MethodAttributes.Public;
+                    }
+                }
+            }
         }
 
         public override Task<bool> Execute(string assembly)
         {
             throw new NotImplementedException();
         }
+
     }
+
 }
