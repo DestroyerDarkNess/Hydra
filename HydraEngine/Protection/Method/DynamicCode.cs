@@ -16,7 +16,10 @@ namespace HydraEngine.Protection.Method
                 if (!File.Exists("Runtime.dll")) File.WriteAllBytes("Runtime.dll", HydraEngine.Properties.Resources.Runtime);
 
                 TempModule = DynCore.Execute.Protect(module);
+
                 if (TempModule == null) throw new Exception("VM Methods Failed!");
+
+
                 return true;
             }
             catch (Exception Ex)
@@ -30,5 +33,8 @@ namespace HydraEngine.Protection.Method
         {
             throw new NotImplementedException();
         }
+
+
+
     }
 }

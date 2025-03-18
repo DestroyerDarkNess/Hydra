@@ -1,17 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Diagnostics;
-using System.Collections.Generic;
-
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-
-using EXGuard.Core.RT;
-using EXGuard.DynCipher;
-using EXGuard.Core.Services;
-
 using EXGuard.Core.Helpers;
-using EXGuard.Core.Helpers.System;
+using EXGuard.Core.RT;
+using EXGuard.Core.Services;
+using EXGuard.DynCipher;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace EXGuard.Core.RTProtections.Constants
 {
@@ -31,7 +26,7 @@ namespace EXGuard.Core.RTProtections.Constants
             context.DecoderCount = 1;
             context.ModeHandler = new DynamicMode();
             context.Compressor = runtime.CompressionService;
- 
+
             InjectHelpers(context);
             MutateInitializer(context);
 
@@ -105,7 +100,7 @@ namespace EXGuard.Core.RTProtections.Constants
                     {
                         Instruction ldBlock = instrs[i - 2];
                         Instruction ldKey = instrs[i - 1];
-                        
+
                         Debug.Assert(ldBlock.OpCode == OpCodes.Ldloc && ldKey.OpCode == OpCodes.Ldloc);
 
                         instrs.RemoveAt(i);

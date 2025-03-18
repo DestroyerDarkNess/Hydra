@@ -11,6 +11,11 @@ namespace SugarGuard.Protector.Protections.ControlFlow
     {
         public SugarControlFlow(MethodDef method)
         {
+
+        }
+
+        public static void Execute(MethodDef method)
+        {
             if (!method.HasBody || !method.Body.HasInstructions)
                 return;
 

@@ -1,6 +1,5 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Protection.Method;
 using HydraEngine.Protection.Renamer;
 using HydraEngine.Runtimes.Anti.Runtime;
 using System;
@@ -84,7 +83,7 @@ namespace HydraEngine.Runtimes.Anti
                 type_cctor.Body.Instructions.Insert(0, Instruction.Create(OpCodes.Call, type_init));
 
                 init.Name = "<" + Core.Randomizer.GenerateRandomString2() + ">";
-                bool Dynamic = new IL2Dynamic().ConvertToDynamic(init, module);
+                //bool Dynamic = new IL2Dynamic().ConvertToDynamic(init, module);
             }
 
         }

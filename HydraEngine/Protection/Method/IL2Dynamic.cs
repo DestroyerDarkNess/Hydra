@@ -907,9 +907,15 @@ namespace HydraEngine.Protection.Method
             }
             var final = typeof(ROpCodes).GetField(f.Replace(".", "_"), BindingFlags.Public | BindingFlags.Static);
             if (final == null)
-                Console.WriteLine(f);
-            lista.Add(OpCodes.Ldsfld.ToInstruction(ctx.ManifestModule.Import(final)));
-            lista.Add(OpCodes.Callvirt.ToInstruction(ctx.ManifestModule.Import(typeof(ILGenerator).GetMethod("Emit", new Type[] { typeof(ROpCode) }))));
+            {
+                //Console.WriteLine(f);
+            }
+            else
+            {
+                lista.Add(OpCodes.Ldsfld.ToInstruction(ctx.ManifestModule.Import(final)));
+                lista.Add(OpCodes.Callvirt.ToInstruction(ctx.ManifestModule.Import(typeof(ILGenerator).GetMethod("Emit", new Type[] { typeof(ROpCode) }))));
+            }
+
         }
         public void addLocal(Local local, Local push, ref List<Instruction> lista, AssemblyDef ctx, ref List<Local> list)
         {

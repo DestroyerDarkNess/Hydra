@@ -1,18 +1,17 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using dnlib.DotNet.Pdb;
-using EXGuard.Core.EXECProtections.CEXCFlow;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.ControlFlow
 {
-    public class EXGuard_ControlFlow : Models.Protection
+    public class KroksControlFlow : Models.Protection
     {
-        public EXGuard_ControlFlow() : base("Protection.CtrlFlow.EXGuard_ControlFlow", "Renamer Phase", "Description for Renamer Phase") { }
+        public KroksControlFlow() : base("Protection.CtrlFlow.KroksControlFlow", "Renamer Phase", "Description for Renamer Phase") { }
 
-        public bool StrongMode { get; set; } = false;
+        public bool StrongMode { get; set; } = true;
 
         public override async Task<bool> Execute(ModuleDefMD Module)
         {
@@ -35,7 +34,7 @@ namespace HydraEngine.Protection.ControlFlow
                         if (method.IsPinvokeImpl) continue;
                         if (method.IsUnmanagedExport) continue;
 
-                        CEXControlFlow.Execute(method, repeat);
+                        EXGuard.Core.RTProtections.KroksCFlow.KroksControlFlow.Execute(method, repeat);
                     }
                 }
                 return true;

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Text;
-using System.Linq;
-using System.Diagnostics;
+﻿using dnlib.DotNet.Writer;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Security.Cryptography;
-
-using dnlib.DotNet.Writer;
+using System.Text;
 
 namespace EXGuard.Core.Services
 {
@@ -28,7 +27,7 @@ namespace EXGuard.Core.Services
         /// <summary>
         ///     Initializes a new instance of the <see cref="RandomGenerator" /> class. (32 in length random seed)
         /// </summary>
-        internal RandomGenerator()
+        public RandomGenerator()
         {
             byte[] seed = new byte[32];
             _RNG.GetBytes(seed);
@@ -90,7 +89,8 @@ namespace EXGuard.Core.Services
 		/// </summary>
 		/// <param name="buffer">The input buffer.</param>
 		/// <returns>The SHA256 hash of the input buffer.</returns>
-		private static byte[] _SHA256(byte[] buffer) {
+		private static byte[] _SHA256(byte[] buffer)
+        {
             var sha = new SHA256Managed();
             return sha.ComputeHash(buffer);
         }
@@ -179,7 +179,8 @@ namespace EXGuard.Core.Services
                 }
                 return builder.ToString();
             }
-            catch { /* throw null */ };
+            catch { /* throw null */ }
+            ;
 
             return string.Empty;
         }
@@ -200,13 +201,14 @@ namespace EXGuard.Core.Services
             {
                 var chars = @"qwertyuıopğüasdfghjklşizxcvbnmöçQWERTYUIOPĞÜASDFGHJKLŞİZXCVBNMÖÇ0123456789/*-.:,;!'^+%&/()=?_~|\}][{½$#£>";
                 var rnd = new string(Enumerable.Repeat(chars, (length / 2)).Select(s => s[NextInt32(s.Length)]).ToArray());
-               
+
                 if (large == false)
                     return BitConverter.ToString(Encoding.Default.GetBytes(rnd)).Replace("-", string.Empty).ToLower();
                 else if (large == true)
                     return BitConverter.ToString(Encoding.Default.GetBytes(rnd)).Replace("-", string.Empty);
             }
-            catch { /* throw null */ };
+            catch { /* throw null */ }
+            ;
 
             return string.Empty;
         }
@@ -307,7 +309,7 @@ namespace EXGuard.Core.Services
         {
             return NextUInt32() / ((double)uint.MaxValue + 1);
         }
-        
+
         /// <summary>
         ///     Returns a random double that is within a specified range..
         /// </summary>

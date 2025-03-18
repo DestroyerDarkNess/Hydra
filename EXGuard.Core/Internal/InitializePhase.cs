@@ -1,20 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using dnlib.DotNet.Writer;
-
 using EXGuard.Core;
 using EXGuard.Core.JIT;
-
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using MethodAttributes = dnlib.DotNet.MethodAttributes;
 
 namespace EXGuard.Internal
@@ -179,7 +170,7 @@ namespace EXGuard.Internal
                 }
             };
         }
-        
+
         public void GetProtectedFile(out byte[] jitedEXEC)
         {
             #region Extract Virted EXEC

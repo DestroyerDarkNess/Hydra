@@ -1,5 +1,6 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
+using HydraEngine.Core;
 using HydraEngine.Protection.Renamer;
 using System;
 using System.Linq;
@@ -39,6 +40,21 @@ namespace HydraEngine.Protection.Calli
                         if (meth.FullName.Contains("Costura")) continue;
                         if (meth.IsConstructor) continue;
                         if (meth.DeclaringType.IsGlobalModuleType) continue;
+
+                        if (meth.IsConstructor) continue;
+                        if (!meth.HasBody || !meth.Body.HasInstructions || meth.DeclaringType.IsGlobalModuleType) continue;
+
+                        if (meth.HasGenericParameters) continue;
+                        if (meth.IsPinvokeImpl) continue;
+                        if (meth.IsUnmanagedExport) continue;
+
+
+                        if (meth.HasClosureReferences()) continue;
+
+                        if (meth.Body.Instructions.Any(instr => IsAccessingNonPublicMember(instr, type))) continue;
+
+                        if (meth.Parameters.Count >= 4) continue;
+
                         for (var i = 0; i < meth.Body.Instructions.Count - 1; i++)
                         {
                             try
@@ -88,6 +104,27 @@ namespace HydraEngine.Protection.Calli
         public override Task<bool> Execute(string assembly)
         {
             throw new NotImplementedException();
+        }
+
+        private bool IsAccessingNonPublicMember(Instruction instr, TypeDef declaringType)
+        {
+            if (instr.OpCode == OpCodes.Ldfld || instr.OpCode == OpCodes.Ldflda || instr.OpCode == OpCodes.Stfld)
+            {
+                var field = instr.Operand as IField;
+                var fieldDef = field?.ResolveFieldDef();
+                if (fieldDef?.DeclaringType == declaringType && !fieldDef.IsPublic)
+                    return true;
+            }
+
+            if (instr.OpCode == OpCodes.Call || instr.OpCode == OpCodes.Callvirt)
+            {
+                var method = instr.Operand as IMethod;
+                var methodDef = method?.ResolveMethodDef();
+                if (methodDef?.DeclaringType == declaringType && !methodDef.IsPublic)
+                    return true;
+            }
+
+            return false;
         }
     }
 }
