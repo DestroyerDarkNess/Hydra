@@ -1,6 +1,5 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using HydraEngine.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace HydraEngine.References
             "SevenZip"
         };
 
-        public  void InjectDependencyClasses(ModuleDefMD fromModule, ModuleDefMD toModule)
+        public void InjectDependencyClasses(ModuleDefMD fromModule, ModuleDefMD toModule)
         {
 
             //First attach our ModuleLoader class
@@ -26,40 +25,48 @@ namespace HydraEngine.References
             //for registering AssemblyResolve event and loading our bundled assembiles
             var ctor = toModule.GlobalType.FindOrCreateStaticConstructor();
             var attachDef = modLoaderType.Methods.Where(m => m.Name == "Attach").FirstOrDefault();
-            ctor.Body = new CilBody();
-            ctor.Body.Instructions.Add(OpCodes.Call.ToInstruction(attachDef));
-            ctor.Body.Instructions.Add(OpCodes.Ret.ToInstruction());
+            if (ctor.HasBody)
+            {
+                ctor.Body.Instructions.Insert(0, OpCodes.Call.ToInstruction(attachDef));
+            }
+            else
+            {
+                ctor.Body = new CilBody();
+                ctor.Body.Instructions.Add(OpCodes.Call.ToInstruction(attachDef));
+                ctor.Body.Instructions.Add(OpCodes.Ret.ToInstruction());
+            }
+
 
             //Finally merge all other generic class dependencies (mainly SevenZip stuff)
             MergeClasses(fromModule, toModule);
         }
 
-        public  bool ProcessAssembly(ModuleDefMD module, List<string> ReferencesPath)
+        public bool ProcessAssembly(ModuleDefMD module, List<string> ReferencesPath)
         {
             try
             {
 
-            foreach (var referenceCopyLocalFile in ReferencesPath)
-            {
+                foreach (var referenceCopyLocalFile in ReferencesPath)
+                {
 
-                try
-                {
-                    var referenceAssemblyData = System.IO.File.ReadAllBytes(referenceCopyLocalFile);
-                    var refModule = ModuleDefMD.Load(referenceAssemblyData);
-                    module.Resources.Add(new EmbeddedResource(refModule.Assembly.Name.ToLower(), SevenZip.Compression.LZMA.SevenZipHelper.Compress(referenceAssemblyData)));
-                    Console.WriteLine($"Merged assembly {referenceCopyLocalFile}");
+                    try
+                    {
+                        var referenceAssemblyData = System.IO.File.ReadAllBytes(referenceCopyLocalFile);
+                        var refModule = ModuleDefMD.Load(referenceAssemblyData);
+                        module.Resources.Add(new EmbeddedResource(refModule.Assembly.Name.ToLower(), SevenZip.Compression.LZMA.SevenZipHelper.Compress(referenceAssemblyData)));
+                        Console.WriteLine($"Merged assembly {referenceCopyLocalFile}");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"Failed to merge assembly {referenceCopyLocalFile} with error {e.Message}");
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Failed to merge assembly {referenceCopyLocalFile} with error {e.Message}");
-                }
-            }
 
                 return true;
             }
             catch (Exception e)
             {
-               return false;
+                return false;
             }
         }
 
@@ -97,7 +104,8 @@ namespace HydraEngine.References
                 {
                     fieldsToCopy.Add(field);
                 }
-                fieldsToCopy.ForEach(field => {
+                fieldsToCopy.ForEach(field =>
+                {
                     field.DeclaringType = null;
                     targetPrivateInit.Fields.Add(field);
                 });
@@ -108,7 +116,8 @@ namespace HydraEngine.References
                 {
                     typesToCopy.Add(type);
                 }
-                typesToCopy.ForEach(type => {
+                typesToCopy.ForEach(type =>
+                {
                     type.DeclaringType = null;
                     targetPrivateInit.NestedTypes.Add(type);
                 });

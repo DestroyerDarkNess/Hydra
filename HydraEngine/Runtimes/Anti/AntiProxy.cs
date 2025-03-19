@@ -1,11 +1,8 @@
-﻿using dnlib.DotNet.Emit;
-using dnlib.DotNet;
-using HydraEngine.Core;
+﻿using dnlib.DotNet;
+using dnlib.DotNet.Emit;
 using HydraEngine.Runtimes.Anti.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Runtimes.Anti

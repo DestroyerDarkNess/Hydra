@@ -1,6 +1,5 @@
 ﻿using dnlib.DotNet;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HydraEngine.Protection.Misc
@@ -13,111 +12,34 @@ namespace HydraEngine.Protection.Misc
 
         public string Ouput { get; set; } = string.Empty;
 
-        public List<MethodDef> SelectedMethods = null;
-
-        public override async Task<bool> Execute(ModuleDefMD module)
+        public override async Task<bool> Execute(ModuleDefMD Module)
         {
-            //try
-            //{
-
             if (string.IsNullOrEmpty(Ouput))
                 throw new Exception("Output Path is Empty");
 
-            return true;
+            //ModuleDefMD CurrentProtected = ModuleDefMD.Load(TempModule);
 
-            //bool ResultMove = MethodMover.MoveMethodILToStaticClass(module.EntryPoint, module);
-            //bool Dynamic = new IL2Dynamic().ConvertToDynamic(module.EntryPoint, module);
-            //bool ResultMove2 = MethodMover.MoveMethodILToStaticClass(module.EntryPoint, module);
-
-            //foreach (var type in module.Types.ToArray())
+            //foreach (var type in Module.Types)
             //{
-            //    if (!AnalyzerPhase.CanRename(type)) continue;
-
-            //    foreach (var method in type.Methods.ToArray())
+            //    if (type.IsGlobalModuleType) continue;
+            //    foreach (var method in type.Methods)
             //    {
-            //        if (method.IsConstructor) continue;
-
-            //        if (!method.HasBody) continue;
-            //        if (!method.Body.HasInstructions) continue;
-            //        if (!AnalyzerPhase.CanRename(method, type)) continue;
-
-            //        if (!method.HasBody) continue;
-
-            //        if (!method.Body.HasInstructions) continue;
-
-            //        if (method.HasGenericParameters) continue;
-
-            //        if (method.IsPinvokeImpl) continue;
-
-            //        if (method.IsUnmanagedExport) continue;
-
-            //        if (method.Body.Instructions.Any(instr => instr.OpCode == OpCodes.Or || instr.OpCode == OpCodes.And))
-            //            continue;
-
-            //        var unsafeOpcodes = new[] { OpCodes.Ldind_I1, OpCodes.Stind_I1, OpCodes.Conv_I };
-            //        if (method.Body.Instructions.Any(instr => unsafeOpcodes.Contains(instr.OpCode)))
+            //        if (!method.HasBody || !method.Body.HasInstructions) continue;
+            //        if (method == Module.EntryPoint) continue;
+            //        if (method.Body.Instructions.Any(instr => IsDynMethod(instr, type)))
             //        {
-            //            continue;
+            //            Console.WriteLine($"[DynamicCode] Found Dynamic Method: {method.FullName}");
+            //            bool Dynamic = new IL2Dynamic().ConvertToDynamic(method, Module);
             //        }
-
-            //        //bool TestEmulated = MethodMover.EmulateTest(method, module);
-            //        //if (!TestEmulated) continue;
-            //        if (method.IsStatic)
-            //        {
-            //            bool ResultMove = MethodMover.MoveMethodILToStaticClass(method, module);
-            //            if (!ResultMove) continue;
-
-            //            bool Dynamic = new IL2Dynamic().ConvertToDynamic(method, module);
-            //        }
-
-
             //    }
             //}
 
+            //TempModule = new MemoryStream();
+            //CurrentProtected.Write(TempModule);
 
-            foreach (var method in SelectedMethods)
-            {
-                //if (method.IsConstructor) continue;
-
-                //if (!method.HasBody) continue;
-                //if (!method.Body.HasInstructions) continue;
-
-                //if (!method.HasBody) continue;
-
-                //if (!method.Body.HasInstructions) continue;
-
-                //if (method.HasGenericParameters) continue;
-
-                //if (method.IsPinvokeImpl) continue;
-
-                //if (method.IsUnmanagedExport) continue;
-
-                //if (method.Body.Instructions.Any(instr => instr.OpCode == OpCodes.Or || instr.OpCode == OpCodes.And)) continue;
-
-                //var unsafeOpcodes = new[] { OpCodes.Ldind_I1, OpCodes.Stind_I1, OpCodes.Conv_I };
-                //if (method.Body.Instructions.Any(instr => unsafeOpcodes.Contains(instr.OpCode))) continue;
-
-                //bool TestEmulated = MethodMover.EmulateTest(method, module);
-                //if (!TestEmulated) continue;
-                //if (method.IsStatic)
-                //{
-                //    bool ResultMove = MethodMover.MoveMethodILToStaticClass(method, module);
-                //    if (!ResultMove) continue;
-
-                //    bool Dynamic = new IL2Dynamic().ConvertToDynamic(method, module);
-                //}
-
-
-            }
 
 
             return true;
-            //}
-            //catch (Exception Ex)
-            //{
-            //    this.Errors = Ex;
-            //    return false;
-            //}
         }
 
 
@@ -125,6 +47,18 @@ namespace HydraEngine.Protection.Misc
         {
             throw new NotImplementedException();
         }
+
+        //private bool IsDynMethod(Instruction instr, TypeDef declaringType)
+        //{
+        //    if (instr.OpCode == OpCodes.Call && instr.Operand is IMethod method)
+        //    {
+        //        if (method.DeclaringType.FullName == "ConversionBack.Dyn" && method.Name == "Run")
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
     }
 }

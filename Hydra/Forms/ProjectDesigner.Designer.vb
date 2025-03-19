@@ -31,30 +31,29 @@ Partial Class ProjectDesigner
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2TextBox1 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.XylosNotice6 = New Hydra.XylosNotice()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.XylosNotice3 = New Hydra.XylosNotice()
         Me.Guna2CheckBox3 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2ComboBox1 = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.DLLEmbeder = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
-        Me.LogInLabel2 = New Hydra.LogInLabel()
-        Me.LogInLabel9 = New Hydra.LogInLabel()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.XylosNotice5 = New Hydra.XylosNotice()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2TextBox2 = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.LogInLabel1 = New Hydra.LogInLabel()
         Me.Guna2NumericUpDown1 = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.AddJunkCode = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox4 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.KroksCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.SugarControlFlowCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.ProxyReferencesUnsafeCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.ProxyClassesObjectUnsafeCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.ProxyClassesObject = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Method2DynamicEntryPoint = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Method2DelegateCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.CctorL2FCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.CctorHider = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.ProxyReferencesUnsafeCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ResourceCompressAndEncryptCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.EXGuardControlFlowCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.MutationCheck_Unsafe = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -111,25 +110,15 @@ Partial Class ProjectDesigner
         Me.EventsCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.FieldsCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.PropertiesCheck = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.LogInLabel13 = New Hydra.LogInLabel()
         Me.Guna2TrackBar1 = New Guna.UI2.WinForms.Guna2TrackBar()
-        Me.LogInLabel17 = New Hydra.LogInLabel()
         Me.MethodsCheck = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.LogInLabel16 = New Hydra.LogInLabel()
         Me.Guna2ComboBox2 = New Guna.UI2.WinForms.Guna2ComboBox()
-        Me.LogInLabel15 = New Hydra.LogInLabel()
         Me.Guna2TextBox9 = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.LogInLabel14 = New Hydra.LogInLabel()
         Me.Renamer = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.XylosNotice2 = New Hydra.XylosNotice()
-        Me.LogInLabel10 = New Hydra.LogInLabel()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.XylosNotice1 = New Hydra.XylosNotice()
         Me.PackerSelect = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Guna2GroupBox5 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.UsePacker = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.LogInLabel18 = New Hydra.LogInLabel()
-        Me.LogInLabel11 = New Hydra.LogInLabel()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.ExportEntryPoint = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2ProgressBar1 = New Guna.UI2.WinForms.Guna2ProgressBar()
@@ -142,7 +131,6 @@ Partial Class ProjectDesigner
         Me.Guna2Button12 = New Guna.UI2.WinForms.Guna2Button()
         Me.OutputTextBox = New Guna.UI2.WinForms.Guna2TextBox()
         Me.LogTextBox = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.LogInLabel21 = New Hydra.LogInLabel()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.AppClosesMethod = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Guna2GroupBox3 = New Guna.UI2.WinForms.Guna2GroupBox()
@@ -161,26 +149,16 @@ Partial Class ProjectDesigner
         Me.AntiDump = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.AntiTamper = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Antide4dot = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.LogInLabel6 = New Hydra.LogInLabel()
-        Me.LogInLabel7 = New Hydra.LogInLabel()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.Guna2GroupBox8 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.PESectionCustomText = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.PESectionCustom = New Hydra.BoosterRadioButton()
-        Me.PESectionRenamerBase = New Hydra.BoosterRadioButton()
-        Me.PESectionPreserve = New Hydra.BoosterRadioButton()
-        Me.LogInLabel4 = New Hydra.LogInLabel()
         Me.PESectionExclusion = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2GroupBox7 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2Button3 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2ComboBox3 = New Guna.UI2.WinForms.Guna2ComboBox()
-        Me.LogInLabel5 = New Hydra.LogInLabel()
         Me.Guna2TextBox3 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2CheckBox2 = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.XylosNotice4 = New Hydra.XylosNotice()
-        Me.LogInLabel3 = New Hydra.LogInLabel()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
-        Me.XylosNotice7 = New Hydra.XylosNotice()
         Me.VirtualizeStringsVM = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2CheckBox7 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2CheckBox6 = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -190,7 +168,6 @@ Partial Class ProjectDesigner
         Me.ILVMCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.VMComboSelect = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.TreeView1 = New System.Windows.Forms.TreeView()
-        Me.LogInLabel8 = New Hydra.LogInLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.VMButton = New Guna.UI2.WinForms.Guna2Button()
         Me.ExtraFeaturesButton = New Guna.UI2.WinForms.Guna2Button()
@@ -203,10 +180,37 @@ Partial Class ProjectDesigner
         Me.PackButton = New Guna.UI2.WinForms.Guna2Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.XylosNotice6 = New Hydra.XylosNotice()
+        Me.XylosNotice3 = New Hydra.XylosNotice()
+        Me.LogInLabel2 = New Hydra.LogInLabel()
+        Me.LogInLabel9 = New Hydra.LogInLabel()
+        Me.XylosNotice5 = New Hydra.XylosNotice()
+        Me.LogInLabel1 = New Hydra.LogInLabel()
+        Me.LogInLabel13 = New Hydra.LogInLabel()
+        Me.LogInLabel17 = New Hydra.LogInLabel()
+        Me.LogInLabel16 = New Hydra.LogInLabel()
+        Me.LogInLabel15 = New Hydra.LogInLabel()
+        Me.LogInLabel14 = New Hydra.LogInLabel()
+        Me.LogInLabel10 = New Hydra.LogInLabel()
+        Me.XylosNotice8 = New Hydra.XylosNotice()
+        Me.XylosNotice1 = New Hydra.XylosNotice()
+        Me.LogInLabel18 = New Hydra.LogInLabel()
+        Me.LogInLabel11 = New Hydra.LogInLabel()
+        Me.LogInLabel21 = New Hydra.LogInLabel()
+        Me.LogInLabel6 = New Hydra.LogInLabel()
+        Me.LogInLabel7 = New Hydra.LogInLabel()
+        Me.PESectionCustom = New Hydra.BoosterRadioButton()
+        Me.PESectionRenamerBase = New Hydra.BoosterRadioButton()
+        Me.PESectionPreserve = New Hydra.BoosterRadioButton()
+        Me.LogInLabel4 = New Hydra.LogInLabel()
+        Me.LogInLabel5 = New Hydra.LogInLabel()
+        Me.XylosNotice4 = New Hydra.XylosNotice()
+        Me.LogInLabel3 = New Hydra.LogInLabel()
+        Me.XylosNotice7 = New Hydra.XylosNotice()
+        Me.LogInLabel8 = New Hydra.LogInLabel()
         Me.LogInContextMenu1 = New Hydra.LogInContextMenu()
         Me.ExcludeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoosterToolTip1 = New Hydra.BoosterToolTip()
-        Me.Method2DynamicEntryPoint = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -368,21 +372,6 @@ Partial Class ProjectDesigner
         Me.Guna2Panel2.Size = New System.Drawing.Size(727, 320)
         Me.Guna2Panel2.TabIndex = 26
         '
-        'XylosNotice6
-        '
-        Me.XylosNotice6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.XylosNotice6.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice6.Enabled = False
-        Me.XylosNotice6.ForeColor = System.Drawing.Color.Red
-        Me.XylosNotice6.Location = New System.Drawing.Point(178, 98)
-        Me.XylosNotice6.Multiline = True
-        Me.XylosNotice6.Name = "XylosNotice6"
-        Me.XylosNotice6.ReadOnly = True
-        Me.XylosNotice6.Size = New System.Drawing.Size(409, 28)
-        Me.XylosNotice6.TabIndex = 72
-        Me.XylosNotice6.Text = "This Protector is not complete. I'm posting it anyway so you can use it."
-        '
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
@@ -410,22 +399,6 @@ Partial Class ProjectDesigner
         Me.TabPage2.Size = New System.Drawing.Size(758, 456)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
-        '
-        'XylosNotice3
-        '
-        Me.XylosNotice3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.XylosNotice3.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice3.Enabled = False
-        Me.XylosNotice3.ForeColor = System.Drawing.Color.White
-        Me.XylosNotice3.Location = New System.Drawing.Point(262, 0)
-        Me.XylosNotice3.Multiline = True
-        Me.XylosNotice3.Name = "XylosNotice3"
-        Me.XylosNotice3.ReadOnly = True
-        Me.XylosNotice3.Size = New System.Drawing.Size(496, 28)
-        Me.XylosNotice3.TabIndex = 72
-        Me.XylosNotice3.Text = "If any DLL is protected, it is recommended not to use IL Merger with that specifi" &
-    "c DLL."
         '
         'Guna2CheckBox3
         '
@@ -523,32 +496,6 @@ Partial Class ProjectDesigner
         Me.Guna2Button2.TabIndex = 17
         Me.BoosterToolTip1.SetToolTip(Me.Guna2Button2, "Add DLL")
         '
-        'LogInLabel2
-        '
-        Me.LogInLabel2.AutoSize = True
-        Me.LogInLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel2.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel2.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel2.Location = New System.Drawing.Point(541, 43)
-        Me.LogInLabel2.Name = "LogInLabel2"
-        Me.LogInLabel2.Size = New System.Drawing.Size(80, 28)
-        Me.LogInLabel2.TabIndex = 67
-        Me.LogInLabel2.Text = "Engine :"
-        '
-        'LogInLabel9
-        '
-        Me.LogInLabel9.AutoSize = True
-        Me.LogInLabel9.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel9.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel9.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel9.Location = New System.Drawing.Point(9, 11)
-        Me.LogInLabel9.Name = "LogInLabel9"
-        Me.LogInLabel9.Size = New System.Drawing.Size(127, 28)
-        Me.LogInLabel9.TabIndex = 13
-        Me.LogInLabel9.Text = "DLL Embeder"
-        '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
@@ -556,28 +503,13 @@ Partial Class ProjectDesigner
         Me.TabPage3.Controls.Add(Me.Guna2GroupBox1)
         Me.TabPage3.Controls.Add(Me.Guna2GroupBox4)
         Me.TabPage3.Controls.Add(Me.Guna2GroupBox2)
-        Me.TabPage3.Controls.Add(Me.XylosNotice2)
         Me.TabPage3.Controls.Add(Me.LogInLabel10)
+        Me.TabPage3.Controls.Add(Me.XylosNotice8)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(758, 456)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "TabPage3"
-        '
-        'XylosNotice5
-        '
-        Me.XylosNotice5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice5.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.XylosNotice5.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice5.Enabled = False
-        Me.XylosNotice5.ForeColor = System.Drawing.Color.White
-        Me.XylosNotice5.Location = New System.Drawing.Point(148, 0)
-        Me.XylosNotice5.Multiline = True
-        Me.XylosNotice5.Name = "XylosNotice5"
-        Me.XylosNotice5.ReadOnly = True
-        Me.XylosNotice5.Size = New System.Drawing.Size(272, 28)
-        Me.XylosNotice5.TabIndex = 72
-        Me.XylosNotice5.Text = "Do not use VM Methods with JIT Protections"
         '
         'Guna2GroupBox1
         '
@@ -618,19 +550,6 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox2.Size = New System.Drawing.Size(164, 28)
         Me.Guna2TextBox2.TabIndex = 65
         Me.Guna2TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'LogInLabel1
-        '
-        Me.LogInLabel1.AutoSize = True
-        Me.LogInLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel1.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel1.Location = New System.Drawing.Point(15, 47)
-        Me.LogInLabel1.Name = "LogInLabel1"
-        Me.LogInLabel1.Size = New System.Drawing.Size(32, 15)
-        Me.LogInLabel1.TabIndex = 64
-        Me.LogInLabel1.Text = "Tag :"
         '
         'Guna2NumericUpDown1
         '
@@ -677,11 +596,15 @@ Partial Class ProjectDesigner
         'Guna2GroupBox4
         '
         Me.Guna2GroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox4.Controls.Add(Me.KroksCheck)
+        Me.Guna2GroupBox4.Controls.Add(Me.SugarControlFlowCheck)
+        Me.Guna2GroupBox4.Controls.Add(Me.ProxyReferencesUnsafeCheck)
+        Me.Guna2GroupBox4.Controls.Add(Me.ProxyClassesObjectUnsafeCheck)
+        Me.Guna2GroupBox4.Controls.Add(Me.ProxyClassesObject)
         Me.Guna2GroupBox4.Controls.Add(Me.Method2DynamicEntryPoint)
         Me.Guna2GroupBox4.Controls.Add(Me.Method2DelegateCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.CctorL2FCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.CctorHider)
-        Me.Guna2GroupBox4.Controls.Add(Me.ProxyReferencesUnsafeCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.ResourceCompressAndEncryptCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.EXGuardControlFlowCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.MutationCheck_Unsafe)
@@ -733,6 +656,120 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.TabIndex = 43
         Me.Guna2GroupBox4.Text = "Options"
         '
+        'KroksCheck
+        '
+        Me.KroksCheck.AutoSize = True
+        Me.KroksCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.KroksCheck.CheckedState.BorderRadius = 0
+        Me.KroksCheck.CheckedState.BorderThickness = 1
+        Me.KroksCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.KroksCheck.Location = New System.Drawing.Point(341, 85)
+        Me.KroksCheck.Name = "KroksCheck"
+        Me.KroksCheck.Size = New System.Drawing.Size(126, 19)
+        Me.KroksCheck.TabIndex = 95
+        Me.KroksCheck.Text = "Kroks Control Flow"
+        Me.KroksCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.KroksCheck.UncheckedState.BorderRadius = 0
+        Me.KroksCheck.UncheckedState.BorderThickness = 1
+        Me.KroksCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.KroksCheck.UseVisualStyleBackColor = True
+        '
+        'SugarControlFlowCheck
+        '
+        Me.SugarControlFlowCheck.AutoSize = True
+        Me.SugarControlFlowCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.SugarControlFlowCheck.CheckedState.BorderRadius = 0
+        Me.SugarControlFlowCheck.CheckedState.BorderThickness = 1
+        Me.SugarControlFlowCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.SugarControlFlowCheck.Location = New System.Drawing.Point(341, 62)
+        Me.SugarControlFlowCheck.Name = "SugarControlFlowCheck"
+        Me.SugarControlFlowCheck.Size = New System.Drawing.Size(127, 19)
+        Me.SugarControlFlowCheck.TabIndex = 94
+        Me.SugarControlFlowCheck.Text = "Sugar Control Flow"
+        Me.SugarControlFlowCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.SugarControlFlowCheck.UncheckedState.BorderRadius = 0
+        Me.SugarControlFlowCheck.UncheckedState.BorderThickness = 1
+        Me.SugarControlFlowCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.SugarControlFlowCheck.UseVisualStyleBackColor = True
+        '
+        'ProxyReferencesUnsafeCheck
+        '
+        Me.ProxyReferencesUnsafeCheck.AutoSize = True
+        Me.ProxyReferencesUnsafeCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProxyReferencesUnsafeCheck.CheckedState.BorderRadius = 0
+        Me.ProxyReferencesUnsafeCheck.CheckedState.BorderThickness = 1
+        Me.ProxyReferencesUnsafeCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProxyReferencesUnsafeCheck.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.ProxyReferencesUnsafeCheck.Font = New System.Drawing.Font("Segoe UI", 7.0!)
+        Me.ProxyReferencesUnsafeCheck.Location = New System.Drawing.Point(281, 189)
+        Me.ProxyReferencesUnsafeCheck.Name = "ProxyReferencesUnsafeCheck"
+        Me.ProxyReferencesUnsafeCheck.Size = New System.Drawing.Size(54, 16)
+        Me.ProxyReferencesUnsafeCheck.TabIndex = 87
+        Me.ProxyReferencesUnsafeCheck.Text = "Unsafe"
+        Me.ProxyReferencesUnsafeCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProxyReferencesUnsafeCheck.UncheckedState.BorderRadius = 0
+        Me.ProxyReferencesUnsafeCheck.UncheckedState.BorderThickness = 1
+        Me.ProxyReferencesUnsafeCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProxyReferencesUnsafeCheck.UseVisualStyleBackColor = True
+        '
+        'ProxyClassesObjectUnsafeCheck
+        '
+        Me.ProxyClassesObjectUnsafeCheck.AutoSize = True
+        Me.ProxyClassesObjectUnsafeCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProxyClassesObjectUnsafeCheck.CheckedState.BorderRadius = 0
+        Me.ProxyClassesObjectUnsafeCheck.CheckedState.BorderThickness = 1
+        Me.ProxyClassesObjectUnsafeCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProxyClassesObjectUnsafeCheck.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.ProxyClassesObjectUnsafeCheck.Font = New System.Drawing.Font("Segoe UI", 7.0!)
+        Me.ProxyClassesObjectUnsafeCheck.Location = New System.Drawing.Point(259, 62)
+        Me.ProxyClassesObjectUnsafeCheck.Name = "ProxyClassesObjectUnsafeCheck"
+        Me.ProxyClassesObjectUnsafeCheck.Size = New System.Drawing.Size(54, 16)
+        Me.ProxyClassesObjectUnsafeCheck.TabIndex = 93
+        Me.ProxyClassesObjectUnsafeCheck.Text = "Unsafe"
+        Me.ProxyClassesObjectUnsafeCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProxyClassesObjectUnsafeCheck.UncheckedState.BorderRadius = 0
+        Me.ProxyClassesObjectUnsafeCheck.UncheckedState.BorderThickness = 1
+        Me.ProxyClassesObjectUnsafeCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProxyClassesObjectUnsafeCheck.UseVisualStyleBackColor = True
+        '
+        'ProxyClassesObject
+        '
+        Me.ProxyClassesObject.AutoSize = True
+        Me.ProxyClassesObject.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProxyClassesObject.CheckedState.BorderRadius = 0
+        Me.ProxyClassesObject.CheckedState.BorderThickness = 1
+        Me.ProxyClassesObject.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProxyClassesObject.Location = New System.Drawing.Point(167, 62)
+        Me.ProxyClassesObject.Name = "ProxyClassesObject"
+        Me.ProxyClassesObject.Size = New System.Drawing.Size(85, 19)
+        Me.ProxyClassesObject.TabIndex = 92
+        Me.ProxyClassesObject.Text = "Proxy Class"
+        Me.ProxyClassesObject.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ProxyClassesObject.UncheckedState.BorderRadius = 0
+        Me.ProxyClassesObject.UncheckedState.BorderThickness = 1
+        Me.ProxyClassesObject.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.ProxyClassesObject.UseVisualStyleBackColor = True
+        '
+        'Method2DynamicEntryPoint
+        '
+        Me.Method2DynamicEntryPoint.AutoSize = True
+        Me.Method2DynamicEntryPoint.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Method2DynamicEntryPoint.CheckedState.BorderRadius = 0
+        Me.Method2DynamicEntryPoint.CheckedState.BorderThickness = 1
+        Me.Method2DynamicEntryPoint.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Method2DynamicEntryPoint.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.Method2DynamicEntryPoint.Font = New System.Drawing.Font("Segoe UI", 7.0!)
+        Me.Method2DynamicEntryPoint.Location = New System.Drawing.Point(298, 255)
+        Me.Method2DynamicEntryPoint.Name = "Method2DynamicEntryPoint"
+        Me.Method2DynamicEntryPoint.Size = New System.Drawing.Size(111, 16)
+        Me.Method2DynamicEntryPoint.TabIndex = 91
+        Me.Method2DynamicEntryPoint.Text = "Dynamic EntryPoint"
+        Me.Method2DynamicEntryPoint.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Method2DynamicEntryPoint.UncheckedState.BorderRadius = 0
+        Me.Method2DynamicEntryPoint.UncheckedState.BorderThickness = 1
+        Me.Method2DynamicEntryPoint.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Method2DynamicEntryPoint.UseVisualStyleBackColor = True
+        '
         'Method2DelegateCheck
         '
         Me.Method2DelegateCheck.AutoSize = True
@@ -740,7 +777,7 @@ Partial Class ProjectDesigner
         Me.Method2DelegateCheck.CheckedState.BorderRadius = 0
         Me.Method2DelegateCheck.CheckedState.BorderThickness = 1
         Me.Method2DelegateCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Method2DelegateCheck.Location = New System.Drawing.Point(164, 252)
+        Me.Method2DelegateCheck.Location = New System.Drawing.Point(167, 252)
         Me.Method2DelegateCheck.Name = "Method2DelegateCheck"
         Me.Method2DelegateCheck.Size = New System.Drawing.Size(133, 19)
         Me.Method2DelegateCheck.TabIndex = 90
@@ -758,7 +795,7 @@ Partial Class ProjectDesigner
         Me.CctorL2FCheck.CheckedState.BorderRadius = 0
         Me.CctorL2FCheck.CheckedState.BorderThickness = 1
         Me.CctorL2FCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CctorL2FCheck.Location = New System.Drawing.Point(338, 154)
+        Me.CctorL2FCheck.Location = New System.Drawing.Point(341, 155)
         Me.CctorL2FCheck.Name = "CctorL2FCheck"
         Me.CctorL2FCheck.Size = New System.Drawing.Size(139, 19)
         Me.CctorL2FCheck.TabIndex = 89
@@ -776,7 +813,7 @@ Partial Class ProjectDesigner
         Me.CctorHider.CheckedState.BorderRadius = 0
         Me.CctorHider.CheckedState.BorderThickness = 1
         Me.CctorHider.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CctorHider.Location = New System.Drawing.Point(338, 128)
+        Me.CctorHider.Location = New System.Drawing.Point(341, 129)
         Me.CctorHider.Name = "CctorHider"
         Me.CctorHider.Size = New System.Drawing.Size(140, 19)
         Me.CctorHider.TabIndex = 88
@@ -786,26 +823,6 @@ Partial Class ProjectDesigner
         Me.CctorHider.UncheckedState.BorderThickness = 1
         Me.CctorHider.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.CctorHider.UseVisualStyleBackColor = True
-        '
-        'ProxyReferencesUnsafeCheck
-        '
-        Me.ProxyReferencesUnsafeCheck.AutoSize = True
-        Me.ProxyReferencesUnsafeCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ProxyReferencesUnsafeCheck.CheckedState.BorderRadius = 0
-        Me.ProxyReferencesUnsafeCheck.CheckedState.BorderThickness = 1
-        Me.ProxyReferencesUnsafeCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProxyReferencesUnsafeCheck.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        Me.ProxyReferencesUnsafeCheck.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.ProxyReferencesUnsafeCheck.Location = New System.Drawing.Point(285, 231)
-        Me.ProxyReferencesUnsafeCheck.Name = "ProxyReferencesUnsafeCheck"
-        Me.ProxyReferencesUnsafeCheck.Size = New System.Drawing.Size(54, 16)
-        Me.ProxyReferencesUnsafeCheck.TabIndex = 87
-        Me.ProxyReferencesUnsafeCheck.Text = "Unsafe"
-        Me.ProxyReferencesUnsafeCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ProxyReferencesUnsafeCheck.UncheckedState.BorderRadius = 0
-        Me.ProxyReferencesUnsafeCheck.UncheckedState.BorderThickness = 1
-        Me.ProxyReferencesUnsafeCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProxyReferencesUnsafeCheck.UseVisualStyleBackColor = True
         '
         'ResourceCompressAndEncryptCheck
         '
@@ -832,7 +849,7 @@ Partial Class ProjectDesigner
         Me.EXGuardControlFlowCheck.CheckedState.BorderRadius = 0
         Me.EXGuardControlFlowCheck.CheckedState.BorderThickness = 1
         Me.EXGuardControlFlowCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.EXGuardControlFlowCheck.Location = New System.Drawing.Point(338, 58)
+        Me.EXGuardControlFlowCheck.Location = New System.Drawing.Point(341, 38)
         Me.EXGuardControlFlowCheck.Name = "EXGuardControlFlowCheck"
         Me.EXGuardControlFlowCheck.Size = New System.Drawing.Size(142, 19)
         Me.EXGuardControlFlowCheck.TabIndex = 85
@@ -870,7 +887,7 @@ Partial Class ProjectDesigner
         Me.DynamicMethodsCheck.CheckedState.BorderRadius = 0
         Me.DynamicMethodsCheck.CheckedState.BorderThickness = 1
         Me.DynamicMethodsCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.DynamicMethodsCheck.Location = New System.Drawing.Point(338, 82)
+        Me.DynamicMethodsCheck.Location = New System.Drawing.Point(341, 105)
         Me.DynamicMethodsCheck.Name = "DynamicMethodsCheck"
         Me.DynamicMethodsCheck.Size = New System.Drawing.Size(123, 19)
         Me.DynamicMethodsCheck.TabIndex = 83
@@ -890,7 +907,7 @@ Partial Class ProjectDesigner
         Me.ControlFlowStrongModeCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
         Me.ControlFlowStrongModeCheck.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.ControlFlowStrongModeCheck.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.ControlFlowStrongModeCheck.Location = New System.Drawing.Point(429, 37)
+        Me.ControlFlowStrongModeCheck.Location = New System.Drawing.Point(432, 17)
         Me.ControlFlowStrongModeCheck.Name = "ControlFlowStrongModeCheck"
         Me.ControlFlowStrongModeCheck.Size = New System.Drawing.Size(54, 16)
         Me.ControlFlowStrongModeCheck.TabIndex = 82
@@ -928,7 +945,7 @@ Partial Class ProjectDesigner
         Me.Dynamic_INT.CheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Dynamic_INT.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.Dynamic_INT.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.Dynamic_INT.Location = New System.Drawing.Point(256, 128)
+        Me.Dynamic_INT.Location = New System.Drawing.Point(259, 85)
         Me.Dynamic_INT.Name = "Dynamic_INT"
         Me.Dynamic_INT.Size = New System.Drawing.Size(63, 16)
         Me.Dynamic_INT.TabIndex = 80
@@ -948,7 +965,7 @@ Partial Class ProjectDesigner
         Me.Dynamic_STRINGS.CheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Dynamic_STRINGS.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.Dynamic_STRINGS.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.Dynamic_STRINGS.Location = New System.Drawing.Point(256, 154)
+        Me.Dynamic_STRINGS.Location = New System.Drawing.Point(259, 111)
         Me.Dynamic_STRINGS.Name = "Dynamic_STRINGS"
         Me.Dynamic_STRINGS.Size = New System.Drawing.Size(63, 16)
         Me.Dynamic_STRINGS.TabIndex = 79
@@ -984,7 +1001,7 @@ Partial Class ProjectDesigner
         Me.AntiDecompilerCheck.CheckedState.BorderRadius = 0
         Me.AntiDecompilerCheck.CheckedState.BorderThickness = 1
         Me.AntiDecompilerCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.AntiDecompilerCheck.Location = New System.Drawing.Point(338, 106)
+        Me.AntiDecompilerCheck.Location = New System.Drawing.Point(167, 354)
         Me.AntiDecompilerCheck.Name = "AntiDecompilerCheck"
         Me.AntiDecompilerCheck.Size = New System.Drawing.Size(112, 19)
         Me.AntiDecompilerCheck.TabIndex = 64
@@ -1002,7 +1019,7 @@ Partial Class ProjectDesigner
         Me.JITHookCheck.CheckedState.BorderRadius = 0
         Me.JITHookCheck.CheckedState.BorderThickness = 1
         Me.JITHookCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.JITHookCheck.Location = New System.Drawing.Point(164, 354)
+        Me.JITHookCheck.Location = New System.Drawing.Point(167, 330)
         Me.JITHookCheck.Name = "JITHookCheck"
         Me.JITHookCheck.Size = New System.Drawing.Size(98, 19)
         Me.JITHookCheck.TabIndex = 72
@@ -1020,7 +1037,7 @@ Partial Class ProjectDesigner
         Me.SUFconfusionCheck.CheckedState.BorderRadius = 0
         Me.SUFconfusionCheck.CheckedState.BorderThickness = 1
         Me.SUFconfusionCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.SUFconfusionCheck.Location = New System.Drawing.Point(164, 329)
+        Me.SUFconfusionCheck.Location = New System.Drawing.Point(167, 302)
         Me.SUFconfusionCheck.Name = "SUFconfusionCheck"
         Me.SUFconfusionCheck.Size = New System.Drawing.Size(102, 19)
         Me.SUFconfusionCheck.TabIndex = 71
@@ -1056,7 +1073,7 @@ Partial Class ProjectDesigner
         Me.ProxyMethods.CheckedState.BorderRadius = 0
         Me.ProxyMethods.CheckedState.BorderThickness = 1
         Me.ProxyMethods.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProxyMethods.Location = New System.Drawing.Point(164, 179)
+        Me.ProxyMethods.Location = New System.Drawing.Point(167, 136)
         Me.ProxyMethods.Name = "ProxyMethods"
         Me.ProxyMethods.Size = New System.Drawing.Size(105, 19)
         Me.ProxyMethods.TabIndex = 34
@@ -1112,7 +1129,7 @@ Partial Class ProjectDesigner
         Me.ProxyReferences.CheckedState.BorderRadius = 0
         Me.ProxyReferences.CheckedState.BorderThickness = 1
         Me.ProxyReferences.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProxyReferences.Location = New System.Drawing.Point(164, 229)
+        Me.ProxyReferences.Location = New System.Drawing.Point(167, 186)
         Me.ProxyReferences.Name = "ProxyReferences"
         Me.ProxyReferences.Size = New System.Drawing.Size(115, 19)
         Me.ProxyReferences.TabIndex = 67
@@ -1165,7 +1182,7 @@ Partial Class ProjectDesigner
         Me.InvalidOpcodes.CheckedState.BorderRadius = 0
         Me.InvalidOpcodes.CheckedState.BorderThickness = 1
         Me.InvalidOpcodes.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.InvalidOpcodes.Location = New System.Drawing.Point(164, 277)
+        Me.InvalidOpcodes.Location = New System.Drawing.Point(167, 227)
         Me.InvalidOpcodes.Name = "InvalidOpcodes"
         Me.InvalidOpcodes.Size = New System.Drawing.Size(111, 19)
         Me.InvalidOpcodes.TabIndex = 64
@@ -1307,7 +1324,7 @@ Partial Class ProjectDesigner
         Me.EntryPointMover.CheckedState.BorderRadius = 0
         Me.EntryPointMover.CheckedState.BorderThickness = 1
         Me.EntryPointMover.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.EntryPointMover.Location = New System.Drawing.Point(338, 179)
+        Me.EntryPointMover.Location = New System.Drawing.Point(341, 180)
         Me.EntryPointMover.Name = "EntryPointMover"
         Me.EntryPointMover.Size = New System.Drawing.Size(118, 19)
         Me.EntryPointMover.TabIndex = 50
@@ -1361,7 +1378,7 @@ Partial Class ProjectDesigner
         Me.HideMethods.CheckedState.BorderRadius = 0
         Me.HideMethods.CheckedState.BorderThickness = 1
         Me.HideMethods.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.HideMethods.Location = New System.Drawing.Point(164, 35)
+        Me.HideMethods.Location = New System.Drawing.Point(167, 207)
         Me.HideMethods.Name = "HideMethods"
         Me.HideMethods.Size = New System.Drawing.Size(101, 19)
         Me.HideMethods.TabIndex = 47
@@ -1379,7 +1396,7 @@ Partial Class ProjectDesigner
         Me.StringsHider.CheckedState.BorderRadius = 0
         Me.StringsHider.CheckedState.BorderThickness = 1
         Me.StringsHider.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.StringsHider.Location = New System.Drawing.Point(164, 57)
+        Me.StringsHider.Location = New System.Drawing.Point(341, 203)
         Me.StringsHider.Name = "StringsHider"
         Me.StringsHider.Size = New System.Drawing.Size(90, 19)
         Me.StringsHider.TabIndex = 46
@@ -1397,7 +1414,7 @@ Partial Class ProjectDesigner
         Me.MoveVariables.CheckedState.BorderRadius = 0
         Me.MoveVariables.CheckedState.BorderThickness = 1
         Me.MoveVariables.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.MoveVariables.Location = New System.Drawing.Point(164, 204)
+        Me.MoveVariables.Location = New System.Drawing.Point(167, 161)
         Me.MoveVariables.Name = "MoveVariables"
         Me.MoveVariables.Size = New System.Drawing.Size(104, 19)
         Me.MoveVariables.TabIndex = 45
@@ -1415,7 +1432,7 @@ Partial Class ProjectDesigner
         Me.EncodeIntergers.CheckedState.BorderRadius = 0
         Me.EncodeIntergers.CheckedState.BorderThickness = 1
         Me.EncodeIntergers.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.EncodeIntergers.Location = New System.Drawing.Point(164, 81)
+        Me.EncodeIntergers.Location = New System.Drawing.Point(167, 15)
         Me.EncodeIntergers.Name = "EncodeIntergers"
         Me.EncodeIntergers.Size = New System.Drawing.Size(114, 19)
         Me.EncodeIntergers.TabIndex = 44
@@ -1433,7 +1450,7 @@ Partial Class ProjectDesigner
         Me.ProxyStrings.CheckedState.BorderRadius = 0
         Me.ProxyStrings.CheckedState.BorderThickness = 1
         Me.ProxyStrings.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProxyStrings.Location = New System.Drawing.Point(164, 154)
+        Me.ProxyStrings.Location = New System.Drawing.Point(167, 111)
         Me.ProxyStrings.Name = "ProxyStrings"
         Me.ProxyStrings.Size = New System.Drawing.Size(94, 19)
         Me.ProxyStrings.TabIndex = 43
@@ -1451,7 +1468,7 @@ Partial Class ProjectDesigner
         Me.ProxyInt.CheckedState.BorderRadius = 0
         Me.ProxyInt.CheckedState.BorderThickness = 1
         Me.ProxyInt.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ProxyInt.Location = New System.Drawing.Point(164, 128)
+        Me.ProxyInt.Location = New System.Drawing.Point(167, 85)
         Me.ProxyInt.Name = "ProxyInt"
         Me.ProxyInt.Size = New System.Drawing.Size(72, 19)
         Me.ProxyInt.TabIndex = 42
@@ -1469,7 +1486,7 @@ Partial Class ProjectDesigner
         Me.L2F.CheckedState.BorderRadius = 0
         Me.L2F.CheckedState.BorderThickness = 1
         Me.L2F.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.L2F.Location = New System.Drawing.Point(164, 302)
+        Me.L2F.Location = New System.Drawing.Point(167, 277)
         Me.L2F.Name = "L2F"
         Me.L2F.Size = New System.Drawing.Size(98, 19)
         Me.L2F.TabIndex = 41
@@ -1505,7 +1522,7 @@ Partial Class ProjectDesigner
         Me.ControlFlow.CheckedState.BorderRadius = 0
         Me.ControlFlow.CheckedState.BorderThickness = 1
         Me.ControlFlow.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ControlFlow.Location = New System.Drawing.Point(338, 35)
+        Me.ControlFlow.Location = New System.Drawing.Point(341, 15)
         Me.ControlFlow.Name = "ControlFlow"
         Me.ControlFlow.Size = New System.Drawing.Size(94, 19)
         Me.ControlFlow.TabIndex = 30
@@ -1523,7 +1540,7 @@ Partial Class ProjectDesigner
         Me.IntConfusion.CheckedState.BorderRadius = 0
         Me.IntConfusion.CheckedState.BorderThickness = 1
         Me.IntConfusion.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.IntConfusion.Location = New System.Drawing.Point(164, 106)
+        Me.IntConfusion.Location = New System.Drawing.Point(167, 40)
         Me.IntConfusion.Name = "IntConfusion"
         Me.IntConfusion.Size = New System.Drawing.Size(98, 19)
         Me.IntConfusion.TabIndex = 31
@@ -1846,20 +1863,6 @@ Partial Class ProjectDesigner
         Me.PropertiesCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.PropertiesCheck.UseVisualStyleBackColor = True
         '
-        'LogInLabel13
-        '
-        Me.LogInLabel13.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel13.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel13.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel13.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.LogInLabel13.Location = New System.Drawing.Point(205, 54)
-        Me.LogInLabel13.Name = "LogInLabel13"
-        Me.LogInLabel13.Size = New System.Drawing.Size(12, 16)
-        Me.LogInLabel13.TabIndex = 42
-        Me.LogInLabel13.Text = "??"
-        Me.LogInLabel13.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
         'Guna2TrackBar1
         '
         Me.Guna2TrackBar1.FillColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
@@ -1871,20 +1874,6 @@ Partial Class ProjectDesigner
         Me.Guna2TrackBar1.Style = Guna.UI2.WinForms.Enums.TrackBarStyle.Metro
         Me.Guna2TrackBar1.TabIndex = 38
         Me.Guna2TrackBar1.ThumbColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        '
-        'LogInLabel17
-        '
-        Me.LogInLabel17.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel17.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel17.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel17.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.LogInLabel17.Location = New System.Drawing.Point(195, 126)
-        Me.LogInLabel17.Name = "LogInLabel17"
-        Me.LogInLabel17.Size = New System.Drawing.Size(33, 16)
-        Me.LogInLabel17.TabIndex = 41
-        Me.LogInLabel17.Text = "50"
-        Me.LogInLabel17.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'MethodsCheck
         '
@@ -1904,19 +1893,6 @@ Partial Class ProjectDesigner
         Me.MethodsCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.MethodsCheck.UseVisualStyleBackColor = True
         '
-        'LogInLabel16
-        '
-        Me.LogInLabel16.AutoSize = True
-        Me.LogInLabel16.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel16.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel16.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel16.Location = New System.Drawing.Point(6, 124)
-        Me.LogInLabel16.Name = "LogInLabel16"
-        Me.LogInLabel16.Size = New System.Drawing.Size(50, 15)
-        Me.LogInLabel16.TabIndex = 39
-        Me.LogInLabel16.Text = "Length :"
-        '
         'Guna2ComboBox2
         '
         Me.Guna2ComboBox2.BackColor = System.Drawing.Color.Transparent
@@ -1935,19 +1911,6 @@ Partial Class ProjectDesigner
         Me.Guna2ComboBox2.Size = New System.Drawing.Size(132, 31)
         Me.Guna2ComboBox2.StartIndex = 9
         Me.Guna2ComboBox2.TabIndex = 37
-        '
-        'LogInLabel15
-        '
-        Me.LogInLabel15.AutoSize = True
-        Me.LogInLabel15.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel15.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel15.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel15.Location = New System.Drawing.Point(19, 51)
-        Me.LogInLabel15.Name = "LogInLabel15"
-        Me.LogInLabel15.Size = New System.Drawing.Size(38, 15)
-        Me.LogInLabel15.TabIndex = 36
-        Me.LogInLabel15.Text = "Type :"
         '
         'Guna2TextBox9
         '
@@ -1972,19 +1935,6 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox9.TabIndex = 35
         Me.Guna2TextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'LogInLabel14
-        '
-        Me.LogInLabel14.AutoSize = True
-        Me.LogInLabel14.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel14.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel14.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel14.Location = New System.Drawing.Point(25, 90)
-        Me.LogInLabel14.Name = "LogInLabel14"
-        Me.LogInLabel14.Size = New System.Drawing.Size(32, 15)
-        Me.LogInLabel14.TabIndex = 34
-        Me.LogInLabel14.Text = "Tag :"
-        '
         'Renamer
         '
         Me.Renamer.AutoSize = True
@@ -2004,34 +1954,6 @@ Partial Class ProjectDesigner
         Me.Renamer.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Renamer.UseVisualStyleBackColor = True
         '
-        'XylosNotice2
-        '
-        Me.XylosNotice2.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.XylosNotice2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice2.Enabled = False
-        Me.XylosNotice2.ForeColor = System.Drawing.Color.White
-        Me.XylosNotice2.Location = New System.Drawing.Point(420, 0)
-        Me.XylosNotice2.Multiline = True
-        Me.XylosNotice2.Name = "XylosNotice2"
-        Me.XylosNotice2.ReadOnly = True
-        Me.XylosNotice2.Size = New System.Drawing.Size(338, 28)
-        Me.XylosNotice2.TabIndex = 71
-        Me.XylosNotice2.Text = "Do not use VM if you have enabled : | Code Encryption |"
-        '
-        'LogInLabel10
-        '
-        Me.LogInLabel10.AutoSize = True
-        Me.LogInLabel10.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel10.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel10.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel10.Location = New System.Drawing.Point(9, 11)
-        Me.LogInLabel10.Name = "LogInLabel10"
-        Me.LogInLabel10.Size = New System.Drawing.Size(111, 28)
-        Me.LogInLabel10.TabIndex = 14
-        Me.LogInLabel10.Text = "Protections"
-        '
         'TabPage4
         '
         Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
@@ -2046,21 +1968,6 @@ Partial Class ProjectDesigner
         Me.TabPage4.Size = New System.Drawing.Size(758, 456)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "TabPage4"
-        '
-        'XylosNotice1
-        '
-        Me.XylosNotice1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.XylosNotice1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice1.Enabled = False
-        Me.XylosNotice1.ForeColor = System.Drawing.Color.White
-        Me.XylosNotice1.Location = New System.Drawing.Point(337, 0)
-        Me.XylosNotice1.Multiline = True
-        Me.XylosNotice1.Name = "XylosNotice1"
-        Me.XylosNotice1.ReadOnly = True
-        Me.XylosNotice1.Size = New System.Drawing.Size(421, 28)
-        Me.XylosNotice1.TabIndex = 70
-        Me.XylosNotice1.Text = "Do not use Packer if you have any of these protections enabled: | ILVM |"
         '
         'PackerSelect
         '
@@ -2110,32 +2017,6 @@ Partial Class ProjectDesigner
         Me.UsePacker.UncheckedState.BorderThickness = 1
         Me.UsePacker.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.UsePacker.UseVisualStyleBackColor = True
-        '
-        'LogInLabel18
-        '
-        Me.LogInLabel18.AutoSize = True
-        Me.LogInLabel18.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel18.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel18.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel18.Location = New System.Drawing.Point(13, 68)
-        Me.LogInLabel18.Name = "LogInLabel18"
-        Me.LogInLabel18.Size = New System.Drawing.Size(49, 15)
-        Me.LogInLabel18.TabIndex = 36
-        Me.LogInLabel18.Text = "Engine :"
-        '
-        'LogInLabel11
-        '
-        Me.LogInLabel11.AutoSize = True
-        Me.LogInLabel11.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel11.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel11.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel11.Location = New System.Drawing.Point(9, 11)
-        Me.LogInLabel11.Name = "LogInLabel11"
-        Me.LogInLabel11.Size = New System.Drawing.Size(68, 28)
-        Me.LogInLabel11.TabIndex = 14
-        Me.LogInLabel11.Text = "Packer"
         '
         'TabPage6
         '
@@ -2336,19 +2217,6 @@ Partial Class ProjectDesigner
         Me.LogTextBox.SelectedText = ""
         Me.LogTextBox.Size = New System.Drawing.Size(731, 325)
         Me.LogTextBox.TabIndex = 16
-        '
-        'LogInLabel21
-        '
-        Me.LogInLabel21.AutoSize = True
-        Me.LogInLabel21.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel21.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel21.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel21.Location = New System.Drawing.Point(11, 18)
-        Me.LogInLabel21.Name = "LogInLabel21"
-        Me.LogInLabel21.Size = New System.Drawing.Size(51, 15)
-        Me.LogInLabel21.TabIndex = 17
-        Me.LogInLabel21.Text = "Output :"
         '
         'TabPage7
         '
@@ -2683,32 +2551,6 @@ Partial Class ProjectDesigner
         Me.Antide4dot.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Antide4dot.UseVisualStyleBackColor = True
         '
-        'LogInLabel6
-        '
-        Me.LogInLabel6.AutoSize = True
-        Me.LogInLabel6.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel6.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel6.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel6.Location = New System.Drawing.Point(19, 11)
-        Me.LogInLabel6.Name = "LogInLabel6"
-        Me.LogInLabel6.Size = New System.Drawing.Size(189, 28)
-        Me.LogInLabel6.TabIndex = 44
-        Me.LogInLabel6.Text = "Runtime Protections"
-        '
-        'LogInLabel7
-        '
-        Me.LogInLabel7.AutoSize = True
-        Me.LogInLabel7.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel7.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel7.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel7.ForeColor = System.Drawing.Color.Silver
-        Me.LogInLabel7.Location = New System.Drawing.Point(512, 11)
-        Me.LogInLabel7.Name = "LogInLabel7"
-        Me.LogInLabel7.Size = New System.Drawing.Size(76, 15)
-        Me.LogInLabel7.TabIndex = 45
-        Me.LogInLabel7.Text = "Exit Method :"
-        '
         'TabPage5
         '
         Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
@@ -2763,54 +2605,6 @@ Partial Class ProjectDesigner
         Me.PESectionCustomText.SelectedText = ""
         Me.PESectionCustomText.Size = New System.Drawing.Size(210, 27)
         Me.PESectionCustomText.TabIndex = 82
-        '
-        'PESectionCustom
-        '
-        Me.PESectionCustom.AutoSize = True
-        Me.PESectionCustom.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.PESectionCustom.Location = New System.Drawing.Point(390, 10)
-        Me.PESectionCustom.Name = "PESectionCustom"
-        Me.PESectionCustom.Size = New System.Drawing.Size(70, 19)
-        Me.PESectionCustom.TabIndex = 81
-        Me.PESectionCustom.Text = "Custom "
-        Me.PESectionCustom.UseVisualStyleBackColor = True
-        '
-        'PESectionRenamerBase
-        '
-        Me.PESectionRenamerBase.AutoSize = True
-        Me.PESectionRenamerBase.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.PESectionRenamerBase.Location = New System.Drawing.Point(222, 10)
-        Me.PESectionRenamerBase.Name = "PESectionRenamerBase"
-        Me.PESectionRenamerBase.Size = New System.Drawing.Size(152, 19)
-        Me.PESectionRenamerBase.TabIndex = 80
-        Me.PESectionRenamerBase.Text = "Use Renamer Basechars "
-        Me.PESectionRenamerBase.UseVisualStyleBackColor = True
-        '
-        'PESectionPreserve
-        '
-        Me.PESectionPreserve.AutoSize = True
-        Me.PESectionPreserve.Checked = True
-        Me.PESectionPreserve.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.PESectionPreserve.Location = New System.Drawing.Point(134, 10)
-        Me.PESectionPreserve.Name = "PESectionPreserve"
-        Me.PESectionPreserve.Size = New System.Drawing.Size(72, 19)
-        Me.PESectionPreserve.TabIndex = 79
-        Me.PESectionPreserve.TabStop = True
-        Me.PESectionPreserve.Text = "Preserve "
-        Me.PESectionPreserve.UseVisualStyleBackColor = True
-        '
-        'LogInLabel4
-        '
-        Me.LogInLabel4.AutoSize = True
-        Me.LogInLabel4.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel4.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel4.Location = New System.Drawing.Point(12, 43)
-        Me.LogInLabel4.Name = "LogInLabel4"
-        Me.LogInLabel4.Size = New System.Drawing.Size(61, 17)
-        Me.LogInLabel4.TabIndex = 76
-        Me.LogInLabel4.Text = "Exclusion"
         '
         'PESectionExclusion
         '
@@ -2882,19 +2676,6 @@ Partial Class ProjectDesigner
         Me.Guna2ComboBox3.StartIndex = 0
         Me.Guna2ComboBox3.TabIndex = 75
         '
-        'LogInLabel5
-        '
-        Me.LogInLabel5.AutoSize = True
-        Me.LogInLabel5.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel5.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel5.Location = New System.Drawing.Point(12, 47)
-        Me.LogInLabel5.Name = "LogInLabel5"
-        Me.LogInLabel5.Size = New System.Drawing.Size(66, 17)
-        Me.LogInLabel5.TabIndex = 76
-        Me.LogInLabel5.Text = "Certificate"
-        '
         'Guna2TextBox3
         '
         Me.Guna2TextBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -2935,34 +2716,6 @@ Partial Class ProjectDesigner
         Me.Guna2CheckBox2.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Guna2CheckBox2.UseVisualStyleBackColor = True
         '
-        'XylosNotice4
-        '
-        Me.XylosNotice4.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice4.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.XylosNotice4.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice4.Enabled = False
-        Me.XylosNotice4.ForeColor = System.Drawing.Color.White
-        Me.XylosNotice4.Location = New System.Drawing.Point(601, 0)
-        Me.XylosNotice4.Multiline = True
-        Me.XylosNotice4.Name = "XylosNotice4"
-        Me.XylosNotice4.ReadOnly = True
-        Me.XylosNotice4.Size = New System.Drawing.Size(157, 28)
-        Me.XylosNotice4.TabIndex = 73
-        Me.XylosNotice4.Text = "Some extra features"
-        '
-        'LogInLabel3
-        '
-        Me.LogInLabel3.AutoSize = True
-        Me.LogInLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel3.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel3.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel3.Location = New System.Drawing.Point(13, 5)
-        Me.LogInLabel3.Name = "LogInLabel3"
-        Me.LogInLabel3.Size = New System.Drawing.Size(129, 28)
-        Me.LogInLabel3.TabIndex = 71
-        Me.LogInLabel3.Text = "Extra features"
-        '
         'TabPage8
         '
         Me.TabPage8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
@@ -2982,22 +2735,6 @@ Partial Class ProjectDesigner
         Me.TabPage8.Size = New System.Drawing.Size(758, 456)
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "TabPage8"
-        '
-        'XylosNotice7
-        '
-        Me.XylosNotice7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.XylosNotice7.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.XylosNotice7.Cursor = System.Windows.Forms.Cursors.Default
-        Me.XylosNotice7.Enabled = False
-        Me.XylosNotice7.ForeColor = System.Drawing.Color.White
-        Me.XylosNotice7.Location = New System.Drawing.Point(267, 0)
-        Me.XylosNotice7.Multiline = True
-        Me.XylosNotice7.Name = "XylosNotice7"
-        Me.XylosNotice7.ReadOnly = True
-        Me.XylosNotice7.Size = New System.Drawing.Size(491, 28)
-        Me.XylosNotice7.TabIndex = 85
-        Me.XylosNotice7.Text = "If you use VM EXGuard (KoiVM Based) and also DLL Embedder use Resources Engine." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
-    ""
         '
         'VirtualizeStringsVM
         '
@@ -3156,19 +2893,6 @@ Partial Class ProjectDesigner
         Me.TreeView1.Name = "TreeView1"
         Me.TreeView1.Size = New System.Drawing.Size(709, 363)
         Me.TreeView1.TabIndex = 79
-        '
-        'LogInLabel8
-        '
-        Me.LogInLabel8.AutoSize = True
-        Me.LogInLabel8.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel8.Font = New System.Drawing.Font("Segoe UI", 15.0!)
-        Me.LogInLabel8.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel8.Location = New System.Drawing.Point(23, 11)
-        Me.LogInLabel8.Name = "LogInLabel8"
-        Me.LogInLabel8.Size = New System.Drawing.Size(42, 28)
-        Me.LogInLabel8.TabIndex = 15
-        Me.LogInLabel8.Text = "VM"
         '
         'Panel1
         '
@@ -3372,6 +3096,385 @@ Partial Class ProjectDesigner
         Me.Panel2.Size = New System.Drawing.Size(817, 453)
         Me.Panel2.TabIndex = 2
         '
+        'XylosNotice6
+        '
+        Me.XylosNotice6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.XylosNotice6.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice6.Enabled = False
+        Me.XylosNotice6.ForeColor = System.Drawing.Color.Red
+        Me.XylosNotice6.Location = New System.Drawing.Point(178, 98)
+        Me.XylosNotice6.Multiline = True
+        Me.XylosNotice6.Name = "XylosNotice6"
+        Me.XylosNotice6.ReadOnly = True
+        Me.XylosNotice6.Size = New System.Drawing.Size(409, 28)
+        Me.XylosNotice6.TabIndex = 72
+        Me.XylosNotice6.Text = "This Protector is not complete. I'm posting it anyway so you can use it."
+        '
+        'XylosNotice3
+        '
+        Me.XylosNotice3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice3.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice3.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice3.Enabled = False
+        Me.XylosNotice3.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice3.Location = New System.Drawing.Point(262, 0)
+        Me.XylosNotice3.Multiline = True
+        Me.XylosNotice3.Name = "XylosNotice3"
+        Me.XylosNotice3.ReadOnly = True
+        Me.XylosNotice3.Size = New System.Drawing.Size(496, 28)
+        Me.XylosNotice3.TabIndex = 72
+        Me.XylosNotice3.Text = "If any DLL is protected, it is recommended not to use IL Merger with that specifi" &
+    "c DLL."
+        '
+        'LogInLabel2
+        '
+        Me.LogInLabel2.AutoSize = True
+        Me.LogInLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel2.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel2.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel2.Location = New System.Drawing.Point(541, 43)
+        Me.LogInLabel2.Name = "LogInLabel2"
+        Me.LogInLabel2.Size = New System.Drawing.Size(80, 28)
+        Me.LogInLabel2.TabIndex = 67
+        Me.LogInLabel2.Text = "Engine :"
+        '
+        'LogInLabel9
+        '
+        Me.LogInLabel9.AutoSize = True
+        Me.LogInLabel9.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel9.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel9.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel9.Location = New System.Drawing.Point(9, 11)
+        Me.LogInLabel9.Name = "LogInLabel9"
+        Me.LogInLabel9.Size = New System.Drawing.Size(127, 28)
+        Me.LogInLabel9.TabIndex = 13
+        Me.LogInLabel9.Text = "DLL Embeder"
+        '
+        'XylosNotice5
+        '
+        Me.XylosNotice5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice5.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice5.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice5.Enabled = False
+        Me.XylosNotice5.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XylosNotice5.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice5.Location = New System.Drawing.Point(200, 0)
+        Me.XylosNotice5.Multiline = True
+        Me.XylosNotice5.Name = "XylosNotice5"
+        Me.XylosNotice5.ReadOnly = True
+        Me.XylosNotice5.Size = New System.Drawing.Size(220, 28)
+        Me.XylosNotice5.TabIndex = 72
+        Me.XylosNotice5.Text = "Do not use VM with JIT Protections"
+        '
+        'LogInLabel1
+        '
+        Me.LogInLabel1.AutoSize = True
+        Me.LogInLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel1.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel1.Location = New System.Drawing.Point(15, 47)
+        Me.LogInLabel1.Name = "LogInLabel1"
+        Me.LogInLabel1.Size = New System.Drawing.Size(32, 15)
+        Me.LogInLabel1.TabIndex = 64
+        Me.LogInLabel1.Text = "Tag :"
+        '
+        'LogInLabel13
+        '
+        Me.LogInLabel13.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel13.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel13.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel13.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.LogInLabel13.Location = New System.Drawing.Point(205, 54)
+        Me.LogInLabel13.Name = "LogInLabel13"
+        Me.LogInLabel13.Size = New System.Drawing.Size(12, 16)
+        Me.LogInLabel13.TabIndex = 42
+        Me.LogInLabel13.Text = "??"
+        Me.LogInLabel13.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'LogInLabel17
+        '
+        Me.LogInLabel17.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel17.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel17.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel17.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.LogInLabel17.Location = New System.Drawing.Point(195, 126)
+        Me.LogInLabel17.Name = "LogInLabel17"
+        Me.LogInLabel17.Size = New System.Drawing.Size(33, 16)
+        Me.LogInLabel17.TabIndex = 41
+        Me.LogInLabel17.Text = "50"
+        Me.LogInLabel17.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'LogInLabel16
+        '
+        Me.LogInLabel16.AutoSize = True
+        Me.LogInLabel16.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel16.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel16.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel16.Location = New System.Drawing.Point(6, 124)
+        Me.LogInLabel16.Name = "LogInLabel16"
+        Me.LogInLabel16.Size = New System.Drawing.Size(50, 15)
+        Me.LogInLabel16.TabIndex = 39
+        Me.LogInLabel16.Text = "Length :"
+        '
+        'LogInLabel15
+        '
+        Me.LogInLabel15.AutoSize = True
+        Me.LogInLabel15.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel15.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel15.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel15.Location = New System.Drawing.Point(19, 51)
+        Me.LogInLabel15.Name = "LogInLabel15"
+        Me.LogInLabel15.Size = New System.Drawing.Size(38, 15)
+        Me.LogInLabel15.TabIndex = 36
+        Me.LogInLabel15.Text = "Type :"
+        '
+        'LogInLabel14
+        '
+        Me.LogInLabel14.AutoSize = True
+        Me.LogInLabel14.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel14.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel14.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel14.Location = New System.Drawing.Point(25, 90)
+        Me.LogInLabel14.Name = "LogInLabel14"
+        Me.LogInLabel14.Size = New System.Drawing.Size(32, 15)
+        Me.LogInLabel14.TabIndex = 34
+        Me.LogInLabel14.Text = "Tag :"
+        '
+        'LogInLabel10
+        '
+        Me.LogInLabel10.AutoSize = True
+        Me.LogInLabel10.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel10.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel10.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel10.Location = New System.Drawing.Point(9, 11)
+        Me.LogInLabel10.Name = "LogInLabel10"
+        Me.LogInLabel10.Size = New System.Drawing.Size(111, 28)
+        Me.LogInLabel10.TabIndex = 14
+        Me.LogInLabel10.Text = "Protections"
+        '
+        'XylosNotice8
+        '
+        Me.XylosNotice8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice8.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice8.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice8.Enabled = False
+        Me.XylosNotice8.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice8.Location = New System.Drawing.Point(420, 0)
+        Me.XylosNotice8.Multiline = True
+        Me.XylosNotice8.Name = "XylosNotice8"
+        Me.XylosNotice8.ReadOnly = True
+        Me.XylosNotice8.Size = New System.Drawing.Size(338, 30)
+        Me.XylosNotice8.TabIndex = 73
+        Me.XylosNotice8.Text = "Dynamic Methods do not support Method To Delegate "
+        '
+        'XylosNotice1
+        '
+        Me.XylosNotice1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice1.Enabled = False
+        Me.XylosNotice1.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice1.Location = New System.Drawing.Point(337, 0)
+        Me.XylosNotice1.Multiline = True
+        Me.XylosNotice1.Name = "XylosNotice1"
+        Me.XylosNotice1.ReadOnly = True
+        Me.XylosNotice1.Size = New System.Drawing.Size(421, 28)
+        Me.XylosNotice1.TabIndex = 70
+        Me.XylosNotice1.Text = "Do not use Packer if you have any of these protections enabled: | ILVM |"
+        '
+        'LogInLabel18
+        '
+        Me.LogInLabel18.AutoSize = True
+        Me.LogInLabel18.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel18.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel18.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel18.Location = New System.Drawing.Point(13, 68)
+        Me.LogInLabel18.Name = "LogInLabel18"
+        Me.LogInLabel18.Size = New System.Drawing.Size(49, 15)
+        Me.LogInLabel18.TabIndex = 36
+        Me.LogInLabel18.Text = "Engine :"
+        '
+        'LogInLabel11
+        '
+        Me.LogInLabel11.AutoSize = True
+        Me.LogInLabel11.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel11.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel11.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel11.Location = New System.Drawing.Point(9, 11)
+        Me.LogInLabel11.Name = "LogInLabel11"
+        Me.LogInLabel11.Size = New System.Drawing.Size(68, 28)
+        Me.LogInLabel11.TabIndex = 14
+        Me.LogInLabel11.Text = "Packer"
+        '
+        'LogInLabel21
+        '
+        Me.LogInLabel21.AutoSize = True
+        Me.LogInLabel21.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel21.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel21.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel21.Location = New System.Drawing.Point(11, 18)
+        Me.LogInLabel21.Name = "LogInLabel21"
+        Me.LogInLabel21.Size = New System.Drawing.Size(51, 15)
+        Me.LogInLabel21.TabIndex = 17
+        Me.LogInLabel21.Text = "Output :"
+        '
+        'LogInLabel6
+        '
+        Me.LogInLabel6.AutoSize = True
+        Me.LogInLabel6.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel6.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel6.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel6.Location = New System.Drawing.Point(19, 11)
+        Me.LogInLabel6.Name = "LogInLabel6"
+        Me.LogInLabel6.Size = New System.Drawing.Size(189, 28)
+        Me.LogInLabel6.TabIndex = 44
+        Me.LogInLabel6.Text = "Runtime Protections"
+        '
+        'LogInLabel7
+        '
+        Me.LogInLabel7.AutoSize = True
+        Me.LogInLabel7.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel7.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.LogInLabel7.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel7.ForeColor = System.Drawing.Color.Silver
+        Me.LogInLabel7.Location = New System.Drawing.Point(512, 11)
+        Me.LogInLabel7.Name = "LogInLabel7"
+        Me.LogInLabel7.Size = New System.Drawing.Size(76, 15)
+        Me.LogInLabel7.TabIndex = 45
+        Me.LogInLabel7.Text = "Exit Method :"
+        '
+        'PESectionCustom
+        '
+        Me.PESectionCustom.AutoSize = True
+        Me.PESectionCustom.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.PESectionCustom.Location = New System.Drawing.Point(390, 10)
+        Me.PESectionCustom.Name = "PESectionCustom"
+        Me.PESectionCustom.Size = New System.Drawing.Size(70, 19)
+        Me.PESectionCustom.TabIndex = 81
+        Me.PESectionCustom.Text = "Custom "
+        Me.PESectionCustom.UseVisualStyleBackColor = True
+        '
+        'PESectionRenamerBase
+        '
+        Me.PESectionRenamerBase.AutoSize = True
+        Me.PESectionRenamerBase.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.PESectionRenamerBase.Location = New System.Drawing.Point(222, 10)
+        Me.PESectionRenamerBase.Name = "PESectionRenamerBase"
+        Me.PESectionRenamerBase.Size = New System.Drawing.Size(152, 19)
+        Me.PESectionRenamerBase.TabIndex = 80
+        Me.PESectionRenamerBase.Text = "Use Renamer Basechars "
+        Me.PESectionRenamerBase.UseVisualStyleBackColor = True
+        '
+        'PESectionPreserve
+        '
+        Me.PESectionPreserve.AutoSize = True
+        Me.PESectionPreserve.Checked = True
+        Me.PESectionPreserve.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.PESectionPreserve.Location = New System.Drawing.Point(134, 10)
+        Me.PESectionPreserve.Name = "PESectionPreserve"
+        Me.PESectionPreserve.Size = New System.Drawing.Size(72, 19)
+        Me.PESectionPreserve.TabIndex = 79
+        Me.PESectionPreserve.TabStop = True
+        Me.PESectionPreserve.Text = "Preserve "
+        Me.PESectionPreserve.UseVisualStyleBackColor = True
+        '
+        'LogInLabel4
+        '
+        Me.LogInLabel4.AutoSize = True
+        Me.LogInLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel4.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel4.Location = New System.Drawing.Point(12, 43)
+        Me.LogInLabel4.Name = "LogInLabel4"
+        Me.LogInLabel4.Size = New System.Drawing.Size(61, 17)
+        Me.LogInLabel4.TabIndex = 76
+        Me.LogInLabel4.Text = "Exclusion"
+        '
+        'LogInLabel5
+        '
+        Me.LogInLabel5.AutoSize = True
+        Me.LogInLabel5.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel5.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel5.Location = New System.Drawing.Point(12, 47)
+        Me.LogInLabel5.Name = "LogInLabel5"
+        Me.LogInLabel5.Size = New System.Drawing.Size(66, 17)
+        Me.LogInLabel5.TabIndex = 76
+        Me.LogInLabel5.Text = "Certificate"
+        '
+        'XylosNotice4
+        '
+        Me.XylosNotice4.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice4.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice4.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice4.Enabled = False
+        Me.XylosNotice4.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice4.Location = New System.Drawing.Point(601, 0)
+        Me.XylosNotice4.Multiline = True
+        Me.XylosNotice4.Name = "XylosNotice4"
+        Me.XylosNotice4.ReadOnly = True
+        Me.XylosNotice4.Size = New System.Drawing.Size(157, 28)
+        Me.XylosNotice4.TabIndex = 73
+        Me.XylosNotice4.Text = "Some extra features"
+        '
+        'LogInLabel3
+        '
+        Me.LogInLabel3.AutoSize = True
+        Me.LogInLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel3.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel3.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel3.Location = New System.Drawing.Point(13, 5)
+        Me.LogInLabel3.Name = "LogInLabel3"
+        Me.LogInLabel3.Size = New System.Drawing.Size(129, 28)
+        Me.LogInLabel3.TabIndex = 71
+        Me.LogInLabel3.Text = "Extra features"
+        '
+        'XylosNotice7
+        '
+        Me.XylosNotice7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.XylosNotice7.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.XylosNotice7.Cursor = System.Windows.Forms.Cursors.Default
+        Me.XylosNotice7.Enabled = False
+        Me.XylosNotice7.ForeColor = System.Drawing.Color.White
+        Me.XylosNotice7.Location = New System.Drawing.Point(267, 0)
+        Me.XylosNotice7.Multiline = True
+        Me.XylosNotice7.Name = "XylosNotice7"
+        Me.XylosNotice7.ReadOnly = True
+        Me.XylosNotice7.Size = New System.Drawing.Size(491, 28)
+        Me.XylosNotice7.TabIndex = 85
+        Me.XylosNotice7.Text = "If you use VM EXGuard (KoiVM Based) and also DLL Embedder use Resources Engine." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
+    ""
+        '
+        'LogInLabel8
+        '
+        Me.LogInLabel8.AutoSize = True
+        Me.LogInLabel8.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel8.Font = New System.Drawing.Font("Segoe UI", 15.0!)
+        Me.LogInLabel8.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel8.Location = New System.Drawing.Point(23, 11)
+        Me.LogInLabel8.Name = "LogInLabel8"
+        Me.LogInLabel8.Size = New System.Drawing.Size(42, 28)
+        Me.LogInLabel8.TabIndex = 15
+        Me.LogInLabel8.Text = "VM"
+        '
         'LogInContextMenu1
         '
         Me.LogInContextMenu1.FontColour = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -3393,26 +3496,6 @@ Partial Class ProjectDesigner
         Me.BoosterToolTip1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
-        '
-        'Method2DynamicEntryPoint
-        '
-        Me.Method2DynamicEntryPoint.AutoSize = True
-        Me.Method2DynamicEntryPoint.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Method2DynamicEntryPoint.CheckedState.BorderRadius = 0
-        Me.Method2DynamicEntryPoint.CheckedState.BorderThickness = 1
-        Me.Method2DynamicEntryPoint.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Method2DynamicEntryPoint.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        Me.Method2DynamicEntryPoint.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.Method2DynamicEntryPoint.Location = New System.Drawing.Point(295, 255)
-        Me.Method2DynamicEntryPoint.Name = "Method2DynamicEntryPoint"
-        Me.Method2DynamicEntryPoint.Size = New System.Drawing.Size(111, 16)
-        Me.Method2DynamicEntryPoint.TabIndex = 91
-        Me.Method2DynamicEntryPoint.Text = "Dynamic EntryPoint"
-        Me.Method2DynamicEntryPoint.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Method2DynamicEntryPoint.UncheckedState.BorderRadius = 0
-        Me.Method2DynamicEntryPoint.UncheckedState.BorderThickness = 1
-        Me.Method2DynamicEntryPoint.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Method2DynamicEntryPoint.UseVisualStyleBackColor = True
         '
         'ProjectDesigner
         '
@@ -3584,7 +3667,6 @@ Partial Class ProjectDesigner
     Friend WithEvents PreserveAllCheck As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents InvalidMetaDataCheck As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents XylosNotice1 As XylosNotice
-    Friend WithEvents XylosNotice2 As XylosNotice
     Friend WithEvents XylosNotice3 As XylosNotice
     Friend WithEvents ExtraFeaturesButton As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents TabPage5 As TabPage
@@ -3657,4 +3739,9 @@ Partial Class ProjectDesigner
     Friend WithEvents CctorL2FCheck As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Method2DelegateCheck As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Method2DynamicEntryPoint As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents XylosNotice8 As XylosNotice
+    Friend WithEvents ProxyClassesObjectUnsafeCheck As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents ProxyClassesObject As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents SugarControlFlowCheck As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents KroksCheck As Guna.UI2.WinForms.Guna2CheckBox
 End Class

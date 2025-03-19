@@ -184,9 +184,11 @@
     <Compile Include="Protection\ControlFlow\ControlFlowGraph.cs" />
     <Compile Include="Protection\ControlFlow\EXGuard_ControlFlow.cs" />
     <Compile Include="Protection\ControlFlow\IPredicate.cs" />
+    <Compile Include="Protection\ControlFlow\KroksControlFlow.cs" />
     <Compile Include="Protection\ControlFlow\ManglerBase.cs" />
     <Compile Include="Protection\ControlFlow\Predicate.cs" />
     <Compile Include="Protection\ControlFlow\Shuffler.cs" />
+    <Compile Include="Protection\ControlFlow\Sugar_ControlFlow.cs" />
     <Compile Include="Protection\ControlFlow\SwitchMangler.cs" />
     <Compile Include="Protection\ControlFlow\SwitchMangler2.cs" />
     <Compile Include="Protection\ControlFlow\Utils.cs" />
@@ -265,6 +267,7 @@
     <Compile Include="Protection\Packer\Origami.cs" />
     <Compile Include="Protection\Packer\PEPacker.cs" />
     <Compile Include="Protection\Proxy\Helper.cs" />
+    <Compile Include="Protection\Proxy\ProxyClass.cs" />
     <Compile Include="Protection\Proxy\ProxyMeth.cs" />
     <Compile Include="Protection\Proxy\ProxyReferences.cs" />
     <Compile Include="Protection\Proxy\ProxyString.cs" />

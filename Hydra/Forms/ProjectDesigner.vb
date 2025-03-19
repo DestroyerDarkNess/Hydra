@@ -529,6 +529,10 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Misc.SUFconfusion)
         End If
 
+        If ProxyClassesObject.Checked Then
+            Result.Add(New HydraEngine.Protection.Proxy.ProxyClass With {.Unsafe = ProxyClassesObjectUnsafeCheck.Checked})
+        End If
+
         If ProxyMethods.Checked Then
             Result.Add(New HydraEngine.Protection.Proxy.ProxyMeth)
         End If
@@ -626,6 +630,14 @@ Public Class ProjectDesigner
 
         If ControlFlow.Checked Then
             Result.Add(New HydraEngine.Protection.ControlFlow.ControlFlow With {.StrongMode = ControlFlowStrongModeCheck.Checked})
+        End If
+
+        If SugarControlFlowCheck.Checked Then
+            Result.Add(New HydraEngine.Protection.ControlFlow.Sugar_ControlFlow) 'With {.StrongMode = ControlFlowStrongModeCheck.Checked}
+        End If
+
+        If SugarControlFlowCheck.Checked Then
+            Result.Add(New HydraEngine.Protection.ControlFlow.KroksControlFlow) 'With {.StrongMode = ControlFlowStrongModeCheck.Checked}
         End If
 
         If EXGuardControlFlowCheck.Checked Then
@@ -742,16 +754,16 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.VM.EXGuard)
         End If
 
+        If CctorHider.Checked = True Then
+            Result.Add(New HydraEngine.Protection.Method.cctorHider)
+        End If
+
         If DynamicCctorCheck.Checked = True Then
             Result.Add(New HydraEngine.Protection.Method.IL2Dynamic)
         End If
 
         If CctorL2FCheck.Checked = True Then
             Result.Add(New HydraEngine.Protection.Method.cctorL2F)
-        End If
-
-        If CctorHider.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Method.cctorHider)
         End If
 
         If MethodError.Checked = True Then
@@ -1429,14 +1441,14 @@ Public Class ProjectDesigner
 
                                      Catch ex As Exception : End Try
 
-                                     Dim TestProtection As Misc.TestProtection = New Misc.TestProtection() With {.Ouput = Ouput}
-                                     Dim TestProtectionResult As Boolean = Await TestProtection.Execute(AsmDef)
+                                     'Dim TestProtection As Misc.TestProtection = New Misc.TestProtection() With {.Ouput = Ouput}
+                                     'Dim TestProtectionResult As Boolean = Await TestProtection.Execute(AsmDef)
 
-                                     If TestProtectionResult Then
-                                         Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"TestProtectiond", "TestProtection", ""}))
-                                     Else
-                                         Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"TestProtectiond", "TestProtection", TestProtection.Errors}))
-                                     End If
+                                     'If TestProtectionResult Then
+                                     '    Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {"TestProtectiond", "TestProtection", ""}))
+                                     'Else
+                                     '    Writelog(String.Format("[{0}] {1} Could not apply, Error: {2}", {"TestProtectiond", "TestProtection", TestProtection.Errors}))
+                                     'End If
 
                                      Try
 

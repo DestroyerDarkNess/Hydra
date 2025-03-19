@@ -14,6 +14,7 @@ namespace HydraEngine.Protection.Method
 
         public bool DynamicEntryPoint { get; set; } = false;
 
+
         public override async Task<bool> Execute(ModuleDefMD Module)
         {
             try
