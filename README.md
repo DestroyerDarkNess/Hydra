@@ -59,7 +59,7 @@ Together, we can make this project **better** every day! 😘
 
 <!-- .NET -->
 
-[dotnet_version_img]: https://img.shields.io/badge/.NET_Framework-blue?style=for-the-badge&logo=dotnet
+[dotnet_version_img]: https://img.shields.io/badge/.NET_Framework-violet?style=for-the-badge&logo=dotnet
 [dotnet_core_version_img]: https://img.shields.io/badge/.NET_Core-blue?style=for-the-badge&logo=dotnet
 [dotnet_dev_url]: https://dotnet.microsoft.com/
 
