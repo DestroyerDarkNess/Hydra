@@ -29,8 +29,8 @@ The best way to explore all the features of **Hydra** is to read the project [Wi
 Listed below are all the features of Hydra:
  
 | Feature| Description                                              | .Net Framework   | .Net Core | 
-| ------ | -------------------------------------------------------- | ------ | ------- | --------- |
-| 🔄 `Renamer`   | Obfuscates the original assembly by renaming Methods, Properties, Events, Classes, Fields, Namespaces and even the Module of the assembly.              | ✅ | ✅  |  
+| ------ | -------------------------------------------------------- | ---------------- | --------- |
+| 🔄 `Renamer`   | Obfuscates the original assembly by renaming Methods, Properties, Events, Classes, Fields, Namespaces and even the Module of the assembly.             | ✅ | ✅  |  
 
 🚧 Under Construction. 🚧
  
