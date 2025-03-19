@@ -28,9 +28,9 @@ The best way to explore all the features of **Hydra** is to read the project [Wi
 
 Listed below are all the features of Hydra:
  
-| Feature| Description                                              | .Net Framework   | .Net Core | Required? |
+| Feature| Description                                              | .Net Framework   | .Net Core | 
 | ------ | -------------------------------------------------------- | ------ | ------- | --------- |
-| `Renamer`   | Input path to the .NET assembly to protect.              | ✅ | ✖️  | Yes       | 
+| 🔄 `Renamer`   | Obfuscates the original assembly by renaming Methods, Properties, Events, Classes, Fields, Namespaces and even the Module of the assembly.              | ✅ | ✅  |  
 
 🚧 Under Construction. 🚧
  
@@ -42,11 +42,11 @@ If you want to say **thank you** or/and support active development of `Hydra`:
 
 ## ❗️ Support the author
 
-You can support the author on Binance `s4lsalsoft@gmail.com`.
+You can support the author on Binance `s4lsalsoft@gmail.com`. ❤️
 
 ## 🏆 A win-win cooperation
 
-And now, I invite you to participate in this project! Let's work **together** to create the **most useful** tool for developers on the web today.
+And now, I invite you to participate in this project!  
 
 - [Issues][repo_issues_url]: ask questions and submit your features.
 - [Pull requests][repo_pull_request_url]: send your improvements to the current.
@@ -55,7 +55,7 @@ Together, we can make this project **better** every day! 😘
 
 ## ⚠️ License
 
-[`HydraEngine`][repo_url] is free and open-source software licensed under the [MIT License][repo_license_url].
+[`Hydra`][repo_url] is free and open-source software licensed under the [MIT License][repo_license_url].
 
 <!-- .NET -->
 
@@ -68,7 +68,7 @@ Together, we can make this project **better** every day! 😘
 [repo_logo_img]: https://github.com/user-attachments/assets/2b36e5d4-0122-4691-9fda-2dfb0acfb7cc
 [repo_url]: https://github.com/DestroyerDarkNess/Hydra
 [repo_license_url]: https://github.com/DestroyerDarkNess/Hydra/blob/main/LICENSE
-[repo_license_img]: https://img.shields.io/badge/license-Apache_2.0-red?style=for-the-badge&logo=none
+[repo_license_img]: https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none
 [repo_issues_url]: https://github.com/DestroyerDarkNess/Hydra/issues
 [repo_pull_request_url]: https://github.com/DestroyerDarkNess/Hydra/pulls
 [repo_discussions_url]: https://github.com/DestroyerDarkNess/Hydra/discussions
