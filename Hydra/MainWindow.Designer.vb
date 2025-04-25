@@ -25,6 +25,10 @@ Partial Class MainWindow
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainWindow))
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.LogInLabel6 = New Hydra.LogInLabel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.LogInLabel5 = New Hydra.LogInLabel()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2Button13 = New Guna.UI2.WinForms.Guna2Button()
@@ -60,6 +64,8 @@ Partial Class MainWindow
         Me.Guna2DragControl7 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2DragControl8 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2Panel1.SuspendLayout()
+        Me.Guna2Panel4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel2.SuspendLayout()
         Me.MenuStripZ1.SuspendLayout()
         Me.SuspendLayout()
@@ -72,6 +78,7 @@ Partial Class MainWindow
         Me.Guna2Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2Panel1.BorderThickness = 1
+        Me.Guna2Panel1.Controls.Add(Me.Guna2Panel4)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Button1)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Panel2)
         Me.Guna2Panel1.Controls.Add(Me.MenuStripZ1)
@@ -84,6 +91,61 @@ Partial Class MainWindow
         Me.Guna2Panel1.Size = New System.Drawing.Size(819, 494)
         Me.Guna2Panel1.TabIndex = 0
         Me.Guna2Panel1.UseTransparentBackground = True
+        '
+        'Guna2Panel4
+        '
+        Me.Guna2Panel4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2Panel4.BorderThickness = 1
+        Me.Guna2Panel4.Controls.Add(Me.LogInLabel6)
+        Me.Guna2Panel4.Controls.Add(Me.PictureBox1)
+        Me.Guna2Panel4.Controls.Add(Me.LogInLabel5)
+        Me.Guna2Panel4.FillColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.Guna2Panel4.Location = New System.Drawing.Point(256, 330)
+        Me.Guna2Panel4.Name = "Guna2Panel4"
+        Me.Guna2Panel4.Size = New System.Drawing.Size(306, 26)
+        Me.Guna2Panel4.TabIndex = 7
+        '
+        'LogInLabel6
+        '
+        Me.LogInLabel6.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel6.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LogInLabel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LogInLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel6.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel6.ForeColor = System.Drawing.Color.Gray
+        Me.LogInLabel6.Location = New System.Drawing.Point(28, 0)
+        Me.LogInLabel6.Name = "LogInLabel6"
+        Me.LogInLabel6.Size = New System.Drawing.Size(175, 26)
+        Me.LogInLabel6.TabIndex = 8
+        Me.LogInLabel6.Text = "Join the Discord community"
+        Me.LogInLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(28, 26)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 10
+        Me.PictureBox1.TabStop = False
+        '
+        'LogInLabel5
+        '
+        Me.LogInLabel5.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel5.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LogInLabel5.Dock = System.Windows.Forms.DockStyle.Right
+        Me.LogInLabel5.Font = New System.Drawing.Font("Corbel", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel5.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel5.ForeColor = System.Drawing.Color.Firebrick
+        Me.LogInLabel5.Location = New System.Drawing.Point(203, 0)
+        Me.LogInLabel5.Name = "LogInLabel5"
+        Me.LogInLabel5.Size = New System.Drawing.Size(103, 26)
+        Me.LogInLabel5.TabIndex = 9
+        Me.LogInLabel5.Text = "¡Hail Hydra!"
+        Me.LogInLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Guna2Button1
         '
@@ -296,7 +358,7 @@ Partial Class MainWindow
         'Guna2Panel3
         '
         Me.Guna2Panel3.FillColor = System.Drawing.Color.Transparent
-        Me.Guna2Panel3.Location = New System.Drawing.Point(1, 40)
+        Me.Guna2Panel3.Location = New System.Drawing.Point(1, 44)
         Me.Guna2Panel3.Name = "Guna2Panel3"
         Me.Guna2Panel3.Size = New System.Drawing.Size(817, 453)
         Me.Guna2Panel3.TabIndex = 7
@@ -391,6 +453,8 @@ Partial Class MainWindow
         Me.Text = "Hydra By https://github.com/DestroyerDarkNess"
         Me.Guna2Panel1.ResumeLayout(False)
         Me.Guna2Panel1.PerformLayout()
+        Me.Guna2Panel4.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel2.ResumeLayout(False)
         Me.Guna2Panel2.PerformLayout()
         Me.MenuStripZ1.ResumeLayout(False)
@@ -434,4 +498,8 @@ Partial Class MainWindow
     Friend WithEvents Guna2DragControl6 As Guna.UI2.WinForms.Guna2DragControl
     Friend WithEvents Guna2DragControl7 As Guna.UI2.WinForms.Guna2DragControl
     Friend WithEvents Guna2DragControl8 As Guna.UI2.WinForms.Guna2DragControl
+    Friend WithEvents Guna2Panel4 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents LogInLabel5 As LogInLabel
+    Friend WithEvents LogInLabel6 As LogInLabel
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
