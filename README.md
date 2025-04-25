@@ -9,8 +9,14 @@
 [![License][repo_license_img]][repo_license_url]
 
 Hydra is a powerful tool for protecting .NET assemblies with various obfuscation and anti-debugging techniques. Focus on writing your code and let Hydra handle the protection!
+<br><br>
 
+⚠️ I invite you to the community, where you can chat and suggest your ideas for this project. 💌 
+
+![Discord Banner 2](https://discord.com/api/guilds/1327640073348317235/widget.png?style=banner2)
 </div>
+
+
 
 ## ⚡️ Quick start
 
@@ -42,7 +48,7 @@ If you want to say **thank you** or/and support active development of `Hydra`:
 
 ## ❗️ Support the author
 
-You can support the author on Binance `s4lsalsoft@gmail.com`. ❤️
+You can support the author on Binance or Paypal `s4lsalsoft@gmail.com`. ❤️
 
 ## 🏆 A win-win cooperation
 
