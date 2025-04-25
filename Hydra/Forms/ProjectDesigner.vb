@@ -43,7 +43,6 @@ Public Class ProjectDesigner
         RaiseUI()
     End Sub
 
-
 #Region " Methods "
 
     Public ManifestResource As Vestris.ResourceLib.ManifestResource = New Vestris.ResourceLib.ManifestResource()
@@ -95,7 +94,6 @@ Public Class ProjectDesigner
 
             OutputTextBox.Text = IO.Path.Combine(WorkingDir, IO.Path.GetFileNameWithoutExtension(PE_Path) & "_HailHydra" & IO.Path.GetExtension(PE_Path))
 
-
             Try
                 Guna2Panel1.BackgroundImage = Icon.ExtractAssociatedIcon(PE_Path).ToBitmap
             Catch ex As Exception
@@ -131,7 +129,6 @@ Public Class ProjectDesigner
             MessageBox.Show("Error: " & ex.Message, "Loading Error")
             Me.Close()
         End Try
-
 
         'Else
 
@@ -175,7 +172,6 @@ Public Class ProjectDesigner
         Result.Add(New HydraEngine.Protection.Packer.ILPacker)
         Result.Add(New HydraEngine.Protection.Packer.Native)
         Result.Add(New HydraEngine.Protection.Packer.NativeRC)
-
 
         Return Result
     End Function
@@ -231,11 +227,13 @@ Public Class ProjectDesigner
     Private Sub Guna2Panel1_Click(sender As Object, e As EventArgs) Handles Guna2Panel1.Click
         ChangeIcon()
     End Sub
+
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
         ChangeIcon()
     End Sub
 
     Dim ChangeAppIcon As Boolean = False
+
     Private Sub ChangeIcon()
         Dim FilesSelected As List(Of String) = Core.Helpers.Utils.OpenFile("Image files|*.jpg;*.jpge;*.png;*.bmp;*.ico")
 
@@ -258,7 +256,6 @@ Public Class ProjectDesigner
             Dim CurrentFile As String = OutputTextBox.Text
             Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
 
-
             Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*{Extension}", Path.GetDirectoryName(CurrentFile))
 
             If String.IsNullOrEmpty(NewSavePath) = False Then
@@ -266,6 +263,7 @@ Public Class ProjectDesigner
             End If
         Catch ex As Exception : End Try
     End Sub
+
     Private Sub Guna2CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox2.CheckedChanged
         RaiseUI()
     End Sub
@@ -298,7 +296,6 @@ Public Class ProjectDesigner
         RaiseUI()
     End Sub
 
-
     Private Sub PESectionCustom_CheckedChanged(sender As Object, e As EventArgs) Handles PESectionCustom.CheckedChanged
         RaiseUI()
     End Sub
@@ -314,7 +311,6 @@ Public Class ProjectDesigner
     Private Sub ILVMCheck_CheckedChanged(sender As Object, e As EventArgs) Handles ILVMCheck.CheckedChanged
         RaiseUI()
     End Sub
-
 
     Public Sub RaiseUI()
         Try
@@ -434,7 +430,6 @@ Public Class ProjectDesigner
 
 #Region " Protect "
 
-
     Private Async Sub BuildButton_Click(sender As Object, e As EventArgs) Handles BuildButton.Click
         'AntiTamperEx = True
         'Dim AsmDef As ModuleDefMD = ModuleDefMD.Load(Guna2TextBox1.Text)
@@ -470,7 +465,6 @@ Public Class ProjectDesigner
         ''Renamer.ModuleInvisible = ModuleCheck_Invisible.Checked
         'Dim NativeBuild As Boolean = Await Renamer.Execute(AsmDef)
 
-
         ''Dim writerOptions As New ModuleWriterOptions(AsmDef)
         ''writerOptions.MetadataOptions.Flags = MetadataFlags.PreserveAll
         ''writerOptions.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.ILOnly
@@ -479,7 +473,6 @@ Public Class ProjectDesigner
         'AsmDef.Write(OutputTextBox.Text)
         ''MsgBox("Packed: " & NativeBuild)
         'Exit Sub
-
 
         Console.Clear()
         Dim Protections As List(Of HydraEngine.Models.Protection) = MakeConfig()
@@ -771,6 +764,8 @@ Public Class ProjectDesigner
             'Result.Add(New HydraEngine.Protection.Method.MethodError)
         End If
 
+        'Result.Add(New HydraEngine.Protection.INT.UnmanagedInteger)
+
         Return Result
     End Function
 
@@ -927,14 +922,11 @@ Public Class ProjectDesigner
                                      'If ExportEntry = True Then
                                      '    Try
 
-
-
                                      '        Dim MainMethod As MethodDef = AsmDef.EntryPoint
 
                                      '        Dim TypeCl As TypeDef = AsmDef.GetTypes().FirstOrDefault(Function(t) t.Name = "Program")
                                      '        MainMethod = TypeCl.Methods.FirstOrDefault(Function(m) m.Name = "Main")
                                      '        Writelog("Entry: " & TypeCl.Namespace.String & "." & MainMethod.Name.String)
-
 
                                      '        MainMethod.ExportInfo = New MethodExportInfo()
                                      '        MainMethod.IsUnmanagedExport = True
@@ -961,7 +953,6 @@ Public Class ProjectDesigner
                                      '    End Try
                                      'End If
 
-
                                      Try
                                          resolveModule(AsmDef)
                                          simplifyModule(AsmDef)
@@ -980,14 +971,12 @@ Public Class ProjectDesigner
                                      Dim ProtectInt As Integer = 0
                                      Dim ProtectErrors As Integer = 0
 
-
                                      'If DllEmbed = True Then
 
                                      '    If Not DllsToMerged.Count = 0 Then
 
                                      '        Guna2ProgressBar1.Maximum = DllsToMerged.Count + 1
                                      '        Guna2ProgressBar1.Value += 1
-
 
                                      '        Try
                                      '            If IO.File.Exists(PackedPath) = True Then
@@ -1169,7 +1158,6 @@ Public Class ProjectDesigner
                                                         Guna2ProgressBar1.Value += 1
                                                     End Sub)
 
-
                                      If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
 
                                      Core.Helpers.Utils.Sleep(2)
@@ -1250,13 +1238,12 @@ Public Class ProjectDesigner
                                              Guna2ProgressBar1.Maximum = DllsToMerged.Count + 1
                                              Guna2ProgressBar1.Value += 1
 
-
                                              Try
                                                  If IO.File.Exists(PackedPath) = True Then
                                                      IO.File.Delete(PackedPath)
                                                  End If
 
-                                                 Dim Merger As ILMerger = New ILMerger()
+                                                 Dim Merger As ILRepack = New ILRepack()
                                                  Dim Merge As Boolean = Merger.MergeAssemblies(OriginalPath, DllsToMerged, PackedPath)
 
                                                  Core.Helpers.Utils.Sleep(3)
@@ -1438,7 +1425,6 @@ Public Class ProjectDesigner
                                                  Next
                                              Next
                                          End If
-
                                      Catch ex As Exception : End Try
 
                                      'Dim TestProtection As Misc.TestProtection = New Misc.TestProtection() With {.Ouput = Ouput}
@@ -1486,7 +1472,6 @@ Public Class ProjectDesigner
                                                      While (IO.File.Exists(BackupPath) = False)
                                                          Core.Helpers.Utils.Sleep(3)
                                                      End While
-
                                                  Catch ex As Exception : End Try
 
                                                  If File.Exists(BackupPath) = False Then
@@ -1606,7 +1591,6 @@ Public Class ProjectDesigner
                                                          End If
 
                                                      End If
-
                                                  Else
                                                      IO.File.Copy(TempPreOuputPath, Ouput)
                                                  End If
@@ -1627,7 +1611,6 @@ Public Class ProjectDesigner
 
                                                  ProtectErrors += 1
                                              End If
-
                                          Else
 
                                              IO.File.Copy(TempPreOuputPath, Ouput)
@@ -1670,9 +1653,7 @@ Public Class ProjectDesigner
                                              End If
 
                                              'Packer.BitDotNet.ProtectAssembly(Ouput)
-
                                          Catch ex As Exception : End Try
-
                                      Catch ex As Exception
                                          Writelog(String.Format("Error saving: {0}", {ex.Message}))
                                      End Try
@@ -1709,7 +1690,6 @@ Public Class ProjectDesigner
         thread.Priority = ThreadPriority.Highest
         thread.Start()
     End Sub
-
 
     Private Sub Writelog(ByVal Msg As String, Optional ByVal ForeC As Color = Nothing)
         Try

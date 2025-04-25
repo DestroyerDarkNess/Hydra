@@ -201,6 +201,7 @@
     <Compile Include="Protection\Import\Runtime\PToDInvoke.cs" />
     <Compile Include="Protection\INT\AddIntPhase.cs" />
     <Compile Include="Protection\INT\IntEncoding.cs" />
+    <Compile Include="Protection\INT\UnmanagedInteger.cs" />
     <Compile Include="Protection\Invalid\InvalidMDPhase.cs" />
     <Compile Include="Protection\Invalid\InvalidMDWritter.cs" />
     <Compile Include="Protection\Invalid\InvalidOpcodes.cs" />
@@ -307,6 +308,7 @@
     <Compile Include="References\DllEmbbeder.cs" />
     <Compile Include="References\Embeder.cs" />
     <Compile Include="References\ILMerger.cs" />
+    <Compile Include="References\ILRepack.cs" />
     <Compile Include="References\LibzWrapper.cs" />
     <Compile Include="Runtimes\AdministratorRights\Runtime\RuntimeScalation.cs" />
     <Compile Include="Runtimes\AdministratorRights\RuntimeSInj.cs" />
@@ -424,6 +426,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ExtremeAntiDump_HailHydra.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ILRepack.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

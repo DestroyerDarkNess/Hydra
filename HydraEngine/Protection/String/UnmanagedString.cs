@@ -246,7 +246,10 @@ namespace HydraEngine.Protection.String
 
         public override Task<bool> Execute(dnlib.DotNet.ModuleDefMD module)
         {
-            throw new NotImplementedException();
+            string TempRenamer = Path.Combine(Path.GetTempPath(), module.Name);
+            try { module.Write(TempRenamer); } catch (Exception Ex) { this.Errors = Ex; }
+
+            return Execute(TempRenamer);
         }
     }
 }

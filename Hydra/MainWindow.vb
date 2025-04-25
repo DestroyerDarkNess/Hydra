@@ -1,13 +1,10 @@
-﻿
-
-Public Class MainWindow
+﻿Public Class MainWindow
 
     Public ProjectDesignerForm As ProjectDesigner = Nothing
 
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         StartRutines()
     End Sub
-
 
     Public Sub StartRutines()
         Guna2ShadowForm1.SetShadowForm(Me)
@@ -31,7 +28,6 @@ Public Class MainWindow
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
         Open()
     End Sub
-
 
     Private Sub Open()
         Dim FilesSelected As List(Of String) = Core.Helpers.Utils.OpenFile("Executable Files|*.exe|DLL Files|*.dll")
@@ -81,6 +77,7 @@ Public Class MainWindow
     End Sub
 
     Dim DiagAbout As New Hydra.About
+
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
         Guna2Panel2.Visible = False
         DiagAbout.ShowDialog()
@@ -98,4 +95,9 @@ Public Class MainWindow
     Private Sub Project_Closed(sender As Object, e As EventArgs)
         Clear()
     End Sub
+
+    Private Sub LogInLabel5_Click(sender As Object, e As EventArgs) Handles LogInLabel5.Click, LogInLabel6.Click, PictureBox1.Click
+        Process.Start("https://discord.gg/C4evgU4Tas")
+    End Sub
+
 End Class
