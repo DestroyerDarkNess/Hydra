@@ -12,8 +12,8 @@ Hydra is a powerful tool for protecting .NET assemblies with various obfuscation
 <br><br>
 
 ⚠️ I invite you to the community, where you can chat and suggest your ideas for this project. 💌 
-
-![Discord Banner 2](https://discord.com/api/guilds/1327640073348317235/widget.png?style=banner2)
+ 
+[![Discord Banner 2](https://discord.com/api/guilds/1327640073348317235/widget.png?style=banner2)](https://discord.gg/C4evgU4Tas)
 </div>
 
 
