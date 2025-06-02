@@ -41,6 +41,12 @@ namespace HydraEngine.Models
         public bool UpdateResurces { get; set; } = false;
 
         /// <summary>
+        /// Gets the description of component.
+        /// </summary>
+        /// <value>The description of component.</value>
+        public bool IsCompatibleWithDLL { get; set; } = false;
+
+        /// <summary>
         /// Gets the preset this protection is in.
         /// </summary>
         /// <value>The protection's preset.</value>
@@ -50,7 +56,7 @@ namespace HydraEngine.Models
         /// Gets the preset this protection is in.
         /// </summary>
         /// <value>The protection's preset.</value>
-        public abstract Task<bool> Execute(string FilePath , string Ouput);
+        public abstract Task<bool> Execute(string FilePath, string Ouput);
 
         public Exception Errors { get; set; } = new Exception("Undefined");
 
