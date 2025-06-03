@@ -13,8 +13,8 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
 {
     public static class AssemblyToShellCode
     {
-       private static string Donut = Path.Combine(Path.GetTempPath(), "donut.exe");
-      
+        private static string Donut = Path.Combine(Path.GetTempPath(), "donut.exe");
+
         public static byte[] ToShellCode(this ModuleDefMD Module, MethodDef EntryPoint, string appdomainName = "")
         {
             if (!File.Exists(Donut)) File.WriteAllBytes(Donut, HydraEngine.Properties.Resources.donut);
@@ -38,20 +38,22 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
             }
 
             string DonutResult = Core.Utils.RunRemoteHost(Donut, FullDonutArgs);
-            Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
+            Console.WriteLine("Shell Output: " + DonutResult);
 
-            if (File.Exists(TempShell) == true) {
+            //Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
+
+            if (File.Exists(TempShell) == true)
+            {
                 string data = File.ReadAllText(TempShell);
 
                 if (File.Exists(TempShell)) File.Delete(TempShell);
 
                 return Convert.FromBase64String(data);
-            } 
+            }
             else
             {
                 return null;
             }
-          
         }
 
         public static byte[] ToShellCode(this string TargetAssembly, MethodDef EntryPoint, string appdomainName = "")
@@ -59,30 +61,34 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
             if (!File.Exists(Donut)) File.WriteAllBytes(Donut, HydraEngine.Properties.Resources.donut);
 
             string TempShell = Path.Combine(Path.GetTempPath(), "loader.b64");
-            string TargetAsmName = Path.Combine(Path.GetTempPath(), "tempASMShell.exe");
+            string TargetAsmName = Path.Combine(Path.GetTempPath(), "tempASMShell.dll");
 
             if (File.Exists(TargetAsmName)) File.Delete(TargetAsmName);
 
+            //try
+            //{
+            //    ModuleDefMD ModuleDef = ModuleDefMD.Load(TargetAssembly);
 
-            //try { 
-            //ModuleDefMD ModuleDef = ModuleDefMD.Load(TargetAssembly);
-            //    ModuleDef.Kind = ModuleKind.Dll;
+            //    if (ModuleDef.Kind == ModuleKind.Dll)
+            //    {
+            //        //ModuleDef.Kind = ModuleKind.Console;
 
-            //    //if (ModuleDef.EntryPoint != null)
-            //    //{
-            //    //    ModuleDef.EntryPoint.ExportInfo = new MethodExportInfo();
-            //    //    ModuleDef.EntryPoint.IsUnmanagedExport = true;
-            //    //}
-            //    //ModuleWriterOptions opts = new ModuleWriterOptions(ModuleDef);
-            //    //opts.Cor20HeaderOptions.Flags =  dnlib.DotNet.MD.ComImageFlags.NativeEntryPoint;
-            //    //opts.MetadataOptions.TablesHeapOptions = null;
-            //    //opts.MetadataOptions.DebugMetadataHeaderOptions = null;
-            //    //opts.MetadataOptions.MetadataHeaderOptions = null;
-            //    ModuleDef.Write(TargetAsmName);
-            //} catch { }
+            //        //var writerOptions = new ModuleWriterOptions(ModuleDef);
+            //        //writerOptions.Cor20HeaderOptions.Flags &= ~dnlib.DotNet.MD.ComImageFlags.ILLibrary;
+
+            //        //writerOptions.PEHeadersOptions.Characteristics &= ~dnlib.PE.Characteristics.Dll;
+            //        //writerOptions.PEHeadersOptions.Characteristics |= dnlib.PE.Characteristics.ExecutableImage;
+
+            //        ModuleDef.Write(TargetAsmName);
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Module is not a DLL");
+            //    }
+            //}
+            //catch { File.Copy(TargetAssembly, TargetAsmName); }
 
             File.Copy(TargetAssembly, TargetAsmName);
-
 
             System.Threading.Thread.Sleep(100);
 
@@ -90,14 +96,14 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
 
             string FullDonutArgs = $"-f 2 -c {declaringType.Namespace + "." + declaringType.Name} -m {EntryPoint.Name} --input:{TargetAsmName}";
 
-            //Console.WriteLine("ShellCode Gen: " + FullDonutArgs);
-
             if (appdomainName != "")
             {
                 FullDonutArgs += " -d " + appdomainName;
             }
 
             string DonutResult = Core.Utils.RunRemoteHost(Donut, FullDonutArgs);
+            //Console.WriteLine("Shell Output: " + DonutResult);
+
             Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
 
             if (File.Exists(TempShell) == true)
@@ -112,8 +118,6 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
             {
                 return null;
             }
-
         }
-
     }
 }

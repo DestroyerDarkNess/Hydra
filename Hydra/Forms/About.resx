@@ -117,6 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAANzSURBVGhD7ZhJaFNBHIfHmRdrUgVJ5l+T0gUlzSvi0Zso
+        CN4EFcWjF88e9eBVBA96slaoBy9uoB4URerWmVat4q51q1Vq63uxigsiWrVgJC7Q/t7YTpIXiZIPvuPM
+        /wuTvCWMValSpco/wal0ukZJeUcT5YpwTEs5oolOainX9zY0RHH/sqOlXGwIK04pn6m6umU4o6wook2B
+        kBJURF810WqcUza0lEcxolQV0fvzyWQzzioLmsjDgFCUsg1nhY6KxxsCg8NSytc4L3Q00drA4BDtljKF
+        M0NFEe3AoWhnMjnY5rpv2lpbc4XaF4vd84R45glxwBNiRY6xadhQElrKixiM7p87V2GYrY9isUFfiNxv
+        Pc6vDTOWxo6iuM5YREn5CYPRjpaWyxhmpeuOPXecL+M/wC9fv4hEFmBPwahEYiHGmmxz3ZFAnIUd6fRt
+        Q/zPkxDi/iBjM7CpIBTRBoxFO5NJH8NsPZ5KaQwfb5bzddhUEFrKfRiMHm1s7MUwSz8N1NS8xOgJp8B5
+        JzYVhJZyAIPRvfPmdRvipvRwY2MXBqOeEIPYZM3Z+vqEIvqGwWh7JtOHcVPZnsk8HopEPmCwwVHssqZL
+        yuUYi3bV1X3d2do6ioGT6rrZB7HYE0OsyWHsskYTbcFg9GQqdT8QOIntLS0P+6PRIUOoWc57scsaJeUZ
+        DEYPNjdbff93ue6rE6nUuT9c8ydzO3ZZkb+da6J3GIzuSadNV6DPu1x3ZHcm8+BAU5PqiccveI4zaoib
+        0qzjLME2K3ri8fkYa/JRNHoTh4alx3lfjjGObVbk310xFr0Yj7/FoWGaFWINdlmjiDowGL01a9ZVHBqi
+        h7CpIGz+geiPRid9DChazi+9ZGwmNllzes6c2h9/hRiixzvsODcCw0uV8yM+YzFsKgidSCzFWDR/h/aF
+        eB8IKNL8D9YXYiW2FIUi2ozB6JXZswcwogDfeUI89Tk/5wux1XecRdhQElrKYxiM3q2t7TGETdAT4qPP
+        WBPuX3YUURaD0SfTp3djcEDOFe79V7B5Bx4Woj8QHDyBbbh3RfCCsVpPiDEMNrgK11YEz4VYaogNOMRY
+        Pa6tCHzON2OsweKf48uNx/kxQ/BEOT+C6yoGXwg/EAx6nG/EdRVB/rqOsSaLfo4vN1nGaMoT4PzmY8Zq
+        cG2VKlWq/H98B2AqlAoOWRAvAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="Guna2TextBox1.DefaultText" xml:space="preserve">
     <value>Hydra Protector is made possible by the following projects:
 
@@ -127,11 +149,10 @@ https://github.com/Sato-Isolated/MindLated
 
 and possibly some other sources I've overlooked. My sincere thanks to the authors of the above mentioned projects.</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAApBJREFUeF7tmUtu1EAURS9sgBGIxYRtsAA+A8JuQJmEXREJdtFuQaahUUm+UvFU
+        DwAACw8BkvkDpQAAApBJREFUeF7tmUtu1EAURS9sgBGIxYRtsAA+A8JuQJmEXREJdtFuQaahUUm+UvFU
         n/eqyk1V2Ud6E7ft+Bw7bjsBDg4O/hcX4JkbuXwXOPEF+HoG7i/Ac/n51Hjyl3X2EyEgv58ICfn5Iyjk
         541gkJ8vQoH8PBEq5MeP0EB+3AgN5TnjRNhAntN/hA3lOf1GWOXvAgcdnQX440YuT437Gd29QJWc+VX8
         dgHeLcCT/Dwz/VwJNfLcx7ARWsiT4SK0lCdDRTgBL87AQ+CAguPEFuCj3I/ErWOM8OCORe7nKvwCXp6B

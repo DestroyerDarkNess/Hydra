@@ -395,9 +395,6 @@
     <None Include="Resources\JITLibrary.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\donut.exe" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ILoader.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -429,6 +426,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ILRepack.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\donut.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

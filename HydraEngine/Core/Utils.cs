@@ -23,7 +23,6 @@ namespace HydraEngine.Core
 
     public class AssemblyMap
     {
-
         public MethodDef EntryPoint { get; set; } = null;
         public ModuleKind Kind { get; set; } = ModuleKind.Console;
         public Characteristics Characteristics { get; set; } = Characteristics.ExecutableImage;
@@ -44,6 +43,7 @@ namespace HydraEngine.Core
             catch { return false; }
         }
     }
+
     public class Utils
     {
         public static void ConvertToIco(Image img, string file, int size)
@@ -98,7 +98,6 @@ namespace HydraEngine.Core
         {
             try
             {
-
                 Process cmdProcess = new Process();
                 {
                     var withBlock = cmdProcess;
@@ -107,12 +106,12 @@ namespace HydraEngine.Core
                         var withBlock1 = withBlock.StartInfo;
                         if (redirectouput)
                         {
-                            withBlock1.CreateNoWindow = true;
+                            //withBlock1.CreateNoWindow = true;
                             withBlock1.UseShellExecute = false;
                             withBlock1.RedirectStandardOutput = true;
                             withBlock1.RedirectStandardError = true;
                         }
-                        withBlock1.WindowStyle = ProcessWindowStyle.Hidden;
+                        //withBlock1.WindowStyle = ProcessWindowStyle.Hidden;
                         withBlock1.WorkingDirectory = Path.GetDirectoryName(Target);
                     }
                     withBlock.Start();
@@ -125,7 +124,6 @@ namespace HydraEngine.Core
                     return HostOutput.ToString();
                 }
                 else { return ""; }
-
             }
             catch (Exception ex)
             {
@@ -134,11 +132,17 @@ namespace HydraEngine.Core
         }
 
         public static System.Random rnd = new System.Random();
+
         public static int RandomTinyInt32() => rnd.Next(2, 25);
+
         public static int RandomSmallInt32() => rnd.Next(15, 40);
+
         public static int RandomInt32() => rnd.Next(100, 300);
+
         public static int RandomInt322() => rnd.Next(10000, 100000);
+
         public static int RandomBigInt32() => rnd.Next();
+
         public static bool RandomBoolean() => Convert.ToBoolean(rnd.Next(0, 2));
 
         public static string ComputeAssemblyHash(string assemblyPath)
@@ -236,7 +240,6 @@ namespace HydraEngine.Core
                 return ModuleDefMD.Load(data, options);
             }
             catch { assemblyResolver = null; return null; }
-
         }
 
         public static MethodDefUser CreateMethod(ModuleDef mod)
@@ -281,6 +284,5 @@ namespace HydraEngine.Core
         //    };
         //    return ModuleDefMD.Load(FilePath, options);
         //}
-
     }
 }

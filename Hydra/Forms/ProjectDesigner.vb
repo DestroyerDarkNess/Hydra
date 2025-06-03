@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Threading
 Imports dnlib.DotNet
 Imports dnlib.DotNet.Emit
@@ -19,7 +20,7 @@ Public Class ProjectDesigner
     Public Property Assembly As ModuleDefMD = Nothing
     Public Property assemblyResolver As AssemblyResolver = Nothing
 
-    Public Property TreeVewMethodManager As MethodTreeLoader = Nothing
+    Public Property TreeViewMethodManager As MethodTreeLoader = Nothing
 
     Public Property Packers As List(Of HydraEngine.Models.Pack) = GetPackers()
 
@@ -84,8 +85,14 @@ Public Class ProjectDesigner
             End If
 
             If Assembly.EntryPoint Is Nothing Then
-                PackButton.Enabled = False
-                UsePacker.Checked = False
+                'PackButton.Enabled = False
+                'UsePacker.Checked = False
+                XylosNotice2.Visible = True
+                Guna2Button4.Visible = True
+                LogInLabel22.Visible = True
+                XylosNotice9.Visible = True
+                Guna2TextBox4.Visible = True
+                SetupContextMenu()
             End If
 
             Try
@@ -101,7 +108,7 @@ Public Class ProjectDesigner
                 Guna2Panel1.Enabled = False
             End Try
 
-            LoadPackers()
+            LoadPackers(Assembly.EntryPoint Is Nothing)
 
             Try
                 ManifestResource.LoadFrom(PE_Path)
@@ -115,13 +122,37 @@ Public Class ProjectDesigner
                 Guna2Panel2.Enabled = False
             End Try
 
-            TreeVewMethodManager = New MethodTreeLoader(TreeView1, Assembly)
-            TreeVewMethodManager.LoadMethods()
+            TreeViewMethodManager = New MethodTreeLoader(TreeView1, Assembly)
+            TreeViewMethodManager.ExcludeCompilerGenerated = True
+            TreeViewMethodManager.HighlightUserStaticMethods = True
 
-            Guna2CheckBox4.Checked = TreeVewMethodManager.All
-            Guna2CheckBox5.Checked = TreeVewMethodManager.ExcludeConstructors
-            Guna2CheckBox6.Checked = TreeVewMethodManager.ExcludeRedMethods
-            Guna2CheckBox7.Checked = TreeVewMethodManager.ExcludeUnsafeMethods
+            'TreeVewMethodManager.LoadMethods()
+
+            Dim progress = New Progress(Of MethodTreeLoader.ProgressEventArgs)(
+                                                                            Sub(args)
+                                                                                Guna2ProgressBar3.Value = args.PercentComplete
+                                                                                LogInLabel20.Text = args.CurrentOperation
+                                                                            End Sub)
+
+            'AddHandler TreeVewMethodManager.ProgressChanged, Sub(s, args)
+            '                                                     Guna2ProgressBar3.Value = args.PercentComplete
+            '                                                     LogInLabel20.Text = $"{args.CurrentOperation} ({args.PercentComplete}%)"
+            '                                                 End Sub
+
+            Dim thread As New Thread(Async Sub()
+                                         Await TreeViewMethodManager.LoadMethodsAsync(progress)
+                                         Me.BeginInvoke(Sub()
+                                                            Guna2Panel4.Visible = False
+                                                            TreeView1.Visible = True
+                                                        End Sub)
+                                     End Sub)
+            thread.Priority = ThreadPriority.Highest
+            thread.Start()
+
+            Guna2CheckBox4.Checked = TreeViewMethodManager.All
+            Guna2CheckBox5.Checked = TreeViewMethodManager.ExcludeConstructors
+            Guna2CheckBox6.Checked = TreeViewMethodManager.ExcludeRedMethods
+            Guna2CheckBox7.Checked = TreeViewMethodManager.ExcludeUnsafeMethods
 
             Dim assemblyRefs As List(Of HydraEngine.Core.DLLInfo) = HydraEngine.Core.Utils.GetUniqueLibsToMerged(Assembly, WorkingDir)
             LoadDlls(assemblyRefs)
@@ -142,10 +173,11 @@ Public Class ProjectDesigner
 
     End Sub
 
-    Private Sub LoadPackers()
+    Private Sub LoadPackers(ByVal isDLL As Boolean)
         PackerSelect.Items.Clear()
 
         For Each Pack As HydraEngine.Models.Pack In Packers
+            If isDLL = True AndAlso Pack.IsCompatibleWithDLL = False Then Continue For
             PackerSelect.Items.Add(Pack.Id)
         Next
 
@@ -256,7 +288,9 @@ Public Class ProjectDesigner
             Dim CurrentFile As String = OutputTextBox.Text
             Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
 
-            Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*{Extension}", Path.GetDirectoryName(CurrentFile))
+            Dim filter As String = "Executable (*.exe)|*.exe|Library (*.dll)|*.dll" '= $"PE File|*{Extension}"
+
+            Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), filter, Path.GetDirectoryName(CurrentFile))
 
             If String.IsNullOrEmpty(NewSavePath) = False Then
                 OutputTextBox.Text = NewSavePath
@@ -802,10 +836,6 @@ Public Class ProjectDesigner
         Dim selectedText As String = PackerSelect.Items(PackerSelect.SelectedIndex).ToString()
         Dim selectedPack As HydraEngine.Models.Pack = Packers.FirstOrDefault(Function(p) p.Id = selectedText)
 
-        If UsePacker.Checked = False Then
-            selectedPack = Nothing
-        End If
-
         Dim TempPath As String = IO.Path.Combine(IO.Path.GetTempPath, "HydraTempBuild")
 
         If IO.Directory.Exists(TempPath) Then
@@ -815,6 +845,16 @@ Public Class ProjectDesigner
         IO.Directory.CreateDirectory(TempPath)
 
         Dim AsmDef As ModuleDef = Asm
+
+        If UsePacker.Checked = False Then
+            selectedPack = Nothing
+        ElseIf AsmDef.EntryPoint Is Nothing Then
+            If EntryPointToken > 0 Then
+                Dim Method As MethodDef = AsmDef.ResolveToken(EntryPointToken)
+                If Method IsNot Nothing Then AsmDef.EntryPoint = Method
+            End If
+        End If
+
         Dim AsmRef As AssemblyResolver = AsmResolver
         Dim OriginalPath As String = Guna2TextBox1.Text
         Dim AsmMap As AssemblyMap = New AssemblyMap
@@ -898,7 +938,7 @@ Public Class ProjectDesigner
         Dim VM_Selected_Methods As List(Of UInteger) = Nothing
         Dim AntiTamp As Boolean = AntiTamper.Checked
 
-        If TreeVewMethodManager IsNot Nothing Then VM_Selected_Methods = TreeVewMethodManager.GetSelectedMethodTokens()
+        If TreeViewMethodManager IsNot Nothing Then VM_Selected_Methods = TreeViewMethodManager.GetSelectedMethodTokens()
 
         Dim ExitMethod As String = ""
 
@@ -1174,14 +1214,14 @@ Public Class ProjectDesigner
                                          If TypeOf Protection Is Virtualizer Then
                                              DirectCast(Protection, Virtualizer).ProtectRuntime = ProtectVMRuntime
                                              DirectCast(Protection, Virtualizer).VMStrings = VMStrigns
-                                             If TreeVewMethodManager IsNot Nothing Then
+                                             If TreeViewMethodManager IsNot Nothing Then
                                                  DirectCast(Protection, Virtualizer).SelectedMethods = MethodTreeLoader.ResolveMethodsFromTokens(AsmDef, VM_Selected_Methods)
                                              End If
                                          ElseIf TypeOf Protection Is EXGuard Then
                                              DirectCast(Protection, EXGuard).Protect = ProtectVMRuntime
                                              DirectCast(Protection, EXGuard).ouput = IO.Path.GetDirectoryName(Ouput)
                                              DirectCast(Protection, EXGuard).VMStrings = VMStrigns
-                                             If TreeVewMethodManager IsNot Nothing Then
+                                             If TreeViewMethodManager IsNot Nothing Then
                                                  DirectCast(Protection, EXGuard).SelectedMethods = MethodTreeLoader.ResolveMethodsFromTokens(AsmDef, VM_Selected_Methods)
                                              End If
                                          ElseIf TypeOf Protection Is ExtremeAD Then
@@ -1576,7 +1616,7 @@ Public Class ProjectDesigner
                                                  Writelog(String.Format("[{0}] {1} It was applied satisfactorily. ({2})", {selectedPack.Id, selectedPack.Name, selectedPack.Description}))
                                                  ProtectInt += 1
                                              Else
-
+                                                 Console.WriteLine(String.Format("[{0}] {1} Could not apply, Error: {2}", {selectedPack.Id, selectedPack.Name, selectedPack.Errors?.Message}))
                                                  If AplyJitHook = False Then
 
                                                      AsmDef.Write(Ouput, writerOptions)
@@ -1689,6 +1729,7 @@ Public Class ProjectDesigner
                                  End Sub)
         thread.Priority = ThreadPriority.Highest
         thread.Start()
+
     End Sub
 
     Private Sub Writelog(ByVal Msg As String, Optional ByVal ForeC As Color = Nothing)
@@ -1803,20 +1844,123 @@ Public Class ProjectDesigner
     End Sub
 
     Private Sub Guna2CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox4.CheckedChanged
-        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.All = Guna2CheckBox4.Checked
+        If TreeViewMethodManager IsNot Nothing Then TreeViewMethodManager.All = Guna2CheckBox4.Checked
     End Sub
 
     Private Sub Guna2CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox5.CheckedChanged
-        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.ExcludeConstructors = Guna2CheckBox5.Checked
+        If TreeViewMethodManager IsNot Nothing Then TreeViewMethodManager.ExcludeConstructors = Guna2CheckBox5.Checked
     End Sub
 
     Private Sub Guna2CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox6.CheckedChanged
-        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.ExcludeRedMethods = Guna2CheckBox6.Checked
+        If TreeViewMethodManager IsNot Nothing Then TreeViewMethodManager.ExcludeRedMethods = Guna2CheckBox6.Checked
     End Sub
 
     Private Sub Guna2CheckBox7_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox7.CheckedChanged
-        If TreeVewMethodManager IsNot Nothing Then TreeVewMethodManager.ExcludeUnsafeMethods = Guna2CheckBox7.Checked
+        If TreeViewMethodManager IsNot Nothing Then TreeViewMethodManager.ExcludeUnsafeMethods = Guna2CheckBox7.Checked
     End Sub
+
+    Private Sub Guna2Button4_Click(sender As Object, e As EventArgs) Handles Guna2Button4.Click
+        VMButton.Checked = True
+    End Sub
+
+#End Region
+
+#Region " Select EntryPoint DLL "
+
+    Public Property EntryPointToken As UInteger = 0
+    Public Property EntryPointMethod As MethodDef = Nothing
+
+    Private Sub SetupContextMenu()
+        AddHandler setEntryPoint.Click, AddressOf SetEntryPointMenuItem_Click
+        AddHandler LogInContextMenu2.Opening, AddressOf TreeContextMenu_Opening
+    End Sub
+
+    Private Sub TreeContextMenu_Opening(sender As Object, e As CancelEventArgs)
+
+        Dim setEntryPointItem = LogInContextMenu2
+
+        Dim hitTest = TreeView1.HitTest(TreeView1.PointToClient(Cursor.Position))
+        Dim selectedNode = hitTest.Node
+
+        If selectedNode?.Tag IsNot Nothing AndAlso IsMethodNode(selectedNode) Then
+            Dim method = GetMethodFromNode(selectedNode)
+
+            If method IsNot Nothing Then
+                Dim isUserStaticMethod As Boolean = method.IsStatic
+                setEntryPointItem.Visible = isUserStaticMethod
+
+                If isUserStaticMethod Then
+                    Dim isCurrentEntryPoint As Boolean = False
+
+                    '((EntryPointToken IsNot 0) AndAlso
+                    '                     EntryPointMethod.MDToken.Raw = method.MDToken.Raw)
+
+                    If EntryPointMethod IsNot Nothing AndAlso EntryPointMethod.MDToken.Raw = method.MDToken.Raw Then isCurrentEntryPoint = True
+
+                    setEntryPointItem.Text = If(isCurrentEntryPoint,
+                    "✓ Current EntryPoint",
+                    "Set As EntryPoint")
+
+                    'setEntryPointItem.Enabled = Not isCurrentEntryPoint
+                End If
+            Else
+                setEntryPointItem.Visible = False
+            End If
+        Else
+            setEntryPointItem.Visible = False
+        End If
+
+    End Sub
+
+    Private Sub SetEntryPointMenuItem_Click(sender As Object, e As EventArgs)
+        Dim selectedNode As TreeNode = Nothing
+
+        If TreeView1.SelectedNode IsNot Nothing Then
+            If IsMethodNode(TreeView1.SelectedNode) Then
+                Dim selectedMethod = GetMethodFromNode(TreeView1.SelectedNode)
+                If selectedMethod IsNot Nothing AndAlso selectedMethod.IsStatic Then
+                    selectedNode = TreeView1.SelectedNode
+                End If
+            End If
+        End If
+
+        If selectedNode Is Nothing Then
+            Dim hitTest = TreeView1.HitTest(TreeView1.PointToClient(Cursor.Position))
+            selectedNode = hitTest.Node
+        End If
+
+        If selectedNode?.Tag IsNot Nothing AndAlso IsMethodNode(selectedNode) Then
+            Dim method = GetMethodFromNode(selectedNode)
+            If method IsNot Nothing AndAlso method.IsStatic Then
+                EntryPointToken = method.MDToken.Raw
+                EntryPointMethod = method
+                Guna2TextBox4.Text = selectedNode.Text
+            End If
+        End If
+    End Sub
+
+    Private Function IsMethodNode(node As TreeNode) As Boolean
+        If node.Tag Is Nothing Then Return False
+
+        Dim nodeInfoType = node.Tag.GetType()
+        Dim typeProperty = nodeInfoType.GetProperty("Type")
+
+        If typeProperty IsNot Nothing Then
+            Dim nodeType = typeProperty.GetValue(node.Tag)
+            Return nodeType.ToString() = "Method"
+        End If
+
+        Return False
+    End Function
+
+    Private Function GetMethodFromNode(node As TreeNode) As MethodDef
+        If node.Tag Is Nothing Then Return Nothing
+
+        Dim nodeInfoType = node.Tag.GetType()
+        Dim methodProperty = nodeInfoType.GetProperty("Method")
+
+        Return TryCast(methodProperty?.GetValue(node.Tag), MethodDef)
+    End Function
 
 #End Region
 
