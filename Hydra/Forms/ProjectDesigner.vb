@@ -288,7 +288,9 @@ Public Class ProjectDesigner
             Dim CurrentFile As String = OutputTextBox.Text
             Dim Extension As String = IO.Path.GetExtension(CurrentFile).ToLower
 
-            Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), $"PE File|*{Extension}", Path.GetDirectoryName(CurrentFile))
+            Dim filter As String = "Executable (*.exe)|*.exe|Library (*.dll)|*.dll" '= $"PE File|*{Extension}"
+
+            Dim NewSavePath As String = Core.Helpers.Utils.SaveFile(System.IO.Path.GetFileName(CurrentFile), filter, Path.GetDirectoryName(CurrentFile))
 
             If String.IsNullOrEmpty(NewSavePath) = False Then
                 OutputTextBox.Text = NewSavePath

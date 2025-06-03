@@ -26,7 +26,6 @@ Partial Class About
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2TextBox1 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.LogInUserTextBox1 = New Hydra.LogInUserTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Button13 = New Guna.UI2.WinForms.Guna2Button()
@@ -37,8 +36,13 @@ Partial Class About
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.LogInUserTextBox1 = New Hydra.LogInUserTextBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.LogInUserTextBox2 = New Hydra.LogInUserTextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Guna2Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Guna2Panel1
@@ -46,6 +50,9 @@ Partial Class About
         Me.Guna2Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(4, Byte), Integer))
         Me.Guna2Panel1.BorderThickness = 1
+        Me.Guna2Panel1.Controls.Add(Me.PictureBox2)
+        Me.Guna2Panel1.Controls.Add(Me.LogInUserTextBox2)
+        Me.Guna2Panel1.Controls.Add(Me.Label8)
         Me.Guna2Panel1.Controls.Add(Me.Guna2TextBox1)
         Me.Guna2Panel1.Controls.Add(Me.PictureBox1)
         Me.Guna2Panel1.Controls.Add(Me.LogInUserTextBox1)
@@ -79,48 +86,31 @@ Partial Class About
         Me.Guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Guna2TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Guna2TextBox1.Location = New System.Drawing.Point(12, 168)
+        Me.Guna2TextBox1.Location = New System.Drawing.Point(12, 180)
         Me.Guna2TextBox1.Multiline = True
         Me.Guna2TextBox1.Name = "Guna2TextBox1"
         Me.Guna2TextBox1.PlaceholderText = ""
         Me.Guna2TextBox1.ReadOnly = True
         Me.Guna2TextBox1.SelectedText = ""
-        Me.Guna2TextBox1.Size = New System.Drawing.Size(388, 178)
+        Me.Guna2TextBox1.Size = New System.Drawing.Size(388, 166)
         Me.Guna2TextBox1.TabIndex = 31
         Me.Guna2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(355, 133)
+        Me.PictureBox1.Location = New System.Drawing.Point(355, 110)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 29)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 30
         Me.PictureBox1.TabStop = False
         '
-        'LogInUserTextBox1
-        '
-        Me.LogInUserTextBox1.BackColor = System.Drawing.Color.Transparent
-        Me.LogInUserTextBox1.BackgroundColour = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        Me.LogInUserTextBox1.BorderColour = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer))
-        Me.LogInUserTextBox1.Location = New System.Drawing.Point(131, 133)
-        Me.LogInUserTextBox1.MaxLength = 32767
-        Me.LogInUserTextBox1.Multiline = False
-        Me.LogInUserTextBox1.Name = "LogInUserTextBox1"
-        Me.LogInUserTextBox1.ReadOnly = True
-        Me.LogInUserTextBox1.Size = New System.Drawing.Size(204, 29)
-        Me.LogInUserTextBox1.TabIndex = 29
-        Me.LogInUserTextBox1.Text = "s4lsalsoft@gmail.com"
-        Me.LogInUserTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.LogInUserTextBox1.TextColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInUserTextBox1.UseSystemPasswordChar = False
-        '
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semilight", 10.0!)
-        Me.Label2.Location = New System.Drawing.Point(12, 136)
+        Me.Label2.Location = New System.Drawing.Point(12, 113)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(123, 20)
         Me.Label2.TabIndex = 28
@@ -136,7 +126,7 @@ Partial Class About
         Me.Guna2Button2.FillColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer))
         Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button2.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button2.Location = New System.Drawing.Point(206, 87)
+        Me.Guna2Button2.Location = New System.Drawing.Point(206, 64)
         Me.Guna2Button2.Name = "Guna2Button2"
         Me.Guna2Button2.Size = New System.Drawing.Size(179, 40)
         Me.Guna2Button2.TabIndex = 27
@@ -152,7 +142,7 @@ Partial Class About
         Me.Guna2Button13.FillColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer), CType(CType(14, Byte), Integer))
         Me.Guna2Button13.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button13.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button13.Location = New System.Drawing.Point(16, 87)
+        Me.Guna2Button13.Location = New System.Drawing.Point(16, 64)
         Me.Guna2Button13.Name = "Guna2Button13"
         Me.Guna2Button13.Size = New System.Drawing.Size(184, 40)
         Me.Guna2Button13.TabIndex = 26
@@ -190,11 +180,11 @@ Partial Class About
         Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semilight", 10.0!)
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(65, 40)
+        Me.Label5.Location = New System.Drawing.Point(16, 40)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(283, 44)
+        Me.Label5.Size = New System.Drawing.Size(384, 21)
         Me.Label5.TabIndex = 6
-        Me.Label5.Text = "Contact > S4Lsalsoft@gmail.com" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                Discord> Destroyer#8384"
+        Me.Label5.Text = "Contact > S4Lsalsoft@gmail.com  Discord> Destroyer#8384"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label4
@@ -245,6 +235,61 @@ Partial Class About
         Me.Label7.Text = "This is a remastered version and above all it's free, with a unique code!"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'LogInUserTextBox1
+        '
+        Me.LogInUserTextBox1.BackColor = System.Drawing.Color.Transparent
+        Me.LogInUserTextBox1.BackgroundColour = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        Me.LogInUserTextBox1.BorderColour = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.LogInUserTextBox1.Location = New System.Drawing.Point(131, 110)
+        Me.LogInUserTextBox1.MaxLength = 32767
+        Me.LogInUserTextBox1.Multiline = False
+        Me.LogInUserTextBox1.Name = "LogInUserTextBox1"
+        Me.LogInUserTextBox1.ReadOnly = True
+        Me.LogInUserTextBox1.Size = New System.Drawing.Size(204, 29)
+        Me.LogInUserTextBox1.TabIndex = 29
+        Me.LogInUserTextBox1.Text = "s4lsalsoft@gmail.com"
+        Me.LogInUserTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.LogInUserTextBox1.TextColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInUserTextBox1.UseSystemPasswordChar = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(355, 145)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(30, 29)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 34
+        Me.PictureBox2.TabStop = False
+        '
+        'LogInUserTextBox2
+        '
+        Me.LogInUserTextBox2.BackColor = System.Drawing.Color.Transparent
+        Me.LogInUserTextBox2.BackgroundColour = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        Me.LogInUserTextBox2.BorderColour = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.LogInUserTextBox2.Location = New System.Drawing.Point(131, 145)
+        Me.LogInUserTextBox2.MaxLength = 32767
+        Me.LogInUserTextBox2.Multiline = False
+        Me.LogInUserTextBox2.Name = "LogInUserTextBox2"
+        Me.LogInUserTextBox2.ReadOnly = True
+        Me.LogInUserTextBox2.Size = New System.Drawing.Size(204, 29)
+        Me.LogInUserTextBox2.TabIndex = 33
+        Me.LogInUserTextBox2.Text = "s4lsalsoft@gmail.com"
+        Me.LogInUserTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.LogInUserTextBox2.TextColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInUserTextBox2.UseSystemPasswordChar = False
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semilight", 10.0!)
+        Me.Label8.Location = New System.Drawing.Point(12, 148)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(123, 20)
+        Me.Label8.TabIndex = 32
+        Me.Label8.Text = "Donate (PayPal)"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'About
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -263,6 +308,7 @@ Partial Class About
         Me.Text = "About"
         Me.Guna2Panel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -281,4 +327,7 @@ Partial Class About
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Guna2TextBox1 As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents LogInUserTextBox2 As LogInUserTextBox
+    Friend WithEvents Label8 As Label
 End Class

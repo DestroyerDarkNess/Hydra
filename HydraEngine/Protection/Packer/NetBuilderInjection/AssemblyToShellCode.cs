@@ -38,7 +38,9 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
             }
 
             string DonutResult = Core.Utils.RunRemoteHost(Donut, FullDonutArgs);
-            Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
+            Console.WriteLine("Shell Output: " + DonutResult);
+
+            //Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
 
             if (File.Exists(TempShell) == true)
             {
@@ -59,35 +61,34 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
             if (!File.Exists(Donut)) File.WriteAllBytes(Donut, HydraEngine.Properties.Resources.donut);
 
             string TempShell = Path.Combine(Path.GetTempPath(), "loader.b64");
-            string TargetAsmName = Path.Combine(Path.GetTempPath(), "tempASMShell.exe");
+            string TargetAsmName = Path.Combine(Path.GetTempPath(), "tempASMShell.dll");
 
             if (File.Exists(TargetAsmName)) File.Delete(TargetAsmName);
 
-            try
-            {
-                ModuleDefMD ModuleDef = ModuleDefMD.Load(TargetAssembly);
+            //try
+            //{
+            //    ModuleDefMD ModuleDef = ModuleDefMD.Load(TargetAssembly);
 
-                if (ModuleDef.Kind == ModuleKind.Dll)
-                {
-                    //if (ModuleDef.EntryPoint != null)
-                    //{
-                    //    ModuleDef.EntryPoint.ExportInfo = new MethodExportInfo();
-                    //    ModuleDef.EntryPoint.IsUnmanagedExport = true;
-                    //}
-                    ModuleWriterOptions opts = new ModuleWriterOptions(ModuleDef);
-                    //opts.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.NativeEntryPoint;
-                    //opts.MetadataOptions.TablesHeapOptions = null;
-                    //opts.MetadataOptions.DebugMetadataHeaderOptions = null;
-                    //opts.MetadataOptions.MetadataHeaderOptions = null;
-                    opts.Cor20HeaderOptions.Flags = 0;
-                    ModuleDef.Write(TargetAsmName, opts);
-                }
-                else
-                {
-                    throw new Exception("Module is not a DLL");
-                }
-            }
-            catch { File.Copy(TargetAssembly, TargetAsmName); }
+            //    if (ModuleDef.Kind == ModuleKind.Dll)
+            //    {
+            //        //ModuleDef.Kind = ModuleKind.Console;
+
+            //        //var writerOptions = new ModuleWriterOptions(ModuleDef);
+            //        //writerOptions.Cor20HeaderOptions.Flags &= ~dnlib.DotNet.MD.ComImageFlags.ILLibrary;
+
+            //        //writerOptions.PEHeadersOptions.Characteristics &= ~dnlib.PE.Characteristics.Dll;
+            //        //writerOptions.PEHeadersOptions.Characteristics |= dnlib.PE.Characteristics.ExecutableImage;
+
+            //        ModuleDef.Write(TargetAsmName);
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Module is not a DLL");
+            //    }
+            //}
+            //catch { File.Copy(TargetAssembly, TargetAsmName); }
+
+            File.Copy(TargetAssembly, TargetAsmName);
 
             System.Threading.Thread.Sleep(100);
 
@@ -95,14 +96,14 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
 
             string FullDonutArgs = $"-f 2 -c {declaringType.Namespace + "." + declaringType.Name} -m {EntryPoint.Name} --input:{TargetAsmName}";
 
-            //Console.WriteLine("ShellCode Gen: " + FullDonutArgs);
-
             if (appdomainName != "")
             {
                 FullDonutArgs += " -d " + appdomainName;
             }
 
             string DonutResult = Core.Utils.RunRemoteHost(Donut, FullDonutArgs);
+            //Console.WriteLine("Shell Output: " + DonutResult);
+
             Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
 
             if (File.Exists(TempShell) == true)
