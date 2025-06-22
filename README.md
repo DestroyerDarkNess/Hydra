@@ -22,7 +22,7 @@ Hydra is a powerful tool for protecting .NET assemblies with various obfuscation
 
 First, ensure you have **[.NET Framework 4.8](https://go.microsoft.com/fwlink/?linkid=2088631)** or higher installed.
 
-[Download Hydra](https://github.com/DestroyerDarkNess/Hydra/releases/download/1.1.5/HailHydra.7z) and have fun.
+[Download Hydra](https://github.com/DestroyerDarkNess/Hydra/releases/download/1.1.8/HailHydra.7z) and have fun.
  
 That's all you need to know to start! 🎉
 
