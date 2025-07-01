@@ -52,7 +52,7 @@ Partial Class PresetManagerForm
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 30)
         Me.BtnSave.TabIndex = 1
-        Me.BtnSave.Text = "Guardar"
+        Me.BtnSave.Text = "Save"
         Me.BtnSave.UseVisualStyleBackColor = True
         '
         'BtnLoad
@@ -61,7 +61,7 @@ Partial Class PresetManagerForm
         Me.BtnLoad.Name = "BtnLoad"
         Me.BtnLoad.Size = New System.Drawing.Size(75, 30)
         Me.BtnLoad.TabIndex = 2
-        Me.BtnLoad.Text = "Cargar"
+        Me.BtnLoad.Text = "Load"
         Me.BtnLoad.UseVisualStyleBackColor = True
         '
         'BtnDelete
@@ -70,7 +70,7 @@ Partial Class PresetManagerForm
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(75, 30)
         Me.BtnDelete.TabIndex = 3
-        Me.BtnDelete.Text = "Eliminar"
+        Me.BtnDelete.Text = "Delete"
         Me.BtnDelete.UseVisualStyleBackColor = True
         '
         'BtnExport
@@ -79,7 +79,7 @@ Partial Class PresetManagerForm
         Me.BtnExport.Name = "BtnExport"
         Me.BtnExport.Size = New System.Drawing.Size(75, 30)
         Me.BtnExport.TabIndex = 4
-        Me.BtnExport.Text = "Exportar"
+        Me.BtnExport.Text = "Export"
         Me.BtnExport.UseVisualStyleBackColor = True
         '
         'BtnImport
@@ -88,7 +88,7 @@ Partial Class PresetManagerForm
         Me.BtnImport.Name = "BtnImport"
         Me.BtnImport.Size = New System.Drawing.Size(75, 30)
         Me.BtnImport.TabIndex = 5
-        Me.BtnImport.Text = "Importar"
+        Me.BtnImport.Text = "Import"
         Me.BtnImport.UseVisualStyleBackColor = True
         '
         'BtnInfo
@@ -106,7 +106,7 @@ Partial Class PresetManagerForm
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 30)
         Me.BtnClose.TabIndex = 7
-        Me.BtnClose.Text = "Cerrar"
+        Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
         'BtnRefresh
@@ -115,7 +115,7 @@ Partial Class PresetManagerForm
         Me.BtnRefresh.Name = "BtnRefresh"
         Me.BtnRefresh.Size = New System.Drawing.Size(75, 30)
         Me.BtnRefresh.TabIndex = 8
-        Me.BtnRefresh.Text = "Actualizar"
+        Me.BtnRefresh.Text = "Refresh"
         Me.BtnRefresh.UseVisualStyleBackColor = True
         '
         'LblPreviewInfo
@@ -125,7 +125,7 @@ Partial Class PresetManagerForm
         Me.LblPreviewInfo.Name = "LblPreviewInfo"
         Me.LblPreviewInfo.Size = New System.Drawing.Size(280, 120)
         Me.LblPreviewInfo.TabIndex = 9
-        Me.LblPreviewInfo.Text = "Selecciona un preset para ver información"
+        Me.LblPreviewInfo.Text = "Select a preset to view information"
         'Me.LblPreviewInfo.VerticalAlignment = ContentAlignment.Top
         '
         'GroupBox1
@@ -136,7 +136,7 @@ Partial Class PresetManagerForm
         Me.GroupBox1.Size = New System.Drawing.Size(274, 322)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Presets Disponibles"
+        Me.GroupBox1.Text = "Available Presets"
         '
         'GroupBox2
         '
@@ -146,7 +146,7 @@ Partial Class PresetManagerForm
         Me.GroupBox2.Size = New System.Drawing.Size(310, 165)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Vista Previa"
+        Me.GroupBox2.Text = "Preview"
         '
         'PresetManagerForm
         '
@@ -168,7 +168,7 @@ Partial Class PresetManagerForm
         Me.MinimizeBox = False
         Me.Name = "PresetManagerForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Gestor de Presets de Protección"
+        Me.Text = "Protection Presets Manager"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)

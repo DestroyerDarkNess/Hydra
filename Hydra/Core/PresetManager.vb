@@ -27,7 +27,7 @@ Public Class PresetManager
             File.WriteAllText(filePath, json)
             Return True
         Catch ex As Exception
-            MessageBox.Show($"Error al guardar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error saving preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End Try
     End Function
@@ -44,13 +44,13 @@ Public Class PresetManager
             Dim filePath As String = Path.Combine(PresetsDirectory, filename)
 
             If Not File.Exists(filePath) Then
-                Throw New FileNotFoundException($"El archivo de preset no existe: {filename}")
+                Throw New FileNotFoundException($"Preset file does not exist: {filename}")
             End If
 
             Dim json As String = File.ReadAllText(filePath)
             Return JsonConvert.DeserializeObject(Of ProtectionPreset)(json)
         Catch ex As Exception
-            MessageBox.Show($"Error al cargar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error loading preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return Nothing
         End Try
     End Function
@@ -93,7 +93,7 @@ Public Class PresetManager
 
             Return False
         Catch ex As Exception
-            MessageBox.Show($"Error al eliminar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error deleting preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End Try
     End Function
@@ -404,7 +404,7 @@ Public Class PresetManager
             ' Actualizar UI
             form.RaiseUI()
         Catch ex As Exception
-            MessageBox.Show($"Error al aplicar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error applying preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -430,10 +430,10 @@ Public Class PresetManager
 
                 ' Mostrar mensaje informativo si el ensamblado no coincide
                 If Not String.IsNullOrEmpty(entryPointSettings.EntryPointMethodName) Then
-                    Dim msg As String = $"El preset contiene un entrypoint personalizado '{entryPointSettings.EntryPointMethodName}' " &
-                                      $"del ensamblado '{entryPointSettings.AssemblyName}', pero el ensamblado actual es '{currentAssemblyName}'. " &
-                                      $"El entrypoint no se aplicará automáticamente."
-                    MessageBox.Show(msg, "EntryPoint no compatible", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Dim msg As String = $"The preset contains a custom entrypoint '{entryPointSettings.EntryPointMethodName}' " &
+                                      $"from assembly '{entryPointSettings.AssemblyName}', but current assembly is '{currentAssemblyName}'. " &
+                                      $"The entrypoint will not be applied automatically."
+                    MessageBox.Show(msg, "EntryPoint not compatible", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
                 Return
             End If
@@ -484,8 +484,8 @@ Public Class PresetManager
                             form.Guna2TextBox4.Text = $"{entryPointSettings.EntryPointTypeName}.{entryPointSettings.EntryPointMethodName}"
 
                             ' Mostrar mensaje de éxito
-                            MessageBox.Show($"EntryPoint restaurado: {entryPointSettings.EntryPointMethodName}",
-                                          "EntryPoint Aplicado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            MessageBox.Show($"EntryPoint restored: {entryPointSettings.EntryPointMethodName}",
+                                          "EntryPoint Applied", MessageBoxButtons.OK, MessageBoxIcon.Information)
                             Return
                         End If
                     End If
@@ -496,12 +496,12 @@ Public Class PresetManager
 
             ' Si llegamos aquí, no se pudo restaurar el entrypoint
             If Not String.IsNullOrEmpty(entryPointSettings.EntryPointMethodName) Then
-                MessageBox.Show($"No se pudo restaurar el entrypoint '{entryPointSettings.EntryPointMethodName}'. " &
-                              $"Puede que el método haya sido modificado o eliminado del ensamblado.",
-                              "EntryPoint no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show($"Could not restore entrypoint '{entryPointSettings.EntryPointMethodName}'. " &
+                              $"The method may have been modified or removed from the assembly.",
+                              "EntryPoint not found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Catch ex As Exception
-            MessageBox.Show($"Error al aplicar configuraciones del entrypoint: {ex.Message}",
+            MessageBox.Show($"Error applying entrypoint settings: {ex.Message}",
                           "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -515,7 +515,7 @@ Public Class PresetManager
             File.WriteAllText(filePath, json)
             Return True
         Catch ex As Exception
-            MessageBox.Show($"Error al exportar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error exporting preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End Try
     End Function
@@ -526,13 +526,13 @@ Public Class PresetManager
     Public Shared Function ImportPreset(filePath As String) As ProtectionPreset
         Try
             If Not File.Exists(filePath) Then
-                Throw New FileNotFoundException($"El archivo no existe: {filePath}")
+                Throw New FileNotFoundException($"File does not exist: {filePath}")
             End If
 
             Dim json As String = File.ReadAllText(filePath)
             Return JsonConvert.DeserializeObject(Of ProtectionPreset)(json)
         Catch ex As Exception
-            MessageBox.Show($"Error al importar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error importing preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return Nothing
         End Try
     End Function
@@ -560,8 +560,8 @@ Public Class PresetManager
 
     Private Shared Sub CreateBasicPreset()
         Dim preset As New ProtectionPreset()
-        preset.Name = "Básico"
-        preset.Description = "Configuración básica de protección con renombrado y cifrado de strings"
+        preset.Name = "Basic"
+        preset.Description = "Basic protection configuration with renaming and string encryption"
         preset.Version = "1.0"
         preset.Created = DateTime.Now
 
@@ -585,13 +585,13 @@ Public Class PresetManager
             .ReduceMetadata = True
         End With
 
-        SavePreset(preset, "Básico")
+        SavePreset(preset, "Basic")
     End Sub
 
     Private Shared Sub CreateAdvancedPreset()
         Dim preset As New ProtectionPreset()
-        preset.Name = "Avanzado"
-        preset.Description = "Configuración avanzada con múltiples protecciones"
+        preset.Name = "Advanced"
+        preset.Description = "Advanced configuration with multiple protections"
         preset.Version = "1.0"
         preset.Created = DateTime.Now
 
@@ -637,13 +637,13 @@ Public Class PresetManager
             .AntiInvoke = True
         End With
 
-        SavePreset(preset, "Avanzado")
+        SavePreset(preset, "Advanced")
     End Sub
 
     Private Shared Sub CreateMaximumPreset()
         Dim preset As New ProtectionPreset()
-        preset.Name = "Máximo"
-        preset.Description = "Configuración con el máximo nivel de protección (puede ser inestable)"
+        preset.Name = "Maximum"
+        preset.Description = "Configuration with maximum protection level (may be unstable)"
         preset.Version = "1.0"
         preset.Created = DateTime.Now
 
@@ -751,13 +751,13 @@ Public Class PresetManager
             .JITHook = True
         End With
 
-        SavePreset(preset, "Máximo")
+        SavePreset(preset, "Maximum")
     End Sub
 
     Private Shared Sub CreateRenamerOnlyPreset()
         Dim preset As New ProtectionPreset()
-        preset.Name = "Solo Renombrado"
-        preset.Description = "Solo renombrado de símbolos, ideal para debugging"
+        preset.Name = "Renaming Only"
+        preset.Description = "Symbol renaming only, ideal for debugging"
         preset.Version = "1.0"
         preset.Created = DateTime.Now
 
@@ -774,7 +774,7 @@ Public Class PresetManager
             .Fields = True
         End With
 
-        SavePreset(preset, "Solo Renombrado")
+        SavePreset(preset, "Renaming Only")
     End Sub
 
 End Class

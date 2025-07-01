@@ -21,7 +21,7 @@ Public Class PresetManagerForm
 
             UpdateButtonStates()
         Catch ex As Exception
-            MessageBox.Show($"Error al cargar presets: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error loading presets: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -39,7 +39,7 @@ Public Class PresetManagerForm
         If ListBoxPresets.SelectedIndex >= 0 Then
             ShowPresetPreview(ListBoxPresets.SelectedItem.ToString())
         Else
-            LblPreviewInfo.Text = "Selecciona un preset para ver información"
+            LblPreviewInfo.Text = "Select a preset to view information"
         End If
     End Sub
 
@@ -47,14 +47,14 @@ Public Class PresetManagerForm
         Try
             Dim preset As ProtectionPreset = PresetManager.LoadPreset(presetName)
             If preset IsNot Nothing Then
-                Dim info As String = $"Nombre: {preset.Name}" & vbCrLf &
-                                   $"Descripción: {preset.Description}" & vbCrLf &
-                                   $"Creado: {preset.Created:dd/MM/yyyy HH:mm}"
+                Dim info As String = $"Name: {preset.Name}" & vbCrLf &
+                                   $"Description: {preset.Description}" & vbCrLf &
+                                   $"Created: {preset.Created:dd/MM/yyyy HH:mm}"
 
                 LblPreviewInfo.Text = info
             End If
         Catch ex As Exception
-            LblPreviewInfo.Text = "Error al cargar información del preset"
+            LblPreviewInfo.Text = "Error loading preset information"
         End Try
     End Sub
 
