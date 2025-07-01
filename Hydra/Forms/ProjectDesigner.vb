@@ -161,6 +161,8 @@ Public Class ProjectDesigner
             Me.Close()
         End Try
 
+        LoadPresetsComboBox()
+
         'Else
 
         '    MessageDialog.ShowAsync("PE Invalid, please select a .NET binary")
@@ -405,7 +407,7 @@ Public Class ProjectDesigner
 
     End Sub
 
-    Private Property BaseChars As String = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+    Public Property BaseChars As String = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
     Private Property BaseMode As HydraEngine.Protection.Renamer.RenamerPhase.RenameMode = HydraEngine.Protection.Renamer.RenamerPhase.RenameMode.Ascii
 
     Private m_flowing As String = ".̃̏̂͑̽̿̄ͯ҉̬̬̭͉͙.ͮͦ͌̑̄ͤͥͫ̕͏͉̖̪̪̤͈̝̠͓̥̹̥̺͉ͅ.̶̸̘̘̙̭̻͖̪͍̖̰͍͇̟̯̖̃͒ͧ̈́ͧ͛͑ͣ̂̌͑̽̎̔̚͢.͙̙͓͔̻̺̪͙̼̺͙̠̭̣̯̫͔̭ͥͦͫ͜͟͞.̩͈̤̼̬̬̼̘͎̻̼̠̼͓̝̯̰̌̆̋̃͗̃̅͂̂̈́̔͒̑̕͜.̧̭̫̭̮͙̣̺̳̦̝̦͍͚̟̯̟̽̂ͨ͑̈̀͟͠.̡̣̖͚̮͓͇͔͈̱̯̞͓̙̞͕͚́ͩ̾ͯ̍̏̿̆ͫ̆͛̑́͝ͅ.̛̊ͨ̆͂͌ͭ͏̸͓͕͕͓̗͙͇̤͍̦͕̥̘͇.̡͔͇͍̦͚̲͔̯̪̙̘͓͚̬̲͔̼͕̽̃̉ͫ̓̑ͫ̉ͫ̒̊͜.͎̹̫͕ͯ̐͌̐͒͛̐̎̏ͨͮ͂̒̀̚͠.̶̷̨̝̣͖͇̲̯͇̰͈̙͉͙͚͉̄͑͗̏̒ͪ̏ͮ͌͗ͬͪͥͭ̊͋͞.̜̟͕̺̣͕̥͚͔͓̠̞̳̭̠ͪ̽ͭ͒ͮ͘͝.̛̝̦͎͚̈̉̈́̈͛ͯ͑ͫ̊ͮͬ̆ͣ͂ͥ.̸͇̮͙͈͇̱͈͕̜̬̻̮ͫ͊ͭ̏͑̔͐̑ͬ̾̂ͩ͆ͫ̀.ͤ͂ͩ̀͑̒͏̷́͏͓̮̙͈̮̳̲̭̺̟̱̞͍̜̥͜.̶̷̣̮͍͇͈̝̞͓̦͐ͤͦͤͦͭ̆͒̓̀ͫ̅̐̚͡.̵̢͇̯͕͕̤̥̘͍͂̆̊ͮ̆̋̿ͧ͊ͩ̑͜.̸̧̗̜̼͖̲̟̹̞̈ͭ̊̔ͪ̐ͤ͆̇̔ͫͮ̀́.̏̅̃̓ͭ͏͇̲͎̹̖͙͎̯̥͡.̢̰͕̭̲͖͇͒́̾͋ͬ̅̈͑ͥͅͅ.͊̒̃͒́͜͏̢͉̲̹̼̥̥͖̘̼̹͈͉.̸̷̶̜̞͖̪̻̦͕͕̼̮̳͙̯̹̩̗̓͌̑ͭ̏͂̾͂̒ͭ̍̀̚.̵̡̘͕͚̳͐ͦͥ̉͘͢ͅ.̶̸̨̨͍̳̣̱͓̫̫̱̖̣͔̅ͧ̂́ͯ̓͋͋͂̾͑̈́̇̑̎̑ͭ̍͜.̴̵̘̩͍͖̻̦̣͕̗̖͔̘͓͗̈͛͂́̾ͫ͛̄͆ͤ̑͘͘.̡̛̮͇̫̮͔̲͕̫̹̘̞̱̾̈ͬ̆ͦ̈́͂̀̌̈́̆͋͆͋́.̶̴̨̩̻̮̹͔̞̻͖̭̻̲̉͆̓ͨͥ̈́̈́ͤ̅͑̆̑̔̔̍̀͘͝.̃̏̂͑̽̿̄ͯ҉̬̬̭͉͙.ͮͦ͌̑̄ͤͥͫ̕͏͉̖̪̪̤͈̝̠͓̥̹̥̺͉ͅ.̶̸̘̘̙̭̻͖̪͍̖̰͍͇̟̯̖̃͒ͧ̈́ͧ͛͑ͣ̂̌͑̽̎̔̚͢.͙̙͓͔̻̺̪͙̼̺͙̠̭̣̯̫͔̭ͥͦͫ͜͟͞.̩͈̤̼̬̬̼̘͎̻̼̠̼͓̝̯̰̌̆̋̃͗̃̅͂̂̈́̔͒̑̕͜.̧̭̫̭̮͙̣̺̳̦̝̦͍͚̟̯̟̽̂ͨ͑̈̀͟͠.̡̣̖͚̮͓͇͔͈̱̯̞͓̙̞͕͚́ͩ̾ͯ̍̏̿̆ͫ̆͛̑́͝ͅ.̛̊ͨ̆͂͌ͭ͏̸͓͕͕͓̗͙͇̤͍̦͕̥̘͇.̡͔͇͍̦͚̲͔̯̪̙̘͓͚̬̲͔̼͕̽̃̉ͫ̓̑ͫ̉ͫ̒̊͜.͎̹̫͕ͯ̐͌̐͒͛̐̎̏ͨͮ͂̒̀̚͠.̶̷̨̝̣͖͇̲̯͇̰͈̙͉͙͚͉̄͑͗̏̒ͪ̏ͮ͌͗ͬͪͥͭ̊͋͞.̜̟͕̺̣͕̥͚͔͓̠̞̳̭̠ͪ̽ͭ͒ͮ͘͝.̛̝̦͎͚̈̉̈́̈͛ͯ͑ͫ̊ͮͬ̆ͣ͂ͥ.̸͇̮͙͈͇̱͈͕̜̬̻̮ͫ͊ͭ̏͑̔͐̑ͬ̾̂ͩ͆ͫ̀.ͤ͂ͩ̀͑̒͏̷́͏͓̮̙͈̮̳̲̭̺̟̱̞͍̜̥͜.̶̷̣̮͍͇͈̝̞͓̦͐ͤͦͤͦͭ̆͒̓̀ͫ̅̐̚͡.̵̢͇̯͕͕̤̥̘͍͂̆̊ͮ̆̋̿ͧ͊ͩ̑͜.̸̧̗̜̼͖̲̟̹̞̈ͭ̊̔ͪ̐ͤ͆̇̔ͫͮ̀́.̏̅̃̓ͭ͏͇̲͎̹̖͙͎̯̥͡.̢̰͕̭̲͖͇͒́̾͋ͬ̅̈͑ͥͅͅ.͊̒̃͒́͜͏̢͉̲̹̼̥̥͖̘̼̹͈͉.̸̷̶̜̞͖̪̻̦͕͕̼̮̳͙̯̹̩̗̓͌̑ͭ̏͂̾͂̒ͭ̍̀̚.̵̡̘͕͚̳͐ͦͥ̉͘͢ͅ.̶̸̨̨͍̳̣̱͓̫̫̱̖̣͔̅ͧ̂́ͯ̓͋͋͂̾͑̈́̇̑̎̑ͭ̍͜.̴̵̘̩͍͖̻̦̣͕̗̖͔̘͓͗̈͛͂́̾ͫ͛̄͆ͤ̑͘͘.̡̛̮͇̫̮͔̲͕̫̹̘̞̱̾̈ͬ̆ͦ̈́͂̀̌̈́̆͋͆͋́.̶̴̨̩̻̮̹͔̞̻͖̭̻̲̉͆̓ͨͥ̈́̈́ͤ̅͑̆̑̔̔̍̀͘͝ḩ̷̸͎̞̬͚͙́͒̃̿̑ส็็็็็็็็็็็็็็็็็็็i͇̠̱̽͛ͣͯͭ̐͐ͩͪ̀͒̿̍̆̌ͣ̕͞ţ̈́̄ͦ͑͐ͤ̇ͯ̚͜͢͏̺͎̰̯̰̳̣̺͉͉̻̯̱͉̱̳̠̫l̢̮̝̰̖̲̯͉̱͉̤̗̯͇ͫ͋͑͋͊́͑͠e̛̼͉̝̯̼͚͇̜̹̬̼͚̥̝̟̩̮̎̾ͧ͟͝ͅr̷͎̣͙͇̦̱̺͚̬͍͎̗̺͍͈͍̔̃̆ͬ̃͌ͦ͗ͧ̓͋̓͟͟͡ͅ ̵̩̼͙̣̦͕̃ͨͧ̂ͭ͂̀͜ḣ͚͖͉͓̫̲̦͓́̆̈ͯ͒͂ͫ͛ͣ̓ͫ̄́́̕͜͜͜ą̴̢̺̼͎̩͓̱͍̯͓̻̖͓̯̿ͩͩͦ̕ͅt͂ͫ̔͋͆̀ͩͨ͂̎̓ͧ̿̈́̓̏̃ͯ̈͘͘҉͚̬̝͙̟̗̰̹̱̗ ̵̠̤̼̬̩͔̲̖̎̍̈̌̾̎̋̂̓ͬ̒ͫ̽ͭ́̕͠n̛̲͙̻̤̮̥̠͇͇͖͎̘̠̲ͥͣ̋͛ͨ̀i̧͓͖͈̭͔͉̼ͪͫ̓͂̔̿͠ͅč̨̆̉͂̑͞͏̻̠̖̼̹̻̹̯͇͙̰̪̯hͭ͌ͦ̉̊͐͂҉̸͇̹̹̬̖͕̱͕͕̠̗̀͘͝tͤͫͫͧ̈́͂͛ͭ̉ͧ͛ͫ̚҉̴͚̯̭̲̫̦͖̮̭͖̗͎̳̟̀͘s̸ͧ͗̌͊ͨ̐̅̇͟҉͈̤̘͉̤̯̝͈͚ ͤ͆͆ͨ̓҉̤̣̩̠̩̯̩̱͕̹͜͝f̡̞͔̮͖̩͔̀̆̅̓̈ͪͥ͋͊̉ͪ̇̉̃̔͋̃̈́͟͠͝ä̵̸̺̖͓͖̳̬̲̲͎͎͔̈͋͑͋ͦͅͅl̻̟̲̞̘͚̤͎͉̯̫̹̜̥̳͈̙ͧ͋̇ͫ͋̎ͯ̋͂ͮ̈͂̾ͯ̎̊̾ͯ͘͢ͅs̴̡͍̖̖͕̱̫̤̣͛ͩͤ͆̅ͣ͐̿ͣ͐̔ͨ̄ͫͩ̄̍͘̕͜c̵̷̨͇̰̰̼̝̝̼̤͎̯̺̰͕̤̤͇ͧͦ̄̇̓ͩ̎͂̊ͯ͋͋̋̀ͬͧ͗̔̚͝͡ͅͅh͓͙̩̭̬̠̜͇̗̮̐ͥͧͭ̆͆̔ͬ́̄͊ͮ͡͝͠ ̩̹̥̯̲͉͔̟͕͎̪͔̱̬̌ͭ͗̔̏̊̚͡͞g̴̴̫͖̥̲̦͉̩̲̪̹̙̘̩̣̯̜̱͌ͩ͑̆̿̏̽ͤ͂ͩ́͢͠e̤̳͈̹͉̹̪̥̜̲͙͕͍̟̱̱̳͗̽ͤ̈́̽̽̊͢͡ḿ͈̮͓͇̞̯͍̦͖̟͔̫͈̏̑̋̂̒ͬ͌̌̓̄͢͞ą̶̴͈̳̥͙͚͓͉̟̬̤͋͒ͫ̓̿́̒͐͒͘͡c̡̞̪̞̣̦̖̙̬̜̜̋̿͐̇̓̋̃͆̚h̨̛̝͓͚̱͍͕̝̬̯̩̓̽̉͌͊̇͐̒̈͋͋̌ͩ̋ͭt̶̄́͑̐҉҉̟̭̟͓̜̩͖̲͔̀ ̷̧̡̦̞̝̯̥͍̻͚̠̞̣̯͎̇̓̇̐̓́͝h̡̺̳͇̤̬̻̮̭͇̿̑̔̽ͮ̉̏̃͂̄̌̍͒̑̇ͪ̑͡͞ĭ̵͔͙̞̻̰̻̬̖͇̩͔̪̮̩̘̔ͪͥ̈́͋͞t̸̝̪̹̲̤̜̓͌ͤ̍ͫͧ͋͋ͣ͆̈́ͩͯ̒ͮ̊ͧ̕͢͜ͅl̈́ͦ̈̌͆ͧ͏̷̛̮̼̬͓̞̻̣̼͙ͅe̗͚̺̰͎͖̥̙̻͕̮͕̱͇̓̑ͫ͋ͭͯ̍ͨ̌͗̊̔̒̈́̽̕͜͝ͅṛ̶̷̟̹̥̹̬̖͖͇̬̭̲̬̠̮ͣͧ̓̓̈́̅͢ ̨̛̘̲͉̮̲̹̳͔̗̣̣̗̱̱̘͚ͦ͋̀̍̃̑ͣ̍͒̇ͭ̆ͧ͒͒̋̕h̷͔̠͈̙̝̻̺͔͕̤ͯ̃̎̋͑ͫ̎̾̃̿̀̄́̀͞a̍̏͛̔͆͗͒̆̐́̈ͥ̃͌͝҉̧҉̷̪̳̻͓̘̜̘͔̘̞̱̫͈̹ͅť̷̢̫̰̦̫̯̮̟͇̍͊̒̅̀̐͊ͯ́̒̅ͤͅ ̵̮̤̳̺̤̼̝̉̑̎ͧ̏̀̽̽́n̴̴̯̹̮̣͉̹̝̑͑̐̿ͮ̈̆̔́̏ͥ͋ͨ̒͘͘͟i̲̬͓̯̋͑̂̋͋͡c͑̒̈́ͫ̓̎͆̃̃ͬͯ͜͏͓̲̝̺̥̘͍͚̕ḩ̜͖̤̼͇̳̳̭̻͖̳̙͑͌̑̓͒ͦ͂ͮ̅̅͌̈ͭͭ̄ͅṫ̴͎̺̭̺̞̺̮̼̣͔͎͔̗̱̭̄̆̓͋̔͝s̛͓͇̮̹̙̫̮̦̪̜̋ͪ̊̊ͮ̎͌̂̂̿̽̔̉̓̍̔͆̕ ̛̽͌͋ͩ̃̈̍ͨ̅ͦ̀̏̍̓̑̍̊ͧ͘͏̪͔͇ͅf̢̰̲̺͙̝̣͕̭̝̙͍ͧ̌ͤͮ͛͋ͭ́̓̽̔̈́̂ͤ̉̆ͩ̚͘ͅa̧̡ͪ̊̊ͩ̈͠͏҉̠̬̝̻͙̰̖̻̼̖̘̠̺̝l̸̷͊͒ͨ̄̓̂҉̥̩̮̳̯̠̻͎̹͈̟̠̫̮̫̠̖̥͙s̶͒̓̇͑͗̍̿̐ͮ҉͇͖͓̣͉̗̰̯͎̖͎̱c̶͇̭̣͍̞̝͓͇̫̯̜̫̞͉̑ͤͧ̎̒̈ͯͣͥ̍ͪ̌̎̒́h̵̢̼̮̖͎̭̭͇͚̮͙͙͇̗̤̝̺͚̐̏͋ͬ̋̿̎ͭ̂̾̂̓ͪ̏̋̀ ̵̨̛̱̖̫͇̱͈̞̭̱́̔ͪ̋̎̎ͭͨ̈̿ͤ̎̿͟ͅg̉͂͛̍̓ͫ̇̿̎͐̓̏͏͏̴̤̗̙͖͙̱̺͎̖̩͝ę̵̞͖̭̳͔̻͉̯̻̯̣̈́́̈̊̽̾͗ͣ̃͊ͬ̔ṃ̶̳̫̲̩̺͍̝̰̻̱̖̦̪̘̠̏ͫ̎ͤ̓ͣ̾͊̑͒͗̋͂̉̈́͜͞a̰̯͔̗̠͖̣̬̖͐ͬ̏͐ͬ͊̂̍̇ͣͩ́͠͞c̨̡̬̥̟̩̠̬̟̪͖̙̮̺̩͍̮̝ͥ̌̉ͣ͊̈͌̓̈̉̈͐̿̈ͬ̀h̛̬͚̝͉̮̝͉̥̺̩̼̞̙̖͎̮̳̒͂̋̋ͬ̓͋̂̊̚̕t͒ͮ̿ͤͬ̎ͭ͌̅̂̾̐̉ͦ͌ͧͯ͋̈͏̮̮̰̻̕͜͞ ̸͎̥̞̟͙͚͙̥ͬ̈́̋̔̿ͣͨͧͫ͒̿ͬͫͧ̊͢͜͠ḫ̝̘̤̰͐͆ͤ̑̒͛ͩ́͞iͤ̓͑̊̏ͥ̀͘͞҉̨̗̬͉̜̘̜t̑ͨ͋̾ͦ̋̊ͤ̔̒̑̿̓́͏̵̛̱͚̖͓̲̕l̶͍̳̳͎͓̀ͭ̎̉̌̓̊̌̍̍̀̕e̵̡͇͈͉̥̼̼̺͎͉̦ͮ̾̒̃ͫ̃͒̃̓́̅͆ͬ͗ͨ̿ͥ̂̚͝͡ŗ̡̊͋̾ͩ̽͆̋̈́͐͊̂ͮͨ̉̏ͨ͐͐̆̕͞͏͍͍̰̻̖̥ ͨ́̿̃̇ͯ̾̕͢҉̩͇̟̪̥̬͍̲͈͔͔͍̼̭͇̣h̷̻̝̫̪͚̦͙͉͎̥̦̳͉̖̃ͥ̅͗͢ḁ̛̪̗̮̦̳̪̭̞̗̠̟̈́̌͐̈́ͦ̄̉̎ͬ͆̒̉̕͟t̶̛͔͍͔͎̫̞̖͓̰̒̇̆ͯ̀ͥ̈́̏̓̀ͮͥ̍̀ ̨ͥ̄̓ͩ̿̃̿̊̈̔͒͗͊ͭ̽ͥͥ͐҉̶̸̲̻̱̩̖̪̹͈̙̩͎̲̘̙n"
@@ -1961,6 +1963,315 @@ Public Class ProjectDesigner
 
         Return TryCast(methodProperty?.GetValue(node.Tag), MethodDef)
     End Function
+
+#End Region
+
+#Region " Presets Manager "
+
+    ''' <summary>
+    ''' Carga la lista de presets disponibles en el ComboBox
+    ''' </summary>
+    Private Sub LoadPresetsComboBox()
+        Try
+            ' Buscar si existe un ComboBox para presets, si no, crearlo dinámicamente
+            Dim presetsCombo As LogInComboBox = Nothing
+
+            ' Buscar en los controles existentes
+            For Each ctrl As Control In Core.Instances.MainInstance.Guna2Panel1.Controls
+                If TypeOf ctrl Is LogInComboBox AndAlso ctrl.Name = "PresetsComboBox" Then
+                    presetsCombo = DirectCast(ctrl, LogInComboBox)
+                    Exit For
+                End If
+            Next
+
+            ' Si no existe, no cargar presets todavía
+            If presetsCombo IsNot Nothing Then
+                presetsCombo.Visible = True
+                presetsCombo.Invalidate()
+                presetsCombo.Items.Clear()
+                presetsCombo.Items.Add("-- Select Preset --")
+
+                Dim presets As List(Of String) = PresetManager.GetAvailablePresets()
+                For Each preset As String In presets
+                    presetsCombo.Items.Add(preset)
+                Next
+
+                presetsCombo.SelectedIndex = 0
+            End If
+        Catch ex As Exception
+            Console.WriteLine("Error loading presets: " & ex.Message)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Guarda la configuración actual como un nuevo preset
+    ''' </summary>
+    Public Sub SaveCurrentConfigurationAsPreset()
+        Try
+            ' Crear formulario de diálogo para obtener nombre y descripción
+            Dim inputForm As New Form()
+            inputForm.Text = "Guardar Preset"
+            inputForm.Size = New Size(400, 220)
+            inputForm.StartPosition = FormStartPosition.CenterParent
+            inputForm.FormBorderStyle = FormBorderStyle.FixedDialog
+            inputForm.MaximizeBox = False
+            inputForm.MinimizeBox = False
+
+            Dim lblName As New Label()
+            lblName.Text = "Nombre del Preset:"
+            lblName.Location = New Point(10, 15)
+            lblName.Size = New Size(120, 20)
+
+            Dim txtName As New TextBox()
+            txtName.Location = New Point(140, 12)
+            txtName.Size = New Size(230, 25)
+            txtName.Text = "Preset_" & DateTime.Now.ToString("yyyyMMdd_HHmmss")
+
+            Dim lblDescription As New Label()
+            lblDescription.Text = "Descripción:"
+            lblDescription.Location = New Point(10, 50)
+            lblDescription.Size = New Size(120, 20)
+
+            Dim txtDescription As New TextBox()
+            txtDescription.Location = New Point(140, 47)
+            txtDescription.Size = New Size(230, 60)
+            txtDescription.Multiline = True
+            txtDescription.Text = "Preset creado el " & DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+
+            Dim btnSave As New Button()
+            btnSave.Text = "Guardar"
+            btnSave.Location = New Point(215, 125)
+            btnSave.Size = New Size(75, 30)
+            btnSave.DialogResult = DialogResult.OK
+
+            Dim btnCancel As New Button()
+            btnCancel.Text = "Cancelar"
+            btnCancel.Location = New Point(295, 125)
+            btnCancel.Size = New Size(75, 30)
+            btnCancel.DialogResult = DialogResult.Cancel
+
+            inputForm.Controls.AddRange({lblName, txtName, lblDescription, txtDescription, btnSave, btnCancel})
+
+            If inputForm.ShowDialog() = DialogResult.OK AndAlso Not String.IsNullOrWhiteSpace(txtName.Text) Then
+                Dim preset As ProtectionPreset = PresetManager.CreatePresetFromForm(Me)
+                preset.Name = txtName.Text.Trim()
+                preset.Description = txtDescription.Text.Trim()
+                preset.Created = DateTime.Now
+
+                If PresetManager.SavePreset(preset, txtName.Text.Trim()) Then
+                    MessageBox.Show("Preset guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    LoadPresetsComboBox()
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al guardar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Carga un preset seleccionado
+    ''' </summary>
+    Public Sub LoadSelectedPreset(presetName As String)
+        Try
+            If String.IsNullOrWhiteSpace(presetName) OrElse presetName = "-- Select Preset --" Then
+                Return
+            End If
+
+            Dim preset As ProtectionPreset = PresetManager.LoadPreset(presetName)
+            If preset IsNot Nothing Then
+                PresetManager.ApplyPresetToForm(preset, Me)
+                'MessageBox.Show($"Preset '{preset.Name}' aplicado exitosamente.", "Preset Aplicado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al cargar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Elimina un preset seleccionado
+    ''' </summary>
+    Public Sub DeleteSelectedPreset(presetName As String)
+        Try
+            If String.IsNullOrWhiteSpace(presetName) OrElse presetName = "-- Select Preset --" Then
+                MessageBox.Show("Selecciona un preset válido para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim result As DialogResult = MessageBox.Show($"¿Estás seguro de que deseas eliminar el preset '{presetName}'?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+            If result = DialogResult.Yes Then
+                If PresetManager.DeletePreset(presetName) Then
+                    MessageBox.Show("Preset eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    LoadPresetsComboBox()
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al eliminar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Exporta un preset a un archivo
+    ''' </summary>
+    Public Sub ExportPreset(presetName As String)
+        Try
+            If String.IsNullOrWhiteSpace(presetName) OrElse presetName = "-- Select Preset --" Then
+                MessageBox.Show("Selecciona un preset válido para exportar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim preset As ProtectionPreset = PresetManager.LoadPreset(presetName)
+            If preset IsNot Nothing Then
+                Dim saveDialog As New SaveFileDialog()
+                saveDialog.Filter = "Archivos JSON|*.json"
+                saveDialog.Title = "Exportar Preset"
+                saveDialog.FileName = presetName & ".json"
+
+                If saveDialog.ShowDialog() = DialogResult.OK Then
+                    If PresetManager.ExportPreset(preset, saveDialog.FileName) Then
+                        MessageBox.Show("Preset exportado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al exportar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Importa un preset desde un archivo
+    ''' </summary>
+    Public Sub ImportPreset()
+        Try
+            Dim openDialog As New OpenFileDialog()
+            openDialog.Filter = "Archivos JSON|*.json"
+            openDialog.Title = "Importar Preset"
+
+            If openDialog.ShowDialog() = DialogResult.OK Then
+                Dim preset As ProtectionPreset = PresetManager.ImportPreset(openDialog.FileName)
+                If preset IsNot Nothing Then
+                    ' Pedir nuevo nombre si es necesario
+                    Dim inputForm As New Form()
+                    inputForm.Text = "Importar Preset"
+                    inputForm.Size = New Size(350, 180)
+                    inputForm.StartPosition = FormStartPosition.CenterParent
+                    inputForm.FormBorderStyle = FormBorderStyle.FixedDialog
+                    inputForm.MaximizeBox = False
+                    inputForm.MinimizeBox = False
+
+                    Dim lblName As New Label()
+                    lblName.Text = "Nombre del Preset:"
+                    lblName.Location = New Point(10, 15)
+                    lblName.Size = New Size(120, 20)
+
+                    Dim txtName As New TextBox()
+                    txtName.Location = New Point(10, 40)
+                    txtName.Size = New Size(310, 25)
+                    txtName.Text = preset.Name
+
+                    Dim lblInfo As New Label()
+                    lblInfo.Text = $"Descripción: {preset.Description}" & vbCrLf & $"Creado: {preset.Created:dd/MM/yyyy HH:mm}"
+                    lblInfo.Location = New Point(10, 75)
+                    lblInfo.Size = New Size(310, 40)
+                    lblInfo.AutoSize = False
+
+                    Dim btnImport As New Button()
+                    btnImport.Text = "Importar"
+                    btnImport.Location = New Point(165, 125)
+                    btnImport.Size = New Size(75, 30)
+                    btnImport.DialogResult = DialogResult.OK
+
+                    Dim btnCancel As New Button()
+                    btnCancel.Text = "Cancelar"
+                    btnCancel.Location = New Point(245, 125)
+                    btnCancel.Size = New Size(75, 30)
+                    btnCancel.DialogResult = DialogResult.Cancel
+
+                    inputForm.Controls.AddRange({lblName, txtName, lblInfo, btnImport, btnCancel})
+
+                    If inputForm.ShowDialog() = DialogResult.OK AndAlso Not String.IsNullOrWhiteSpace(txtName.Text) Then
+                        preset.Name = txtName.Text.Trim()
+
+                        If PresetManager.SavePreset(preset, txtName.Text.Trim()) Then
+                            MessageBox.Show("Preset importado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            LoadPresetsComboBox()
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al importar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Abre el formulario de gestión de presets
+    ''' </summary>
+    Public Sub OpenPresetManager()
+        Try
+            Dim presetManager As New PresetManagerForm(Me)
+            presetManager.ShowDialog(Me)
+        Catch ex As Exception
+            MessageBox.Show($"Error al abrir el gestor de presets: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Muestra información detallada de un preset
+    ''' </summary>
+    Public Sub ShowPresetInfo(presetName As String)
+        Try
+            If String.IsNullOrWhiteSpace(presetName) OrElse presetName = "-- Select Preset --" Then
+                MessageBox.Show("Selecciona un preset válido para ver información.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim preset As ProtectionPreset = PresetManager.LoadPreset(presetName)
+            If preset IsNot Nothing Then
+                Dim info As String = $"Nombre: {preset.Name}" & vbCrLf &
+                                   $"Descripción: {preset.Description}" & vbCrLf &
+                                   $"Versión: {preset.Version}" & vbCrLf &
+                                   $"Creado: {preset.Created:dd/MM/yyyy HH:mm:ss}" & vbCrLf & vbCrLf &
+                                   "Protecciones Habilitadas:" & vbCrLf
+
+                ' Contar protecciones habilitadas
+                Dim enabledCount As Integer = 0
+
+                If preset.Renamer.Enabled Then
+                    info &= "• Renamer" & vbCrLf
+                    enabledCount += 1
+                End If
+
+                If preset.Protections.StringEncryption Then
+                    info &= "• String Encryption" & vbCrLf
+                    enabledCount += 1
+                End If
+
+                If preset.Protections.ControlFlow Then
+                    info &= "• Control Flow" & vbCrLf
+                    enabledCount += 1
+                End If
+
+                If preset.VM.Enabled Then
+                    info &= "• Virtualization" & vbCrLf
+                    enabledCount += 1
+                End If
+
+                If preset.Packer.UsePacker Then
+                    info &= "• Packer" & vbCrLf
+                    enabledCount += 1
+                End If
+
+                If enabledCount = 0 Then
+                    info &= "• Ninguna protección habilitada" & vbCrLf
+                End If
+
+                MessageBox.Show(info, $"Información del Preset - {preset.Name}", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al mostrar información del preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 #End Region
 

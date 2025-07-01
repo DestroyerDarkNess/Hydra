@@ -62,7 +62,7 @@
                 ProyectControl.Dispose()
             End If
         Next
-
+        PresetsComboBox.Visible = False
         Guna2Panel3.Visible = False
         Guna2Panel3.SendToBack()
         Guna2Panel2.Visible = True
@@ -98,6 +98,21 @@
 
     Private Sub LogInLabel5_Click(sender As Object, e As EventArgs) Handles LogInLabel5.Click, LogInLabel6.Click, PictureBox1.Click
         Process.Start("https://discord.gg/C4evgU4Tas")
+    End Sub
+
+    Private Sub PresetsComboBox_VisibleChanged(sender As Object, e As EventArgs) Handles PresetsComboBox.VisibleChanged
+        Guna2Button2.Visible = PresetsComboBox.Visible
+    End Sub
+
+    Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
+        If (ProjectDesignerForm Is Nothing) Then Exit Sub
+        ProjectDesignerForm.OpenPresetManager()
+    End Sub
+
+    Private Sub PresetsComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PresetsComboBox.SelectedIndexChanged
+        If (ProjectDesignerForm Is Nothing) Then Exit Sub
+        Dim SelectedTextValue = PresetsComboBox.Items(PresetsComboBox.SelectedIndex).ToString
+        ProjectDesignerForm.LoadSelectedPreset(SelectedTextValue)
     End Sub
 
 End Class

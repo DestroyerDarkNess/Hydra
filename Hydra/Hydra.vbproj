@@ -61,6 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Guna.UI2.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -125,10 +128,18 @@
     </Compile>
     <Compile Include="Core\Helper\Paths.vb" />
     <Compile Include="Core\Helper\Utils.vb" />
+    <Compile Include="Core\PresetManager.vb" />
+    <Compile Include="Core\ProtectionPreset.vb" />
     <Compile Include="Forms\About.Designer.vb">
       <DependentUpon>About.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\About.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PresetManager.Designer.vb">
+      <DependentUpon>PresetManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PresetManager.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ProjectDesigner.Designer.vb">
@@ -208,6 +219,7 @@
     <Content Include="e3a312f5-8eb1-5266-896b-1d7bc06ce12d.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\ModuleLoader.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
