@@ -41,6 +41,10 @@ Public Class ProtectionPreset
     ' Configuraciones de DLL
     <JsonProperty("dll")>
     Public Property DLL As New DLLSettings()
+    
+    ' Configuraciones de EntryPoint
+    <JsonProperty("entryPoint")>
+    Public Property EntryPoint As New EntryPointSettings()
 
 End Class
 
@@ -396,5 +400,27 @@ Public Class DLLSettings
 
     <JsonProperty("mergeMode")>
     Public Property MergeMode As Integer = 0
+
+End Class
+
+Public Class EntryPointSettings
+
+    <JsonProperty("hasCustomEntryPoint")>
+    Public Property HasCustomEntryPoint As Boolean = False
+
+    <JsonProperty("entryPointToken")>
+    Public Property EntryPointToken As UInteger = 0
+
+    <JsonProperty("entryPointMethodName")>
+    Public Property EntryPointMethodName As String = ""
+
+    <JsonProperty("entryPointTypeName")>
+    Public Property EntryPointTypeName As String = ""
+
+    <JsonProperty("assemblyName")>
+    Public Property AssemblyName As String = ""
+
+    <JsonProperty("assemblyFullName")>
+    Public Property AssemblyFullName As String = ""
 
 End Class

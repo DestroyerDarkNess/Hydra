@@ -241,6 +241,16 @@ Public Class PresetManager
             .MergeMode = form.Guna2ComboBox1.SelectedIndex
         End With
 
+        ' Configuraciones de EntryPoint
+        With preset.EntryPoint
+            .HasCustomEntryPoint = (form.EntryPointToken > 0 AndAlso form.EntryPointMethod IsNot Nothing)
+            .EntryPointToken = form.EntryPointToken
+            .EntryPointMethodName = If(form.EntryPointMethod IsNot Nothing, form.EntryPointMethod.Name.String, "")
+            .EntryPointTypeName = If(form.EntryPointMethod IsNot Nothing, form.EntryPointMethod.DeclaringType.FullName, "")
+            .AssemblyName = If(form.Assembly IsNot Nothing, form.Assembly.Name.String, "")
+            .AssemblyFullName = If(form.Assembly IsNot Nothing, form.Assembly.FullName, "")
+        End With
+
         Return preset
     End Function
 
@@ -388,10 +398,111 @@ Public Class PresetManager
                 form.Guna2ComboBox1.SelectedIndex = .MergeMode
             End With
 
+            ' Configuraciones de EntryPoint
+            ApplyEntryPointSettings(preset.EntryPoint, form)
+
             ' Actualizar UI
             form.RaiseUI()
         Catch ex As Exception
             MessageBox.Show($"Error al aplicar preset: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Aplica configuraciones del entrypoint al formulario si es compatible
+    ''' </summary>
+    Private Shared Sub ApplyEntryPointSettings(entryPointSettings As EntryPointSettings, form As ProjectDesigner)
+        Try
+            ' Verificar si hay un entrypoint personalizado guardado
+            If Not entryPointSettings.HasCustomEntryPoint Then
+                Return
+            End If
+
+            ' Verificar compatibilidad del ensamblado
+            If form.Assembly Is Nothing Then
+                Return
+            End If
+
+            ' Verificar si es el mismo ensamblado (por nombre)
+            Dim currentAssemblyName As String = form.Assembly.Name
+            If String.IsNullOrEmpty(currentAssemblyName) OrElse
+               Not String.Equals(currentAssemblyName, entryPointSettings.AssemblyName, StringComparison.OrdinalIgnoreCase) Then
+
+                ' Mostrar mensaje informativo si el ensamblado no coincide
+                If Not String.IsNullOrEmpty(entryPointSettings.EntryPointMethodName) Then
+                    Dim msg As String = $"El preset contiene un entrypoint personalizado '{entryPointSettings.EntryPointMethodName}' " &
+                                      $"del ensamblado '{entryPointSettings.AssemblyName}', pero el ensamblado actual es '{currentAssemblyName}'. " &
+                                      $"El entrypoint no se aplicará automáticamente."
+                    MessageBox.Show(msg, "EntryPoint no compatible", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+                Return
+            End If
+
+            ' Intentar restaurar el entrypoint por token
+            If entryPointSettings.EntryPointToken > 0 Then
+                Try
+                    Dim method As dnlib.DotNet.MethodDef = form.Assembly.ResolveToken(entryPointSettings.EntryPointToken)
+                    If method IsNot Nothing Then
+                        ' Verificar que el método coincida con el guardado
+                        If String.Equals(method.Name.String, entryPointSettings.EntryPointMethodName, StringComparison.Ordinal) AndAlso
+                           String.Equals(method.DeclaringType.FullName, entryPointSettings.EntryPointTypeName, StringComparison.Ordinal) Then
+
+                            ' Restaurar entrypoint
+                            form.EntryPointToken = entryPointSettings.EntryPointToken
+                            form.EntryPointMethod = method
+                            form.Guna2TextBox4.Text = $"{entryPointSettings.EntryPointTypeName}.{entryPointSettings.EntryPointMethodName}"
+
+                            ' Mostrar mensaje de éxito
+                            'MessageBox.Show($"EntryPoint restaurado: {entryPointSettings.EntryPointMethodName}",
+                            '              "EntryPoint Aplicado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Return
+                        End If
+                    End If
+                Catch ex As Exception
+                    ' Si falla por token, intentar por nombre
+                End Try
+            End If
+
+            ' Intentar restaurar por nombre si el token falló
+            If Not String.IsNullOrEmpty(entryPointSettings.EntryPointMethodName) AndAlso
+               Not String.IsNullOrEmpty(entryPointSettings.EntryPointTypeName) Then
+
+                Try
+                    ' Buscar el tipo
+                    Dim targetType As dnlib.DotNet.TypeDef = form.Assembly.Types.FirstOrDefault(
+                        Function(t) String.Equals(t.FullName, entryPointSettings.EntryPointTypeName, StringComparison.Ordinal))
+
+                    If targetType IsNot Nothing Then
+                        ' Buscar el método
+                        Dim targetMethod As dnlib.DotNet.MethodDef = targetType.Methods.FirstOrDefault(
+                            Function(m) String.Equals(m.Name.String, entryPointSettings.EntryPointMethodName, StringComparison.Ordinal) AndAlso m.IsStatic)
+
+                        If targetMethod IsNot Nothing Then
+                            ' Restaurar entrypoint
+                            form.EntryPointToken = targetMethod.MDToken.Raw
+                            form.EntryPointMethod = targetMethod
+                            form.Guna2TextBox4.Text = $"{entryPointSettings.EntryPointTypeName}.{entryPointSettings.EntryPointMethodName}"
+
+                            ' Mostrar mensaje de éxito
+                            MessageBox.Show($"EntryPoint restaurado: {entryPointSettings.EntryPointMethodName}",
+                                          "EntryPoint Aplicado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Return
+                        End If
+                    End If
+                Catch ex As Exception
+                    ' Error buscando por nombre
+                End Try
+            End If
+
+            ' Si llegamos aquí, no se pudo restaurar el entrypoint
+            If Not String.IsNullOrEmpty(entryPointSettings.EntryPointMethodName) Then
+                MessageBox.Show($"No se pudo restaurar el entrypoint '{entryPointSettings.EntryPointMethodName}'. " &
+                              $"Puede que el método haya sido modificado o eliminado del ensamblado.",
+                              "EntryPoint no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Error al aplicar configuraciones del entrypoint: {ex.Message}",
+                          "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 

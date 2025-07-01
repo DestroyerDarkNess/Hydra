@@ -71,7 +71,7 @@ Public Module PresetUsageExample
             .Mode = 2 ' Alphanumeric
             .Length = 12
             .BaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-            .Namespace = True
+            .NamespaceEx = True
             .ClassName = True
             .Methods = True
             .Properties = True
@@ -164,6 +164,103 @@ Public Module PresetUsageExample
         ExampleExportImportPreset()
         
         Console.WriteLine(vbCrLf & "=== Flujo completado ===")
+    End Sub
+    
+    ''' <summary>
+    ''' Ejemplo de cómo trabajar con entrypoints personalizados en presets
+    ''' </summary>
+    Public Sub ExampleEntryPointPresets(form As ProjectDesigner)
+        Console.WriteLine("=== Trabajo con EntryPoints en Presets ===")
+        
+        ' Los entrypoints se guardan automáticamente en los presets cuando:
+        ' 1. Se ha seleccionado un entrypoint personalizado en el formulario
+        ' 2. Se guarda un preset usando CreatePresetFromForm
+        
+        ' Crear preset con entrypoint personalizado (si existe)
+        Dim preset As ProtectionPreset = PresetManager.CreatePresetFromForm(form)
+        preset.Name = "Preset con EntryPoint"
+        preset.Description = "Preset que incluye configuración de entrypoint personalizado"
+        
+        ' Verificar si se capturó un entrypoint personalizado
+        If preset.EntryPoint.HasCustomEntryPoint Then
+            Console.WriteLine($"EntryPoint capturado: {preset.EntryPoint.EntryPointMethodName}")
+            Console.WriteLine($"Tipo: {preset.EntryPoint.EntryPointTypeName}")
+            Console.WriteLine($"Token: {preset.EntryPoint.EntryPointToken}")
+            Console.WriteLine($"Ensamblado: {preset.EntryPoint.AssemblyName}")
+        Else
+            Console.WriteLine("No hay entrypoint personalizado configurado")
+        End If
+        
+        ' Guardar el preset
+        If PresetManager.SavePreset(preset, "PresetConEntryPoint") Then
+            Console.WriteLine("Preset con entrypoint guardado exitosamente")
+        End If
+        
+        ' Al cargar el preset, el entrypoint se restaurará automáticamente
+        ' si el ensamblado actual es compatible
+        Console.WriteLine(vbCrLf & "Cargando preset con entrypoint...")
+        Dim loadedPreset As ProtectionPreset = PresetManager.LoadPreset("PresetConEntryPoint")
+        If loadedPreset IsNot Nothing Then
+            PresetManager.ApplyPresetToForm(loadedPreset, form)
+            Console.WriteLine("Preset aplicado. El entrypoint se restaurará si es compatible.")
+        End If
+        
+        Console.WriteLine(vbCrLf & "=== Notas importantes sobre EntryPoints ===")
+        Console.WriteLine("- Los entrypoints se restauran solo si el ensamblado es compatible")
+        Console.WriteLine("- Se verifica por nombre de ensamblado y luego por token/nombre del método")
+        Console.WriteLine("- Si el método no existe, se muestra una advertencia")
+        Console.WriteLine("- Los entrypoints son útiles principalmente para DLLs sin entrypoint nativo")
+    End Sub
+    
+    ''' <summary>
+    ''' Ejemplo de preset específico para DLLs con entrypoint personalizado
+    ''' </summary>
+    Public Sub ExampleDLLPresetWithEntryPoint()
+        Dim preset As New ProtectionPreset()
+        
+        ' Configurar información básica
+        preset.Name = "DLL con EntryPoint Personalizado"
+        preset.Description = "Configuración optimizada para DLLs con entrypoint personalizado"
+        preset.Version = "1.0"
+        preset.Created = DateTime.Now
+        
+        ' Configuraciones básicas para DLL
+        With preset.Renamer
+            .Enabled = True
+            .Engine = 0
+            .Mode = 2 ' Alphanumeric
+            .Length = 10
+            .ClassName = True
+            .Methods = True
+            .Properties = True
+            .Fields = True
+        End With
+        
+        ' Protecciones ligeras para DLLs
+        With preset.Protections
+            .StringEncryption = True
+            .ControlFlow = True
+            .ReduceMetadata = True
+            .ProxyStrings = True
+        End With
+        
+        ' Configuraciones de EntryPoint
+        ' Nota: Estos valores se configuran automáticamente desde el formulario
+        ' Este es solo un ejemplo de la estructura
+        With preset.EntryPoint
+            .HasCustomEntryPoint = False ' Se establecerá automáticamente
+            .EntryPointToken = 0         ' Se capturará desde el formulario
+            .EntryPointMethodName = ""   ' Se capturará desde el formulario
+            .EntryPointTypeName = ""     ' Se capturará desde el formulario
+            .AssemblyName = ""           ' Se capturará desde el formulario
+            .AssemblyFullName = ""       ' Se capturará desde el formulario
+        End With
+        
+        ' Guardar el preset base
+        If PresetManager.SavePreset(preset, "DLL_BaseConEntryPoint") Then
+            Console.WriteLine("Preset base para DLL creado exitosamente")
+            Console.WriteLine("Para usar con entrypoint: selecciona un método como entrypoint y luego guarda el preset")
+        End If
     End Sub
     
 End Module 

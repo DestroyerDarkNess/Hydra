@@ -227,6 +227,47 @@ Los presets se guardan en:
 - Nuevas protecciones se añaden automáticamente
 - Protecciones obsoletas se ignoran silenciosamente
 
+## EntryPoints Personalizados
+
+### Funcionalidad para DLLs
+
+El sistema de presets incluye soporte completo para entrypoints personalizados, especialmente útil para DLLs:
+
+### Captura Automática
+- El entrypoint seleccionado se guarda automáticamente en el preset
+- Incluye token del método, nombre, tipo y ensamblado de origen
+- Solo se captura si existe un entrypoint personalizado configurado
+
+### Restauración Inteligente
+- **Verificación de compatibilidad**: Solo restaura si el ensamblado coincide
+- **Búsqueda por token**: Intenta restaurar usando el token original del método
+- **Búsqueda por nombre**: Si el token falla, busca por nombre del método y tipo
+- **Mensajes informativos**: Notifica sobre éxito, incompatibilidad o errores
+
+### Información Guardada
+```json
+{
+  "entryPoint": {
+    "hasCustomEntryPoint": true,
+    "entryPointToken": 100663297,
+    "entryPointMethodName": "Main",
+    "entryPointTypeName": "MyNamespace.Program", 
+    "assemblyName": "MiDLL",
+    "assemblyFullName": "MiDLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+  }
+}
+```
+
+### Casos de Uso
+- **DLLs sin entrypoint nativo**: Configura un método como punto de entrada
+- **Reutilización de configuraciones**: Mantén la misma configuración entre proyectos similares
+- **Flujos de trabajo automatizados**: Restaura automáticamente la configuración completa
+
+### Limitaciones
+- Solo funciona con el mismo ensamblado (verificación por nombre)
+- El método debe existir y mantener su signatura
+- Requiere que el método sea estático y público
+
 ## Extensión del Sistema
 
 Para añadir nuevas configuraciones al sistema de presets:
