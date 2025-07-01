@@ -197,6 +197,9 @@ Public Class ProtectionSettings
     <JsonProperty("sugarControlFlow")>
     Public Property SugarControlFlow As Boolean = False
 
+    <JsonProperty("KroksControlFlow")>
+    Public Property KroksControlFlow As Boolean = False
+
     <JsonProperty("exGuardControlFlow")>
     Public Property EXGuardControlFlow As Boolean = False
 

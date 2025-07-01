@@ -160,6 +160,7 @@ Public Class PresetManager
             .ControlFlowStrong = form.ControlFlowStrongModeCheck.Checked
             .SugarControlFlow = form.SugarControlFlowCheck.Checked
             .EXGuardControlFlow = form.EXGuardControlFlowCheck.Checked
+            .KroksControlFlow = form.KroksCheck.Checked
             .ProxyReferences = form.ProxyReferences.Checked
             .ProxyReferencesUnsafe = form.ProxyReferencesUnsafeCheck.Checked
             .Mutator = form.Mutator.Checked
@@ -304,6 +305,7 @@ Public Class PresetManager
                 form.ControlFlowStrongModeCheck.Checked = .ControlFlowStrong
                 form.SugarControlFlowCheck.Checked = .SugarControlFlow
                 form.EXGuardControlFlowCheck.Checked = .EXGuardControlFlow
+                form.KroksCheck.Checked = .KroksControlFlow
                 form.ProxyReferences.Checked = .ProxyReferences
                 form.ProxyReferencesUnsafeCheck.Checked = .ProxyReferencesUnsafe
                 form.Mutator.Checked = .Mutator
