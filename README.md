@@ -36,9 +36,63 @@ Listed below are all the features of Hydra:
  
 | Feature| Description                                              | .Net Framework   | .Net Core | 
 | ------ | -------------------------------------------------------- | ---------------- | --------- |
-| 🔄 `Renamer`   | Obfuscates the original assembly by renaming Methods, Properties, Events, Classes, Fields, Namespaces and even the Module of the assembly.             | ✅ | ✅  |  
+| 🔄 `Renamer`   | Obfuscates the original assembly by renaming Methods, Properties, Events, Classes, Fields, Namespaces and even the Module of the assembly. Supports exclusion via `HydraNoObfuscate` attribute.             | ✅ | ✅  |  
 
 🚧 Under Construction. 🚧
+
+### 🔄 Renamer - HydraNoObfuscate Attribute
+
+The Renamer feature now supports excluding specific classes and methods from obfuscation using the `HydraNoObfuscate` attribute.
+
+#### Usage Example:
+
+```csharp
+// 1. Define the attribute in your code
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event)]
+public class HydraNoObfuscateAttribute : Attribute
+{
+}
+
+// 2. Apply to classes you want to exclude completely
+[HydraNoObfuscate]
+public class ImportantAPIClass
+{
+    // All members of this class will be excluded from renaming
+    public void PublicMethod() { }
+    public string PublicProperty { get; set; }
+    public string PublicField;
+}
+
+// 3. Apply to specific members you want to exclude
+public class MyClass
+{
+    [HydraNoObfuscate]
+    public void DoNotRenameThisMethod() 
+    {
+        // This method will keep its original name
+    }
+    
+    public void ThisMethodWillBeRenamed() 
+    {
+        // This method will be renamed normally
+    }
+    
+    [HydraNoObfuscate]
+    public string ImportantProperty { get; set; }
+    
+    [HydraNoObfuscate]
+    public string criticalField;
+    
+    [HydraNoObfuscate]
+    public event EventHandler ImportantEvent;
+}
+```
+
+#### Key Features:
+- **Hierarchical Protection**: If a class has `[HydraNoObfuscate]`, all its members are automatically protected
+- **Granular Control**: Apply the attribute to specific methods, properties, fields, or events
+- **Flexible Naming**: The attribute works with both `HydraNoObfuscate` and `HydraNoObfuscateAttribute` names
+- **Zero Configuration**: Just add the attribute definition to your code and start using it
  
 ## Documentation
 
