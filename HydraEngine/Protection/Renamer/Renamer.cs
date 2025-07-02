@@ -14,7 +14,9 @@ namespace HydraEngine.Protection.Renamer
     {
         private Random Random = new Random();
 
-        public Renamer() : base("Protection.Renamer", "Renamer Phase", "Description for Renamer Phase") { }
+        public Renamer() : base("Protection.Renamer", "Renamer Phase", "Description for Renamer Phase")
+        {
+        }
 
         public string tag { get; set; } = string.Empty;
         public int Length { get; set; } = 20;
@@ -46,7 +48,6 @@ namespace HydraEngine.Protection.Renamer
                 GGeneration.Custom = tag;
 
                 GGeneration.CustomRN = !string.IsNullOrEmpty(tag);
-
 
                 if (ModuleRenaming)
                 {
@@ -88,7 +89,6 @@ namespace HydraEngine.Protection.Renamer
                                 module.Assembly.Name = "";
                                 module.Assembly.Version = new Version(Random.Next(1, 9), Random.Next(1, 9), Random.Next(1, 9), Random.Next(1, 9));
                             }
-
                         }
                     }
                 }
@@ -197,7 +197,6 @@ namespace HydraEngine.Protection.Renamer
                         if (ClassName)
                             type.Name = text2;
 
-
                         if (!method3.Name.Equals("InitializeComponent") || !method3.HasBody)
                         {
                             continue;
@@ -230,7 +229,6 @@ namespace HydraEngine.Protection.Renamer
         {
             throw new NotImplementedException();
         }
-
     }
 
     public class GGeneration
@@ -323,8 +321,28 @@ namespace HydraEngine.Protection.Renamer
 
     public class AnalyzerPhase
     {
+        private static bool HasHydraNoObfuscateAttribute(IHasCustomAttribute element)
+        {
+            if (element?.CustomAttributes == null)
+                return false;
+
+            return element.CustomAttributes.Any(attr =>
+                attr.AttributeType?.Name?.Contains("HydraNoObfuscate") == true ||
+                attr.AttributeType?.FullName?.Contains("HydraNoObfuscate") == true);
+        }
+
         public static bool CanRename(TypeDef type)
         {
+            if (HasHydraNoObfuscateAttribute(type))
+            {
+                return false;
+            }
+
+            if (type.Name == "HydraNoObfuscate" || type.Name == "HydraNoObfuscateAttribute")
+            {
+                return false;
+            }
+
             if (type.FullName == "TrinityAttribute")
             {
                 return false;
@@ -382,6 +400,16 @@ namespace HydraEngine.Protection.Renamer
 
         public static bool CanRename(EventDef e)
         {
+            if (HasHydraNoObfuscateAttribute(e))
+            {
+                return false;
+            }
+
+            if (HasHydraNoObfuscateAttribute(e.DeclaringType))
+            {
+                return false;
+            }
+
             if (e.IsSpecialName)
             {
                 return false;
@@ -395,6 +423,18 @@ namespace HydraEngine.Protection.Renamer
 
         public static bool CanRename(TypeDef type, PropertyDef p)
         {
+            // Verificar si la propiedad tiene el atributo HydraNoObfuscate
+            if (HasHydraNoObfuscateAttribute(p))
+            {
+                return false;
+            }
+
+            // También verificar si el tipo declarante tiene el atributo
+            if (HasHydraNoObfuscateAttribute(type))
+            {
+                return false;
+            }
+
             if (p.DeclaringType.Implements("System.ComponentModel.INotifyPropertyChanged"))
             {
                 return false;
@@ -424,6 +464,16 @@ namespace HydraEngine.Protection.Renamer
 
         public static bool CanRename(TypeDef type, FieldDef field)
         {
+            if (HasHydraNoObfuscateAttribute(field))
+            {
+                return false;
+            }
+
+            if (HasHydraNoObfuscateAttribute(type))
+            {
+                return false;
+            }
+
             if (field.DeclaringType.IsSerializable && !field.IsNotSerialized)
             {
                 return false;
@@ -469,6 +519,16 @@ namespace HydraEngine.Protection.Renamer
 
         public static bool CanRename(MethodDef method, TypeDef type)
         {
+            if (HasHydraNoObfuscateAttribute(method))
+            {
+                return false;
+            }
+
+            if (HasHydraNoObfuscateAttribute(type))
+            {
+                return false;
+            }
+
             if (method.DeclaringType.IsComImport() && !method.HasAttribute("System.Runtime.InteropServices.DispIdAttribute"))
             {
                 return false;
@@ -578,6 +638,16 @@ namespace HydraEngine.Protection.Renamer
 
         public static bool CanRename(TypeDef type, Parameter p)
         {
+            if (p.ParamDef != null && HasHydraNoObfuscateAttribute(p.ParamDef))
+            {
+                return false;
+            }
+
+            if (HasHydraNoObfuscateAttribute(type))
+            {
+                return false;
+            }
+
             if (type.FullName == "<Module>")
             {
                 return false;
@@ -593,5 +663,4 @@ namespace HydraEngine.Protection.Renamer
             return true;
         }
     }
-
 }
