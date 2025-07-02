@@ -1,96 +1,42 @@
-<div align="center">
+# Hydra
+
+[Download on the official website](https://toolslib.net/downloads/viewdownload/600-hydranet/)
+[Download on Github](https://github.com/DestroyerDarkNess/Hydra/releases/tag/1.1.3)
+
+# Embed DLL assemblies into executable
+
+![{DCC3C1D8-5A40-419B-9D0A-871AEBC70F2D}](https://github.com/user-attachments/assets/12bdde6f-1b48-4f0b-8716-324d1d016252)
  
-[![Create Go App][repo_logo_img]][repo_url]
+# Protections Preview 
+
+![{FBFBDF60-8891-4408-BF11-92BAB1FB9BCB}](https://github.com/user-attachments/assets/b94c0579-a161-41e2-b292-48a7e5ff9a9a)
+
+![Untitled](https://github.com/user-attachments/assets/041f21a5-0d17-4211-8c2b-14baf4008dfb)
+
+# Packers
+
+![{5F861715-1FE7-40BE-88B6-B68802B89384}](https://github.com/user-attachments/assets/01482d1f-650a-414c-af36-8c34d826e735)
+
+## NativeV2 Packer Warning
+
+![{4E879C52-37D8-455F-9728-720497078BA5}](https://github.com/user-attachments/assets/c65056e4-deb7-49ba-8876-03eb54843ae5)
  
-# HydraEngine
+ > **Warning**
+>
+> If you use Native Packer :
+> ![{DD9A3F26-48DB-4690-B788-5ABD81AA0ADA}](https://github.com/user-attachments/assets/bf93839b-30ed-4144-81a9-80e2f5a7a417)
+> You should combine it with Extreme AntiDump :
+> ![{DBA730AB-B4CB-42E1-998B-EAEE1E7F24B7}](https://github.com/user-attachments/assets/ba97ede7-f697-44a8-8029-0e464b4c5d0c)
+> 
+> **And the final result should be protected with VMP or some other similar software to prevent it from being unpacked.**
 
-[![.NET Framework][dotnet_version_img]][dotnet_dev_url]
-[![.NET Framework][dotnet_core_version_img]][dotnet_dev_url]
-[![License][repo_license_img]][repo_license_url]
-
-Hydra is a powerful tool for protecting .NET assemblies with various obfuscation and anti-debugging techniques. Focus on writing your code and let Hydra handle the protection!
-<br><br>
-
-⚠️ I invite you to the community, where you can chat and suggest your ideas for this project. 💌 
+The NativeV2 Packer itself is just a loader written in C for .net, its purpose is simply to add a native layer, but without protection, so it must be protected in the end with VMP or similar software .
  
-[![Discord Banner 2](https://discord.com/api/guilds/1327640073348317235/widget.png?style=banner2)](https://discord.gg/C4evgU4Tas)
-</div>
+![{F05B08A1-F9DF-425F-9131-5D6C65F40D9B}](https://github.com/user-attachments/assets/66f47bdb-e831-47f2-83d3-37ac3a095f19)
 
 
 
-## ⚡️ Quick start
 
-First, ensure you have **[.NET Framework 4.8](https://go.microsoft.com/fwlink/?linkid=2088631)** or higher installed.
 
-[Download Hydra](https://github.com/DestroyerDarkNess/Hydra/releases/download/1.1.9/HailHydra.7z) and have fun.
- 
-That's all you need to know to start! 🎉
 
-## 📖 Project Wiki
-
-The best way to explore all the features of **Hydra** is to read the project [Wiki][repo_wiki_url] and take part in [Discussions][repo_discussions_url] and/or [Issues][repo_issues_url].
-
-## ⚙️ Features & Options
-
-Listed below are all the features of Hydra:
- 
-| Feature| Description                                              | .Net Framework   | .Net Core | 
-| ------ | -------------------------------------------------------- | ---------------- | --------- |
-| 🔄 `Renamer`   | Obfuscates the original assembly by renaming Methods, Properties, Events, Classes, Fields, Namespaces and even the Module of the assembly.             | ✅ | ✅  |  
-
-🚧 Under Construction. 🚧
- 
-## Documentation
-
-- 📖 [Complete Command Line Guide](Hydra/COMMANDLINE_README.md)
-- 📝 [Preset System Documentation](Hydra/PRESETS_README.md)
-- 📁 [Example Scripts](Hydra/Examples/)
-
-## ⭐️ Project assistance
-
-If you want to say **thank you** or/and support active development of `Hydra`:
-
-- Add a [GitHub Star][repo_url] to the project.
-
-## ❗️ Support the author
-
-You can support the author on Binance or Paypal `s4lsalsoft@gmail.com`. ❤️
-
-## 🏆 A win-win cooperation
-
-And now, I invite you to participate in this project!  
-
-- [Issues][repo_issues_url]: ask questions and submit your features.
-- [Pull requests][repo_pull_request_url]: send your improvements to the current.
-
-Together, we can make this project **better** every day! 😘
-
-## ⚠️ License
-
-[`Hydra`][repo_url] is free and open-source software licensed under the [MIT License][repo_license_url].
-
-<!-- .NET -->
-
-[dotnet_version_img]: https://img.shields.io/badge/.NET_Framework-violet?style=for-the-badge&logo=dotnet
-[dotnet_core_version_img]: https://img.shields.io/badge/.NET_Core-blue?style=for-the-badge&logo=dotnet
-[dotnet_dev_url]: https://dotnet.microsoft.com/
-
-<!-- Repository -->
-[repo_logo_url]: https://github.com/DestroyerDarkNess/Hydra
-[repo_logo_img]: https://github.com/user-attachments/assets/2b36e5d4-0122-4691-9fda-2dfb0acfb7cc
-[repo_url]: https://github.com/DestroyerDarkNess/Hydra
-[repo_license_url]: https://github.com/DestroyerDarkNess/Hydra/blob/main/LICENSE
-[repo_license_img]: https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none
-[repo_issues_url]: https://github.com/DestroyerDarkNess/Hydra/issues
-[repo_pull_request_url]: https://github.com/DestroyerDarkNess/Hydra/pulls
-[repo_discussions_url]: https://github.com/DestroyerDarkNess/Hydra/discussions
-[repo_wiki_url]: https://github.com/DestroyerDarkNess/Hydra/wiki
-
-<!-- Author -->
-
-[boosty_url]: https://github.com/DestroyerDarkNess
-
-<!-- Readme links -->
-
-[dev_to_url]: https://dev.to/
 
