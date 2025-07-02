@@ -60,14 +60,7 @@ And now, I invite you to participate in this project!
 Together, we can make this project **better** every day! 😘
 
 ## ⚠️ License
-
-[`Hydra`][repo_url] is free and open-source software licensed under the [MIT License][repo_license_url].
-
-<!-- .NET -->
-
-[dotnet_version_img]: https://img.shields.io/badge/.NET_Framework-violet?style=for-the-badge&logo=dotnet
-[dotnet_core_version_img]: https://img.shields.io/badge/.NET_Core-blue?style=for-the-badge&logo=dotnet
-[dotnet_dev_url]: https://dotnet.microsoft.com/
+ 
 
 <!-- Repository -->
 [repo_logo_url]: https://github.com/DestroyerDarkNess/Hydra

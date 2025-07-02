@@ -25,17 +25,20 @@ Partial Class MainWindow
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainWindow))
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
+        Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.LogInLabel6 = New Hydra.LogInLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.LogInLabel5 = New Hydra.LogInLabel()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2Button13 = New Guna.UI2.WinForms.Guna2Button()
-        Me.LogInLabel4 = New Hydra.LogInLabel()
-        Me.LogInLabel3 = New Hydra.LogInLabel()
-        Me.LogInLabel1 = New Hydra.LogInLabel()
-        Me.LogInLabel2 = New Hydra.LogInLabel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
+        Me.Guna2DragControl1 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
+        Me.Guna2ShadowForm1 = New Guna.UI2.WinForms.Guna2ShadowForm(Me.components)
+        Me.Guna2DragControl2 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
+        Me.Guna2DragControl3 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
+        Me.PresetsComboBox = New Hydra.LogInComboBox()
         Me.MenuStripZ1 = New Hydra.MenuStripZ()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,13 +54,12 @@ Partial Class MainWindow
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HomePageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
-        Me.Guna2DragControl1 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
-        Me.Guna2ShadowForm1 = New Guna.UI2.WinForms.Guna2ShadowForm(Me.components)
-        Me.Guna2DragControl2 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
-        Me.Guna2DragControl3 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
+        Me.LogInLabel6 = New Hydra.LogInLabel()
+        Me.LogInLabel5 = New Hydra.LogInLabel()
+        Me.LogInLabel4 = New Hydra.LogInLabel()
+        Me.LogInLabel3 = New Hydra.LogInLabel()
+        Me.LogInLabel1 = New Hydra.LogInLabel()
+        Me.LogInLabel2 = New Hydra.LogInLabel()
         Me.Guna2DragControl4 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2DragControl5 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
         Me.Guna2DragControl6 = New Guna.UI2.WinForms.Guna2DragControl(Me.components)
@@ -78,11 +80,13 @@ Partial Class MainWindow
         Me.Guna2Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2Panel1.BorderThickness = 1
+        Me.Guna2Panel1.Controls.Add(Me.PresetsComboBox)
+        Me.Guna2Panel1.Controls.Add(Me.Guna2Button2)
+        Me.Guna2Panel1.Controls.Add(Me.Guna2Panel3)
+        Me.Guna2Panel1.Controls.Add(Me.MenuStripZ1)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Panel4)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Button1)
         Me.Guna2Panel1.Controls.Add(Me.Guna2Panel2)
-        Me.Guna2Panel1.Controls.Add(Me.MenuStripZ1)
-        Me.Guna2Panel1.Controls.Add(Me.Guna2Panel3)
         Me.Guna2Panel1.Controls.Add(Me.Label1)
         Me.Guna2Panel1.FillColor = System.Drawing.Color.Transparent
         Me.Guna2Panel1.ForeColor = System.Drawing.Color.White
@@ -91,6 +95,31 @@ Partial Class MainWindow
         Me.Guna2Panel1.Size = New System.Drawing.Size(819, 494)
         Me.Guna2Panel1.TabIndex = 0
         Me.Guna2Panel1.UseTransparentBackground = True
+        '
+        'Guna2Button2
+        '
+        Me.Guna2Button2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Guna2Button2.BorderRadius = 5
+        Me.Guna2Button2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(25, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.Guna2Button2.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button2.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button2.Image = CType(resources.GetObject("Guna2Button2.Image"), System.Drawing.Image)
+        Me.Guna2Button2.Location = New System.Drawing.Point(346, 17)
+        Me.Guna2Button2.Name = "Guna2Button2"
+        Me.Guna2Button2.Size = New System.Drawing.Size(27, 28)
+        Me.Guna2Button2.TabIndex = 24
+        Me.Guna2Button2.Visible = False
+        '
+        'Guna2Panel3
+        '
+        Me.Guna2Panel3.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2Panel3.Location = New System.Drawing.Point(1, 44)
+        Me.Guna2Panel3.Name = "Guna2Panel3"
+        Me.Guna2Panel3.Size = New System.Drawing.Size(817, 453)
+        Me.Guna2Panel3.TabIndex = 7
+        Me.Guna2Panel3.UseTransparentBackground = True
+        Me.Guna2Panel3.Visible = False
         '
         'Guna2Panel4
         '
@@ -105,21 +134,6 @@ Partial Class MainWindow
         Me.Guna2Panel4.Size = New System.Drawing.Size(306, 26)
         Me.Guna2Panel4.TabIndex = 7
         '
-        'LogInLabel6
-        '
-        Me.LogInLabel6.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel6.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.LogInLabel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LogInLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel6.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel6.ForeColor = System.Drawing.Color.Gray
-        Me.LogInLabel6.Location = New System.Drawing.Point(28, 0)
-        Me.LogInLabel6.Name = "LogInLabel6"
-        Me.LogInLabel6.Size = New System.Drawing.Size(175, 26)
-        Me.LogInLabel6.TabIndex = 8
-        Me.LogInLabel6.Text = "Join the Discord community"
-        Me.LogInLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'PictureBox1
         '
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
@@ -131,21 +145,6 @@ Partial Class MainWindow
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
-        '
-        'LogInLabel5
-        '
-        Me.LogInLabel5.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel5.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.LogInLabel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.LogInLabel5.Font = New System.Drawing.Font("Corbel", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel5.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel5.ForeColor = System.Drawing.Color.Firebrick
-        Me.LogInLabel5.Location = New System.Drawing.Point(203, 0)
-        Me.LogInLabel5.Name = "LogInLabel5"
-        Me.LogInLabel5.Size = New System.Drawing.Size(103, 26)
-        Me.LogInLabel5.TabIndex = 9
-        Me.LogInLabel5.Text = "¡Hail Hydra!"
-        Me.LogInLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Guna2Button1
         '
@@ -190,58 +189,66 @@ Partial Class MainWindow
         Me.Guna2Button13.Text = "Open"
         Me.Guna2Button13.UseTransparentBackground = True
         '
-        'LogInLabel4
+        'Label1
         '
-        Me.LogInLabel4.AutoSize = True
-        Me.LogInLabel4.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel4.Font = New System.Drawing.Font("Segoe UI Semilight", 9.0!)
-        Me.LogInLabel4.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel4.ForeColor = System.Drawing.Color.Silver
-        Me.LogInLabel4.Location = New System.Drawing.Point(15, 113)
-        Me.LogInLabel4.Name = "LogInLabel4"
-        Me.LogInLabel4.Size = New System.Drawing.Size(276, 15)
-        Me.LogInLabel4.TabIndex = 9
-        Me.LogInLabel4.Text = "« If one head is cut off, two more will take its place »"
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(819, 17)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "  Hydra Protector Reborn @Dark" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'LogInLabel3
+        'Guna2Elipse1
         '
-        Me.LogInLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.LogInLabel3.Font = New System.Drawing.Font("Segoe UI Semilight", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel3.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel3.ForeColor = System.Drawing.Color.Gray
-        Me.LogInLabel3.Location = New System.Drawing.Point(0, 128)
-        Me.LogInLabel3.Name = "LogInLabel3"
-        Me.LogInLabel3.Size = New System.Drawing.Size(306, 25)
-        Me.LogInLabel3.TabIndex = 8
-        Me.LogInLabel3.Text = "Private Protector"
-        Me.LogInLabel3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Guna2Elipse1.BorderRadius = 0
+        Me.Guna2Elipse1.TargetControl = Me
         '
-        'LogInLabel1
+        'Guna2DragControl1
         '
-        Me.LogInLabel1.AutoSize = True
-        Me.LogInLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel1.Font = New System.Drawing.Font("Segoe UI Semilight", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel1.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel1.Location = New System.Drawing.Point(70, 11)
-        Me.LogInLabel1.Name = "LogInLabel1"
-        Me.LogInLabel1.Size = New System.Drawing.Size(114, 25)
-        Me.LogInLabel1.TabIndex = 6
-        Me.LogInLabel1.Text = "Welcome By"
+        Me.Guna2DragControl1.DockIndicatorTransparencyValue = 0.6R
+        Me.Guna2DragControl1.TargetControl = Me.Guna2Panel1
+        Me.Guna2DragControl1.UseTransparentDrag = True
         '
-        'LogInLabel2
+        'Guna2ShadowForm1
         '
-        Me.LogInLabel2.AutoSize = True
-        Me.LogInLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel2.Font = New System.Drawing.Font("Segoe UI Semilight", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LogInLabel2.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel2.ForeColor = System.Drawing.Color.Gray
-        Me.LogInLabel2.Location = New System.Drawing.Point(178, 11)
-        Me.LogInLabel2.Name = "LogInLabel2"
-        Me.LogInLabel2.Size = New System.Drawing.Size(61, 25)
-        Me.LogInLabel2.TabIndex = 7
-        Me.LogInLabel2.Text = "Hydra"
+        Me.Guna2ShadowForm1.TargetForm = Me
+        '
+        'Guna2DragControl2
+        '
+        Me.Guna2DragControl2.DockIndicatorTransparencyValue = 0.6R
+        Me.Guna2DragControl2.TargetControl = Me.Label1
+        Me.Guna2DragControl2.UseTransparentDrag = True
+        '
+        'Guna2DragControl3
+        '
+        Me.Guna2DragControl3.DockIndicatorTransparencyValue = 0.6R
+        Me.Guna2DragControl3.TargetControl = Me.Guna2Panel2
+        Me.Guna2DragControl3.UseTransparentDrag = True
+        '
+        'PresetsComboBox
+        '
+        Me.PresetsComboBox.ArrowColour = System.Drawing.Color.White
+        Me.PresetsComboBox.BackColor = System.Drawing.Color.Transparent
+        Me.PresetsComboBox.BaseColour = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.PresetsComboBox.BorderColour = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.PresetsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.PresetsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.PresetsComboBox.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.PresetsComboBox.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.PresetsComboBox.FormattingEnabled = True
+        Me.PresetsComboBox.LineColour = System.Drawing.Color.Red
+        Me.PresetsComboBox.Location = New System.Drawing.Point(101, 19)
+        Me.PresetsComboBox.Name = "PresetsComboBox"
+        Me.PresetsComboBox.Size = New System.Drawing.Size(239, 26)
+        Me.PresetsComboBox.SqaureColour = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.PresetsComboBox.SqaureHoverColour = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(52, Byte), Integer))
+        Me.PresetsComboBox.StartIndex = 0
+        Me.PresetsComboBox.TabIndex = 0
+        Me.PresetsComboBox.Visible = False
         '
         'MenuStripZ1
         '
@@ -355,55 +362,88 @@ Partial Class MainWindow
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.AboutToolStripMenuItem.Text = "About..."
         '
-        'Guna2Panel3
+        'LogInLabel6
         '
-        Me.Guna2Panel3.FillColor = System.Drawing.Color.Transparent
-        Me.Guna2Panel3.Location = New System.Drawing.Point(1, 44)
-        Me.Guna2Panel3.Name = "Guna2Panel3"
-        Me.Guna2Panel3.Size = New System.Drawing.Size(817, 453)
-        Me.Guna2Panel3.TabIndex = 7
-        Me.Guna2Panel3.UseTransparentBackground = True
-        Me.Guna2Panel3.Visible = False
+        Me.LogInLabel6.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel6.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LogInLabel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LogInLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel6.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel6.ForeColor = System.Drawing.Color.Gray
+        Me.LogInLabel6.Location = New System.Drawing.Point(28, 0)
+        Me.LogInLabel6.Name = "LogInLabel6"
+        Me.LogInLabel6.Size = New System.Drawing.Size(175, 26)
+        Me.LogInLabel6.TabIndex = 8
+        Me.LogInLabel6.Text = "Join the Discord community"
+        Me.LogInLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label1
+        'LogInLabel5
         '
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(819, 17)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "  Hydra Protector Reborn @Dark" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LogInLabel5.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel5.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LogInLabel5.Dock = System.Windows.Forms.DockStyle.Right
+        Me.LogInLabel5.Font = New System.Drawing.Font("Corbel", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel5.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel5.ForeColor = System.Drawing.Color.Firebrick
+        Me.LogInLabel5.Location = New System.Drawing.Point(203, 0)
+        Me.LogInLabel5.Name = "LogInLabel5"
+        Me.LogInLabel5.Size = New System.Drawing.Size(103, 26)
+        Me.LogInLabel5.TabIndex = 9
+        Me.LogInLabel5.Text = "¡Hail Hydra!"
+        Me.LogInLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Guna2Elipse1
+        'LogInLabel4
         '
-        Me.Guna2Elipse1.BorderRadius = 0
-        Me.Guna2Elipse1.TargetControl = Me
+        Me.LogInLabel4.AutoSize = True
+        Me.LogInLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel4.Font = New System.Drawing.Font("Segoe UI Semilight", 9.0!)
+        Me.LogInLabel4.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel4.ForeColor = System.Drawing.Color.Silver
+        Me.LogInLabel4.Location = New System.Drawing.Point(15, 113)
+        Me.LogInLabel4.Name = "LogInLabel4"
+        Me.LogInLabel4.Size = New System.Drawing.Size(276, 15)
+        Me.LogInLabel4.TabIndex = 9
+        Me.LogInLabel4.Text = "« If one head is cut off, two more will take its place »"
         '
-        'Guna2DragControl1
+        'LogInLabel3
         '
-        Me.Guna2DragControl1.DockIndicatorTransparencyValue = 0.6R
-        Me.Guna2DragControl1.TargetControl = Me.Guna2Panel1
-        Me.Guna2DragControl1.UseTransparentDrag = True
+        Me.LogInLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.LogInLabel3.Font = New System.Drawing.Font("Segoe UI Semilight", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel3.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel3.ForeColor = System.Drawing.Color.Gray
+        Me.LogInLabel3.Location = New System.Drawing.Point(0, 128)
+        Me.LogInLabel3.Name = "LogInLabel3"
+        Me.LogInLabel3.Size = New System.Drawing.Size(306, 25)
+        Me.LogInLabel3.TabIndex = 8
+        Me.LogInLabel3.Text = "Private Protector"
+        Me.LogInLabel3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
-        'Guna2ShadowForm1
+        'LogInLabel1
         '
-        Me.Guna2ShadowForm1.TargetForm = Me
+        Me.LogInLabel1.AutoSize = True
+        Me.LogInLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel1.Font = New System.Drawing.Font("Segoe UI Semilight", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel1.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel1.Location = New System.Drawing.Point(70, 11)
+        Me.LogInLabel1.Name = "LogInLabel1"
+        Me.LogInLabel1.Size = New System.Drawing.Size(114, 25)
+        Me.LogInLabel1.TabIndex = 6
+        Me.LogInLabel1.Text = "Welcome By"
         '
-        'Guna2DragControl2
+        'LogInLabel2
         '
-        Me.Guna2DragControl2.DockIndicatorTransparencyValue = 0.6R
-        Me.Guna2DragControl2.TargetControl = Me.Label1
-        Me.Guna2DragControl2.UseTransparentDrag = True
-        '
-        'Guna2DragControl3
-        '
-        Me.Guna2DragControl3.DockIndicatorTransparencyValue = 0.6R
-        Me.Guna2DragControl3.TargetControl = Me.Guna2Panel2
-        Me.Guna2DragControl3.UseTransparentDrag = True
+        Me.LogInLabel2.AutoSize = True
+        Me.LogInLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel2.Font = New System.Drawing.Font("Segoe UI Semilight", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LogInLabel2.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel2.ForeColor = System.Drawing.Color.Gray
+        Me.LogInLabel2.Location = New System.Drawing.Point(178, 11)
+        Me.LogInLabel2.Name = "LogInLabel2"
+        Me.LogInLabel2.Size = New System.Drawing.Size(61, 25)
+        Me.LogInLabel2.TabIndex = 7
+        Me.LogInLabel2.Text = "Hydra"
         '
         'Guna2DragControl4
         '
@@ -502,4 +542,6 @@ Partial Class MainWindow
     Friend WithEvents LogInLabel5 As LogInLabel
     Friend WithEvents LogInLabel6 As LogInLabel
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PresetsComboBox As LogInComboBox
+    Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
 End Class
