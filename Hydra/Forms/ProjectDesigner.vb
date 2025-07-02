@@ -51,12 +51,12 @@ Public Class ProjectDesigner
     Private FilePath As String = String.Empty
     Private WorkingDir As String = String.Empty
 
-    Public Sub LoadFile(ByVal PE_Path As String)
+    Public Function LoadFile(ByVal PE_Path As String) As Boolean
         Try
             If IO.File.Exists(PE_Path) = False Then
                 Me.Close()
                 Me.Dispose()
-                Exit Sub
+                Return False
             End If
 
             AssemblyBytes = IO.File.ReadAllBytes(PE_Path)
@@ -82,6 +82,7 @@ Public Class ProjectDesigner
 
             If Assembly.IsILOnly = False Then
                 Me.Close()
+                Return False
             End If
 
             If Assembly.EntryPoint Is Nothing Then
@@ -159,10 +160,11 @@ Public Class ProjectDesigner
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Loading Error")
             Me.Close()
+            Return False
         End Try
 
         LoadPresetsComboBox()
-
+        Return True
         'Else
 
         '    MessageDialog.ShowAsync("PE Invalid, please select a .NET binary")
@@ -170,10 +172,10 @@ Public Class ProjectDesigner
         '    ShiledButton.Enabled = False
         '    ShiledButton.Enabled = False
         '    JumpCrackButton.Enabled = False
-
+        '    Return True
         'End If
 
-    End Sub
+    End Function
 
     Private Sub LoadPackers(ByVal isDLL As Boolean)
         PackerSelect.Items.Clear()
@@ -1734,13 +1736,19 @@ Public Class ProjectDesigner
 
     End Sub
 
+    Public IsConsoleMode As Boolean = False
+
     Private Sub Writelog(ByVal Msg As String, Optional ByVal ForeC As Color = Nothing)
         Try
-            Me.BeginInvoke(Sub()
-                               If ForeC = Nothing Then ForeC = Color.White
-                               LogTextBox.ForeColor = ForeC
-                               LogTextBox.Text += Msg & vbNewLine
-                           End Sub)
+            If IsConsoleMode Then
+                Console.WriteLine(Msg)
+            Else
+                Me.BeginInvoke(Sub()
+                                   If ForeC = Nothing Then ForeC = Color.White
+                                   LogTextBox.ForeColor = ForeC
+                                   LogTextBox.Text += Msg & vbNewLine
+                               End Sub)
+            End If
         Catch ex As Exception : End Try
     End Sub
 
@@ -1973,6 +1981,7 @@ Public Class ProjectDesigner
     ''' </summary>
     Private Sub LoadPresetsComboBox()
         Try
+            If Core.Instances.MainInstance Is Nothing Then Exit Sub
             ' Buscar si existe un ComboBox para presets, si no, crearlo dinámicamente
             Dim presetsCombo As LogInComboBox = Nothing
 

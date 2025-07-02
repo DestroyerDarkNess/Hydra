@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3C89876D-9613-4146-B553-0D6C45BF99BB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>Hydra.MainWindow</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Hydra</RootNamespace>
     <AssemblyName>Hydra</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -126,6 +126,8 @@
     <Compile Include="Controls\MessageDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Core\CommandLineArgs.vb" />
+    <Compile Include="Core\ConsoleRunner.vb" />
     <Compile Include="Core\Helper\Paths.vb" />
     <Compile Include="Core\Helper\Utils.vb" />
     <Compile Include="Core\PresetManager.vb" />

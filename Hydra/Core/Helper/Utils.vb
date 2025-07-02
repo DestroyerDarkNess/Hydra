@@ -4,7 +4,6 @@ Imports System.Reflection
 
 Namespace Core.Helpers
 
-
     Public Class Utils
 
         ''' <summary>
@@ -18,7 +17,6 @@ Namespace Core.Helpers
         Public Shared Function ConvertToIcon(inputBitmap As Image, output As Stream, Optional size As Integer = 16, Optional preserveAspectRatio As Boolean = False) As Boolean
 
             Dim width As Single = size, height As Single = size
-
 
             Dim newBitmap = New Bitmap(inputBitmap, New Size(CInt(width), CInt(height)))
             If newBitmap Is Nothing Then
@@ -96,7 +94,6 @@ Namespace Core.Helpers
             If Formats = "" Then
 
                 OpenFileDialog1.Filter = "Executable Files|*.exe"
-
             Else
 
                 OpenFileDialog1.Filter = Formats
@@ -142,7 +139,6 @@ Namespace Core.Helpers
             Return Nothing
 
         End Function
-
 
         Public Shared Function IsAdmin() As Boolean
             Try
@@ -246,7 +242,6 @@ Namespace Core.Helpers
 #End Region
 
 #Region " Base64 Functions "
-
 
 #Region " Base64 Functions "
 
@@ -410,7 +405,6 @@ Namespace Core.Helpers
             ' Return hr = 0
         End Function
 
-
         Public Shared Function IsBinary(ByVal filePath As String, ByVal Optional requiredConsecutiveNul As Integer = 1) As Boolean
             Const charsToCheck As Integer = 8000
             Const nulChar As Char = vbNullChar
@@ -433,9 +427,8 @@ Namespace Core.Helpers
             Return False
         End Function
 
-
 #End Region
 
     End Class
-End Namespace
 
+End Namespace

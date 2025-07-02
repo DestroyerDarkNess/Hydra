@@ -1,83 +1,83 @@
-# Sistema de Presets de Protección - Hydra
+# Protection Preset System - Hydra
 
-Este documento describe el sistema de presets implementado en Hydra para guardar, cargar y compartir configuraciones de protección.
+This document describes the preset system implemented in Hydra for saving, loading, and sharing protection configurations.
 
-## Características
+## Features
 
-- **Guardado automático** de todas las configuraciones del protector
-- **Presets por defecto** listos para usar
-- **Importación y exportación** de presets en formato JSON
-- **Gestión completa** con interfaz gráfica
-- **Compatibilidad total** con todas las protecciones disponibles
+- **Automatic saving** of all protector configurations
+- **Default presets** ready to use
+- **Import and export** of presets in JSON format
+- **Complete management** with graphical interface
+- **Full compatibility** with all available protections
 
-## Estructura de Archivos
+## File Structure
 
 ```
 Hydra/
 ├── Core/
-│   ├── ProtectionPreset.vb       # Clases de datos para presets
-│   └── PresetManager.vb          # Gestor principal de presets
+│   ├── ProtectionPreset.vb       # Data classes for presets
+│   └── PresetManager.vb          # Main preset manager
 ├── Forms/
-│   ├── PresetManager.vb          # Formulario de gestión
-│   └── PresetManager.Designer.vb # Diseño del formulario
+│   ├── PresetManager.vb          # Management form
+│   └── PresetManager.Designer.vb # Form design
 └── Examples/
-    └── PresetUsageExample.vb     # Ejemplos de uso
+    └── PresetUsageExample.vb     # Usage examples
 ```
 
-## Presets por Defecto
+## Default Presets
 
-El sistema incluye 4 presets predefinidos:
+The system includes 4 predefined presets:
 
-### 1. **Básico**
-- Renombrado de símbolos (Alphanumeric, 10 caracteres)
-- Cifrado de strings
-- Control flow básico
-- Reducción de metadatos
+### 1. **Basic**
+- Symbol renaming (Alphanumeric, 10 characters)
+- String encryption
+- Basic control flow
+- Metadata reduction
 
-### 2. **Avanzado**
-- Renombrado avanzado (Chino, 15 caracteres)
-- Múltiples protecciones de strings y enteros
-- Control flow robusto
-- Protecciones proxy
-- Mutación v2
+### 2. **Advanced**
+- Advanced renaming (Chinese, 15 characters)
+- Multiple string and integer protections
+- Robust control flow
+- Proxy protections
+- Mutation v2
 - Anti-debug, anti-dump, anti-tamper
 
-### 3. **Máximo**
-- **¡ATENCIÓN!** Configuración extrema que puede ser inestable
-- Todas las protecciones habilitadas
-- Virtualización de métodos
-- Todas las anti-protecciones
-- Renombrado invisible
+### 3. **Maximum**
+- **WARNING!** Extreme configuration that may be unstable
+- All protections enabled
+- Method virtualization
+- All anti-protections
+- Invisible renaming
 
-### 4. **Solo Renombrado**
-- Únicamente renombrado de símbolos
-- Ideal para debugging y desarrollo
+### 4. **Renaming Only**
+- Symbol renaming only
+- Ideal for debugging and development
 
-## Uso desde Código
+## Code Usage
 
-### Guardar Configuración Actual
+### Save Current Configuration
 ```vb
-' Crear preset desde el formulario actual
-Dim preset As ProtectionPreset = PresetManager.CreatePresetFromForm(formulario)
-preset.Name = "Mi Configuración"
-preset.Description = "Configuración personalizada"
+' Create preset from current form
+Dim preset As ProtectionPreset = PresetManager.CreatePresetFromForm(form)
+preset.Name = "My Configuration"
+preset.Description = "Custom configuration"
 
-' Guardar
-If PresetManager.SavePreset(preset, "MiConfig") Then
-    MessageBox.Show("Preset guardado exitosamente")
+' Save
+If PresetManager.SavePreset(preset, "MyConfig") Then
+    MessageBox.Show("Preset saved successfully")
 End If
 ```
 
-### Cargar un Preset
+### Load a Preset
 ```vb
-' Cargar preset específico
-Dim preset As ProtectionPreset = PresetManager.LoadPreset("Básico")
+' Load specific preset
+Dim preset As ProtectionPreset = PresetManager.LoadPreset("Basic")
 If preset IsNot Nothing Then
-    PresetManager.ApplyPresetToForm(preset, formulario)
+    PresetManager.ApplyPresetToForm(preset, form)
 End If
 ```
 
-### Listar Presets Disponibles
+### List Available Presets
 ```vb
 Dim presets As List(Of String) = PresetManager.GetAvailablePresets()
 For Each presetName As String In presets
@@ -85,13 +85,13 @@ For Each presetName As String In presets
 Next
 ```
 
-### Crear Preset Programáticamente
+### Create Preset Programmatically
 ```vb
 Dim preset As New ProtectionPreset()
 preset.Name = "Custom"
-preset.Description = "Configuración personalizada"
+preset.Description = "Custom configuration"
 
-' Configurar renamer
+' Configure renamer
 With preset.Renamer
     .Enabled = True
     .Mode = 2 ' Alphanumeric
@@ -101,40 +101,40 @@ With preset.Renamer
     .Methods = True
 End With
 
-' Configurar protecciones
+' Configure protections
 With preset.Protections
     .StringEncryption = True
     .ControlFlow = True
     .IntConfusion = True
 End With
 
-PresetManager.SavePreset(preset, "MiPresetCustom")
+PresetManager.SavePreset(preset, "MyCustomPreset")
 ```
 
-## Uso desde Interfaz Gráfica
+## Graphical Interface Usage
 
-### Abrir el Gestor de Presets
+### Open Preset Manager
 ```vb
-' Desde el formulario principal
-formulario.OpenPresetManager()
+' From main form
+form.OpenPresetManager()
 ```
 
-### Funciones Disponibles
-- **Guardar**: Guarda la configuración actual como nuevo preset
-- **Cargar**: Aplica un preset seleccionado
-- **Eliminar**: Borra un preset
-- **Exportar**: Guarda un preset en archivo JSON
-- **Importar**: Carga un preset desde archivo JSON
-- **Info**: Muestra información detallada del preset
+### Available Functions
+- **Save**: Saves current configuration as new preset
+- **Load**: Applies selected preset
+- **Delete**: Removes a preset
+- **Export**: Saves preset to JSON file
+- **Import**: Loads preset from JSON file
+- **Info**: Shows detailed preset information
 
-## Formato JSON
+## JSON Format
 
-Los presets se guardan en formato JSON legible:
+Presets are saved in readable JSON format:
 
 ```json
 {
-  "name": "Mi Preset",
-  "description": "Descripción del preset",
+  "name": "My Preset",
+  "description": "Preset description",
   "version": "1.0",
   "created": "2024-01-01T12:00:00",
   "renamer": {
@@ -151,100 +151,100 @@ Los presets se guardan en formato JSON legible:
     "controlFlow": true,
     "intConfusion": false
   },
-  // ... más configuraciones
+  // ... more configurations
 }
 ```
 
-## Ubicación de Archivos
+## File Location
 
-Los presets se guardan en:
+Presets are saved in:
 ```
-[DirectorioAplicación]/Presets/
-├── Básico.json
-├── Avanzado.json
-├── Máximo.json
-├── Solo Renombrado.json
-└── [TusPresetsPersonalizados].json
+[ApplicationDirectory]/Presets/
+├── Basic.json
+├── Advanced.json
+├── Maximum.json
+├── Renaming Only.json
+└── [YourCustomPresets].json
 ```
 
-## Importar/Exportar Presets
+## Import/Export Presets
 
-### Exportar
-1. Selecciona un preset en el gestor
-2. Haz clic en "Exportar"
-3. Elige ubicación y nombre del archivo
-4. El preset se guarda como archivo .json
+### Export
+1. Select a preset in the manager
+2. Click "Export"
+3. Choose location and file name
+4. The preset is saved as a .json file
 
-### Importar
-1. Haz clic en "Importar" en el gestor
-2. Selecciona un archivo .json de preset
-3. Confirma el nombre del preset
-4. El preset se añade a tu colección
+### Import
+1. Click "Import" in the manager
+2. Select a preset .json file
+3. Confirm the preset name
+4. The preset is added to your collection
 
-## Buenas Prácticas
+## Best Practices
 
-### Nomenclatura
-- Usa nombres descriptivos: "Production_v1", "Debug_Mode", "High_Security"
-- Incluye versión si es necesario: "MyConfig_v2.1"
-- Evita caracteres especiales en nombres de archivo
+### Naming
+- Use descriptive names: "Production_v1", "Debug_Mode", "High_Security"
+- Include version if necessary: "MyConfig_v2.1"
+- Avoid special characters in file names
 
-### Organización
-- Crea presets específicos para diferentes tipos de proyectos
-- Mantén un preset de "debugging" con protecciones mínimas
-- Usa descripciones detalladas para recordar el propósito
+### Organization
+- Create specific presets for different project types
+- Keep a "debugging" preset with minimal protections
+- Use detailed descriptions to remember the purpose
 
 ### Backup
-- Exporta regularmente tus presets importantes
-- Mantén copias de seguridad de configuraciones críticas
-- Comparte presets útiles con tu equipo
+- Regularly export your important presets
+- Keep backups of critical configurations
+- Share useful presets with your team
 
-## Solución de Problemas
+## Troubleshooting
 
-### Preset No Carga
-- Verifica que el archivo JSON no esté corrupto
-- Comprueba que el preset sea compatible con la versión actual
-- Revisa los permisos de la carpeta Presets
+### Preset Won't Load
+- Verify that the JSON file is not corrupted
+- Check that the preset is compatible with the current version
+- Review permissions for the Presets folder
 
-### Configuración No Se Aplica
-- Algunos controles pueden no existir en versiones diferentes
-- El sistema omite configuraciones incompatibles automáticamente
-- Revisa el log para mensajes de error
+### Configuration Not Applied
+- Some controls may not exist in different versions
+- The system automatically skips incompatible configurations
+- Check the log for error messages
 
-### Error al Guardar
-- Verifica permisos de escritura en la carpeta Presets
-- Comprueba que no uses caracteres inválidos en el nombre
-- Asegúrate de tener espacio disponible en disco
+### Save Error
+- Verify write permissions in the Presets folder
+- Check that you're not using invalid characters in the name
+- Ensure you have available disk space
 
-## Compatibilidad
+## Compatibility
 
-### Versiones
-- Los presets incluyen información de versión
-- Compatibilidad hacia adelante garantizada
-- Migración automática cuando sea posible
+### Versions
+- Presets include version information
+- Forward compatibility guaranteed
+- Automatic migration when possible
 
-### Protecciones
-- Todas las protecciones actuales son compatibles
-- Nuevas protecciones se añaden automáticamente
-- Protecciones obsoletas se ignoran silenciosamente
+### Protections
+- All current protections are compatible
+- New protections are added automatically
+- Obsolete protections are silently ignored
 
-## EntryPoints Personalizados
+## Custom EntryPoints
 
-### Funcionalidad para DLLs
+### DLL Functionality
 
-El sistema de presets incluye soporte completo para entrypoints personalizados, especialmente útil para DLLs:
+The preset system includes full support for custom entrypoints, especially useful for DLLs:
 
-### Captura Automática
-- El entrypoint seleccionado se guarda automáticamente en el preset
-- Incluye token del método, nombre, tipo y ensamblado de origen
-- Solo se captura si existe un entrypoint personalizado configurado
+### Automatic Capture
+- The selected entrypoint is automatically saved in the preset
+- Includes method token, name, type, and source assembly
+- Only captured if a custom entrypoint is configured
 
-### Restauración Inteligente
-- **Verificación de compatibilidad**: Solo restaura si el ensamblado coincide
-- **Búsqueda por token**: Intenta restaurar usando el token original del método
-- **Búsqueda por nombre**: Si el token falla, busca por nombre del método y tipo
-- **Mensajes informativos**: Notifica sobre éxito, incompatibilidad o errores
+### Intelligent Restoration
+- **Compatibility verification**: Only restores if the assembly matches
+- **Token search**: Attempts to restore using the original method token
+- **Name search**: If token fails, searches by method and type name
+- **Informative messages**: Notifies about success, incompatibility, or errors
 
-### Información Guardada
+### Saved Information
 ```json
 {
   "entryPoint": {
@@ -252,44 +252,44 @@ El sistema de presets incluye soporte completo para entrypoints personalizados, 
     "entryPointToken": 100663297,
     "entryPointMethodName": "Main",
     "entryPointTypeName": "MyNamespace.Program", 
-    "assemblyName": "MiDLL",
-    "assemblyFullName": "MiDLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "assemblyName": "MyDLL",
+    "assemblyFullName": "MyDLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
   }
 }
 ```
 
-### Casos de Uso
-- **DLLs sin entrypoint nativo**: Configura un método como punto de entrada
-- **Reutilización de configuraciones**: Mantén la misma configuración entre proyectos similares
-- **Flujos de trabajo automatizados**: Restaura automáticamente la configuración completa
+### Use Cases
+- **DLLs without native entrypoint**: Configure a method as entry point
+- **Configuration reuse**: Maintain the same configuration across similar projects
+- **Automated workflows**: Automatically restore complete configuration
 
-### Limitaciones
-- Solo funciona con el mismo ensamblado (verificación por nombre)
-- El método debe existir y mantener su signatura
-- Requiere que el método sea estático y público
+### Limitations
+- Only works with the same assembly (verification by name)
+- Method must exist and maintain its signature
+- Requires the method to be static and public
 
-## Extensión del Sistema
+## System Extension
 
-Para añadir nuevas configuraciones al sistema de presets:
+To add new configurations to the preset system:
 
-1. **Agregar propiedades** a las clases en `ProtectionPreset.vb`
-2. **Actualizar `CreatePresetFromForm`** en `PresetManager.vb`
-3. **Actualizar `ApplyPresetToForm`** en `PresetManager.vb`
-4. **Añadir atributos JSON** para serialización
+1. **Add properties** to classes in `ProtectionPreset.vb`
+2. **Update `CreatePresetFromForm`** in `PresetManager.vb`
+3. **Update `ApplyPresetToForm`** in `PresetManager.vb`
+4. **Add JSON attributes** for serialization
 
-Ejemplo:
+Example:
 ```vb
-' En ProtectionSettings
-<JsonProperty("miNuevaProteccion")>
-Public Property MiNuevaProteccion As Boolean = False
+' In ProtectionSettings
+<JsonProperty("myNewProtection")>
+Public Property MyNewProtection As Boolean = False
 
-' En CreatePresetFromForm
-.MiNuevaProteccion = form.MiNuevaProteccionCheck.Checked
+' In CreatePresetFromForm
+.MyNewProtection = form.MyNewProtectionCheck.Checked
 
-' En ApplyPresetToForm  
-form.MiNuevaProteccionCheck.Checked = .MiNuevaProteccion
+' In ApplyPresetToForm  
+form.MyNewProtectionCheck.Checked = .MyNewProtection
 ```
 
 ---
 
-**Nota**: Este sistema está diseñado para ser expandible y mantenible. Cualquier nueva protección añadida al sistema se puede integrar fácilmente en el sistema de presets siguiendo los patrones establecidos. 
+**Note**: This system is designed to be expandable and maintainable. Any new protection added to the system can be easily integrated into the preset system by following the established patterns. 
