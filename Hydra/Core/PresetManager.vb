@@ -550,9 +550,6 @@ Public Class PresetManager
 
             ' Preset máximo
             CreateMaximumPreset()
-
-            ' Preset solo renombrado
-            CreateRenamerOnlyPreset()
         Catch ex As Exception
             ' Si hay error creando presets por defecto, no mostrar mensaje
         End Try
@@ -752,29 +749,6 @@ Public Class PresetManager
         End With
 
         SavePreset(preset, "Maximum")
-    End Sub
-
-    Private Shared Sub CreateRenamerOnlyPreset()
-        Dim preset As New ProtectionPreset()
-        preset.Name = "Renaming Only"
-        preset.Description = "Symbol renaming only, ideal for debugging"
-        preset.Version = "1.0"
-        preset.Created = DateTime.Now
-
-        ' Configurar solo renamer
-        With preset.Renamer
-            .Enabled = True
-            .Engine = 0 ' dnlib
-            .Mode = 2 ' Alphanumeric
-            .Length = 8
-            .NamespaceEx = True
-            .ClassName = True
-            .Methods = True
-            .Properties = True
-            .Fields = True
-        End With
-
-        SavePreset(preset, "Renaming Only")
     End Sub
 
 End Class
