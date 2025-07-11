@@ -156,6 +156,7 @@ Public Class ProjectDesigner
             Guna2CheckBox7.Checked = TreeViewMethodManager.ExcludeUnsafeMethods
 
             Dim assemblyRefs As List(Of HydraEngine.Core.DLLInfo) = HydraEngine.Core.Utils.GetUniqueLibsToMerged(Assembly, WorkingDir)
+
             LoadDlls(assemblyRefs)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Loading Error")
