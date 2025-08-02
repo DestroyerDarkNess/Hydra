@@ -21,15 +21,17 @@ using EXGuard.Core.RTProtections;
 using EXGuard.Core.Helpers.System;
 using EXGuard.Core.RTProtections.Constants;
 
-namespace EXGuard.Core.RT {
-	public class VMRuntime {
-		internal Dictionary<MethodDef, Tuple<ScopeBlock, ILBlock>> MethodMap;
-		List<Tuple<MethodDef, ILBlock>> BasicBlocks;
+namespace EXGuard.Core.RT
+{
+    public class VMRuntime
+    {
+        internal Dictionary<MethodDef, Tuple<ScopeBlock, ILBlock>> MethodMap;
+        private List<Tuple<MethodDef, ILBlock>> BasicBlocks;
 
-		List<IChunk> ExtraChunks;
-		List<IChunk> FinalChunks;
+        private List<IChunk> ExtraChunks;
+        private List<IChunk> FinalChunks;
 
-        List<byte> __ILVDATA;
+        private List<byte> __ILVDATA;
 
         public ModuleDefMD RTModule
         {
@@ -111,7 +113,8 @@ namespace EXGuard.Core.RT {
 
         public static string Watermark { get; set; } = "Discord: user76";
 
-        public VMRuntime(Virtualizer vr, ModuleDef rt) {
+        public VMRuntime(Virtualizer vr, ModuleDef rt)
+        {
             MethodMap = new Dictionary<MethodDef, Tuple<ScopeBlock, ILBlock>>();
             BasicBlocks = new List<Tuple<MethodDef, ILBlock>>();
 
@@ -126,6 +129,7 @@ namespace EXGuard.Core.RT {
             Virtualizer = vr;
 
             #region Runtime ModuleWriterOptions
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             RTModuleWriterOptions = new ModuleWriterOptions(RTModule)
             {
@@ -134,7 +138,8 @@ namespace EXGuard.Core.RT {
                 WritePdb = false
             };
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Runtime ModuleWriterOptions
 
             CompressionService = new CompressionService();
 
@@ -147,43 +152,57 @@ namespace EXGuard.Core.RT {
             __ILVDATA_Deriver = new ILVDynamicDeriver();
         }
 
-        public void AddMethod(MethodDef method, ScopeBlock rootScope) {
-			ILBlock entry = null;
+        public void AddMethod(MethodDef method, ScopeBlock rootScope)
+        {
+            ILBlock entry = null;
 
-			foreach (ILBlock block in rootScope.GetBasicBlocks()) {
-				if (block.Id == 0)
-					entry = block;
-				BasicBlocks.Add(Tuple.Create(method, block));
-			}
+            foreach (ILBlock block in rootScope.GetBasicBlocks())
+            {
+                if (block.Id == 0)
+                    entry = block;
+                BasicBlocks.Add(Tuple.Create(method, block));
+            }
 
-			Debug.Assert(entry != null);
-			MethodMap[method] = Tuple.Create(rootScope, entry);           
+            Debug.Assert(entry != null);
+            MethodMap[method] = Tuple.Create(rootScope, entry);
         }
 
-		internal void AddHelper(MethodDef method, ScopeBlock rootScope, ILBlock entry) {
-			MethodMap[method] = Tuple.Create(rootScope, entry);
-		}
+        internal void AddHelper(MethodDef method, ScopeBlock rootScope, ILBlock entry)
+        {
+            MethodMap[method] = Tuple.Create(rootScope, entry);
+        }
 
-		public void AddBlock(MethodDef method, ILBlock block) {
-			BasicBlocks.Add(Tuple.Create(method, block));
-		}
+        public void AddBlock(MethodDef method, ILBlock block)
+        {
+            BasicBlocks.Add(Tuple.Create(method, block));
+        }
 
-		public ScopeBlock LookupMethod(MethodDef method) {
-			var m = MethodMap[method];
-			return m.Item1;
-		}
+        public ScopeBlock LookupMethod(MethodDef method)
+        {
+            if (!MethodMap.ContainsKey(method)) return null;
+            var m = MethodMap[method];
+            return m.Item1;
+        }
 
-		public ScopeBlock LookupMethod(MethodDef method, out ILBlock entry) {
-			var m = MethodMap[method];
-			entry = m.Item2;
-			return m.Item1;
-		}
+        public ScopeBlock LookupMethod(MethodDef method, out ILBlock entry)
+        {
+            if (!MethodMap.ContainsKey(method))
+            {
+                entry = null;
+                return null;
+            }
+            var m = MethodMap[method];
+            entry = m.Item2;
+            return m.Item1;
+        }
 
-		public void AddChunk(IChunk chunk) {
-			ExtraChunks.Add(chunk);
-		}
+        public void AddChunk(IChunk chunk)
+        {
+            ExtraChunks.Add(chunk);
+        }
 
-		public void ExportMethod(MethodDef method, MDToken mdToken) {
+        public void ExportMethod(MethodDef method, MDToken mdToken)
+        {
             Descriptor.Data.ReadExportMDToken(method, mdToken);
             MethodPatcher.Patch(RTSearch, method);
         }
@@ -205,15 +224,18 @@ namespace EXGuard.Core.RT {
             header.WriteData(this);
 
             #region ***********| Create ILVData |***********
+
             ///////////////////////////////////////////////////////
             List<byte> Data = new List<byte>();
 
             foreach (var chunk in FinalChunks)
                 Data.AddRange(chunk.GetData());
             ///////////////////////////////////////////////////////
-            #endregion
+
+            #endregion ***********| Create ILVData |***********
 
             #region ***********| Write Encrypted And Compressed DATA To __ILVDATA LIST |***********
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////
             __ILVDATA_Deriver.Initialize(this);
 
@@ -222,9 +244,11 @@ namespace EXGuard.Core.RT {
             for (var l = 0; l < Encrypted_ILVDATA.Length; l++)
                 __ILVDATA.Add(Encrypted_ILVDATA[l]);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion ***********| Write Encrypted And Compressed DATA To __ILVDATA LIST |***********
 
             #region Encryption Key Write Utils.Decrypt
+
             /////////////////////////////////////////////////////////////////////////////////////////////////////
             var EncryptionKeyBuffer = BitConverter.GetBytes(EncryptionKey);
 
@@ -233,16 +257,20 @@ namespace EXGuard.Core.RT {
                 EncryptionKeyBuffer[3], EncryptionKeyBuffer[4], EncryptionKeyBuffer[5],
                 EncryptionKeyBuffer[6], EncryptionKeyBuffer[7] });
             /////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Encryption Key Write Utils.Decrypt
 
             #region Data Counts Write VMData.ctor
+
             /////////////////////////////////////////////////////////////////////////////////////////////////////
             MutationHelper.InjectKeys_Int(RTSearch.VMData_Ctor, new int[] { 2, 3, 4 }, new int[] {
                 Descriptor.Data.strMap.Count, Descriptor.Data.refMap.Count, Descriptor.Data.sigs.Count });
             /////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Data Counts Write VMData.ctor
 
             #region Write VMData to VMData.ctor
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             var DataType = new TypeDefUser(RNMService.NewName(Descriptor.RandomGenerator.NextString()),
                 RTModule.CorLibTypes.GetTypeRef("System", "ValueType"))
@@ -277,9 +305,11 @@ namespace EXGuard.Core.RT {
             RTSearch.VMData_Ctor.Body.Instructions.Insert(index + 1, Instruction.Create(OpCodes.Call, RTModule.Import(RTSearch.FieldInfo_GetFieldFromHandle_1)));
             RTSearch.VMData_Ctor.Body.Instructions.Insert(index + 2, Instruction.Create(OpCodes.Callvirt, RTModule.Import(RTSearch.FieldInfo_get_FieldHandle)));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Write VMData to VMData.ctor
 
             #region Write Mutation.Crypt (For Encrypted And Compressed Data)
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             MutationHelper.InjectKey_Int(RTSearch.VMData_Ctor, 1, __ILVDATA_Deriver.Seed); // Write Seed
 
@@ -312,52 +342,68 @@ namespace EXGuard.Core.RT {
             foreach (Instruction instr in instrs)
                 RTSearch.VMData_Ctor.Body.Instructions.Add(instr);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Write Mutation.Crypt (For Encrypted And Compressed Data)
 
             #region End Protection (For RT)
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             #region All String Encryption (ConfuserEX Constants Protection (Modded)
+
             /////////////////////////////////////////////////////////////////
             new ConstantsProtection().Execute(RTModule, this);
             /////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion All String Encryption (ConfuserEX Constants Protection (Modded)
 
             #region Anti De4dot
+
             ////////////////////////////////////////////
             Anti_De4dot.Execute(RTModule, Watermark);
             ////////////////////////////////////////////
-            #endregion
+
+            #endregion Anti De4dot
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion End Protection (For RT)
         }
 
-        void ComputeOffsets() {
-			uint offset = 0;
-			foreach (var chunk in FinalChunks) {
-				chunk.OnOffsetComputed(offset);
-				offset += chunk.Length;
-			}
-		}
+        private void ComputeOffsets()
+        {
+            uint offset = 0;
+            foreach (var chunk in FinalChunks)
+            {
+                chunk.OnOffsetComputed(offset);
+                offset += chunk.Length;
+            }
+        }
 
-		void FixupReferences() {
-			foreach (var block in BasicBlocks) {
-				foreach (var instr in block.Item2.Content) {
-					if (instr.Operand is ILRelReference) {
-						var reference = (ILRelReference)instr.Operand;
-						instr.Operand = ILImmediate.Create(reference.Resolve(this), ASTType.I4);
-					}
-				}
-			}
-		}
+        private void FixupReferences()
+        {
+            foreach (var block in BasicBlocks)
+            {
+                foreach (var instr in block.Item2.Content)
+                {
+                    if (instr.Operand is ILRelReference)
+                    {
+                        var reference = (ILRelReference)instr.Operand;
+                        instr.Operand = ILImmediate.Create(reference.Resolve(this), ASTType.I4);
+                    }
+                }
+            }
+        }
 
-		public void ResetData() {
-			MethodMap = new Dictionary<MethodDef, Tuple<ScopeBlock, ILBlock>>();
-			BasicBlocks = new List<Tuple<MethodDef, ILBlock>>();
+        public void ResetData()
+        {
+            MethodMap = new Dictionary<MethodDef, Tuple<ScopeBlock, ILBlock>>();
+            BasicBlocks = new List<Tuple<MethodDef, ILBlock>>();
 
-			ExtraChunks = new List<IChunk>();
-			FinalChunks = new List<IChunk>();
+            ExtraChunks = new List<IChunk>();
+            FinalChunks = new List<IChunk>();
 
-			Descriptor.ResetData();
-		}
-	}
+            Descriptor.ResetData();
+        }
+    }
 }
