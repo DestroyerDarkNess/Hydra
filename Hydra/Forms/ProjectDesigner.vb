@@ -1288,7 +1288,7 @@ Public Class ProjectDesigner
                                                      IO.File.Delete(PackedPath)
                                                  End If
 
-                                                 Dim Merger As ILRepack = New ILRepack()
+                                                 Dim Merger As ILMerger = New ILMerger()
                                                  Dim Merge As Boolean = Merger.MergeAssemblies(OriginalPath, DllsToMerged, PackedPath)
 
                                                  Core.Helpers.Utils.Sleep(3)
