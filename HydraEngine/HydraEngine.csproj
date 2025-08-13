@@ -162,6 +162,7 @@
     <Compile Include="Core\Utils.cs" />
     <Compile Include="Models\NETBuilderInjection.cs" />
     <Compile Include="Models\Pack.cs" />
+    <Compile Include="Protection\Calli\CallObfuscation.cs" />
     <Compile Include="Protection\Calli\CallToCalli.cs" />
     <Compile Include="Protection\CodeEncryption\AntiTamperNormal.cs" />
     <Compile Include="Protection\CodeEncryption\ATGlobal.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Protection\VM\Core\Protections\LoadDLLRuntime\VMInitialize.cs" />
     <Compile Include="Protection\VM\EXGuard.cs" />
     <Compile Include="Protection\VM\Virtualizer.cs" />
+    <Compile Include="References\AsmLibMerger.cs" />
     <Compile Include="References\AssemblyFusion.cs" />
     <Compile Include="References\DllEmbbeder.cs" />
     <Compile Include="References\Embeder.cs" />

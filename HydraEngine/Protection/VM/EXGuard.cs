@@ -2,11 +2,13 @@
 using EXGuard.Core.EXECProtections;
 using EXGuard.Internal;
 using HydraEngine.Core;
+using HydraEngine.References;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using VM.Runtime.Handler.Impl;
 
 namespace HydraEngine.Protection.VM
 {
@@ -83,6 +85,9 @@ namespace HydraEngine.Protection.VM
             {
                 File.Copy(Runtime, Path.Combine(ouput, RuntimeVM_Name));
             }
+
+            //var Merger = new AsmLibMerger();
+            //var MergeRuntime = Merger.MergeAssemblies(Tempoutput, new List<string>() { Runtime }, Tempoutput);
 
             TempModule = new MemoryStream(File.ReadAllBytes(Tempoutput));
 

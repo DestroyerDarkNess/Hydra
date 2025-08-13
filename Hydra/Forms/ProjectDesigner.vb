@@ -614,7 +614,11 @@ Public Class ProjectDesigner
         End If
 
         If Calli.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
+            If CalliUnsafe.Checked = True Then
+                Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
+            Else
+                Result.Add(New HydraEngine.Protection.Calli.CallObfuscation)
+            End If
         End If
 
         If ProxyInt.Checked = True Then
@@ -1288,7 +1292,7 @@ Public Class ProjectDesigner
                                                      IO.File.Delete(PackedPath)
                                                  End If
 
-                                                 Dim Merger As ILMerger = New ILMerger()
+                                                 Dim Merger As ILRepack = New ILRepack()
                                                  Dim Merge As Boolean = Merger.MergeAssemblies(OriginalPath, DllsToMerged, PackedPath)
 
                                                  Core.Helpers.Utils.Sleep(3)
@@ -1458,6 +1462,7 @@ Public Class ProjectDesigner
                                      End If
 
                                      Try
+
                                          If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
 
                                          If OptimizeCode Then
@@ -1578,7 +1583,7 @@ Public Class ProjectDesigner
                                                  writerOptions.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.ILOnly
                                                  writerOptions.MetadataLogger = DummyLogger.NoThrowInstance
                                              End If
-
+                                             Console.WriteLine("Saving Module... " & TempPreOuputPath)
                                              AsmDef.Write(TempPreOuputPath, writerOptions)
 
                                              If UnmmanagedStr Then

@@ -484,8 +484,8 @@ Public Class PresetManager
                             form.Guna2TextBox4.Text = $"{entryPointSettings.EntryPointTypeName}.{entryPointSettings.EntryPointMethodName}"
 
                             ' Mostrar mensaje de éxito
-                            MessageBox.Show($"EntryPoint restored: {entryPointSettings.EntryPointMethodName}",
-                                          "EntryPoint Applied", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            'MessageBox.Show($"EntryPoint restored: {entryPointSettings.EntryPointMethodName}",
+                            '              "EntryPoint Applied", MessageBoxButtons.OK, MessageBoxIcon.Information)
                             Return
                         End If
                     End If
