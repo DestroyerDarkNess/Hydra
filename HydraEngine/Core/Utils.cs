@@ -189,7 +189,11 @@ namespace HydraEngine.Core
 
         public static List<DLLInfo> GetUniqueLibsToMerged(ModuleDef ASM, string WorkingDir)
         {
-            var allLibs = GetLibsToMergedRecursive(ASM, WorkingDir);
+            Console.WriteLine($"Searching for libraries to merge in {WorkingDir}...");
+            // Crear un HashSet para rastrear assemblies ya procesados
+            var processedAssemblies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var allLibs = GetLibsToMergedRecursive(ASM, WorkingDir, processedAssemblies);
+            Console.WriteLine($"Found {allLibs.Count} libraries to merge.");
             return allLibs
                 .GroupBy(dll => dll.Path)
                 .Select(g => g.First())
@@ -198,7 +202,25 @@ namespace HydraEngine.Core
 
         public static List<DLLInfo> GetLibsToMergedRecursive(ModuleDef ASM, string WorkingDir)
         {
+            // Sobrecarga para mantener compatibilidad hacia atrás
+            var processedAssemblies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            return GetLibsToMergedRecursive(ASM, WorkingDir, processedAssemblies);
+        }
+
+        private static List<DLLInfo> GetLibsToMergedRecursive(ModuleDef ASM, string WorkingDir, HashSet<string> processedAssemblies)
+        {
             List<DLLInfo> result = new List<DLLInfo>();
+
+            // Verificar si ya hemos procesado este assembly
+            string currentAssemblyKey = ASM.Assembly?.FullName ?? ASM.Name;
+            if (processedAssemblies.Contains(currentAssemblyKey))
+            {
+                Console.WriteLine($"Assembly already processed: {currentAssemblyKey}");
+                return result; // Retornar lista vacía para evitar recursión infinita
+            }
+
+            // Marcar este assembly como procesado
+            processedAssemblies.Add(currentAssemblyKey);
 
             var assemblyRefs = ASM.GetAssemblyRefs()
                                   .Select(modEx => Path.Combine(WorkingDir, modEx.Name + ".dll"))
@@ -208,16 +230,34 @@ namespace HydraEngine.Core
             {
                 try
                 {
+                    // Verificar si ya hemos procesado esta ruta
+                    string fullPath = Path.GetFullPath(relativePath);
+                    if (processedAssemblies.Contains(fullPath))
+                    {
+                        Console.WriteLine($"Library path already processed: {Path.GetFileName(relativePath)}");
+                        continue;
+                    }
+
+                    Console.WriteLine($"Assembly: {ASM.FullName} Loading assembly: {Path.GetFileName(relativePath)}");
                     using (var module = ModuleDefMD.Load(relativePath))
                     {
                         if (module.IsILOnly)
                         {
                             result.Add(new DLLInfo { Path = relativePath, Info = module.Assembly.FullName });
-                            result.AddRange(GetLibsToMergedRecursive(module, WorkingDir));
+                            Console.WriteLine($"Loading library: {relativePath}");
+
+                            // Marcar la ruta como procesada antes de la recursión
+                            processedAssemblies.Add(fullPath);
+
+                            // Llamada recursiva con el conjunto de assemblies procesados
+                            result.AddRange(GetLibsToMergedRecursive(module, WorkingDir, processedAssemblies));
                         }
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error processing assembly {Path.GetFileName(relativePath)}: {ex.Message}");
+                }
             }
 
             return result;

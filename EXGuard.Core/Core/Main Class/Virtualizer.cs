@@ -19,23 +19,24 @@ using EXGuard.Runtime;
 
 namespace EXGuard.Core
 {
-    public class Virtualizer : IVMSettings {
-        ModuleDef EXECModule;
-        MethodVirtualizer MDVirtualizer;
+    public class Virtualizer : IVMSettings
+    {
+        private ModuleDef EXECModule;
+        private MethodVirtualizer MDVirtualizer;
 
-		HashSet<MethodDef> methodList = new HashSet<MethodDef>();
-		HashSet<ModuleDef> processed = new HashSet<ModuleDef>();
+        private HashSet<MethodDef> methodList = new HashSet<MethodDef>();
+        private HashSet<ModuleDef> processed = new HashSet<ModuleDef>();
 
         public VMRuntime Runtime
-		{
-			get;
-			private set;
-		}
+        {
+            get;
+            private set;
+        }
 
         public Virtualizer(ModuleDef module, string newRtName)
         {
             var RuntimeModule = ModuleDefMD.Load(typeof(VMEntry).Module);
-            
+
             RuntimeModule.Assembly.Name = newRtName;
             RuntimeModule.Name = string.Empty;
 
@@ -50,6 +51,7 @@ namespace EXGuard.Core
             MDVirtualizer = new MethodVirtualizer(Runtime);
 
             #region Reset MutationHelper
+
             //////////////////////////////////////////////////////////////////////////////////////////////
             MutationHelper.Field2IntIndex = MutationHelper.Original_Field2IntIndex;
             MutationHelper.Field2LongIndex = MutationHelper.Original_Field2LongIndex;
@@ -63,20 +65,24 @@ namespace EXGuard.Core
             RTMap.Mutation_Value_T_Arg0 = "Value";
             RTMap.Mutation_Crypt = "Crypt";
             //////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Reset MutationHelper
 
             #region Set First VMSettings
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             Runtime.RTSearch = new RuntimeSearch(Runtime.RTModule, Runtime).Search(); // Search RTMap Methods
-           
-			Runtime.RTMutator.MutateRuntime(); // Mutate Runtime
+
+            Runtime.RTMutator.MutateRuntime(); // Mutate Runtime
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Set First VMSettings
         }
 
-        public void AddMethod(MethodDef method) {
-			if (!method.HasBody)
-				return;
+        public void AddMethod(MethodDef method)
+        {
+            if (!method.HasBody)
+                return;
 
             if (method.HasGenericParameters)
                 return;
@@ -90,6 +96,7 @@ namespace EXGuard.Core
             var targets = new HashSet<MethodDef>();
 
             #region Search Virtualized Methods
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i < module.Types.Count; i++)
             {
@@ -104,7 +111,8 @@ namespace EXGuard.Core
                 }
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Search Virtualized Methods
 
             ctx.Runtime = Runtime;
             ctx.Targets = targets;
@@ -113,15 +121,17 @@ namespace EXGuard.Core
             antitamper.HandleRun(options);
         }
 
-        public IEnumerable<MethodDef> GetMethods() {
-			return methodList;
-		}
+        public IEnumerable<MethodDef> GetMethods()
+        {
+            return methodList;
+        }
 
         public void ResolveMethods()
         {
             var list = new HashSet<MethodDef>();
 
             #region Search Virtualized Methods
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i < EXECModule.Types.Count; i++)
             {
@@ -134,7 +144,8 @@ namespace EXGuard.Core
                 }
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
-            #endregion
+
+            #endregion Search Virtualized Methods
 
             methodList = list;
         }
@@ -148,19 +159,21 @@ namespace EXGuard.Core
             return fnlist;
         }
 
-        public void ProcessMethods(ModuleWriterBase writer) {
-			if (processed.Contains(EXECModule))
-				throw new InvalidOperationException("Module already processed.");
+        public void ProcessMethods(ModuleWriterBase writer)
+        {
+            if (processed.Contains(EXECModule))
+                throw new InvalidOperationException("Module already processed.");
 
-			var targets = methodList.Where(method => method.Module == EXECModule).ToList();
-            
-            for (int i = 0; i < targets.Count; i++) {
-				var method = targets[i];
+            var targets = methodList.Where(method => method.Module == EXECModule).ToList();
+
+            for (int i = 0; i < targets.Count; i++)
+            {
+                var method = targets[i];
                 ProcessMethod(method, writer.Metadata.GetToken(method));
             }
 
-			processed.Add(EXECModule);
-		}
+            processed.Add(EXECModule);
+        }
 
         public void CommitModule(Metadata rtmtd)
         {
@@ -175,20 +188,23 @@ namespace EXGuard.Core
             Runtime.RTMutator.CommitModule(EXECModule, rtmtd);
         }
 
-		void ProcessMethod(MethodDef method, MDToken mdToken) {
-			MDVirtualizer.Run(method, mdToken);
+        private void ProcessMethod(MethodDef method, MDToken mdToken)
+        {
+            MDVirtualizer.Run(method, mdToken);
         }
 
-		void PostProcessMethod(MethodDef method) {
-			var scope = Runtime.LookupMethod(method);
-
+        private void PostProcessMethod(MethodDef method)
+        {
+            var scope = Runtime.LookupMethod(method);
+            if (scope == null) return;
             var ilTransformer = new ILPostTransformer(method, scope, Runtime);
-			ilTransformer.Transform();
+            ilTransformer.Transform();
         }
 
-		bool IVMSettings.IsVirtualized(MethodDef method) {
-			return methodList.Contains(method);
-		}
+        bool IVMSettings.IsVirtualized(MethodDef method)
+        {
+            return methodList.Contains(method);
+        }
 
         public void Clear()
         {
@@ -201,5 +217,5 @@ namespace EXGuard.Core
             EXECModule = null;
             MDVirtualizer = null;
         }
-	}
+    }
 }

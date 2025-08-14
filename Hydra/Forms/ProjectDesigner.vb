@@ -156,6 +156,7 @@ Public Class ProjectDesigner
             Guna2CheckBox7.Checked = TreeViewMethodManager.ExcludeUnsafeMethods
 
             Dim assemblyRefs As List(Of HydraEngine.Core.DLLInfo) = HydraEngine.Core.Utils.GetUniqueLibsToMerged(Assembly, WorkingDir)
+
             LoadDlls(assemblyRefs)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Loading Error")
@@ -613,7 +614,11 @@ Public Class ProjectDesigner
         End If
 
         If Calli.Checked = True Then
-            Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
+            If CalliUnsafe.Checked = True Then
+                Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
+            Else
+                Result.Add(New HydraEngine.Protection.Calli.CallObfuscation)
+            End If
         End If
 
         If ProxyInt.Checked = True Then
@@ -683,6 +688,10 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.Mutations.MutationProt)
             'Result.Add(New HydraEngine.Protection.Mutations.Mutator)
             If MutationCheck_Unsafe.Checked Then Result.Add(New HydraEngine.Protection.Mutations.Melting)
+        End If
+
+        If Arithmetic.Checked = True Then
+            Result.Add(New Arithmetic_Obfuscation.Arithmetic.Arithmetic)
         End If
 
         If AntiDecompilerCheck.Checked = True Then
@@ -941,7 +950,7 @@ Public Class ProjectDesigner
         Dim VMStrigns As Boolean = VirtualizeStringsVM.Checked
         Dim VM_Selected_Methods As List(Of UInteger) = Nothing
         Dim AntiTamp As Boolean = AntiTamper.Checked
-
+        Dim VMRuntime As String = String.Empty
         If TreeViewMethodManager IsNot Nothing Then VM_Selected_Methods = TreeViewMethodManager.GetSelectedMethodTokens()
 
         Dim ExitMethod As String = ""
@@ -957,7 +966,20 @@ Public Class ProjectDesigner
 
         Dim thread As New Thread(Async Sub()
 
-                                     AsmDef.Write(BackupPath)
+                                     Try
+                                         AsmDef.Write(BackupPath)
+                                     Catch ex As Exception
+                                         Dim writerOps As New ModuleWriterOptions(AsmDef)
+                                         With writerOps
+                                             .Logger = DummyLogger.NoThrowInstance
+                                             .MetadataOptions = New MetadataOptions With {
+                                                         .Flags = MetadataFlags.KeepOldMaxStack
+                                                     }
+                                             .WritePdb = False
+                                         End With
+
+                                         AsmDef.Write(BackupPath, writerOps)
+                                     End Try
 
                                      'If VMEnabled And File.Exists(VMRuntimePath) = True Then
 
@@ -1234,6 +1256,10 @@ Public Class ProjectDesigner
 
                                          Dim ProtectResult As Boolean = Await Protection.Execute(AsmDef)
 
+                                         If TypeOf Protection Is EXGuard Then
+                                             If ProtectResult Then VMRuntime = DirectCast(Protection, EXGuard).VMRuntimeDLL
+                                         End If
+
                                          If ProtectResult Then
                                              If Protection.CompatibleWithMap Then AsmMap.Update(AsmDef)
                                              If Protection.ManualReload Then
@@ -1457,6 +1483,7 @@ Public Class ProjectDesigner
                                      End If
 
                                      Try
+
                                          If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
 
                                          If OptimizeCode Then
@@ -1577,7 +1604,7 @@ Public Class ProjectDesigner
                                                  writerOptions.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.ILOnly
                                                  writerOptions.MetadataLogger = DummyLogger.NoThrowInstance
                                              End If
-
+                                             Console.WriteLine("Saving Module... " & TempPreOuputPath)
                                              AsmDef.Write(TempPreOuputPath, writerOptions)
 
                                              If UnmmanagedStr Then
@@ -1701,6 +1728,31 @@ Public Class ProjectDesigner
                                      Catch ex As Exception
                                          Writelog(String.Format("Error saving: {0}", {ex.Message}))
                                      End Try
+
+                                     'Try
+                                     'If File.Exists(VMRuntime) Then
+                                     '    'Dim AsmLibMerger = New AsmLibMerger
+                                     '    'Dim Result = AsmLibMerger.MergeAssemblies(Ouput, New List(Of String) From {VMRuntime}, Ouput)
+                                     '    'If Result Then
+                                     '    '    'File.Delete(VMRuntime)
+                                     '    'End If
+                                     '    Dim AsmOutput As ModuleDefMD = ModuleDefMD.Load(File.ReadAllBytes(Ouput))
+                                     '    Dim Embeder As Embeder = New Embeder()
+                                     '    Dim Merge As Boolean = Embeder.MergeAssemblies(AsmOutput, New List(Of String) From {VMRuntime})
+                                     '    If Merge Then
+                                     '        Dim outputSingle = Ouput.Insert(Ouput.Length - 4, "-Single")
+                                     '        Dim writerOptions As New ModuleWriterOptions(AsmOutput)
+                                     '        With writerOptions
+                                     '            .Logger = DummyLogger.NoThrowInstance
+                                     '            .MetadataOptions = New MetadataOptions With {
+                                     '                .Flags = MetadataFlags.KeepOldMaxStack
+                                     '            }
+                                     '            .WritePdb = False
+                                     '        End With
+                                     '        AsmOutput.Write(outputSingle, writerOptions)
+                                     '    End If
+                                     'End If
+                                     'Catch ex As Exception : End Try
 
                                      Try
                                          If AntiTamp Then

@@ -1,22 +1,26 @@
-﻿
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using EXGuard.Core.EXECProtections;
 using EXGuard.Internal;
 using HydraEngine.Core;
+using HydraEngine.References;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using VM.Runtime.Handler.Impl;
 
 namespace HydraEngine.Protection.VM
 {
     public class EXGuard : Models.Protection
     {
-        public EXGuard() : base("Protection.VM.EXGuard", "Renamer Phase", "Description for Renamer Phase") { ManualReload = true; }
+        public EXGuard() : base("Protection.VM.EXGuard", "Renamer Phase", "Description for Renamer Phase")
+        {
+            ManualReload = true;
+        }
 
         public bool Protect { get; set; } = false;
-
+        public string VMRuntimeDLL { get; set; } = string.Empty;
         public bool VMStrings { get; set; } = false;
 
         public string ouput { get; set; } = string.Empty;
@@ -27,6 +31,7 @@ namespace HydraEngine.Protection.VM
         {
             throw new NotImplementedException();
         }
+
         public override async Task<bool> Execute(dnlib.DotNet.ModuleDefMD module)
         {
             try
@@ -49,7 +54,7 @@ namespace HydraEngine.Protection.VM
                         //{
                         //    new HideCallString(module).Execute(method.DeclaringType, method);
                         //    //new HideCallNumber(module).Execute(module.GlobalType, method);
-                        //} 
+                        //}
                         foreach (TypeDef type in module.Types.Where(t => t.HasMethods))
                         {
                             foreach (var method in type.Methods)
@@ -59,12 +64,10 @@ namespace HydraEngine.Protection.VM
                                 new HideCallString(module).Execute(method.DeclaringType, method);
                                 //new HideCallNumber(module).Execute(module.GlobalType, method);
                             }
-
                         }
                     }
 
                     new EXGuardTask().Exceute(module, methodSet, Tempoutput, RuntimeVM_Name, "", "");
-
                 }
 
                 int count = 0;
@@ -78,10 +81,16 @@ namespace HydraEngine.Protection.VM
                 if (!File.Exists(Tempoutput)) throw new Exception("AV Compromised, please Disable and try again");
 
                 string Runtime = Path.Combine(Path.GetTempPath(), RuntimeVM_Name);
+
                 if (File.Exists(Runtime) && Directory.Exists(ouput))
                 {
-                    File.Copy(Runtime, Path.Combine(ouput, RuntimeVM_Name));
+                    var outputRuntime = Path.Combine(ouput, RuntimeVM_Name);
+                    VMRuntimeDLL = outputRuntime;
+                    File.Copy(Runtime, outputRuntime);
                 }
+
+                //var Merger = new AsmLibMerger();
+                //var MergeRuntime = Merger.MergeAssemblies(Tempoutput, new List<string>() { Runtime }, Tempoutput);
 
                 TempModule = new MemoryStream(File.ReadAllBytes(Tempoutput));
 

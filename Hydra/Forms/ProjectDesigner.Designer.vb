@@ -45,6 +45,7 @@ Partial Class ProjectDesigner
         Me.Guna2NumericUpDown1 = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.AddJunkCode = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox4 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.CalliUnsafe = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.KroksCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.SugarControlFlowCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ProxyReferencesUnsafeCheck = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -116,6 +117,7 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox9 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Renamer = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Guna2Button4 = New Guna.UI2.WinForms.Guna2Button()
         Me.PackerSelect = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Guna2GroupBox5 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.UsePacker = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -159,6 +161,7 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox3 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2CheckBox2 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.Guna2TextBox4 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ProgressBar3 = New Guna.UI2.WinForms.Guna2ProgressBar()
         Me.VirtualizeStringsVM = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -169,7 +172,6 @@ Partial Class ProjectDesigner
         Me.ProtectVMCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ILVMCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.VMComboSelect = New Guna.UI2.WinForms.Guna2ComboBox()
-        Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.VMButton = New Guna.UI2.WinForms.Guna2Button()
         Me.ExtraFeaturesButton = New Guna.UI2.WinForms.Guna2Button()
@@ -182,7 +184,6 @@ Partial Class ProjectDesigner
         Me.PackButton = New Guna.UI2.WinForms.Guna2Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Guna2Button4 = New Guna.UI2.WinForms.Guna2Button()
         Me.XylosNotice6 = New Hydra.XylosNotice()
         Me.XylosNotice3 = New Hydra.XylosNotice()
         Me.LogInLabel2 = New Hydra.LogInLabel()
@@ -210,18 +211,19 @@ Partial Class ProjectDesigner
         Me.LogInLabel5 = New Hydra.LogInLabel()
         Me.XylosNotice4 = New Hydra.XylosNotice()
         Me.LogInLabel3 = New Hydra.LogInLabel()
-        Me.XylosNotice9 = New Hydra.XylosNotice()
-        Me.LogInLabel22 = New Hydra.LogInLabel()
         Me.LogInLabel20 = New Hydra.LogInLabel()
         Me.LogInLabel12 = New Hydra.LogInLabel()
+        Me.XylosNotice9 = New Hydra.XylosNotice()
+        Me.LogInLabel22 = New Hydra.LogInLabel()
         Me.XylosNotice7 = New Hydra.XylosNotice()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.LogInContextMenu2 = New Hydra.LogInContextMenu()
+        Me.setEntryPoint = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogInLabel8 = New Hydra.LogInLabel()
         Me.LogInContextMenu1 = New Hydra.LogInContextMenu()
         Me.ExcludeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoosterToolTip1 = New Hydra.BoosterToolTip()
-        Me.LogInContextMenu2 = New Hydra.LogInContextMenu()
-        Me.setEntryPoint = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Guna2TextBox4 = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Arithmetic = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -244,8 +246,8 @@ Partial Class ProjectDesigner
         Me.Guna2Panel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.LogInContextMenu1.SuspendLayout()
         Me.LogInContextMenu2.SuspendLayout()
+        Me.LogInContextMenu1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -609,6 +611,8 @@ Partial Class ProjectDesigner
         'Guna2GroupBox4
         '
         Me.Guna2GroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox4.Controls.Add(Me.Arithmetic)
+        Me.Guna2GroupBox4.Controls.Add(Me.CalliUnsafe)
         Me.Guna2GroupBox4.Controls.Add(Me.KroksCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.SugarControlFlowCheck)
         Me.Guna2GroupBox4.Controls.Add(Me.ProxyReferencesUnsafeCheck)
@@ -668,6 +672,26 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.Size = New System.Drawing.Size(499, 403)
         Me.Guna2GroupBox4.TabIndex = 43
         Me.Guna2GroupBox4.Text = "Options"
+        '
+        'CalliUnsafe
+        '
+        Me.CalliUnsafe.AutoSize = True
+        Me.CalliUnsafe.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CalliUnsafe.CheckedState.BorderRadius = 0
+        Me.CalliUnsafe.CheckedState.BorderThickness = 1
+        Me.CalliUnsafe.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CalliUnsafe.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.CalliUnsafe.Font = New System.Drawing.Font("Segoe UI", 7.0!)
+        Me.CalliUnsafe.Location = New System.Drawing.Point(108, 150)
+        Me.CalliUnsafe.Name = "CalliUnsafe"
+        Me.CalliUnsafe.Size = New System.Drawing.Size(54, 16)
+        Me.CalliUnsafe.TabIndex = 96
+        Me.CalliUnsafe.Text = "Unsafe"
+        Me.CalliUnsafe.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CalliUnsafe.UncheckedState.BorderRadius = 0
+        Me.CalliUnsafe.UncheckedState.BorderThickness = 1
+        Me.CalliUnsafe.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CalliUnsafe.UseVisualStyleBackColor = True
         '
         'KroksCheck
         '
@@ -1591,9 +1615,9 @@ Partial Class ProjectDesigner
         Me.Calli.CheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Calli.Location = New System.Drawing.Point(15, 149)
         Me.Calli.Name = "Calli"
-        Me.Calli.Size = New System.Drawing.Size(107, 19)
+        Me.Calli.Size = New System.Drawing.Size(86, 19)
         Me.Calli.TabIndex = 32
-        Me.Calli.Text = "Calli Protection"
+        Me.Calli.Text = "Call to Calli"
         Me.Calli.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Calli.UncheckedState.BorderRadius = 0
         Me.Calli.UncheckedState.BorderThickness = 1
@@ -1983,6 +2007,24 @@ Partial Class ProjectDesigner
         Me.TabPage4.Size = New System.Drawing.Size(758, 456)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "TabPage4"
+        '
+        'Guna2Button4
+        '
+        Me.Guna2Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2Button4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2Button4.BorderRadius = 2
+        Me.Guna2Button4.CheckedState.BorderColor = System.Drawing.Color.Gray
+        Me.Guna2Button4.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2Button4.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button4.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button4.Image = CType(resources.GetObject("Guna2Button4.Image"), System.Drawing.Image)
+        Me.Guna2Button4.ImageSize = New System.Drawing.Size(30, 30)
+        Me.Guna2Button4.Location = New System.Drawing.Point(689, 68)
+        Me.Guna2Button4.Name = "Guna2Button4"
+        Me.Guna2Button4.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2Button4.TabIndex = 72
+        Me.Guna2Button4.UseTransparentBackground = True
+        Me.Guna2Button4.Visible = False
         '
         'PackerSelect
         '
@@ -2735,10 +2777,7 @@ Partial Class ProjectDesigner
         '
         Me.TabPage8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.TabPage8.Controls.Add(Me.Guna2TextBox4)
-        Me.TabPage8.Controls.Add(Me.XylosNotice9)
-        Me.TabPage8.Controls.Add(Me.LogInLabel22)
         Me.TabPage8.Controls.Add(Me.Guna2Panel4)
-        Me.TabPage8.Controls.Add(Me.XylosNotice7)
         Me.TabPage8.Controls.Add(Me.VirtualizeStringsVM)
         Me.TabPage8.Controls.Add(Me.Guna2CheckBox7)
         Me.TabPage8.Controls.Add(Me.Guna2CheckBox6)
@@ -2747,6 +2786,9 @@ Partial Class ProjectDesigner
         Me.TabPage8.Controls.Add(Me.ProtectVMCheck)
         Me.TabPage8.Controls.Add(Me.ILVMCheck)
         Me.TabPage8.Controls.Add(Me.VMComboSelect)
+        Me.TabPage8.Controls.Add(Me.XylosNotice9)
+        Me.TabPage8.Controls.Add(Me.LogInLabel22)
+        Me.TabPage8.Controls.Add(Me.XylosNotice7)
         Me.TabPage8.Controls.Add(Me.TreeView1)
         Me.TabPage8.Controls.Add(Me.LogInLabel8)
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
@@ -2754,6 +2796,31 @@ Partial Class ProjectDesigner
         Me.TabPage8.Size = New System.Drawing.Size(758, 456)
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "TabPage8"
+        '
+        'Guna2TextBox4
+        '
+        Me.Guna2TextBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2TextBox4.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.Guna2TextBox4.DefaultText = ""
+        Me.Guna2TextBox4.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.Guna2TextBox4.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.Guna2TextBox4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.Guna2TextBox4.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.Guna2TextBox4.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(29, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Guna2TextBox4.FocusedState.BorderColor = System.Drawing.Color.Gray
+        Me.Guna2TextBox4.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2TextBox4.HoverState.BorderColor = System.Drawing.Color.Gray
+        Me.Guna2TextBox4.Location = New System.Drawing.Point(547, 24)
+        Me.Guna2TextBox4.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Guna2TextBox4.Name = "Guna2TextBox4"
+        Me.Guna2TextBox4.PlaceholderText = ""
+        Me.Guna2TextBox4.ReadOnly = True
+        Me.Guna2TextBox4.SelectedText = ""
+        Me.Guna2TextBox4.Size = New System.Drawing.Size(190, 27)
+        Me.Guna2TextBox4.TabIndex = 90
+        Me.Guna2TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.BoosterToolTip1.SetToolTip(Me.Guna2TextBox4, "Waiting...")
+        Me.Guna2TextBox4.Visible = False
         '
         'Guna2Panel4
         '
@@ -2931,19 +2998,6 @@ Partial Class ProjectDesigner
         Me.VMComboSelect.Size = New System.Drawing.Size(114, 31)
         Me.VMComboSelect.StartIndex = 1
         Me.VMComboSelect.TabIndex = 78
-        '
-        'TreeView1
-        '
-        Me.TreeView1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.TreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TreeView1.ContextMenuStrip = Me.LogInContextMenu2
-        Me.TreeView1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TreeView1.ForeColor = System.Drawing.Color.White
-        Me.TreeView1.Location = New System.Drawing.Point(28, 80)
-        Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.Size = New System.Drawing.Size(709, 352)
-        Me.TreeView1.TabIndex = 79
-        Me.TreeView1.Visible = False
         '
         'Panel1
         '
@@ -3146,24 +3200,6 @@ Partial Class ProjectDesigner
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(817, 453)
         Me.Panel2.TabIndex = 2
-        '
-        'Guna2Button4
-        '
-        Me.Guna2Button4.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2Button4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2Button4.BorderRadius = 2
-        Me.Guna2Button4.CheckedState.BorderColor = System.Drawing.Color.Gray
-        Me.Guna2Button4.FillColor = System.Drawing.Color.Transparent
-        Me.Guna2Button4.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2Button4.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button4.Image = CType(resources.GetObject("Guna2Button4.Image"), System.Drawing.Image)
-        Me.Guna2Button4.ImageSize = New System.Drawing.Size(30, 30)
-        Me.Guna2Button4.Location = New System.Drawing.Point(689, 68)
-        Me.Guna2Button4.Name = "Guna2Button4"
-        Me.Guna2Button4.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2Button4.TabIndex = 72
-        Me.Guna2Button4.UseTransparentBackground = True
-        Me.Guna2Button4.Visible = False
         '
         'XylosNotice6
         '
@@ -3531,6 +3567,34 @@ Partial Class ProjectDesigner
         Me.LogInLabel3.TabIndex = 71
         Me.LogInLabel3.Text = "Extra features"
         '
+        'LogInLabel20
+        '
+        Me.LogInLabel20.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel20.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.LogInLabel20.Font = New System.Drawing.Font("Segoe UI", 8.0!)
+        Me.LogInLabel20.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel20.Location = New System.Drawing.Point(0, 32)
+        Me.LogInLabel20.Name = "LogInLabel20"
+        Me.LogInLabel20.Size = New System.Drawing.Size(306, 25)
+        Me.LogInLabel20.TabIndex = 6
+        Me.LogInLabel20.Text = "Loading..."
+        Me.LogInLabel20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LogInLabel12
+        '
+        Me.LogInLabel12.BackColor = System.Drawing.Color.Transparent
+        Me.LogInLabel12.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.LogInLabel12.Font = New System.Drawing.Font("Segoe UI Semilight", 9.0!)
+        Me.LogInLabel12.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInLabel12.ForeColor = System.Drawing.Color.Silver
+        Me.LogInLabel12.Location = New System.Drawing.Point(0, 57)
+        Me.LogInLabel12.Name = "LogInLabel12"
+        Me.LogInLabel12.Size = New System.Drawing.Size(306, 24)
+        Me.LogInLabel12.TabIndex = 9
+        Me.LogInLabel12.Text = "Methods are being loaded Asynchronously."
+        Me.LogInLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'XylosNotice9
         '
         Me.XylosNotice9.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
@@ -3562,34 +3626,6 @@ Partial Class ProjectDesigner
     "t As EntryPoint"""
         Me.LogInLabel22.Visible = False
         '
-        'LogInLabel20
-        '
-        Me.LogInLabel20.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel20.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.LogInLabel20.Font = New System.Drawing.Font("Segoe UI", 8.0!)
-        Me.LogInLabel20.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel20.Location = New System.Drawing.Point(0, 32)
-        Me.LogInLabel20.Name = "LogInLabel20"
-        Me.LogInLabel20.Size = New System.Drawing.Size(306, 25)
-        Me.LogInLabel20.TabIndex = 6
-        Me.LogInLabel20.Text = "Loading..."
-        Me.LogInLabel20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LogInLabel12
-        '
-        Me.LogInLabel12.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel12.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.LogInLabel12.Font = New System.Drawing.Font("Segoe UI Semilight", 9.0!)
-        Me.LogInLabel12.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel12.ForeColor = System.Drawing.Color.Silver
-        Me.LogInLabel12.Location = New System.Drawing.Point(0, 57)
-        Me.LogInLabel12.Name = "LogInLabel12"
-        Me.LogInLabel12.Size = New System.Drawing.Size(306, 24)
-        Me.LogInLabel12.TabIndex = 9
-        Me.LogInLabel12.Text = "Methods are being loaded Asynchronously."
-        Me.LogInLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'XylosNotice7
         '
         Me.XylosNotice7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
@@ -3605,6 +3641,34 @@ Partial Class ProjectDesigner
         Me.XylosNotice7.TabIndex = 85
         Me.XylosNotice7.Text = "If you use VM EXGuard (KoiVM Based) and also DLL Embedder use Resources Engine." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
     ""
+        '
+        'TreeView1
+        '
+        Me.TreeView1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.TreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TreeView1.ContextMenuStrip = Me.LogInContextMenu2
+        Me.TreeView1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TreeView1.ForeColor = System.Drawing.Color.White
+        Me.TreeView1.Location = New System.Drawing.Point(28, 80)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(709, 352)
+        Me.TreeView1.TabIndex = 79
+        Me.TreeView1.Visible = False
+        '
+        'LogInContextMenu2
+        '
+        Me.LogInContextMenu2.FontColour = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInContextMenu2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LogInContextMenu2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.setEntryPoint})
+        Me.LogInContextMenu2.Name = "LogInContextMenu2"
+        Me.LogInContextMenu2.ShowImageMargin = False
+        Me.LogInContextMenu2.Size = New System.Drawing.Size(140, 26)
+        '
+        'setEntryPoint
+        '
+        Me.setEntryPoint.Name = "setEntryPoint"
+        Me.setEntryPoint.Size = New System.Drawing.Size(139, 22)
+        Me.setEntryPoint.Text = "Set As EntryPoint"
         '
         'LogInLabel8
         '
@@ -3641,45 +3705,23 @@ Partial Class ProjectDesigner
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
         '
-        'LogInContextMenu2
+        'Arithmetic
         '
-        Me.LogInContextMenu2.FontColour = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInContextMenu2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInContextMenu2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.setEntryPoint})
-        Me.LogInContextMenu2.Name = "LogInContextMenu2"
-        Me.LogInContextMenu2.ShowImageMargin = False
-        Me.LogInContextMenu2.Size = New System.Drawing.Size(140, 26)
-        '
-        'setEntryPoint
-        '
-        Me.setEntryPoint.Name = "setEntryPoint"
-        Me.setEntryPoint.Size = New System.Drawing.Size(139, 22)
-        Me.setEntryPoint.Text = "Set As EntryPoint"
-        '
-        'Guna2TextBox4
-        '
-        Me.Guna2TextBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2TextBox4.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Guna2TextBox4.DefaultText = ""
-        Me.Guna2TextBox4.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.Guna2TextBox4.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.Guna2TextBox4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.Guna2TextBox4.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.Guna2TextBox4.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(29, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Guna2TextBox4.FocusedState.BorderColor = System.Drawing.Color.Gray
-        Me.Guna2TextBox4.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2TextBox4.HoverState.BorderColor = System.Drawing.Color.Gray
-        Me.Guna2TextBox4.Location = New System.Drawing.Point(547, 24)
-        Me.Guna2TextBox4.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.Guna2TextBox4.Name = "Guna2TextBox4"
-        Me.Guna2TextBox4.PlaceholderText = ""
-        Me.Guna2TextBox4.ReadOnly = True
-        Me.Guna2TextBox4.SelectedText = ""
-        Me.Guna2TextBox4.Size = New System.Drawing.Size(190, 27)
-        Me.Guna2TextBox4.TabIndex = 90
-        Me.Guna2TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.BoosterToolTip1.SetToolTip(Me.Guna2TextBox4, "Waiting...")
-        Me.Guna2TextBox4.Visible = False
+        Me.Arithmetic.AutoSize = True
+        Me.Arithmetic.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Arithmetic.CheckedState.BorderRadius = 0
+        Me.Arithmetic.CheckedState.BorderThickness = 1
+        Me.Arithmetic.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Arithmetic.Location = New System.Drawing.Point(341, 227)
+        Me.Arithmetic.Name = "Arithmetic"
+        Me.Arithmetic.Size = New System.Drawing.Size(150, 19)
+        Me.Arithmetic.TabIndex = 97
+        Me.Arithmetic.Text = "Arithmetic Obfuscation"
+        Me.Arithmetic.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Arithmetic.UncheckedState.BorderRadius = 0
+        Me.Arithmetic.UncheckedState.BorderThickness = 1
+        Me.Arithmetic.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Arithmetic.UseVisualStyleBackColor = True
         '
         'ProjectDesigner
         '
@@ -3736,8 +3778,8 @@ Partial Class ProjectDesigner
         Me.Guna2Panel4.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.LogInContextMenu1.ResumeLayout(False)
         Me.LogInContextMenu2.ResumeLayout(False)
+        Me.LogInContextMenu1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -3941,4 +3983,6 @@ Partial Class ProjectDesigner
     Friend WithEvents setEntryPoint As ToolStripMenuItem
     Friend WithEvents XylosNotice9 As XylosNotice
     Friend WithEvents Guna2TextBox4 As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents CalliUnsafe As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Arithmetic As Guna.UI2.WinForms.Guna2CheckBox
 End Class
