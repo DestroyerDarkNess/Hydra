@@ -20,7 +20,7 @@ namespace HydraEngine.Protection.VM
         }
 
         public bool Protect { get; set; } = false;
-
+        public string VMRuntimeDLL { get; set; } = string.Empty;
         public bool VMStrings { get; set; } = false;
 
         public string ouput { get; set; } = string.Empty;
@@ -34,70 +34,73 @@ namespace HydraEngine.Protection.VM
 
         public override async Task<bool> Execute(dnlib.DotNet.ModuleDefMD module)
         {
-            //try
-            //{
-            string RuntimeVM_Name = $"{Randomizer.GenerateRandomString(Randomizer.BaseChars, 5)}.dll";
-
-            string Tempoutput = Path.Combine(Path.GetTempPath(), module.Name);
-
-            if (SelectedMethods == null || SelectedMethods.Count == 0)
+            try
             {
-                throw new Exception("No Selected Methods");
-            }
-            else
-            {
-                HashSet<MethodDef> methodSet = new HashSet<MethodDef>(SelectedMethods);
+                string RuntimeVM_Name = $"{Randomizer.GenerateRandomString(Randomizer.BaseChars, 5)}.dll";
 
-                if (VMStrings)
+                string Tempoutput = Path.Combine(Path.GetTempPath(), module.Name);
+
+                if (SelectedMethods == null || SelectedMethods.Count == 0)
                 {
-                    //foreach (var method in SelectedMethods)
-                    //{
-                    //    new HideCallString(module).Execute(method.DeclaringType, method);
-                    //    //new HideCallNumber(module).Execute(module.GlobalType, method);
-                    //}
-                    foreach (TypeDef type in module.Types.Where(t => t.HasMethods))
+                    throw new Exception("No Selected Methods");
+                }
+                else
+                {
+                    HashSet<MethodDef> methodSet = new HashSet<MethodDef>(SelectedMethods);
+
+                    if (VMStrings)
                     {
-                        foreach (var method in type.Methods)
+                        //foreach (var method in SelectedMethods)
+                        //{
+                        //    new HideCallString(module).Execute(method.DeclaringType, method);
+                        //    //new HideCallNumber(module).Execute(module.GlobalType, method);
+                        //}
+                        foreach (TypeDef type in module.Types.Where(t => t.HasMethods))
                         {
-                            if (!method.HasBody) continue;
-                            if (!method.Body.HasInstructions) continue;
-                            new HideCallString(module).Execute(method.DeclaringType, method);
-                            //new HideCallNumber(module).Execute(module.GlobalType, method);
+                            foreach (var method in type.Methods)
+                            {
+                                if (!method.HasBody) continue;
+                                if (!method.Body.HasInstructions) continue;
+                                new HideCallString(module).Execute(method.DeclaringType, method);
+                                //new HideCallNumber(module).Execute(module.GlobalType, method);
+                            }
                         }
                     }
+
+                    new EXGuardTask().Exceute(module, methodSet, Tempoutput, RuntimeVM_Name, "", "");
                 }
 
-                new EXGuardTask().Exceute(module, methodSet, Tempoutput, RuntimeVM_Name, "", "");
-            }
+                int count = 0;
+                while (!File.Exists(Tempoutput))
+                {
+                    await Task.Delay(1000);
+                    if (count > 4) break;
+                    count += 1;
+                }
 
-            int count = 0;
-            while (!File.Exists(Tempoutput))
+                if (!File.Exists(Tempoutput)) throw new Exception("AV Compromised, please Disable and try again");
+
+                string Runtime = Path.Combine(Path.GetTempPath(), RuntimeVM_Name);
+
+                if (File.Exists(Runtime) && Directory.Exists(ouput))
+                {
+                    var outputRuntime = Path.Combine(ouput, RuntimeVM_Name);
+                    VMRuntimeDLL = outputRuntime;
+                    File.Copy(Runtime, outputRuntime);
+                }
+
+                //var Merger = new AsmLibMerger();
+                //var MergeRuntime = Merger.MergeAssemblies(Tempoutput, new List<string>() { Runtime }, Tempoutput);
+
+                TempModule = new MemoryStream(File.ReadAllBytes(Tempoutput));
+
+                return true;
+            }
+            catch (Exception Ex)
             {
-                await Task.Delay(1000);
-                if (count > 4) break;
-                count += 1;
+                this.Errors = Ex;
+                return false;
             }
-
-            if (!File.Exists(Tempoutput)) throw new Exception("AV Compromised, please Disable and try again");
-
-            string Runtime = Path.Combine(Path.GetTempPath(), RuntimeVM_Name);
-            if (File.Exists(Runtime) && Directory.Exists(ouput))
-            {
-                File.Copy(Runtime, Path.Combine(ouput, RuntimeVM_Name));
-            }
-
-            //var Merger = new AsmLibMerger();
-            //var MergeRuntime = Merger.MergeAssemblies(Tempoutput, new List<string>() { Runtime }, Tempoutput);
-
-            TempModule = new MemoryStream(File.ReadAllBytes(Tempoutput));
-
-            return true;
-            //}
-            //catch (Exception Ex)
-            //{
-            //    this.Errors = Ex;
-            //    return false;
-            //}
         }
     }
 }
