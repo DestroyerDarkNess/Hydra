@@ -74,6 +74,7 @@ Public Class MainWindow
         Guna2Panel3.Visible = False
         Guna2Panel3.SendToBack()
         Guna2Panel2.Visible = True
+        Console.Clear()
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click

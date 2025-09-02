@@ -61,14 +61,14 @@ Public Class ProjectDesigner
 
             AssemblyBytes = IO.File.ReadAllBytes(PE_Path)
 
-            Assembly = HydraEngine.Core.Utils.LoadModule(AssemblyBytes, assemblyResolver)
+            Assembly = HydraEngine.Core.Utils.LoadModule(AssemblyBytes, assemblyResolver, True)
 
             If Assembly Is Nothing Then
                 If PE_Path.ToLower.EndsWith(".exe") Then
                     PE_Path = PE_Path.ToLower.Replace(".exe", ".dll")
                 End If
                 AssemblyBytes = IO.File.ReadAllBytes(PE_Path)
-                Assembly = HydraEngine.Core.Utils.LoadModule(AssemblyBytes, assemblyResolver)
+                Assembly = HydraEngine.Core.Utils.LoadModule(AssemblyBytes, assemblyResolver, True)
                 IsNetCore = True
             End If
 
@@ -248,7 +248,7 @@ Public Class ProjectDesigner
     Private Sub Reset()
         If IO.File.Exists(FilePath) Then
             AssemblyBytes = IO.File.ReadAllBytes(FilePath)
-            Assembly = HydraEngine.Core.Utils.LoadModule(AssemblyBytes, assemblyResolver)
+            Assembly = HydraEngine.Core.Utils.LoadModule(AssemblyBytes, assemblyResolver, True)
         End If
 
         Me?.BeginInvoke(Sub()
@@ -523,11 +523,17 @@ Public Class ProjectDesigner
         Dim Tag As String = Guna2TextBox2.Text
         Dim VMSelected = VMComboSelect.SelectedIndex
 
+        If MetadataCleaner.Checked Then Result.Add(New HydraEngine.Protection.Meta.MetadataPruner)
+
+        If ReduceMetadata.Checked Then Result.Add(New HydraEngine.Protection.Method.MethodToInline)
+
         If String.IsNullOrWhiteSpace(Tag) Then
             Tag = "HailHydra"
         End If
 
         'Result.Add(New HydraEngine.Protection.Misc.Watermark)
+
+        If EnumStripper.Checked Then Result.Add(New HydraEngine.Protection.INT.EnumStripper)
 
         If Renamer.Checked = True And RenamerEngineCombo.SelectedIndex = 1 Then
             'Dim Renamer = New HydraEngine.Protection.Renamer.RenamerPhase With {.tag = Guna2TextBox9.Text, .Mode = BaseMode, .BaseChars = BaseChars, .Length = Guna2TrackBar1.Value}
@@ -939,7 +945,7 @@ Public Class ProjectDesigner
 
         Dim OldKind As ModuleKind = AsmDef.Kind
         Dim UnmmanagedStr = UnmanagedStringCheck.Checked
-        Dim ExportEntry As Boolean = ExportEntryPoint.Checked
+        Dim ExportEntry As Boolean = False ' not implemented YET
         Dim DontRenameSection As Boolean = PESectionPreserve.Checked
         Dim CustomRenameSection As Boolean = PESectionCustom.Checked
         Dim CustomSectionName As String = String.Empty
@@ -1224,7 +1230,7 @@ Public Class ProjectDesigner
                                                         Guna2ProgressBar1.Value += 1
                                                     End Sub)
 
-                                     If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef)
+                                     If AsmDef Is Nothing Then AsmDef = HydraEngine.Core.Utils.LoadModule(IO.File.ReadAllBytes(BackupPath), AsmRef, True)
 
                                      Core.Helpers.Utils.Sleep(2)
 
@@ -1604,7 +1610,7 @@ Public Class ProjectDesigner
                                                  writerOptions.Cor20HeaderOptions.Flags = dnlib.DotNet.MD.ComImageFlags.ILOnly
                                                  writerOptions.MetadataLogger = DummyLogger.NoThrowInstance
                                              End If
-                                             Console.WriteLine("Saving Module... " & TempPreOuputPath)
+                                             'Console.WriteLine("Saving Module... " & TempPreOuputPath)
                                              AsmDef.Write(TempPreOuputPath, writerOptions)
 
                                              If UnmmanagedStr Then
