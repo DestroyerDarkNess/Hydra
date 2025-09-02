@@ -45,6 +45,7 @@ Partial Class ProjectDesigner
         Me.Guna2NumericUpDown1 = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.AddJunkCode = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox4 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Arithmetic = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.CalliUnsafe = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.KroksCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.SugarControlFlowCheck = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -122,7 +123,7 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox5 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.UsePacker = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.ExportEntryPoint = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.MetadataCleaner = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2ProgressBar1 = New Guna.UI2.WinForms.Guna2ProgressBar()
         Me.InvalidMetaDataCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.PreserveAllCheck = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -223,7 +224,7 @@ Partial Class ProjectDesigner
         Me.LogInContextMenu1 = New Hydra.LogInContextMenu()
         Me.ExcludeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoosterToolTip1 = New Hydra.BoosterToolTip()
-        Me.Arithmetic = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.EnumStripper = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -611,6 +612,7 @@ Partial Class ProjectDesigner
         'Guna2GroupBox4
         '
         Me.Guna2GroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox4.Controls.Add(Me.EnumStripper)
         Me.Guna2GroupBox4.Controls.Add(Me.Arithmetic)
         Me.Guna2GroupBox4.Controls.Add(Me.CalliUnsafe)
         Me.Guna2GroupBox4.Controls.Add(Me.KroksCheck)
@@ -672,6 +674,24 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.Size = New System.Drawing.Size(499, 403)
         Me.Guna2GroupBox4.TabIndex = 43
         Me.Guna2GroupBox4.Text = "Options"
+        '
+        'Arithmetic
+        '
+        Me.Arithmetic.AutoSize = True
+        Me.Arithmetic.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Arithmetic.CheckedState.BorderRadius = 0
+        Me.Arithmetic.CheckedState.BorderThickness = 1
+        Me.Arithmetic.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Arithmetic.Location = New System.Drawing.Point(341, 227)
+        Me.Arithmetic.Name = "Arithmetic"
+        Me.Arithmetic.Size = New System.Drawing.Size(150, 19)
+        Me.Arithmetic.TabIndex = 97
+        Me.Arithmetic.Text = "Arithmetic Obfuscation"
+        Me.Arithmetic.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Arithmetic.UncheckedState.BorderRadius = 0
+        Me.Arithmetic.UncheckedState.BorderThickness = 1
+        Me.Arithmetic.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Arithmetic.UseVisualStyleBackColor = True
         '
         'CalliUnsafe
         '
@@ -1276,9 +1296,9 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox6.FillColor = System.Drawing.Color.Transparent
         Me.Guna2GroupBox6.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2GroupBox6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox6.Location = New System.Drawing.Point(317, 283)
+        Me.Guna2GroupBox6.Location = New System.Drawing.Point(328, 285)
         Me.Guna2GroupBox6.Name = "Guna2GroupBox6"
-        Me.Guna2GroupBox6.Size = New System.Drawing.Size(166, 116)
+        Me.Guna2GroupBox6.Size = New System.Drawing.Size(155, 114)
         Me.Guna2GroupBox6.TabIndex = 63
         Me.Guna2GroupBox6.Text = "Special Functions"
         '
@@ -2078,7 +2098,7 @@ Partial Class ProjectDesigner
         'TabPage6
         '
         Me.TabPage6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.TabPage6.Controls.Add(Me.ExportEntryPoint)
+        Me.TabPage6.Controls.Add(Me.MetadataCleaner)
         Me.TabPage6.Controls.Add(Me.Guna2ProgressBar1)
         Me.TabPage6.Controls.Add(Me.InvalidMetaDataCheck)
         Me.TabPage6.Controls.Add(Me.PreserveAllCheck)
@@ -2096,24 +2116,24 @@ Partial Class ProjectDesigner
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "TabPage6"
         '
-        'ExportEntryPoint
+        'MetadataCleaner
         '
-        Me.ExportEntryPoint.AutoSize = True
-        Me.ExportEntryPoint.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ExportEntryPoint.CheckedState.BorderRadius = 0
-        Me.ExportEntryPoint.CheckedState.BorderThickness = 1
-        Me.ExportEntryPoint.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ExportEntryPoint.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.ExportEntryPoint.Location = New System.Drawing.Point(336, 75)
-        Me.ExportEntryPoint.Name = "ExportEntryPoint"
-        Me.ExportEntryPoint.Size = New System.Drawing.Size(107, 17)
-        Me.ExportEntryPoint.TabIndex = 53
-        Me.ExportEntryPoint.Text = "Export EntryPoint"
-        Me.ExportEntryPoint.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ExportEntryPoint.UncheckedState.BorderRadius = 0
-        Me.ExportEntryPoint.UncheckedState.BorderThickness = 1
-        Me.ExportEntryPoint.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ExportEntryPoint.UseVisualStyleBackColor = True
+        Me.MetadataCleaner.AutoSize = True
+        Me.MetadataCleaner.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.MetadataCleaner.CheckedState.BorderRadius = 0
+        Me.MetadataCleaner.CheckedState.BorderThickness = 1
+        Me.MetadataCleaner.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.MetadataCleaner.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.MetadataCleaner.Location = New System.Drawing.Point(336, 75)
+        Me.MetadataCleaner.Name = "MetadataCleaner"
+        Me.MetadataCleaner.Size = New System.Drawing.Size(110, 17)
+        Me.MetadataCleaner.TabIndex = 53
+        Me.MetadataCleaner.Text = "Metadata Cleaner"
+        Me.MetadataCleaner.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.MetadataCleaner.UncheckedState.BorderRadius = 0
+        Me.MetadataCleaner.UncheckedState.BorderThickness = 1
+        Me.MetadataCleaner.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.MetadataCleaner.UseVisualStyleBackColor = True
         '
         'Guna2ProgressBar1
         '
@@ -3705,23 +3725,23 @@ Partial Class ProjectDesigner
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
         '
-        'Arithmetic
+        'EnumStripper
         '
-        Me.Arithmetic.AutoSize = True
-        Me.Arithmetic.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Arithmetic.CheckedState.BorderRadius = 0
-        Me.Arithmetic.CheckedState.BorderThickness = 1
-        Me.Arithmetic.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Arithmetic.Location = New System.Drawing.Point(341, 227)
-        Me.Arithmetic.Name = "Arithmetic"
-        Me.Arithmetic.Size = New System.Drawing.Size(150, 19)
-        Me.Arithmetic.TabIndex = 97
-        Me.Arithmetic.Text = "Arithmetic Obfuscation"
-        Me.Arithmetic.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Arithmetic.UncheckedState.BorderRadius = 0
-        Me.Arithmetic.UncheckedState.BorderThickness = 1
-        Me.Arithmetic.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Arithmetic.UseVisualStyleBackColor = True
+        Me.EnumStripper.AutoSize = True
+        Me.EnumStripper.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.EnumStripper.CheckedState.BorderRadius = 0
+        Me.EnumStripper.CheckedState.BorderThickness = 1
+        Me.EnumStripper.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.EnumStripper.Location = New System.Drawing.Point(212, 377)
+        Me.EnumStripper.Name = "EnumStripper"
+        Me.EnumStripper.Size = New System.Drawing.Size(101, 19)
+        Me.EnumStripper.TabIndex = 76
+        Me.EnumStripper.Text = "Enum Stripper"
+        Me.EnumStripper.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.EnumStripper.UncheckedState.BorderRadius = 0
+        Me.EnumStripper.UncheckedState.BorderThickness = 1
+        Me.EnumStripper.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.EnumStripper.UseVisualStyleBackColor = True
         '
         'ProjectDesigner
         '
@@ -3907,7 +3927,7 @@ Partial Class ProjectDesigner
     Friend WithEvents Guna2TextBox3 As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2Button3 As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents XylosNotice5 As XylosNotice
-    Friend WithEvents ExportEntryPoint As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents MetadataCleaner As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Guna2GroupBox8 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents LogInLabel4 As LogInLabel
     Friend WithEvents PESectionExclusion As Guna.UI2.WinForms.Guna2TextBox
@@ -3985,4 +4005,5 @@ Partial Class ProjectDesigner
     Friend WithEvents Guna2TextBox4 As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents CalliUnsafe As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Arithmetic As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents EnumStripper As Guna.UI2.WinForms.Guna2CheckBox
 End Class

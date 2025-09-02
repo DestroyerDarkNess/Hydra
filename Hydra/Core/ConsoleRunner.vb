@@ -89,8 +89,7 @@ Public Class ConsoleRunner
 
             If success Then
                 Console.WriteLine()
-                Console.WriteLine("✓ Protection completed successfully!")
-                Console.WriteLine($"✓ Output file: {args.OutputFile}")
+                Console.WriteLine("✓ Protection completed successfully!") 
 
                 If File.Exists(args.OutputFile) Then
                     Dim outputInfo As New FileInfo(args.OutputFile)

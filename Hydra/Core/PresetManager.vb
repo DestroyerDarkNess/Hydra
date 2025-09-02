@@ -189,7 +189,7 @@ Public Class PresetManager
             .PreserveAll = form.PreserveAllCheck.Checked
             .InvalidMetadata = form.InvalidMetaDataCheck.Checked
             .UnmanagedString = form.UnmanagedStringCheck.Checked
-            .ExportEntryPoint = form.ExportEntryPoint.Checked
+            .ExportEntryPoint = form.MetadataCleaner.Checked
             .PESectionPreserve = form.PESectionPreserve.Checked
             .PESectionCustom = form.PESectionCustom.Checked
             .PESectionCustomText = form.PESectionCustomText.Text
@@ -346,7 +346,7 @@ Public Class PresetManager
                 form.PreserveAllCheck.Checked = .PreserveAll
                 form.InvalidMetaDataCheck.Checked = .InvalidMetadata
                 form.UnmanagedStringCheck.Checked = .UnmanagedString
-                form.ExportEntryPoint.Checked = .ExportEntryPoint
+                form.MetadataCleaner.Checked = .ExportEntryPoint
                 form.PESectionPreserve.Checked = .PESectionPreserve
                 form.PESectionCustom.Checked = .PESectionCustom
                 form.PESectionCustomText.Text = .PESectionCustomText

@@ -229,6 +229,7 @@
     <Compile Include="Protection\Import\PInvokeToDInvoke.cs" />
     <Compile Include="Protection\Import\Runtime\PToDInvoke.cs" />
     <Compile Include="Protection\INT\AddIntPhase.cs" />
+    <Compile Include="Protection\INT\EnumStripper.cs" />
     <Compile Include="Protection\INT\IntEncoding.cs" />
     <Compile Include="Protection\INT\UnmanagedInteger.cs" />
     <Compile Include="Protection\Invalid\InvalidMDPhase.cs" />
@@ -248,12 +249,14 @@
     <Compile Include="Protection\Method\MethodHider.cs" />
     <Compile Include="Protection\Method\MethodMover.cs" />
     <Compile Include="Protection\Method\MethodToDelegate.cs" />
+    <Compile Include="Protection\Method\MethodToInline.cs" />
     <Compile Include="Protection\Method\Runtime\M2D.cs" />
     <Compile Include="Protection\Method\StackUnfConfusion.cs" />
     <Compile Include="Protection\Misc\FakeObfuscation.cs" />
     <Compile Include="Protection\Method\HideMethods.cs" />
     <Compile Include="Protection\Misc\JunkCode.cs" />
     <Compile Include="Protection\CodeOptimizer\OptimizeCode.cs" />
+    <Compile Include="Protection\Misc\MetadataPruner.cs" />
     <Compile Include="Protection\Misc\NativeEraser.cs" />
     <Compile Include="Protection\Misc\ReduceMetadataOptimization.cs" />
     <Compile Include="Protection\Misc\SUFconfusion.cs" />

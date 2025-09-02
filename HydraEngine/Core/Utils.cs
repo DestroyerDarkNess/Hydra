@@ -263,7 +263,7 @@ namespace HydraEngine.Core
             return result;
         }
 
-        public static ModuleDefMD LoadModule(byte[] data, out AssemblyResolver assemblyResolver)
+        public static ModuleDefMD LoadModule(byte[] data, out AssemblyResolver assemblyResolver, bool TryToLoadPdb = false)
         {
             try
             {
@@ -274,7 +274,7 @@ namespace HydraEngine.Core
                 var options = new ModuleCreationOptions()
                 {
                     Context = context,
-                    TryToLoadPdbFromDisk = false
+                    TryToLoadPdbFromDisk = TryToLoadPdb
                 };
 
                 return ModuleDefMD.Load(data, options);
