@@ -230,6 +230,7 @@
     <Compile Include="Protection\Import\Runtime\PToDInvoke.cs" />
     <Compile Include="Protection\INT\AddIntPhase.cs" />
     <Compile Include="Protection\INT\EnumStripper.cs" />
+    <Compile Include="Protection\INT\IntegersToRvaV2.cs" />
     <Compile Include="Protection\INT\IntEncoding.cs" />
     <Compile Include="Protection\INT\IntegersToRva.cs" />
     <Compile Include="Protection\Invalid\InvalidMDPhase.cs" />

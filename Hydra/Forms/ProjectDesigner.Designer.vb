@@ -228,6 +228,7 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox9 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2CheckBox8 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2CheckBox9 = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2CheckBox10 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -689,6 +690,7 @@ Partial Class ProjectDesigner
         'Guna2GroupBox4
         '
         Me.Guna2GroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox4.BorderRadius = 5
         Me.Guna2GroupBox4.Controls.Add(Me.Guna2GroupBox9)
         Me.Guna2GroupBox4.Controls.Add(Me.EnumStripper)
         Me.Guna2GroupBox4.Controls.Add(Me.Arithmetic)
@@ -3759,6 +3761,7 @@ Partial Class ProjectDesigner
         '
         Me.Guna2GroupBox9.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2GroupBox9.BorderRadius = 5
+        Me.Guna2GroupBox9.Controls.Add(Me.Guna2CheckBox10)
         Me.Guna2GroupBox9.Controls.Add(Me.Guna2CheckBox9)
         Me.Guna2GroupBox9.Controls.Add(Me.Guna2CheckBox8)
         Me.Guna2GroupBox9.Controls.Add(Me.StrIntToRvaCheck)
@@ -3766,10 +3769,10 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox9.FillColor = System.Drawing.Color.Transparent
         Me.Guna2GroupBox9.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2GroupBox9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox9.Location = New System.Drawing.Point(341, 319)
+        Me.Guna2GroupBox9.Location = New System.Drawing.Point(328, 319)
         Me.Guna2GroupBox9.Name = "Guna2GroupBox9"
         Me.Guna2GroupBox9.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
-        Me.Guna2GroupBox9.Size = New System.Drawing.Size(150, 78)
+        Me.Guna2GroupBox9.Size = New System.Drawing.Size(163, 78)
         Me.Guna2GroupBox9.TabIndex = 99
         '
         'Guna2CheckBox8
@@ -3807,6 +3810,27 @@ Partial Class ProjectDesigner
         Me.Guna2CheckBox9.UncheckedState.BorderThickness = 1
         Me.Guna2CheckBox9.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Guna2CheckBox9.UseVisualStyleBackColor = True
+        '
+        'Guna2CheckBox10
+        '
+        Me.Guna2CheckBox10.AutoSize = True
+        Me.Guna2CheckBox10.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot
+        Me.Guna2CheckBox10.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox10.CheckedState.BorderRadius = 3
+        Me.Guna2CheckBox10.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox10.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox10.Location = New System.Drawing.Point(122, 3)
+        Me.Guna2CheckBox10.Name = "Guna2CheckBox10"
+        Me.Guna2CheckBox10.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Guna2CheckBox10.Size = New System.Drawing.Size(38, 19)
+        Me.Guna2CheckBox10.TabIndex = 101
+        Me.Guna2CheckBox10.Text = "v2"
+        Me.BoosterToolTip1.SetToolTip(Me.Guna2CheckBox10, "Protects integers and strings*")
+        Me.Guna2CheckBox10.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox10.UncheckedState.BorderRadius = 3
+        Me.Guna2CheckBox10.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox10.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox10.UseVisualStyleBackColor = True
         '
         'ProjectDesigner
         '
@@ -4076,4 +4100,5 @@ Partial Class ProjectDesigner
     Friend WithEvents Guna2GroupBox9 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents Guna2CheckBox8 As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Guna2CheckBox9 As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Guna2CheckBox10 As Guna.UI2.WinForms.Guna2CheckBox
 End Class

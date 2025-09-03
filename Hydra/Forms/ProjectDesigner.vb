@@ -523,7 +523,12 @@ Public Class ProjectDesigner
         Dim Tag As String = Guna2TextBox2.Text
         Dim VMSelected = VMComboSelect.SelectedIndex
 
-        If StrIntToRvaCheck.Checked Then Result.Add(New HydraEngine.Protection.Integer.StrIntToRva With {.ObfuscateStrings = Guna2CheckBox8.Checked, .Encrypt = Guna2CheckBox9.Checked})
+        If StrIntToRvaCheck.Checked Then
+
+            Dim RVA As HydraEngine.Models.Protection = If(Guna2CheckBox10.Checked, New HydraEngine.Protection.Integer.StrIntToRvaV2, New HydraEngine.Protection.Integer.StrIntToRva)
+            Result.Add(RVA)
+
+        End If
 
         If MetadataCleaner.Checked Then Result.Add(New HydraEngine.Protection.Meta.MetadataPruner)
 
