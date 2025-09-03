@@ -523,6 +523,8 @@ Public Class ProjectDesigner
         Dim Tag As String = Guna2TextBox2.Text
         Dim VMSelected = VMComboSelect.SelectedIndex
 
+        If StrIntToRvaCheck.Checked Then Result.Add(New HydraEngine.Protection.Integer.StrIntToRva)
+
         If MetadataCleaner.Checked Then Result.Add(New HydraEngine.Protection.Meta.MetadataPruner)
 
         If ReduceMetadata.Checked Then Result.Add(New HydraEngine.Protection.Method.MethodToInline)
@@ -816,8 +818,6 @@ Public Class ProjectDesigner
             Result.Add(New HydraEngine.Protection.CodeEncryption.AntiTamperNormal)
             'Result.Add(New HydraEngine.Protection.Method.MethodError)
         End If
-
-        'Result.Add(New HydraEngine.Protection.INT.UnmanagedInteger)
 
         Return Result
     End Function

@@ -41,7 +41,7 @@ Public Class ProtectionPreset
     ' Configuraciones de DLL
     <JsonProperty("dll")>
     Public Property DLL As New DLLSettings()
-    
+
     ' Configuraciones de EntryPoint
     <JsonProperty("entryPoint")>
     Public Property EntryPoint As New EntryPointSettings()
@@ -251,6 +251,12 @@ Public Class ProtectionSettings
 
     <JsonProperty("codeOptimizer")>
     Public Property CodeOptimizer As Boolean = False
+
+    <JsonProperty("strIntToRva")>
+    Public Property StrIntToRva As Boolean = False
+
+    <JsonProperty("enumStripper")>
+    Public Property EnumStripper As Boolean = False
 
 End Class
 

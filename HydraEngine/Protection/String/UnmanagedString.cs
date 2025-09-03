@@ -18,7 +18,10 @@ namespace HydraEngine.Protection.String
 {
     public class UnmanagedString : Models.Protection
     {
-        public UnmanagedString() : base("Protection.Renamer.UnmanagedString", "Renamer Phase", "Description for Renamer Phase") { ManualReload = true; }
+        public UnmanagedString() : base("Protection.Renamer.UnmanagedString", "Renamer Phase", "Description for Renamer Phase")
+        {
+            ManualReload = true;
+        }
 
         public override async Task<bool> Execute(string moduledef)
         {
@@ -31,7 +34,6 @@ namespace HydraEngine.Protection.String
                 var stringCharPointerCtor = importer.ImportMethod(typeof(string).GetConstructor(new[] { typeof(char*) }));
                 var stringSbytePointerWithLengthCtor = importer.ImportMethod(typeof(string).GetConstructor(new[] { typeof(sbyte*), typeof(int), typeof(int) }));
                 var stringCharPointerWithLengthCtor = importer.ImportMethod(typeof(string).GetConstructor(new[] { typeof(char*), typeof(int), typeof(int) }));
-
 
                 module.Attributes &= ~DotNetDirectoryFlags.ILOnly;
                 var isx86 = module.MachineType == MachineType.I386;
@@ -52,10 +54,8 @@ namespace HydraEngine.Protection.String
 
                 foreach (var type in module.GetAllTypes().ToArray())
                 {
-
                     foreach (var method in type.Methods.ToArray())
                     {
-
                         if (method == null)
                             continue;
 
@@ -198,7 +198,6 @@ namespace HydraEngine.Protection.String
         0xC3 // ret
                 };
             }
-
 
             byte[] code = new byte[prefix.Length + stringBytes.Length];
             //prefix.CopyTo(code);

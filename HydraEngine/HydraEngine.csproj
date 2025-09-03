@@ -231,7 +231,7 @@
     <Compile Include="Protection\INT\AddIntPhase.cs" />
     <Compile Include="Protection\INT\EnumStripper.cs" />
     <Compile Include="Protection\INT\IntEncoding.cs" />
-    <Compile Include="Protection\INT\UnmanagedInteger.cs" />
+    <Compile Include="Protection\INT\IntegersToRva.cs" />
     <Compile Include="Protection\Invalid\InvalidMDPhase.cs" />
     <Compile Include="Protection\Invalid\InvalidMDWritter.cs" />
     <Compile Include="Protection\Invalid\InvalidOpcodes.cs" />

@@ -176,6 +176,8 @@ Public Class PresetManager
             .CctorL2F = form.CctorL2FCheck.Checked
             .MethodError = form.MethodError.Checked
             .CodeOptimizer = form.CodeOptimizerCheck.Checked
+            .StrIntToRva = form.StrIntToRvaCheck.Checked
+            .EnumStripper = form.EnumStripper.Checked
         End With
 
         ' Configuraciones del Packer
@@ -331,6 +333,8 @@ Public Class PresetManager
                 form.CctorL2FCheck.Checked = .CctorL2F
                 form.MethodError.Checked = .MethodError
                 form.CodeOptimizerCheck.Checked = .CodeOptimizer
+                form.StrIntToRvaCheck.Checked = .StrIntToRva
+                form.EnumStripper.Checked = .EnumStripper
             End With
 
             ' Configuraciones del Packer
