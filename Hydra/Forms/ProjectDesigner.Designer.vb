@@ -47,10 +47,10 @@ Partial Class ProjectDesigner
         Me.XylosNotice5 = New Hydra.XylosNotice()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2TextBox2 = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.LogInLabel1 = New Hydra.LogInLabel()
         Me.Guna2NumericUpDown1 = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.AddJunkCode = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox4 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.StrIntToRvaCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.EnumStripper = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Arithmetic = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.CalliUnsafe = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -85,7 +85,6 @@ Partial Class ProjectDesigner
         Me.InvalidOpcodes = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ImportProtection = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ReduceMetadata = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.Guna2GroupBox6 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.ElevationEscale = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.NopAttack = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ExeptionManager = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -225,7 +224,10 @@ Partial Class ProjectDesigner
         Me.LogInContextMenu1 = New Hydra.LogInContextMenu()
         Me.ExcludeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoosterToolTip1 = New Hydra.BoosterToolTip()
-        Me.StrIntToRvaCheck = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2GroupBox6 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2GroupBox9 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2CheckBox8 = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.Guna2CheckBox9 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -235,7 +237,6 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox1.SuspendLayout()
         CType(Me.Guna2NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox4.SuspendLayout()
-        Me.Guna2GroupBox6.SuspendLayout()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage6.SuspendLayout()
@@ -250,6 +251,8 @@ Partial Class ProjectDesigner
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.LogInContextMenu1.SuspendLayout()
+        Me.Guna2GroupBox6.SuspendLayout()
+        Me.Guna2GroupBox9.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -573,6 +576,7 @@ Partial Class ProjectDesigner
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.TabPage3.Controls.Add(Me.Guna2GroupBox6)
         Me.TabPage3.Controls.Add(Me.XylosNotice5)
         Me.TabPage3.Controls.Add(Me.Guna2GroupBox1)
         Me.TabPage3.Controls.Add(Me.Guna2GroupBox4)
@@ -605,17 +609,16 @@ Partial Class ProjectDesigner
         '
         Me.Guna2GroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Guna2GroupBox1.Controls.Add(Me.Guna2TextBox2)
-        Me.Guna2GroupBox1.Controls.Add(Me.LogInLabel1)
         Me.Guna2GroupBox1.Controls.Add(Me.Guna2NumericUpDown1)
         Me.Guna2GroupBox1.Controls.Add(Me.AddJunkCode)
         Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.Transparent
         Me.Guna2GroupBox1.FillColor = System.Drawing.Color.Transparent
         Me.Guna2GroupBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(519, 370)
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(656, 366)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
         Me.Guna2GroupBox1.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(227, 82)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(90, 86)
         Me.Guna2GroupBox1.TabIndex = 65
         '
         'Guna2TextBox2
@@ -631,28 +634,15 @@ Partial Class ProjectDesigner
         Me.Guna2TextBox2.FocusedState.BorderColor = System.Drawing.Color.Gray
         Me.Guna2TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.Gray
-        Me.Guna2TextBox2.Location = New System.Drawing.Point(53, 46)
+        Me.Guna2TextBox2.Location = New System.Drawing.Point(8, 55)
         Me.Guna2TextBox2.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.Guna2TextBox2.Name = "Guna2TextBox2"
         Me.Guna2TextBox2.PlaceholderText = ""
         Me.Guna2TextBox2.SelectedText = ""
         Me.Guna2TextBox2.SelectionStart = 9
-        Me.Guna2TextBox2.Size = New System.Drawing.Size(164, 28)
+        Me.Guna2TextBox2.Size = New System.Drawing.Size(75, 22)
         Me.Guna2TextBox2.TabIndex = 65
         Me.Guna2TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'LogInLabel1
-        '
-        Me.LogInLabel1.AutoSize = True
-        Me.LogInLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.LogInLabel1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.LogInLabel1.FontColour = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LogInLabel1.Location = New System.Drawing.Point(15, 47)
-        Me.LogInLabel1.Name = "LogInLabel1"
-        Me.LogInLabel1.Size = New System.Drawing.Size(32, 15)
-        Me.LogInLabel1.TabIndex = 64
-        Me.LogInLabel1.Text = "Tag :"
         '
         'Guna2NumericUpDown1
         '
@@ -669,11 +659,11 @@ Partial Class ProjectDesigner
         Me.Guna2NumericUpDown1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2NumericUpDown1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
         Me.Guna2NumericUpDown1.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.Guna2NumericUpDown1.Location = New System.Drawing.Point(142, 10)
+        Me.Guna2NumericUpDown1.Location = New System.Drawing.Point(8, 28)
         Me.Guna2NumericUpDown1.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.Guna2NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.Guna2NumericUpDown1.Name = "Guna2NumericUpDown1"
-        Me.Guna2NumericUpDown1.Size = New System.Drawing.Size(75, 28)
+        Me.Guna2NumericUpDown1.Size = New System.Drawing.Size(75, 19)
         Me.Guna2NumericUpDown1.TabIndex = 63
         Me.Guna2NumericUpDown1.UpDownButtonFillColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.Guna2NumericUpDown1.Value = New Decimal(New Integer() {100, 0, 0, 0})
@@ -685,7 +675,7 @@ Partial Class ProjectDesigner
         Me.AddJunkCode.CheckedState.BorderRadius = 0
         Me.AddJunkCode.CheckedState.BorderThickness = 1
         Me.AddJunkCode.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.AddJunkCode.Location = New System.Drawing.Point(15, 10)
+        Me.AddJunkCode.Location = New System.Drawing.Point(8, 8)
         Me.AddJunkCode.Name = "AddJunkCode"
         Me.AddJunkCode.Size = New System.Drawing.Size(75, 19)
         Me.AddJunkCode.TabIndex = 54
@@ -699,7 +689,7 @@ Partial Class ProjectDesigner
         'Guna2GroupBox4
         '
         Me.Guna2GroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2GroupBox4.Controls.Add(Me.StrIntToRvaCheck)
+        Me.Guna2GroupBox4.Controls.Add(Me.Guna2GroupBox9)
         Me.Guna2GroupBox4.Controls.Add(Me.EnumStripper)
         Me.Guna2GroupBox4.Controls.Add(Me.Arithmetic)
         Me.Guna2GroupBox4.Controls.Add(Me.CalliUnsafe)
@@ -734,7 +724,6 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.Controls.Add(Me.InvalidOpcodes)
         Me.Guna2GroupBox4.Controls.Add(Me.ImportProtection)
         Me.Guna2GroupBox4.Controls.Add(Me.ReduceMetadata)
-        Me.Guna2GroupBox4.Controls.Add(Me.Guna2GroupBox6)
         Me.Guna2GroupBox4.Controls.Add(Me.FakeObfuscation)
         Me.Guna2GroupBox4.Controls.Add(Me.EntryPointMover)
         Me.Guna2GroupBox4.Controls.Add(Me.Mutator)
@@ -763,6 +752,25 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.TabIndex = 43
         Me.Guna2GroupBox4.Text = "Options"
         '
+        'StrIntToRvaCheck
+        '
+        Me.StrIntToRvaCheck.AutoSize = True
+        Me.StrIntToRvaCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.StrIntToRvaCheck.CheckedState.BorderRadius = 0
+        Me.StrIntToRvaCheck.CheckedState.BorderThickness = 1
+        Me.StrIntToRvaCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.StrIntToRvaCheck.Location = New System.Drawing.Point(10, 9)
+        Me.StrIntToRvaCheck.Name = "StrIntToRvaCheck"
+        Me.StrIntToRvaCheck.Size = New System.Drawing.Size(107, 19)
+        Me.StrIntToRvaCheck.TabIndex = 98
+        Me.StrIntToRvaCheck.Text = "RVA indirection"
+        Me.BoosterToolTip1.SetToolTip(Me.StrIntToRvaCheck, "Protects integers and strings*")
+        Me.StrIntToRvaCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.StrIntToRvaCheck.UncheckedState.BorderRadius = 0
+        Me.StrIntToRvaCheck.UncheckedState.BorderThickness = 1
+        Me.StrIntToRvaCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.StrIntToRvaCheck.UseVisualStyleBackColor = True
+        '
         'EnumStripper
         '
         Me.EnumStripper.AutoSize = True
@@ -770,7 +778,7 @@ Partial Class ProjectDesigner
         Me.EnumStripper.CheckedState.BorderRadius = 0
         Me.EnumStripper.CheckedState.BorderThickness = 1
         Me.EnumStripper.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.EnumStripper.Location = New System.Drawing.Point(212, 377)
+        Me.EnumStripper.Location = New System.Drawing.Point(341, 248)
         Me.EnumStripper.Name = "EnumStripper"
         Me.EnumStripper.Size = New System.Drawing.Size(101, 19)
         Me.EnumStripper.TabIndex = 76
@@ -922,7 +930,7 @@ Partial Class ProjectDesigner
         Me.Method2DynamicEntryPoint.CheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Method2DynamicEntryPoint.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.Method2DynamicEntryPoint.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.Method2DynamicEntryPoint.Location = New System.Drawing.Point(298, 255)
+        Me.Method2DynamicEntryPoint.Location = New System.Drawing.Point(298, 301)
         Me.Method2DynamicEntryPoint.Name = "Method2DynamicEntryPoint"
         Me.Method2DynamicEntryPoint.Size = New System.Drawing.Size(111, 16)
         Me.Method2DynamicEntryPoint.TabIndex = 91
@@ -940,7 +948,7 @@ Partial Class ProjectDesigner
         Me.Method2DelegateCheck.CheckedState.BorderRadius = 0
         Me.Method2DelegateCheck.CheckedState.BorderThickness = 1
         Me.Method2DelegateCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Method2DelegateCheck.Location = New System.Drawing.Point(167, 252)
+        Me.Method2DelegateCheck.Location = New System.Drawing.Point(167, 298)
         Me.Method2DelegateCheck.Name = "Method2DelegateCheck"
         Me.Method2DelegateCheck.Size = New System.Drawing.Size(133, 19)
         Me.Method2DelegateCheck.TabIndex = 90
@@ -994,7 +1002,7 @@ Partial Class ProjectDesigner
         Me.ResourceCompressAndEncryptCheck.CheckedState.BorderRadius = 0
         Me.ResourceCompressAndEncryptCheck.CheckedState.BorderThickness = 1
         Me.ResourceCompressAndEncryptCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ResourceCompressAndEncryptCheck.Location = New System.Drawing.Point(15, 377)
+        Me.ResourceCompressAndEncryptCheck.Location = New System.Drawing.Point(15, 372)
         Me.ResourceCompressAndEncryptCheck.Name = "ResourceCompressAndEncryptCheck"
         Me.ResourceCompressAndEncryptCheck.Size = New System.Drawing.Size(186, 19)
         Me.ResourceCompressAndEncryptCheck.TabIndex = 86
@@ -1164,7 +1172,7 @@ Partial Class ProjectDesigner
         Me.AntiDecompilerCheck.CheckedState.BorderRadius = 0
         Me.AntiDecompilerCheck.CheckedState.BorderThickness = 1
         Me.AntiDecompilerCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.AntiDecompilerCheck.Location = New System.Drawing.Point(167, 354)
+        Me.AntiDecompilerCheck.Location = New System.Drawing.Point(167, 345)
         Me.AntiDecompilerCheck.Name = "AntiDecompilerCheck"
         Me.AntiDecompilerCheck.Size = New System.Drawing.Size(112, 19)
         Me.AntiDecompilerCheck.TabIndex = 64
@@ -1182,7 +1190,7 @@ Partial Class ProjectDesigner
         Me.JITHookCheck.CheckedState.BorderRadius = 0
         Me.JITHookCheck.CheckedState.BorderThickness = 1
         Me.JITHookCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.JITHookCheck.Location = New System.Drawing.Point(167, 330)
+        Me.JITHookCheck.Location = New System.Drawing.Point(167, 323)
         Me.JITHookCheck.Name = "JITHookCheck"
         Me.JITHookCheck.Size = New System.Drawing.Size(98, 19)
         Me.JITHookCheck.TabIndex = 72
@@ -1200,7 +1208,7 @@ Partial Class ProjectDesigner
         Me.SUFconfusionCheck.CheckedState.BorderRadius = 0
         Me.SUFconfusionCheck.CheckedState.BorderThickness = 1
         Me.SUFconfusionCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.SUFconfusionCheck.Location = New System.Drawing.Point(167, 302)
+        Me.SUFconfusionCheck.Location = New System.Drawing.Point(167, 273)
         Me.SUFconfusionCheck.Name = "SUFconfusionCheck"
         Me.SUFconfusionCheck.Size = New System.Drawing.Size(102, 19)
         Me.SUFconfusionCheck.TabIndex = 71
@@ -1218,7 +1226,7 @@ Partial Class ProjectDesigner
         Me.DynamicCctorCheck.CheckedState.BorderRadius = 0
         Me.DynamicCctorCheck.CheckedState.BorderThickness = 1
         Me.DynamicCctorCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.DynamicCctorCheck.Location = New System.Drawing.Point(15, 277)
+        Me.DynamicCctorCheck.Location = New System.Drawing.Point(15, 273)
         Me.DynamicCctorCheck.Name = "DynamicCctorCheck"
         Me.DynamicCctorCheck.Size = New System.Drawing.Size(105, 19)
         Me.DynamicCctorCheck.TabIndex = 70
@@ -1310,7 +1318,7 @@ Partial Class ProjectDesigner
         Me.ResourceEncryptionCheck.CheckedState.BorderRadius = 0
         Me.ResourceEncryptionCheck.CheckedState.BorderThickness = 1
         Me.ResourceEncryptionCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ResourceEncryptionCheck.Location = New System.Drawing.Point(15, 354)
+        Me.ResourceEncryptionCheck.Location = New System.Drawing.Point(15, 345)
         Me.ResourceEncryptionCheck.Name = "ResourceEncryptionCheck"
         Me.ResourceEncryptionCheck.Size = New System.Drawing.Size(134, 19)
         Me.ResourceEncryptionCheck.TabIndex = 66
@@ -1363,7 +1371,7 @@ Partial Class ProjectDesigner
         Me.ImportProtection.CheckedState.BorderRadius = 0
         Me.ImportProtection.CheckedState.BorderThickness = 1
         Me.ImportProtection.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ImportProtection.Location = New System.Drawing.Point(15, 302)
+        Me.ImportProtection.Location = New System.Drawing.Point(15, 298)
         Me.ImportProtection.Name = "ImportProtection"
         Me.ImportProtection.Size = New System.Drawing.Size(120, 19)
         Me.ImportProtection.TabIndex = 61
@@ -1392,22 +1400,6 @@ Partial Class ProjectDesigner
         Me.ReduceMetadata.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.ReduceMetadata.UseVisualStyleBackColor = True
         '
-        'Guna2GroupBox6
-        '
-        Me.Guna2GroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2GroupBox6.Controls.Add(Me.ElevationEscale)
-        Me.Guna2GroupBox6.Controls.Add(Me.NopAttack)
-        Me.Guna2GroupBox6.Controls.Add(Me.ExeptionManager)
-        Me.Guna2GroupBox6.CustomBorderColor = System.Drawing.Color.Transparent
-        Me.Guna2GroupBox6.FillColor = System.Drawing.Color.Transparent
-        Me.Guna2GroupBox6.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2GroupBox6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox6.Location = New System.Drawing.Point(328, 302)
-        Me.Guna2GroupBox6.Name = "Guna2GroupBox6"
-        Me.Guna2GroupBox6.Size = New System.Drawing.Size(155, 97)
-        Me.Guna2GroupBox6.TabIndex = 63
-        Me.Guna2GroupBox6.Text = "Special Functions"
-        '
         'ElevationEscale
         '
         Me.ElevationEscale.AutoSize = True
@@ -1415,9 +1407,10 @@ Partial Class ProjectDesigner
         Me.ElevationEscale.CheckedState.BorderRadius = 0
         Me.ElevationEscale.CheckedState.BorderThickness = 1
         Me.ElevationEscale.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ElevationEscale.Location = New System.Drawing.Point(27, 49)
+        Me.ElevationEscale.Font = New System.Drawing.Font("Segoe UI", 8.0!)
+        Me.ElevationEscale.Location = New System.Drawing.Point(6, 33)
         Me.ElevationEscale.Name = "ElevationEscale"
-        Me.ElevationEscale.Size = New System.Drawing.Size(125, 19)
+        Me.ElevationEscale.Size = New System.Drawing.Size(122, 17)
         Me.ElevationEscale.TabIndex = 64
         Me.ElevationEscale.Text = "Runtime Elevation "
         Me.ElevationEscale.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -1433,7 +1426,7 @@ Partial Class ProjectDesigner
         Me.NopAttack.CheckedState.BorderRadius = 0
         Me.NopAttack.CheckedState.BorderThickness = 1
         Me.NopAttack.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.NopAttack.Location = New System.Drawing.Point(27, 71)
+        Me.NopAttack.Location = New System.Drawing.Point(6, 58)
         Me.NopAttack.Name = "NopAttack"
         Me.NopAttack.Size = New System.Drawing.Size(86, 19)
         Me.NopAttack.TabIndex = 63
@@ -1451,9 +1444,10 @@ Partial Class ProjectDesigner
         Me.ExeptionManager.CheckedState.BorderRadius = 0
         Me.ExeptionManager.CheckedState.BorderThickness = 1
         Me.ExeptionManager.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.ExeptionManager.Location = New System.Drawing.Point(27, 29)
+        Me.ExeptionManager.Font = New System.Drawing.Font("Segoe UI", 8.0!)
+        Me.ExeptionManager.Location = New System.Drawing.Point(6, 8)
         Me.ExeptionManager.Name = "ExeptionManager"
-        Me.ExeptionManager.Size = New System.Drawing.Size(125, 19)
+        Me.ExeptionManager.Size = New System.Drawing.Size(123, 17)
         Me.ExeptionManager.TabIndex = 61
         Me.ExeptionManager.Text = "Full Exeption catch"
         Me.ExeptionManager.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -1649,7 +1643,7 @@ Partial Class ProjectDesigner
         Me.L2F.CheckedState.BorderRadius = 0
         Me.L2F.CheckedState.BorderThickness = 1
         Me.L2F.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.L2F.Location = New System.Drawing.Point(167, 277)
+        Me.L2F.Location = New System.Drawing.Point(167, 248)
         Me.L2F.Name = "L2F"
         Me.L2F.Size = New System.Drawing.Size(98, 19)
         Me.L2F.TabIndex = 41
@@ -1721,7 +1715,7 @@ Partial Class ProjectDesigner
         Me.StackUnfConfusion.CheckedState.BorderRadius = 0
         Me.StackUnfConfusion.CheckedState.BorderThickness = 1
         Me.StackUnfConfusion.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.StackUnfConfusion.Location = New System.Drawing.Point(15, 329)
+        Me.StackUnfConfusion.Location = New System.Drawing.Point(15, 323)
         Me.StackUnfConfusion.Name = "StackUnfConfusion"
         Me.StackUnfConfusion.Size = New System.Drawing.Size(128, 19)
         Me.StackUnfConfusion.TabIndex = 40
@@ -3745,23 +3739,74 @@ Partial Class ProjectDesigner
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
         '
-        'StrIntToRvaCheck
+        'Guna2GroupBox6
         '
-        Me.StrIntToRvaCheck.AutoSize = True
-        Me.StrIntToRvaCheck.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.StrIntToRvaCheck.CheckedState.BorderRadius = 0
-        Me.StrIntToRvaCheck.CheckedState.BorderThickness = 1
-        Me.StrIntToRvaCheck.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.StrIntToRvaCheck.Location = New System.Drawing.Point(341, 277)
-        Me.StrIntToRvaCheck.Name = "StrIntToRvaCheck"
-        Me.StrIntToRvaCheck.Size = New System.Drawing.Size(148, 19)
-        Me.StrIntToRvaCheck.TabIndex = 98
-        Me.StrIntToRvaCheck.Text = "Str&&Int RVA indirection"
-        Me.StrIntToRvaCheck.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.StrIntToRvaCheck.UncheckedState.BorderRadius = 0
-        Me.StrIntToRvaCheck.UncheckedState.BorderThickness = 1
-        Me.StrIntToRvaCheck.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.StrIntToRvaCheck.UseVisualStyleBackColor = True
+        Me.Guna2GroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox6.Controls.Add(Me.NopAttack)
+        Me.Guna2GroupBox6.Controls.Add(Me.ExeptionManager)
+        Me.Guna2GroupBox6.Controls.Add(Me.ElevationEscale)
+        Me.Guna2GroupBox6.CustomBorderColor = System.Drawing.Color.Transparent
+        Me.Guna2GroupBox6.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2GroupBox6.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2GroupBox6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
+        Me.Guna2GroupBox6.Location = New System.Drawing.Point(519, 366)
+        Me.Guna2GroupBox6.Name = "Guna2GroupBox6"
+        Me.Guna2GroupBox6.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2GroupBox6.Size = New System.Drawing.Size(131, 86)
+        Me.Guna2GroupBox6.TabIndex = 74
+        '
+        'Guna2GroupBox9
+        '
+        Me.Guna2GroupBox9.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox9.BorderRadius = 5
+        Me.Guna2GroupBox9.Controls.Add(Me.Guna2CheckBox9)
+        Me.Guna2GroupBox9.Controls.Add(Me.Guna2CheckBox8)
+        Me.Guna2GroupBox9.Controls.Add(Me.StrIntToRvaCheck)
+        Me.Guna2GroupBox9.CustomBorderColor = System.Drawing.Color.Transparent
+        Me.Guna2GroupBox9.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2GroupBox9.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2GroupBox9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
+        Me.Guna2GroupBox9.Location = New System.Drawing.Point(341, 319)
+        Me.Guna2GroupBox9.Name = "Guna2GroupBox9"
+        Me.Guna2GroupBox9.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2GroupBox9.Size = New System.Drawing.Size(150, 78)
+        Me.Guna2GroupBox9.TabIndex = 99
+        '
+        'Guna2CheckBox8
+        '
+        Me.Guna2CheckBox8.AutoSize = True
+        Me.Guna2CheckBox8.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox8.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox8.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox8.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox8.Location = New System.Drawing.Point(22, 30)
+        Me.Guna2CheckBox8.Name = "Guna2CheckBox8"
+        Me.Guna2CheckBox8.Size = New System.Drawing.Size(119, 19)
+        Me.Guna2CheckBox8.TabIndex = 99
+        Me.Guna2CheckBox8.Text = "Obfuscate Strings"
+        Me.Guna2CheckBox8.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox8.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox8.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox8.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox8.UseVisualStyleBackColor = True
+        '
+        'Guna2CheckBox9
+        '
+        Me.Guna2CheckBox9.AutoSize = True
+        Me.Guna2CheckBox9.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox9.CheckedState.BorderRadius = 0
+        Me.Guna2CheckBox9.CheckedState.BorderThickness = 1
+        Me.Guna2CheckBox9.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox9.Location = New System.Drawing.Point(22, 55)
+        Me.Guna2CheckBox9.Name = "Guna2CheckBox9"
+        Me.Guna2CheckBox9.Size = New System.Drawing.Size(93, 19)
+        Me.Guna2CheckBox9.TabIndex = 100
+        Me.Guna2CheckBox9.Text = "Encrypt Data"
+        Me.Guna2CheckBox9.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2CheckBox9.UncheckedState.BorderRadius = 0
+        Me.Guna2CheckBox9.UncheckedState.BorderThickness = 1
+        Me.Guna2CheckBox9.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2CheckBox9.UseVisualStyleBackColor = True
         '
         'ProjectDesigner
         '
@@ -3795,8 +3840,6 @@ Partial Class ProjectDesigner
         CType(Me.Guna2NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2GroupBox4.ResumeLayout(False)
         Me.Guna2GroupBox4.PerformLayout()
-        Me.Guna2GroupBox6.ResumeLayout(False)
-        Me.Guna2GroupBox6.PerformLayout()
         Me.Guna2GroupBox2.ResumeLayout(False)
         Me.Guna2GroupBox2.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
@@ -3820,6 +3863,10 @@ Partial Class ProjectDesigner
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.LogInContextMenu1.ResumeLayout(False)
+        Me.Guna2GroupBox6.ResumeLayout(False)
+        Me.Guna2GroupBox6.PerformLayout()
+        Me.Guna2GroupBox9.ResumeLayout(False)
+        Me.Guna2GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3891,7 +3938,6 @@ Partial Class ProjectDesigner
     Friend WithEvents ReduceMetadata As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Guna2ProgressBar1 As Guna.UI2.WinForms.Guna2ProgressBar
     Friend WithEvents ExeptionManager As Guna.UI2.WinForms.Guna2CheckBox
-    Friend WithEvents Guna2GroupBox6 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents ImportProtection As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
@@ -3909,7 +3955,6 @@ Partial Class ProjectDesigner
     Friend WithEvents NopAttack As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents Guna2GroupBox1 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents Guna2TextBox2 As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents LogInLabel1 As LogInLabel
     Friend WithEvents Guna2ProgressBar2 As Guna.UI2.WinForms.Guna2ProgressBar
     Friend WithEvents DLLEmbeder As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents AntiDecompilerCheck As Guna.UI2.WinForms.Guna2CheckBox
@@ -4027,4 +4072,8 @@ Partial Class ProjectDesigner
     Friend WithEvents Arithmetic As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents EnumStripper As Guna.UI2.WinForms.Guna2CheckBox
     Friend WithEvents StrIntToRvaCheck As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Guna2GroupBox6 As Guna.UI2.WinForms.Guna2GroupBox
+    Friend WithEvents Guna2GroupBox9 As Guna.UI2.WinForms.Guna2GroupBox
+    Friend WithEvents Guna2CheckBox8 As Guna.UI2.WinForms.Guna2CheckBox
+    Friend WithEvents Guna2CheckBox9 As Guna.UI2.WinForms.Guna2CheckBox
 End Class

@@ -523,7 +523,7 @@ Public Class ProjectDesigner
         Dim Tag As String = Guna2TextBox2.Text
         Dim VMSelected = VMComboSelect.SelectedIndex
 
-        If StrIntToRvaCheck.Checked Then Result.Add(New HydraEngine.Protection.Integer.StrIntToRva)
+        If StrIntToRvaCheck.Checked Then Result.Add(New HydraEngine.Protection.Integer.StrIntToRva With {.ObfuscateStrings = Guna2CheckBox8.Checked, .Encrypt = Guna2CheckBox9.Checked})
 
         If MetadataCleaner.Checked Then Result.Add(New HydraEngine.Protection.Meta.MetadataPruner)
 
@@ -2338,6 +2338,11 @@ Public Class ProjectDesigner
         Catch ex As Exception
             MessageBox.Show($"Error showing preset information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub StrIntToRvaCheck_CheckedChanged(sender As Object, e As EventArgs) Handles StrIntToRvaCheck.CheckedChanged
+        Guna2CheckBox8.Enabled = StrIntToRvaCheck.Checked
+        Guna2CheckBox9.Enabled = StrIntToRvaCheck.Checked
     End Sub
 
 #End Region
