@@ -824,6 +824,8 @@ Public Class ProjectDesigner
             'Result.Add(New HydraEngine.Protection.Method.MethodError)
         End If
 
+        Result.Add(New HydraEngine.Protection.ILVM.ILVMProtector)
+
         Return Result
     End Function
 

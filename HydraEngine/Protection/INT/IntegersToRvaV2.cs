@@ -351,6 +351,10 @@ namespace HydraEngine.Protection.Integer
             FieldDefinition shard2RvaField,
             int poolLen, int dirCipherLen, int dirIvLen)
         {
+            var cgCtor = (ICustomAttributeType)importer.ImportMethod(
+            typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute)
+            .GetConstructor(Type.EmptyTypes));
+
             var fac = module.CorLibTypeFactory;
 
             var rt = new TypeDefinition(
@@ -359,6 +363,8 @@ namespace HydraEngine.Protection.Integer
                 TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit,
                 fac.Object.Type);
             module.TopLevelTypes.Add(rt);
+
+            rt.CustomAttributes.Add(new CustomAttribute(cgCtor));
 
             // Campos estáticos:
             var byteArrSig = new SzArrayTypeSignature(fac.Byte);
@@ -671,6 +677,12 @@ namespace HydraEngine.Protection.Integer
                 il.Add(CilOpCodes.Ret);
             }
 
+            foreach (var f in rt.Fields)
+                f.CustomAttributes.Add(new CustomAttribute(cgCtor));
+
+            foreach (var m in rt.Methods)
+                m.CustomAttributes.Add(new CustomAttribute(cgCtor));
+
             return rt;
         }
 
@@ -684,6 +696,12 @@ namespace HydraEngine.Protection.Integer
             var body = new CilMethodBody(m);
             m.CilMethodBody = body;
             var il = body.Instructions;
+
+            // Asegurar ejecución del .cctor de <HydraRvaRuntime>
+            var importer = new ReferenceImporter(rt.Module);
+            var runCCtor = importer.ImportMethod(typeof(System.Runtime.CompilerServices.RuntimeHelpers).GetMethod(nameof(System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor), new[] { typeof(RuntimeTypeHandle) }));
+            il.Add(CilOpCodes.Ldtoken, rt);
+            il.Add(CilOpCodes.Call, runCCtor);
 
             var bytesLocal = new CilLocalVariable(new SzArrayTypeSignature(rt.Module.CorLibTypeFactory.Byte));
             body.LocalVariables.Add(bytesLocal);
@@ -710,6 +728,12 @@ namespace HydraEngine.Protection.Integer
             var body = new CilMethodBody(m);
             m.CilMethodBody = body;
             var il = body.Instructions;
+
+            // Asegurar ejecución del .cctor de <HydraRvaRuntime>
+            var importer = new ReferenceImporter(rt.Module);
+            var runCCtor = importer.ImportMethod(typeof(System.Runtime.CompilerServices.RuntimeHelpers).GetMethod(nameof(System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor), new[] { typeof(RuntimeTypeHandle) }));
+            il.Add(CilOpCodes.Ldtoken, rt);
+            il.Add(CilOpCodes.Call, runCCtor);
 
             var bytesLocal = new CilLocalVariable(new SzArrayTypeSignature(rt.Module.CorLibTypeFactory.Byte));
             body.LocalVariables.Add(bytesLocal);

@@ -336,6 +336,7 @@
     <Compile Include="Protection\VM\Core\Protections\IProtection.cs" />
     <Compile Include="Protection\VM\Core\Protections\LoadDLLRuntime\VMInitialize.cs" />
     <Compile Include="Protection\VM\EXGuard.cs" />
+    <Compile Include="Protection\VM\ILVMProtector.cs" />
     <Compile Include="Protection\VM\Virtualizer.cs" />
     <Compile Include="References\AsmLibMerger.cs" />
     <Compile Include="References\AssemblyFusion.cs" />
