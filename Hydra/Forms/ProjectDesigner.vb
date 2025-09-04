@@ -821,10 +821,9 @@ Public Class ProjectDesigner
 
         If MethodError.Checked = True Then
             Result.Add(New HydraEngine.Protection.CodeEncryption.AntiTamperNormal)
-            'Result.Add(New HydraEngine.Protection.Method.MethodError)
         End If
 
-        Result.Add(New HydraEngine.Protection.ILVM.ILVMProtector)
+        'Result.Add(New HydraEngine.Protection.Method.MethodError)
 
         Return Result
     End Function
