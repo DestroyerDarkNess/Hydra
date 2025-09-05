@@ -13,7 +13,9 @@ namespace HydraEngine.Protection.Proxy
 {
     public class ProxyReferences : Models.Protection
     {
-        public ProxyReferences() : base("Protection.Proxy.ProxyReferences", "Renamer Phase", "Description for Renamer Phase") { }
+        public ProxyReferences() : base("Protection.Proxy.ProxyReferences", "Renamer Phase", "Description for Renamer Phase")
+        {
+        }
 
         public readonly List<MethodDef> ProxyMethods = new List<MethodDef>();
 
@@ -23,7 +25,6 @@ namespace HydraEngine.Protection.Proxy
         {
             try
             {
-
                 //foreach (var type in Module.Types.ToArray())
                 //{
                 //    if (!AnalyzerPhase.CanRename(type)) continue;
@@ -50,7 +51,6 @@ namespace HydraEngine.Protection.Proxy
                 //}
 
                 EXGuard.Core.EXECProtections.RPNormal.Execute(Module);
-
 
                 return true;
             }
@@ -96,6 +96,7 @@ namespace HydraEngine.Protection.Proxy
                     case OpCode op when op == OpCodes.Newobj:
                         if (Unsafe) ProcessNewObjInstruction(ctx, type, method, instruction);
                         break;
+
                     case OpCode op when op == OpCodes.Call:
                         ProcessCallInstruction(ctx, type, method, instruction);
                         break;
@@ -163,7 +164,6 @@ namespace HydraEngine.Protection.Proxy
             instruction.Operand = newMethod;
             instruction.OpCode = OpCodes.Call;
         }
-
     }
 
     public static class ProxyReferences_Helper
@@ -226,7 +226,7 @@ namespace HydraEngine.Protection.Proxy
             methodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
 
             AddDebugAssert(ctx, methodDefinition.Body);
-            DnlibUtils.EnsureNoInlining(methodDefinition);
+            EnsureNoInlining(methodDefinition);
 
             return methodDefinition;
         }
@@ -261,15 +261,19 @@ namespace HydraEngine.Protection.Proxy
             methodDef.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
 
             AddDebugAssert(ctx, methodDef.Body);
-            DnlibUtils.EnsureNoInlining(methodDef);
+            EnsureNoInlining(methodDef);
 
             return methodDef;
+        }
+
+        public static void EnsureNoInlining(MethodDef method)
+        {
+            method.ImplAttributes &= ~MethodImplAttributes.AggressiveInlining;
+            method.ImplAttributes |= MethodImplAttributes.NoInlining;
         }
     }
 
     internal class FixedReferenceProxy
     {
-
     }
-
 }
