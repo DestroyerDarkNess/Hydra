@@ -36,30 +36,7 @@ If you want to compile Hydra from source code, follow these steps:
 - **Git** for cloning the repository
 
 ### Step-by-Step Build Process
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/DestroyerDarkNess/Hydra.git
-   cd Hydra
-   ```
-
-2. **Open the solution**
-   - Open `Hydra.sln` in Visual Studio
-   - Or use the command line: `msbuild Hydra.sln`
-
-3. **Restore NuGet packages**
-   - In Visual Studio: Right-click solution → "Restore NuGet Packages"
-   - Or use command line: `nuget restore Hydra.sln`
-
-4. **Build the solution**
-   - In Visual Studio: Build → Build Solution (Ctrl+Shift+B)
-   - Or use command line: `msbuild Hydra.sln /p:Configuration=Release`
-
-5. **Locate the compiled files**
-   - The main executable will be in: `Hydra/bin/Release/`
-   - Additional libraries will be in their respective `bin/Release/` folders
-
-### Video Tutorial
+ 
 📹 **[Watch the complete build process video](https://github.com/DestroyerDarkNess/Hydra/HydraBuild.mp4)** - Step by step compilation guide
 
 ### Troubleshooting
