@@ -36,8 +36,12 @@ If you want to compile Hydra from source code, follow these steps:
 - **Git** for cloning the repository
 
 ### Step-by-Step Build Process
- 
-📹 **[Watch the complete build process video](https://github.com/DestroyerDarkNess/Hydra/HydraBuild.mp4)** - Step by step compilation guide
+ 📹 **Complete build process demonstration:**
+
+<video width="800" height="450" controls>
+  <source src="https://github.com/DestroyerDarkNess/Hydra/raw/refs/heads/main/HydraBuild.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Troubleshooting
 - Ensure you have the correct .NET Framework version installed
