@@ -54,6 +54,10 @@ Partial Class ProjectDesigner
         Me.Guna2NumericUpDown1 = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.AddJunkCode = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox4 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2GroupBox10 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Calli = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.CalliSecureMode = New Guna.UI2.WinForms.Guna2CheckBox()
+        Me.CalliUnsafe = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox9 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2CheckBox10 = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2CheckBox9 = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -61,7 +65,6 @@ Partial Class ProjectDesigner
         Me.StrIntToRvaCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.EnumStripper = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Arithmetic = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.CalliUnsafe = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.KroksCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.SugarControlFlowCheck = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.ProxyReferencesUnsafeCheck = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -108,7 +111,6 @@ Partial Class ProjectDesigner
         Me.ControlFlow = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.IntConfusion = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.StackUnfConfusion = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.Calli = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.InvalidMD = New Guna.UI2.WinForms.Guna2CheckBox()
         Me.Guna2GroupBox2 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.UnsafeMode = New Guna.UI2.WinForms.Guna2CheckBox()
@@ -229,8 +231,6 @@ Partial Class ProjectDesigner
         Me.LogInContextMenu1 = New Hydra.LogInContextMenu()
         Me.ExcludeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoosterToolTip1 = New Hydra.BoosterToolTip()
-        Me.CalliSecureMode = New Guna.UI2.WinForms.Guna2CheckBox()
-        Me.Guna2GroupBox10 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
@@ -241,6 +241,7 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox1.SuspendLayout()
         CType(Me.Guna2NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox4.SuspendLayout()
+        Me.Guna2GroupBox10.SuspendLayout()
         Me.Guna2GroupBox9.SuspendLayout()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
@@ -256,7 +257,6 @@ Partial Class ProjectDesigner
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.LogInContextMenu1.SuspendLayout()
-        Me.Guna2GroupBox10.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -828,6 +828,81 @@ Partial Class ProjectDesigner
         Me.Guna2GroupBox4.TabIndex = 43
         Me.Guna2GroupBox4.Text = "Options"
         '
+        'Guna2GroupBox10
+        '
+        Me.Guna2GroupBox10.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Guna2GroupBox10.BorderRadius = 5
+        Me.Guna2GroupBox10.Controls.Add(Me.Calli)
+        Me.Guna2GroupBox10.Controls.Add(Me.CalliSecureMode)
+        Me.Guna2GroupBox10.Controls.Add(Me.CalliUnsafe)
+        Me.Guna2GroupBox10.CustomBorderColor = System.Drawing.Color.Transparent
+        Me.Guna2GroupBox10.FillColor = System.Drawing.Color.Transparent
+        Me.Guna2GroupBox10.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2GroupBox10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
+        Me.Guna2GroupBox10.Location = New System.Drawing.Point(328, 248)
+        Me.Guna2GroupBox10.Name = "Guna2GroupBox10"
+        Me.Guna2GroupBox10.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Guna2GroupBox10.Size = New System.Drawing.Size(163, 50)
+        Me.Guna2GroupBox10.TabIndex = 101
+        '
+        'Calli
+        '
+        Me.Calli.AutoSize = True
+        Me.Calli.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Calli.CheckedState.BorderRadius = 0
+        Me.Calli.CheckedState.BorderThickness = 1
+        Me.Calli.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Calli.Location = New System.Drawing.Point(13, 8)
+        Me.Calli.Name = "Calli"
+        Me.Calli.Size = New System.Drawing.Size(86, 19)
+        Me.Calli.TabIndex = 32
+        Me.Calli.Text = "Call to Calli"
+        Me.Calli.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Calli.UncheckedState.BorderRadius = 0
+        Me.Calli.UncheckedState.BorderThickness = 1
+        Me.Calli.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.Calli.UseVisualStyleBackColor = True
+        '
+        'CalliSecureMode
+        '
+        Me.CalliSecureMode.AutoSize = True
+        Me.CalliSecureMode.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CalliSecureMode.CheckedState.BorderRadius = 0
+        Me.CalliSecureMode.CheckedState.BorderThickness = 1
+        Me.CalliSecureMode.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CalliSecureMode.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.CalliSecureMode.Font = New System.Drawing.Font("Segoe UI", 6.0!)
+        Me.CalliSecureMode.Location = New System.Drawing.Point(13, 30)
+        Me.CalliSecureMode.Name = "CalliSecureMode"
+        Me.CalliSecureMode.Size = New System.Drawing.Size(132, 15)
+        Me.CalliSecureMode.TabIndex = 100
+        Me.CalliSecureMode.Text = "Progressive Mode (AntiFailure)"
+        Me.CalliSecureMode.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CalliSecureMode.UncheckedState.BorderRadius = 0
+        Me.CalliSecureMode.UncheckedState.BorderThickness = 1
+        Me.CalliSecureMode.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CalliSecureMode.UseVisualStyleBackColor = True
+        '
+        'CalliUnsafe
+        '
+        Me.CalliUnsafe.AutoSize = True
+        Me.CalliUnsafe.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CalliUnsafe.CheckedState.BorderRadius = 0
+        Me.CalliUnsafe.CheckedState.BorderThickness = 1
+        Me.CalliUnsafe.CheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CalliUnsafe.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
+        Me.CalliUnsafe.Font = New System.Drawing.Font("Segoe UI", 7.0!)
+        Me.CalliUnsafe.Location = New System.Drawing.Point(105, 8)
+        Me.CalliUnsafe.Name = "CalliUnsafe"
+        Me.CalliUnsafe.Size = New System.Drawing.Size(54, 16)
+        Me.CalliUnsafe.TabIndex = 96
+        Me.CalliUnsafe.Text = "Unsafe"
+        Me.CalliUnsafe.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CalliUnsafe.UncheckedState.BorderRadius = 0
+        Me.CalliUnsafe.UncheckedState.BorderThickness = 1
+        Me.CalliUnsafe.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.CalliUnsafe.UseVisualStyleBackColor = True
+        '
         'Guna2GroupBox9
         '
         Me.Guna2GroupBox9.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -929,7 +1004,7 @@ Partial Class ProjectDesigner
         Me.EnumStripper.CheckedState.BorderRadius = 0
         Me.EnumStripper.CheckedState.BorderThickness = 1
         Me.EnumStripper.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.EnumStripper.Location = New System.Drawing.Point(341, 228)
+        Me.EnumStripper.Location = New System.Drawing.Point(341, 223)
         Me.EnumStripper.Name = "EnumStripper"
         Me.EnumStripper.Size = New System.Drawing.Size(101, 19)
         Me.EnumStripper.TabIndex = 76
@@ -947,7 +1022,7 @@ Partial Class ProjectDesigner
         Me.Arithmetic.CheckedState.BorderRadius = 0
         Me.Arithmetic.CheckedState.BorderThickness = 1
         Me.Arithmetic.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Arithmetic.Location = New System.Drawing.Point(341, 207)
+        Me.Arithmetic.Location = New System.Drawing.Point(341, 202)
         Me.Arithmetic.Name = "Arithmetic"
         Me.Arithmetic.Size = New System.Drawing.Size(150, 19)
         Me.Arithmetic.TabIndex = 97
@@ -957,26 +1032,6 @@ Partial Class ProjectDesigner
         Me.Arithmetic.UncheckedState.BorderThickness = 1
         Me.Arithmetic.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.Arithmetic.UseVisualStyleBackColor = True
-        '
-        'CalliUnsafe
-        '
-        Me.CalliUnsafe.AutoSize = True
-        Me.CalliUnsafe.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.CalliUnsafe.CheckedState.BorderRadius = 0
-        Me.CalliUnsafe.CheckedState.BorderThickness = 1
-        Me.CalliUnsafe.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CalliUnsafe.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        Me.CalliUnsafe.Font = New System.Drawing.Font("Segoe UI", 7.0!)
-        Me.CalliUnsafe.Location = New System.Drawing.Point(105, 8)
-        Me.CalliUnsafe.Name = "CalliUnsafe"
-        Me.CalliUnsafe.Size = New System.Drawing.Size(54, 16)
-        Me.CalliUnsafe.TabIndex = 96
-        Me.CalliUnsafe.Text = "Unsafe"
-        Me.CalliUnsafe.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.CalliUnsafe.UncheckedState.BorderRadius = 0
-        Me.CalliUnsafe.UncheckedState.BorderThickness = 1
-        Me.CalliUnsafe.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CalliUnsafe.UseVisualStyleBackColor = True
         '
         'KroksCheck
         '
@@ -1820,24 +1875,6 @@ Partial Class ProjectDesigner
         Me.StackUnfConfusion.UncheckedState.BorderThickness = 1
         Me.StackUnfConfusion.UncheckedState.FillColor = System.Drawing.Color.Transparent
         Me.StackUnfConfusion.UseVisualStyleBackColor = True
-        '
-        'Calli
-        '
-        Me.Calli.AutoSize = True
-        Me.Calli.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Calli.CheckedState.BorderRadius = 0
-        Me.Calli.CheckedState.BorderThickness = 1
-        Me.Calli.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Calli.Location = New System.Drawing.Point(13, 8)
-        Me.Calli.Name = "Calli"
-        Me.Calli.Size = New System.Drawing.Size(86, 19)
-        Me.Calli.TabIndex = 32
-        Me.Calli.Text = "Call to Calli"
-        Me.Calli.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Calli.UncheckedState.BorderRadius = 0
-        Me.Calli.UncheckedState.BorderThickness = 1
-        Me.Calli.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.Calli.UseVisualStyleBackColor = True
         '
         'InvalidMD
         '
@@ -3834,43 +3871,6 @@ Partial Class ProjectDesigner
         Me.BoosterToolTip1.ForeColor = System.Drawing.Color.White
         Me.BoosterToolTip1.OwnerDraw = True
         '
-        'CalliSecureMode
-        '
-        Me.CalliSecureMode.AutoSize = True
-        Me.CalliSecureMode.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.CalliSecureMode.CheckedState.BorderRadius = 0
-        Me.CalliSecureMode.CheckedState.BorderThickness = 1
-        Me.CalliSecureMode.CheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CalliSecureMode.CheckMarkColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(13, Byte), Integer), CType(CType(13, Byte), Integer))
-        Me.CalliSecureMode.Font = New System.Drawing.Font("Segoe UI", 6.0!)
-        Me.CalliSecureMode.Location = New System.Drawing.Point(13, 30)
-        Me.CalliSecureMode.Name = "CalliSecureMode"
-        Me.CalliSecureMode.Size = New System.Drawing.Size(132, 15)
-        Me.CalliSecureMode.TabIndex = 100
-        Me.CalliSecureMode.Text = "Progressive Mode (AntiFailure)"
-        Me.CalliSecureMode.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.CalliSecureMode.UncheckedState.BorderRadius = 0
-        Me.CalliSecureMode.UncheckedState.BorderThickness = 1
-        Me.CalliSecureMode.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.CalliSecureMode.UseVisualStyleBackColor = True
-        '
-        'Guna2GroupBox10
-        '
-        Me.Guna2GroupBox10.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2GroupBox10.BorderRadius = 5
-        Me.Guna2GroupBox10.Controls.Add(Me.Calli)
-        Me.Guna2GroupBox10.Controls.Add(Me.CalliSecureMode)
-        Me.Guna2GroupBox10.Controls.Add(Me.CalliUnsafe)
-        Me.Guna2GroupBox10.CustomBorderColor = System.Drawing.Color.Transparent
-        Me.Guna2GroupBox10.FillColor = System.Drawing.Color.Transparent
-        Me.Guna2GroupBox10.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2GroupBox10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox10.Location = New System.Drawing.Point(328, 248)
-        Me.Guna2GroupBox10.Name = "Guna2GroupBox10"
-        Me.Guna2GroupBox10.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(123, Byte), Integer))
-        Me.Guna2GroupBox10.Size = New System.Drawing.Size(163, 50)
-        Me.Guna2GroupBox10.TabIndex = 101
-        '
         'ProjectDesigner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3905,6 +3905,8 @@ Partial Class ProjectDesigner
         CType(Me.Guna2NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2GroupBox4.ResumeLayout(False)
         Me.Guna2GroupBox4.PerformLayout()
+        Me.Guna2GroupBox10.ResumeLayout(False)
+        Me.Guna2GroupBox10.PerformLayout()
         Me.Guna2GroupBox9.ResumeLayout(False)
         Me.Guna2GroupBox9.PerformLayout()
         Me.Guna2GroupBox2.ResumeLayout(False)
@@ -3930,8 +3932,6 @@ Partial Class ProjectDesigner
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.LogInContextMenu1.ResumeLayout(False)
-        Me.Guna2GroupBox10.ResumeLayout(False)
-        Me.Guna2GroupBox10.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
