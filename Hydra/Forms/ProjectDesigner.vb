@@ -523,6 +523,13 @@ Public Class ProjectDesigner
         Dim Tag As String = Guna2TextBox2.Text
         Dim VMSelected = VMComboSelect.SelectedIndex
 
+        If StrIntToRvaCheck.Checked Then
+
+            Dim RVA As HydraEngine.Models.Protection = If(Guna2CheckBox10.Checked, New HydraEngine.Protection.Integer.StrIntToRvaV2, New HydraEngine.Protection.Integer.StrIntToRva)
+            Result.Add(RVA)
+
+        End If
+
         If MetadataCleaner.Checked Then Result.Add(New HydraEngine.Protection.Meta.MetadataPruner)
 
         If ReduceMetadata.Checked Then Result.Add(New HydraEngine.Protection.Method.MethodToInline)
@@ -623,7 +630,7 @@ Public Class ProjectDesigner
             If CalliUnsafe.Checked = True Then
                 Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
             Else
-                Result.Add(New HydraEngine.Protection.Calli.CallObfuscation)
+                Result.Add(New HydraEngine.Protection.Calli.CallObfuscation With {.AnalisisMode = CalliSecureMode.Checked})
             End If
         End If
 
@@ -814,10 +821,9 @@ Public Class ProjectDesigner
 
         If MethodError.Checked = True Then
             Result.Add(New HydraEngine.Protection.CodeEncryption.AntiTamperNormal)
-            'Result.Add(New HydraEngine.Protection.Method.MethodError)
         End If
 
-        'Result.Add(New HydraEngine.Protection.INT.UnmanagedInteger)
+        'Result.Add(New HydraEngine.Protection.Method.MethodError)
 
         Return Result
     End Function
@@ -2338,6 +2344,11 @@ Public Class ProjectDesigner
         Catch ex As Exception
             MessageBox.Show($"Error showing preset information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub StrIntToRvaCheck_CheckedChanged(sender As Object, e As EventArgs) Handles StrIntToRvaCheck.CheckedChanged
+        Guna2CheckBox8.Enabled = StrIntToRvaCheck.Checked
+        Guna2CheckBox9.Enabled = StrIntToRvaCheck.Checked
     End Sub
 
 #End Region
