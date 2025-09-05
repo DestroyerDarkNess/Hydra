@@ -22,9 +22,50 @@ Hydra is a powerful tool for protecting .NET assemblies with various obfuscation
 
 First, ensure you have **[.NET Framework 4.8](https://go.microsoft.com/fwlink/?linkid=2088631)** or higher installed.
 
-[Download Hydra](https://github.com/DestroyerDarkNess/Hydra/releases/download/1.1.9/HailHydra.7z) and have fun.
+[Download Hydra](https://github.com/DestroyerDarkNess/Hydra/releases/) and have fun.
  
 That's all you need to know to start! 🎉
+
+## 🔨 Building from Source
+
+If you want to compile Hydra from source code, follow these steps:
+
+### Prerequisites
+- **Visual Studio 2019** or later (with .NET Framework 4.8 support)
+- **.NET Framework 4.8** or higher
+- **Git** for cloning the repository
+
+### Step-by-Step Build Process
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/DestroyerDarkNess/Hydra.git
+   cd Hydra
+   ```
+
+2. **Open the solution**
+   - Open `Hydra.sln` in Visual Studio
+   - Or use the command line: `msbuild Hydra.sln`
+
+3. **Restore NuGet packages**
+   - In Visual Studio: Right-click solution → "Restore NuGet Packages"
+   - Or use command line: `nuget restore Hydra.sln`
+
+4. **Build the solution**
+   - In Visual Studio: Build → Build Solution (Ctrl+Shift+B)
+   - Or use command line: `msbuild Hydra.sln /p:Configuration=Release`
+
+5. **Locate the compiled files**
+   - The main executable will be in: `Hydra/bin/Release/`
+   - Additional libraries will be in their respective `bin/Release/` folders
+
+### Video Tutorial
+📹 **[Watch the complete build process video](https://github.com/DestroyerDarkNess/Hydra/HydraBuild.mp4)** - Step by step compilation guide
+
+### Troubleshooting
+- Ensure you have the correct .NET Framework version installed
+- Make sure all NuGet packages are properly restored
+- Check that you have sufficient permissions to build the project
 
 ## ⚙️ Features & Options
 
