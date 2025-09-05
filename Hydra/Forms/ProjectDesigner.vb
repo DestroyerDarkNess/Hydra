@@ -630,7 +630,7 @@ Public Class ProjectDesigner
             If CalliUnsafe.Checked = True Then
                 Result.Add(New HydraEngine.Protection.Calli.CallToCalli With {.BaseChars = BaseChars})
             Else
-                Result.Add(New HydraEngine.Protection.Calli.CallObfuscation)
+                Result.Add(New HydraEngine.Protection.Calli.CallObfuscation With {.AnalisisMode = CalliSecureMode.Checked})
             End If
         End If
 
