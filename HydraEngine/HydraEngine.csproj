@@ -60,17 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\EXGuard.Core\bin\Debug\EXGuard.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Hardening, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Hardening.dll</HintPath>
-    </Reference>
-    <Reference Include="ILMerge, Version=3.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\ILMerge.dll</HintPath>
-    </Reference>
-    <Reference Include="libz">
-      <HintPath>..\Libs\libz.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -125,10 +114,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="VM.Runtime">
       <HintPath>..\VM.Runtime\bin\Debug\netstandard2.0\VM.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="VMUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\VMUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -341,7 +326,6 @@
     <Compile Include="References\AssemblyFusion.cs" />
     <Compile Include="References\DllEmbbeder.cs" />
     <Compile Include="References\Embeder.cs" />
-    <Compile Include="References\ILMerger.cs" />
     <Compile Include="References\ILRepack.cs" />
     <Compile Include="References\LibzWrapper.cs" />
     <Compile Include="Runtimes\AdministratorRights\Runtime\RuntimeScalation.cs" />
