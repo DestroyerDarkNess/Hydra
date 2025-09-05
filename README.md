@@ -13,7 +13,7 @@ Hydra is a powerful tool for protecting .NET assemblies with various obfuscation
 
 ⚠️ I invite you to the community, where you can chat and suggest your ideas for this project. 💌 
  
-[![Discord Banner 2](https://discord.com/api/guilds/1327640073348317235/widget.png?style=banner2)](https://discord.gg/C4evgU4Tas)
+[![Discord Banner 2](https://discord.com/api/guilds/1327640073348317235/widget.png?style=banner2)](https://discord.gg/kmU8d3WDgm)
 </div>
 
 
@@ -25,10 +25,6 @@ First, ensure you have **[.NET Framework 4.8](https://go.microsoft.com/fwlink/?l
 [Download Hydra](https://github.com/DestroyerDarkNess/Hydra/releases/download/1.1.9/HailHydra.7z) and have fun.
  
 That's all you need to know to start! 🎉
-
-## 📖 Project Wiki
-
-The best way to explore all the features of **Hydra** is to read the project [Wiki][repo_wiki_url] and take part in [Discussions][repo_discussions_url] and/or [Issues][repo_issues_url].
 
 ## ⚙️ Features & Options
 
@@ -116,6 +112,7 @@ And now, I invite you to participate in this project!
 
 - [Issues][repo_issues_url]: ask questions and submit your features.
 - [Pull requests][repo_pull_request_url]: send your improvements to the current.
+- Join our [Discord community](https://discord.gg/kmU8d3WDgm) to discuss ideas and get help.
 
 Together, we can make this project **better** every day! 😘
 
