@@ -414,12 +414,12 @@ Partial Class ProjectDesigner
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(157, 169)
+        Me.Label1.Location = New System.Drawing.Point(289, 169)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(462, 13)
+        Me.Label1.Size = New System.Drawing.Size(202, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Under construction until further notice. (Sorry, I don't have time or money, I ha" &
-    "ve to work to eat.)"
+        Me.Label1.Text = "Under construction until further notice. "
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'TabPage2
         '
