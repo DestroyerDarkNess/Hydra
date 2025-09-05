@@ -18,27 +18,27 @@ namespace HydraEngine.Protection.Calli
         public CallObfuscation()
             : base("Protection.Calli.CallObfuscation",
                 "Call Obfuscation",
-                "Reescritura call/callvirt → calli con tabla de punteros y modo de análisis progresivo.")
+                "Transforms call/callvirt into calli using a function-pointer table, with progressive analysis mode.")
         {
             ManualReload = true;
         }
 
         /// <summary>
-        /// Si es true, ejecuta un modo progresivo:
-        /// 1) Intenta proteger todo el ensamblado.
-        /// 2) Si falla al escribir, prueba por tipo (clase) acumulando los que funcionen.
-        /// 3) Si un tipo falla, prueba método por método del tipo, identifica los problemáticos y los agrega a la blacklist.
-        /// 4) Repite la compilación saltando los métodos en la blacklist.
+        /// When true, runs a progressive analysis mode:
+        /// 1) Try to protect the whole assembly.
+        /// 2) If writing fails, try by type (class), accumulating successful ones.
+        /// 3) If a type fails, try method-by-method, mark failing methods in a blacklist.
+        /// 4) Retry skipping blacklisted methods to achieve a best-effort working build.
         /// </summary>
-        public bool AnalisisMode { get; set; } = true;
+        public bool AnalisisMode { get; set; } = false;
 
         /// <summary>
-        /// Blacklist acumulada de métodos (clave estable de método) que deben ignorarse al transformar.
+        /// Accumulated blacklist of method keys to skip during transformation.
         /// </summary>
         public HashSet<string> BlacklistedMethods { get; } = new HashSet<string>(StringComparer.Ordinal);
 
         /// <summary>
-        /// Último flujo ensamblado correcto en memoria.
+        /// Keeps the last valid build in memory (best effort) during analysis mode.
         /// </summary>
         private MemoryStream _lastGoodStream;
 
@@ -48,62 +48,60 @@ namespace HydraEngine.Protection.Calli
             {
                 if (!AnalisisMode)
                 {
-                    // Modo normal: un solo intento.
+                    // Normal mode: single attempt.
                     if (TryBuildWith(moduledef, allowedCallers: null, extraBlacklist: null, out var built, out var error))
                     {
                         TempModule = built ?? throw new Exception("MemoryStream is null");
                         return true;
                     }
 
-                    this.Errors = error ?? new Exception("Fallo al escribir el ensamblado (modo normal).");
+                    this.Errors = error ?? new Exception("Failed to write assembly (normal mode).");
                     return false;
                 }
 
                 // =============================
-                // MODO DE ANÁLISIS PROGRESIVO
+                // PROGRESSIVE ANALYSIS MODE
                 // =============================
 
-                // 1) Intento completo
+                // 1) Full attempt
                 if (TryBuildWith(moduledef, allowedCallers: null, extraBlacklist: BlacklistedMethods, out var fullBuilt, out var fullError))
                 {
                     TempModule = fullBuilt ?? throw new Exception("MemoryStream is null");
                     return true;
                 }
 
-                Console.WriteLine("[AnalisisMode] Falló compilar todo el módulo; iniciando análisis por tipo...");
+                Console.WriteLine("[AnalysisMode] Full module build failed; starting per-type analysis...");
 
-                // 2) Mapear métodos elegibles por tipo (clase)
+                // 2) Map eligible caller methods by type
                 var byType = GetEligibleMethodKeysByType(moduledef);
 
-                // Conjunto de métodos aceptados acumulados (callers en los que aplicaremos la transformación)
+                // Accumulated set of allowed callers that we will transform
                 var acceptedCallers = new HashSet<string>(StringComparer.Ordinal);
 
-                // 3) Probar por tipo (si todo el tipo pasa, se agregan todos sus métodos; si no, vamos por método)
+                // 3) Try by type (fast path: whole type; if it fails, go method-by-method)
                 foreach (var kv in byType)
                 {
                     var typeName = kv.Key;
-                    var typeMethods = kv.Value; // lista de methodKeys
+                    var typeMethods = kv.Value;
 
-                    // Intento rápido: agregar todos los métodos del tipo a los ya aceptados
                     var tryAll = new HashSet<string>(acceptedCallers, StringComparer.Ordinal);
                     foreach (var mk in typeMethods)
                         tryAll.Add(mk);
 
                     if (TryBuildWith(moduledef, tryAll, BlacklistedMethods, out var builtAllType, out var errAllType))
                     {
-                        // Todo el tipo ok → se consolidan
+                        // Whole type OK → consolidate
                         acceptedCallers = tryAll;
                         _lastGoodStream = builtAllType;
-                        Console.WriteLine($"[AnalisisMode] Tipo OK (completo): {typeName} (métodos: {typeMethods.Count})");
+                        Console.WriteLine($"[AnalysisMode] Type OK (whole): {typeName} (methods: {typeMethods.Count})");
                         continue;
                     }
 
-                    Console.WriteLine($"[AnalisisMode] Tipo FALLÓ (completo): {typeName} → intentando por método...");
+                    Console.WriteLine($"[AnalysisMode] Type FAILED (whole): {typeName} → trying per-method...");
 
-                    // 4) Por método (dentro del tipo): agrega si pasa, si no → blacklistea
+                    // 4) Per-method within the type
                     foreach (var methodKey in typeMethods)
                     {
-                        // Ya blacklisteado previamente, saltar
                         if (BlacklistedMethods.Contains(methodKey))
                             continue;
 
@@ -111,41 +109,41 @@ namespace HydraEngine.Protection.Calli
 
                         if (TryBuildWith(moduledef, tryOne, BlacklistedMethods, out var builtOne, out var errOne))
                         {
-                            // Método OK, consolidar
+                            // Method OK → consolidate
                             acceptedCallers = tryOne;
                             _lastGoodStream = builtOne;
-                            Console.WriteLine($"[AnalisisMode] Método OK: {methodKey}");
+                            Console.WriteLine($"[AnalysisMode] Method OK: {methodKey}");
                         }
                         else
                         {
-                            // Método problemático -> blacklist
+                            // Method problematic → blacklist + RED message
                             BlacklistedMethods.Add(methodKey);
-                            Console.WriteLine($"[AnalisisMode] Método PROBLEMÁTICO → blacklist: {methodKey}");
+                            WriteLineError($"[AnalysisMode] Method FAILED → blacklisted: {methodKey}");
                         }
                     }
                 }
 
-                // 5) Intento final con todos los aceptados y saltando blacklist
+                // 5) Final attempt with all accepted callers and skipping blacklist
                 if (TryBuildWith(moduledef, acceptedCallers, BlacklistedMethods, out var finalBuilt, out var finalErr))
                 {
-                    TempModule = finalBuilt ?? _lastGoodStream ?? throw new Exception("MemoryStream es null al finalizar.");
+                    TempModule = finalBuilt ?? _lastGoodStream ?? throw new Exception("MemoryStream is null at the end.");
                     return true;
                 }
 
-                // Si igualmente falla, devolver el último bueno si existe
+                // If still failing, but we have a last good partial build, return that
                 if (_lastGoodStream != null)
                 {
                     TempModule = _lastGoodStream;
-                    Console.WriteLine("[AnalisisMode] Usando el último build válido disponible (parcial).");
+                    Console.WriteLine("[AnalysisMode] Using last valid partial build.");
                     return true;
                 }
 
-                this.Errors = finalErr ?? fullError ?? new Exception("Fallo al escribir el ensamblado incluso tras análisis progresivo.");
+                this.Errors = finalErr ?? fullError ?? new Exception("Failed to write assembly even after progressive analysis.");
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[CallObfuscation] Error: {ex.Message}");
+                WriteLineError($"[CallObfuscation] Error: {ex.Message}");
                 Console.WriteLine(ex.StackTrace);
                 this.Errors = ex;
                 return false;
@@ -160,11 +158,11 @@ namespace HydraEngine.Protection.Calli
         }
 
         // =============================
-        // NÚCLEO DE TRANSFORMACIÓN
+        // BUILD / TRANSFORM CORE
         // =============================
 
         /// <summary>
-        /// Aplica la transformación (con filtros opcionales) y escribe a MemoryStream.
+        /// Applies transformation (with optional filters) and writes to a MemoryStream.
         /// </summary>
         private bool TryBuildWith(
             string modulePath,
@@ -182,10 +180,10 @@ namespace HydraEngine.Protection.Calli
             {
                 moduleDefinition = ModuleDefinition.FromFile(modulePath);
 
-                // Ejecutar transformación en un módulo recién cargado
+                // Apply transformation on a fresh module instance
                 ApplyCalliTransform(moduleDefinition, allowedCallers, extraBlacklist);
 
-                // Escribir
+                // Write
                 var ms = new MemoryStream();
                 moduleDefinition.Write(ms, new ManagedPEImageBuilder(MetadataBuilderFlags.PreserveAll));
                 ms.Position = 0;
@@ -199,20 +197,19 @@ namespace HydraEngine.Protection.Calli
             }
             finally
             {
-                // ModuleDefinition no implementa IDisposable, GC se encarga.
+                // ModuleDefinition is GC-managed; nothing to dispose explicitly.
             }
         }
 
         /// <summary>
-        /// Aplica la reescritura call/callvirt → calli con tabla de punteros
-        /// restringiendo a los "callers" permitidos y saltando blacklist.
+        /// Rewrites call/callvirt → calli via a function-pointer table in module .cctor.
+        /// Respects allowedCallers (if not null) and skips any key present in blacklist.
         /// </summary>
         private void ApplyCalliTransform(
             ModuleDefinition moduleDefinition,
             HashSet<string> allowedCallers,
             HashSet<string> blacklist)
         {
-            // IMPORTANTE: El .cctor del módulo será usado para inicializar la tabla de punteros.
             var globalConstructor = moduleDefinition.GetOrCreateModuleConstructor();
 
             var functionPointerArray = CreateFunctionPointerArray(moduleDefinition);
@@ -223,7 +220,7 @@ namespace HydraEngine.Protection.Calli
             if (globalConstructor.CilMethodBody == null)
                 globalConstructor.CilMethodBody = new CilMethodBody(globalConstructor);
 
-            // Limpiar posibles Ret previos
+            // Remove any pre-existing 'ret' so we can prepend initialization
             if (globalConstructor.CilMethodBody.Instructions.Any(i => i.OpCode.Code is CilCode.Ret))
             {
                 foreach (var ret in globalConstructor.CilMethodBody.Instructions
@@ -231,7 +228,7 @@ namespace HydraEngine.Protection.Calli
                     globalConstructor.CilMethodBody.Instructions.Remove(ret);
             }
 
-            // Corlib helpers
+            // Corlib helpers used during .cctor
             var getTypeFromHandle = GetCorLibMethod(moduleDefinition,
                 "System", nameof(Type),
                 nameof(Type.GetTypeFromHandle), "System.RuntimeTypeHandle");
@@ -250,10 +247,10 @@ namespace HydraEngine.Protection.Calli
 
             if (getTypeFromHandle == null || getModule == null || resolveMethod == null ||
                 getMethodHandle == null || getFunctionPointer == null)
-                throw new InvalidOperationException("No se encontraron métodos corlib requeridos para la inicialización.");
+                throw new InvalidOperationException("Required corlib methods for initialization were not found.");
 
             var functionPointerType = getFunctionPointer.DeclaringType
-                                      ?? throw new InvalidOperationException("DeclaringType de GetFunctionPointer es null.");
+                                      ?? throw new InvalidOperationException("DeclaringType of GetFunctionPointer is null.");
 
             var loadAddress = new CilLocalVariable(importer.ImportTypeSignature(functionPointerType.ToTypeSignature()));
             globalConstructor.CilMethodBody.LocalVariables.Add(loadAddress);
@@ -261,19 +258,19 @@ namespace HydraEngine.Protection.Calli
             var identifierCache = new Dictionary<IMethodDescriptor, int>();
             int currentIndex = 0;
 
-            // Enumerar métodos "caller" candidatos
+            // Enumerate eligible caller methods
             var methods = moduleDefinition
                 .GetAllTypes()
                 .SelectMany(t => t.Methods)
                 .Where(m => m?.CilMethodBody != null)
-                .Where(IsEligibleCallerMethod) // filtro de seguridad
+                .Where(IsEligibleCallerMethod)
                 .ToArray();
 
             foreach (var method in methods)
             {
                 var methodKey = GetMethodKey(method);
 
-                // Filtrado por lista permitida / blacklist
+                // Respect blacklist and allowed set
                 if (blacklist != null && blacklist.Contains(methodKey))
                     continue;
                 if (allowedCallers != null && !allowedCallers.Contains(methodKey))
@@ -292,20 +289,20 @@ namespace HydraEngine.Protection.Calli
                     if (!(instruction.Operand is IMethodDescriptor methodDescriptor))
                         continue;
 
-                    // Excluir MethodSpecification (genéricos) o MethodDefinition directo
+                    // Skip MethodSpecification (generics) and direct MethodDefinition
                     if (methodDescriptor is MethodSpecification) continue;
                     if (methodDescriptor is MethodDefinition) continue;
 
-                    // Excluir TypeSpecification en el declaring type y firmas con sentinel
+                    // Skip TypeSpecification declaring types and signatures with sentinels
                     if (methodDescriptor.DeclaringType is TypeSpecification) continue;
                     if (methodDescriptor.Signature != null && methodDescriptor.Signature.IncludeSentinel) continue;
 
-                    // Excluir delegados, value-types con instancia, etc.
+                    // Skip delegates, and valuetypes with 'this' (instance)
                     var resolvedType = methodDescriptor.DeclaringType?.Resolve();
                     if (resolvedType == null || resolvedType.IsDelegate) continue;
                     if (resolvedType.IsValueType && methodDescriptor.Signature.HasThis) continue;
 
-                    // Prefijos prohibidos: constrained / tailcall
+                    // Forbidden prefixes: constrained / tailcall
                     bool hasForbiddenPrefix = false;
                     if (i - 1 >= 0)
                     {
@@ -315,12 +312,12 @@ namespace HydraEngine.Protection.Calli
                     }
                     if (hasForbiddenPrefix) continue;
 
-                    // Asignar índice en la tabla para este destino si no existe
+                    // Assign a table index for this call target if needed
                     if (!identifierCache.ContainsKey(methodDescriptor))
                     {
                         identifierCache[methodDescriptor] = currentIndex++;
 
-                        // global .cctor: FPTable[idx] = GetFunctionPointer( ResolveMethod(mdToken) )
+                        // .cctor: FPTable[idx] = GetFunctionPointer( ResolveMethod(mdToken) )
                         var arrayStoreExpression = new[]
                         {
                             new CilInstruction(CilOpCodes.Ldsfld, functionPointerArray)
@@ -346,10 +343,10 @@ namespace HydraEngine.Protection.Calli
                         globalConstructor.CilMethodBody.Instructions.AddRange(arrayStoreExpression);
                     }
 
-                    // Importar firma para calli
+                    // Import signature for calli
                     var importedSig = importer.ImportMethodSignature(methodDescriptor.Signature);
 
-                    // Secuencia calli que sustituye a call/callvirt
+                    // Replace with calli sequence
                     var calliList = new List<CilInstruction>
                     {
                         new CilInstruction(CilOpCodes.Ldsfld, functionPointerArray)
@@ -360,7 +357,7 @@ namespace HydraEngine.Protection.Calli
 
                     var calliExpression = calliList.ToArray();
 
-                    // Insertar y neutralizar instrucción original
+                    // Insert and neutralize original instruction
                     instructions.InsertRange(i, calliExpression);
                     instruction.OpCode = CilOpCodes.Nop;
                     instruction.Operand = null;
@@ -370,7 +367,7 @@ namespace HydraEngine.Protection.Calli
                 instructions.OptimizeMacros();
             }
 
-            // Inicialización de la tabla en .cctor
+            // Initialize the pointer table in .cctor
             globalConstructor.CilMethodBody.Instructions.InsertRange(0,
                 MutateI4(currentIndex).ToArray()
                     .Concat(new[] { new CilInstruction(CilOpCodes.Newarr, moduleDefinition.CorLibTypeFactory.IntPtr.Type) })
@@ -384,6 +381,14 @@ namespace HydraEngine.Protection.Calli
         // =============================
         // HELPERS
         // =============================
+
+        private static void WriteLineError(string message)
+        {
+            var old = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ForegroundColor = old;
+        }
 
         private static FieldDefinition CreateFunctionPointerArray(ModuleDefinition moduleDefinition)
         {
@@ -491,7 +496,7 @@ namespace HydraEngine.Protection.Calli
             string typeName = declaringType?.Name?.Value ?? string.Empty;
             string methodName = method.Name?.Value ?? string.Empty;
 
-            // Ignorar generados por el compilador / anónimos / state machines, etc.
+            // Ignore compiler-generated / anonymous / state machines, etc.
             bool hasCompilerGeneratedAttr =
                 method.CustomAttributes.Any(ca => ca.Constructor?.DeclaringType?.FullName ==
                                                   "System.Runtime.CompilerServices.CompilerGeneratedAttribute")
@@ -503,7 +508,7 @@ namespace HydraEngine.Protection.Calli
             if (hasCompilerGeneratedAttr || isAnonToString || isStateMachineMoveNext || typeName.StartsWith("<>"))
                 return false;
 
-            // Ignorar métodos con EH complejas (reduce riesgo)
+            // Ignore methods with EH (reduces risk during transformation)
             if (method.CilMethodBody.ExceptionHandlers.Count > 0)
                 return false;
 
@@ -512,7 +517,7 @@ namespace HydraEngine.Protection.Calli
 
         private static string GetMethodKey(MethodDefinition m)
         {
-            // Clave estable por nombre completo del tipo + nombre + firma
+            // Stable key = declaring type full name + method name + signature
             var typeFullName = m.DeclaringType?.FullName ?? "<null>";
             var sig = m.Signature?.ToString() ?? "";
             return $"{typeFullName}::{m.Name?.Value}{sig}";
