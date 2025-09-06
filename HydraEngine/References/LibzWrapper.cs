@@ -11,21 +11,18 @@
 //{
 //    public class LibzWrapper
 //    {
-
 //        public Exception Errors { get; set; } = new Exception("Undefined");
 
 //        public bool MergeAssemblies(string Original, List<string> dllModules)
 //        {
 //            try
 //            {
-
 //                List<string> ListArg = new List<string>();
 
 //                ListArg.Add("inject-dll");
 //                ListArg.Add("-a");
 //                ListArg.Add(Original);
 //                ListArg.Add("-i");
-
 
 //                foreach (string str in dllModules)
 //                {
@@ -45,7 +42,6 @@
 //                return false;
 //            }
 //        }
-
 
 //    }
 //}
@@ -109,7 +105,6 @@ namespace HydraEngine.References
                 if (!File.Exists(Libz)) File.WriteAllBytes(Libz, HydraEngine.Properties.Resources.libz);
 
                 string LibzResult = Core.Utils.RunRemoteHost(Libz, String.Join(" ", listArg.ToArray()), false);
-                Console.WriteLine(LibzResult.Replace("LibZ 1.2.0.0, Copyright (c) 2013-2014, Milosz Krajewski", "Hydra LibZ Modded version, https://github.com/DestroyerDarkNess").Replace("https://libz.codeplex.com/", "HAIL HYDRA").Replace(original, "****").Replace("LibZ.", "Hydra."));
 
                 return true;
             }

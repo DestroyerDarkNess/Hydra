@@ -38,9 +38,6 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
             }
 
             string DonutResult = Core.Utils.RunRemoteHost(Donut, FullDonutArgs);
-            Console.WriteLine("Shell Output: " + DonutResult);
-
-            //Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
 
             if (File.Exists(TempShell) == true)
             {
@@ -103,8 +100,6 @@ namespace HydraEngine.Protection.Packer.NetBuilderInjection
 
             string DonutResult = Core.Utils.RunRemoteHost(Donut, FullDonutArgs);
             //Console.WriteLine("Shell Output: " + DonutResult);
-
-            Console.WriteLine("Shell Output: " + DonutResult.Replace(TargetAsmName, "******").Replace("Donut", "Hydra").Replace("(built Mar  3 2023 13:33:22)", "").Replace("[ Copyright (c) 2019-2021 TheWover, Odzhan", "[ Github: https://github.com/DestroyerDarkNess"));
 
             if (File.Exists(TempShell) == true)
             {
