@@ -205,7 +205,6 @@ Public Class ProjectDesigner
     Private Function GetPackers() As List(Of HydraEngine.Models.Pack)
         Dim Result As List(Of HydraEngine.Models.Pack) = New List(Of HydraEngine.Models.Pack)
 
-        Result.Add(New HydraEngine.Protection.Packer.OrigamiPack)
         Result.Add(New HydraEngine.Protection.Packer.ILPacker)
         Result.Add(New HydraEngine.Protection.Packer.Native)
         Result.Add(New HydraEngine.Protection.Packer.NativeRC)

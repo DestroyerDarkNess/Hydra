@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static HydraEngine.Protection.Renamer.RenamerPhase;
-using Origami.Packers;
 
 namespace HydraEngine.Protection.Proxy
 {
@@ -34,7 +33,6 @@ namespace HydraEngine.Protection.Proxy
 
         public static RenameMode Mode { get; set; } = RenameMode.Ascii;
 
-
         public enum RenameMode
         {
             Ascii,
@@ -43,9 +41,7 @@ namespace HydraEngine.Protection.Proxy
             Invisible
         }
 
-
         private static Random Random = new Random();
-
 
         private static readonly string[] NormalNameStrings =
         {
@@ -111,7 +107,7 @@ namespace HydraEngine.Protection.Proxy
             return new string(result);
         }
 
-        private static  string RandomString(int length, string chars)
+        private static string RandomString(int length, string chars)
         {
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[Random.Next(s.Length)]).ToArray());
@@ -152,23 +148,25 @@ namespace HydraEngine.Protection.Proxy
             {
                 case RenameMode.Ascii:
                     return RandomString(Random.Next(3, Length), BaseChars);
+
                 case RenameMode.Key:
                     return GenerateProblematicString(Random.Next(3, Length)) + GetRandomReservedWords();// RandomString(16, BaseChars);
                 case RenameMode.Normal:
                     return GetRandomName();
+
                 case RenameMode.Invisible:
                     return GenerateInvisibleString(Random.Next(3, Length));
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }
         }
 
-
         public static string InvisibleName
         {
             get
             {
-                return string.Format("<{0}>{1}", tag, GenerateName() );
+                return string.Format("<{0}>{1}", tag, GenerateName());
             }
         }
 
@@ -237,6 +235,5 @@ namespace HydraEngine.Protection.Proxy
             md.DeclaringType.Methods.Add(methodDef);
             return methodDef;
         }
-
     }
 }

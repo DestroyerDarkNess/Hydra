@@ -65,10 +65,6 @@
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Origami, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Origami.dll</HintPath>
-    </Reference>
     <Reference Include="Ressy, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Ressy.1.0.3\lib\net461\Ressy.dll</HintPath>
     </Reference>
@@ -284,7 +280,6 @@
     <Compile Include="Protection\Packer\NativeRC.cs" />
     <Compile Include="Protection\Packer\NetBuilderInjection\AssemblyToShellCode.cs" />
     <Compile Include="Protection\Packer\NetBuilderInjection\Helpers.cs" />
-    <Compile Include="Protection\Packer\Origami.cs" />
     <Compile Include="Protection\Packer\PEPacker.cs" />
     <Compile Include="Protection\Proxy\Helper.cs" />
     <Compile Include="Protection\Proxy\ProxyClass.cs" />

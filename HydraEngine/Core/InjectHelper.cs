@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Origami.Packers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Configuration.Assemblies;
 
@@ -15,6 +14,7 @@ namespace HydraEngine.Core
     {
         private List<IDnlibDef> Members { get; set; }
         private Type RuntimeType { get; set; }
+
         public IDnlibDef FindMember(string name)
         {
             foreach (var member in Members)
@@ -22,6 +22,7 @@ namespace HydraEngine.Core
                     return member;
             throw new Exception("Error to find member.");
         }
+
         public newInjector(ModuleDefMD module, Type type, bool injectType = true)
         {
             RuntimeType = type;
@@ -29,12 +30,14 @@ namespace HydraEngine.Core
             if (injectType)
                 InjectType(module);
         }
+
         public void InjectType(ModuleDefMD module)
         {
             var typeModule = ModuleDefMD.Load(RuntimeType.Module);
             var typeDefs = typeModule.ResolveTypeDef(MDToken.ToRID(RuntimeType.MetadataToken));
             Members.AddRange(InjectHelper.Inject(typeDefs, module.GlobalType, module).ToList());
         }
+
         public void injectMethod(string Namespace, string Name, ModuleDefMD module, MethodDef method)
         {
             TypeDef newClass = new TypeDefUser(Namespace, Name, module.CorLibTypes.Object.TypeDefOrRef)
@@ -45,6 +48,7 @@ namespace HydraEngine.Core
             method.DeclaringType = null;
             newClass.Methods.Add(method);
         }
+
         public void injectMethods(string Namespace, string Name, ModuleDefMD module, MethodDef[] methods)
         {
             TypeDef newClass = new TypeDefUser(Namespace, Name, module.CorLibTypes.Object.TypeDefOrRef)
@@ -58,6 +62,7 @@ namespace HydraEngine.Core
                 newClass.Methods.Add(m);
             }
         }
+
         public void Rename()
         {
             foreach (var mem in Members)
@@ -69,14 +74,13 @@ namespace HydraEngine.Core
                     if (method.DeclaringType.IsDelegate)
                         continue;
                 }
-                mem.Name =  string.Format("<{0}>Hydra_{1}", Randomizer.GenerateRandomString(), "Guard");
+                mem.Name = string.Format("<{0}>Hydra_{1}", Randomizer.GenerateRandomString(), "Guard");
             }
         }
     }
 
     public static class InjectHelper
     {
-
         public static void AddAttributeToType(TypeDef type, ICustomAttributeType attributeType)
         {
             var customAttribute = new CustomAttribute((ICustomAttributeType)attributeType);
@@ -195,9 +199,11 @@ namespace HydraEngine.Core
                     case IType type:
                         newInstr.Operand = type;
                         break;
+
                     case IMethod theMethod:
                         newInstr.Operand = theMethod;
                         break;
+
                     case IField field:
                         newInstr.Operand = field;
                         break;
@@ -351,7 +357,6 @@ namespace HydraEngine.Core
                     SequencePoint = instr.SequencePoint
                 };
 
-
                 if (newInstr.Operand is IType)
                 {
                     IType type = (IType)newInstr.Operand;
@@ -454,9 +459,10 @@ namespace HydraEngine.Core
             return ctx.Mep.Values.Except(new[] { newType });
         }
 
-        public static bool removeReference(ModuleDefMD module) {
+        public static bool removeReference(ModuleDefMD module)
+        {
             string currentAssemblyName = typeof(InjectHelper).Assembly.GetName().Name;
-            var selfReference = module.GetAssemblyRefs().FirstOrDefault(assRef => System.IO.Path.GetFileNameWithoutExtension( assRef.Name) == currentAssemblyName);
+            var selfReference = module.GetAssemblyRefs().FirstOrDefault(assRef => System.IO.Path.GetFileNameWithoutExtension(assRef.Name) == currentAssemblyName);
 
             if (selfReference != null)
             {
@@ -485,7 +491,7 @@ namespace HydraEngine.Core
 
             public override ITypeDefOrRef Map(ITypeDefOrRef typeDefOrRef)
             {
-                 return typeDefOrRef is TypeDef typeDef && Mep.ContainsKey(typeDef) ? Mep[typeDef] as TypeDef : null;
+                return typeDefOrRef is TypeDef typeDef && Mep.ContainsKey(typeDef) ? Mep[typeDef] as TypeDef : null;
             }
 
             public override IMethod Map(MethodDef methodDef)
